@@ -3,7 +3,7 @@ os := $(shell uname)
 VERSION ?= $(shell git rev-parse --short HEAD)
 image_name = knowledge-platform
 image_tag = latest
-tenant_name = knowledge-platform 
+tenant_name = knowledge-platform
 
 .PHONY: help-p2p
 help-p2p:
