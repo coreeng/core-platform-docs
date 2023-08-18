@@ -65,7 +65,7 @@ jobs:
     # if: github.ref_name == 'main'
     uses: ./.github/workflows/execute-command.yaml
     with:
-      command: deploy-dev
+      command: p2p-dev-deploy
       workload-identity-provider: ${{ needs.print.outputs.workflow_identity_provider }}
       service-account: ${{ needs.print.outputs.service_account }}
       project-id: ${{ vars.PROJECT_ID }}
