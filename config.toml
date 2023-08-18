@@ -1,0 +1,12 @@
+baseURL = ''
+languageCode = 'en-us'
+title = 'CECG IDP Knowledge Platform'
+theme = 'hugo-theme-learn'
+enableEmoji = true
+# Title separator -- defaults to ::
+titleSeparator = "-"
+[params]
+  themeVariant = "cecg"
+# Enable search
+[outputs]
+  home = [ "HTML", "RSS", "JSON"]
