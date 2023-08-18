@@ -1,3 +1,10 @@
++++
+title = "Troubleshooting"
+weight = 1
+chapter = false
+pre = ""
++++
+
 ## P2P GCP Auth Fail
 
 I've got a new app and when the P2P tries to authenticate with Google Cloud it fails with an error like this:
