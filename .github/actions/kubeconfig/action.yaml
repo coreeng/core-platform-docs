@@ -1,0 +1,50 @@
+name: "Setup kubeconfig"
+description: "Creates a kubeconfig file and starts an IAP tunnel"
+
+inputs:
+  project_id:
+    required: true
+    type: string
+  zone:
+    required: false
+    type: string
+    default: europe-west2
+  region:
+    required: false
+    type: string
+    default: europe-west2-a
+  
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Google Cloud SDK
+      id: setup-gcloud
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        install_components: beta,gke-gcloud-auth-plugin
+
+    - name: Setup NumPy
+      id: setup-numpy
+      shell: bash
+      # https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+      run: $(gcloud info --format="value(basic.python_location)") -m pip install numpy
+
+    - name: Setup IAP tunnel
+      id: setup-iap-tunnel
+      shell: bash
+      run: |
+        nohup sh -c "while true ; do gcloud compute start-iap-tunnel sandbox-gcp-bastion 3128 --local-host-port localhost:57755 --project ${{ inputs.project_id }}  --zone ${{ inputs.region }}  ; done" &
+        sleep 4
+
+    - name: Setup kubeconfig
+      id: setup-kubeconfig
+      shell: bash
+      run: |
+        gcloud container clusters get-credentials --project ${{ inputs.project_id }} --zone ${{ inputs.zone }} --internal-ip sandbox-gcp
+        kubectl config set clusters.gke_${{ inputs.project_id }}_${{ inputs.zone }}_sandbox-gcp.proxy-url http://localhost:57755
+  
+    - name: Test kubectl
+      id: test-kubectl
+      shell: bash
+      run: kubectl cluster-info

@@ -1,0 +1,71 @@
+name: P2P
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: ${{ vars.PROJECT_ID }}
+  REGISTRY: europe-west2-docker.pkg.dev/${{ vars.PROJECT_ID }}/tenant
+  SERVICE_ACCOUNT: p2p-${{ vars.TENANT_NAME }}@${{ vars.PROJECT_ID }}.iam.gserviceaccount.com
+  WORKLOAD_IDENTITY_PROVIDER: projects/${{ vars.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/p2p-${{ vars.TENANT_NAME }}/providers/p2p-${{ vars.TENANT_NAME }}
+
+
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    outputs:
+      workflow_identity_provider: ${{ steps.print.outputs.workflow_identity_provider }}
+      service_account: ${{ steps.print.outputs.service_account }}
+    steps:   
+      - name: Print inputs passed to the reusable workflow
+        id: print
+        run: |
+          echo "workflow_identity_provider=$WORKLOAD_IDENTITY_PROVIDER" >> $GITHUB_OUTPUT
+          echo "service_account=$SERVICE_ACCOUNT" >> $GITHUB_OUTPUT
+  build:
+    needs: [print]
+    uses: ./.github/workflows/execute-command.yaml
+    with:
+      command: p2p-build
+      workload-identity-provider: ${{ needs.print.outputs.workflow_identity_provider }}
+      service-account: ${{ needs.print.outputs.service_account }}
+      project-id: ${{ vars.PROJECT_ID }}
+
+  functional-test:
+    needs: [build, print]
+    uses: ./.github/workflows/execute-command.yaml
+    with:
+      command: p2p-functional
+      workload-identity-provider: ${{ needs.print.outputs.workflow_identity_provider }}
+      service-account: ${{ needs.print.outputs.service_account }}
+      project-id: ${{ vars.PROJECT_ID }}
+
+  nft-test:
+    name: nft-test
+    needs: [functional-test, print]
+    uses: ./.github/workflows/execute-command.yaml
+    with:
+      command: p2p-nft
+      workload-identity-provider: ${{ needs.print.outputs.workflow_identity_provider }}
+      service-account: ${{ needs.print.outputs.service_account }}
+      project-id: ${{ vars.PROJECT_ID }}
+
+  dev-deploy: 
+    name: dev-deploy
+    needs: [nft-test, print]
+    # if: github.ref_name == 'main'
+    uses: ./.github/workflows/execute-command.yaml
+    with:
+      command: p2p-dev-deploy
+      workload-identity-provider: ${{ needs.print.outputs.workflow_identity_provider }}
+      service-account: ${{ needs.print.outputs.service_account }}
+      project-id: ${{ vars.PROJECT_ID }}

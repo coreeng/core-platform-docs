@@ -1,0 +1,30 @@
+{{- $registry := .Values.registry | required ".Values.registry is required." -}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knowledge-platform
+  labels:
+    app.kubernetes.io/name: knowledge-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: knowledge-platform
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: knowledge-platform
+    spec:
+      containers:
+        - name: knowledge-platform 
+          image: {{ $registry }}/{{ .Values.service.image }}
+          {{- if .Values.service.environmentVariables }}
+          env:
+            {{- range $key, $value := .Values.service.environmentVariables }}
+            - name: {{ $key }}
+              value: {{ $value }}
+          {{- end }}
+          {{- end }}
+          ports:
+            - containerPort: 8080
