@@ -62,7 +62,7 @@ jobs:
   dev-deploy: 
     name: dev-deploy
     needs: [nft-test, print]
-    if: github.ref_name == 'main'
+    # if: github.ref_name == 'main'
     uses: ./.github/workflows/execute-command.yaml
     with:
       command: deploy-dev
