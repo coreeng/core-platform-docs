@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: knowledge-platform
+metadata:
+  name: knowledge-platform
+spec:
+  selector:
+    app.kubernetes.io/name: knowledge-platform
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -28,8 +28,9 @@ p2p-nft:
 
 .PHONY: p2p-dev-deploy
 p2p-dev-deploy: create-ns-dev 
-	kubectl get pods -n know
-	@echo noop
+	kubectl get pods -n knowledge-platform
+	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --atomic
+	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
 .PHONY: create-ns-dev
 create-ns-dev: ## Create namespace for dev
@@ -38,7 +39,6 @@ create-ns-dev: ## Create namespace for dev
 		sub(/{env}/, ENV);  \
 		print;  \
 	}' resources/subns-anchor.yaml | kubectl apply -f - 	
-
 
 # Docker tasks
 

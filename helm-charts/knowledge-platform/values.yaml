@@ -1,0 +1,4 @@
+registry:
+service:
+  image: knowledge-platform:latest
+
