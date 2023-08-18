@@ -1,5 +1,5 @@
 apiVersion: v1
-kind: knowledge-platform
+kind: Service
 metadata:
   name: knowledge-platform
 spec:
