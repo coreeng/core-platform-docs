@@ -1,4 +1,4 @@
-name: Execute command
+name: p2p-command
 
 on:
   workflow_call:
@@ -20,8 +20,8 @@ env:
   REGISTRY: europe-west2-docker.pkg.dev/${{ vars.PROJECT_ID }}/tenant
 
 jobs:
-  run-command:
-    name: command-${{ inputs.command }}
+  p2p:
+    name: ${{ inputs.command }}
     runs-on: ubuntu-latest
 
 
