@@ -1,0 +1,61 @@
+name: Execute command
+
+on:
+  workflow_call:
+    inputs:
+      command:
+        required: true 
+        type: string
+      project-id:
+        required: true
+        type: string
+      workload-identity-provider:
+        required: true
+        type: string
+      service-account:
+        required: true
+        type: string
+
+env:
+  REGISTRY: europe-west2-docker.pkg.dev/${{ vars.PROJECT_ID }}/tenant
+
+jobs:
+  run-command:
+    name: command-${{ inputs.command }}
+    runs-on: ubuntu-latest
+
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ inputs.workload-identity-provider }}
+          service_account: ${{ inputs.service-account }}
+          token_format: access_token
+          access_token_lifetime: 600s
+
+      - name: Setup kubeconfig
+        id: setup-kubeconfig
+        uses: ./.github/actions/kubeconfig
+        with:
+          project_id: ${{ inputs.project-id }}
+      
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v2
+        with:
+          registry: europe-west2-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Run Command
+        id: run-command
+        run: |
+          make ${{ inputs.command }}
