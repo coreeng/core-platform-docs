@@ -12,3 +12,4 @@ jobs:
       project-id: ${{ vars.PROJECT_ID }}
       project-number: ${{ vars.PROJECT_NUMBER }}
       tenant-name: ${{ vars.TENANT_NAME }}
+      deploy-dev: github.ref_name == 'main'
