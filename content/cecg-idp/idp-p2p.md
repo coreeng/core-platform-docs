@@ -42,14 +42,14 @@ permissions:
 
 jobs:
   p2p:
-    uses: coreeng/reusable-p2p/.github/workflows/p2p.yaml@v0.0.1
+    uses: coreeng/reusable-p2p/.github/workflows/p2p.yaml@v0.1.0
     with:
       project-id: ${{ vars.PROJECT_ID }}
       project-number: ${{ vars.PROJECT_NUMBER }}
       tenant-name: ${{ vars.TENANT_NAME }}
 ```
 
-Always check the latest version on the repository and update it in this job (eg. `coreeng/reusable-p2p/.github/workflows/p2p.yaml@v0.0.3`)
+Always check the latest version on the repository and update it in this job (eg. `coreeng/reusable-p2p/.github/workflows/p2p.yaml@v0.3.0`)
 
 ### Makefile
 The pipeline assumes you have a Makefile and that in that Makefile you have the following tasks:
