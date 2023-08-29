@@ -8,7 +8,7 @@ on:
 
 jobs:
   p2p:
-    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@v0.3.0
+    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@test_tag
     with:
       project-id: ${{ vars.PROJECT_ID }}
       project-number: ${{ vars.PROJECT_NUMBER }}
