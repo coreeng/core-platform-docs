@@ -26,8 +26,8 @@ p2p-functional:
 p2p-nft: 
 	@echo noop
 
-.PHONY: p2p-dev-deploy
-p2p-dev-deploy: create-ns-dev 
+.PHONY: p2p-dev
+p2p-dev: create-ns-dev 
 	kubectl get pods -n knowledge-platform
 	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
