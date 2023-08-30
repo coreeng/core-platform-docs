@@ -1,5 +1,8 @@
 name: P2P
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
