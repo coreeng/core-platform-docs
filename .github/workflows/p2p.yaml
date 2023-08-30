@@ -6,6 +6,13 @@ on:
       - test_tags
       
 jobs:
+  test:
+    name: test
+    runs-one: ubuntu-latest
+    steps:
+    - name: Configure Git
+      run: |
+        printenv 
   p2p:
     uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@v0.4.0
     with:
