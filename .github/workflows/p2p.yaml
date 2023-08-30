@@ -14,7 +14,7 @@ jobs:
       run: |
         printenv 
   p2p:
-    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@refs/heads/v0.4.0
+    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@refs/remotes/origin/v0.4.0
     with:
       project-id: ${{ vars.PROJECT_ID }}
       project-number: ${{ vars.PROJECT_NUMBER }}
