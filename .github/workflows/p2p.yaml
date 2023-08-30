@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: test
-    runs-one: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Configure Git
       run: |
