@@ -4,7 +4,8 @@ on:
     branches:
       - main
       - test_tags
-      
+env:
+  STATS_NM: true  
 jobs:
   test:
     name: test
@@ -14,7 +15,7 @@ jobs:
       run: |
         printenv 
   p2p:
-    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@refs/remotes/origin/v0.4.0
+    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@v0.4.0
     with:
       project-id: ${{ vars.PROJECT_ID }}
       project-number: ${{ vars.PROJECT_NUMBER }}
