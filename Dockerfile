@@ -1,5 +1,5 @@
 FROM cecg/knowledge-platform
 
-COPY logo.png /site/static/images/logo.png
+COPY images/  /site/static/images/
 COPY content/cecg-idp content/cecg-idp
 COPY config.toml /site/
