@@ -1,4 +1,8 @@
 registry:
 service:
   image: knowledge-platform:latest
-
+ingress:
+  domain: corecicd.com
+  organization: cecg
+  environment: sandbox-gcp
+  subDomainName: knowledge-platform

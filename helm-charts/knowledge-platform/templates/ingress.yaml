@@ -1,0 +1,25 @@
+{{- $environment := .Values.ingress.environment | required ".Values.ingress.environment is required." -}}
+{{- $subDomainName := .Values.ingress.subDomainName | required ".Values.ingress.subDomainName is required." -}}
+{{- $organization := .Values.ingress.organization | required ".Values.ingress.organization is required." -}}
+{{- $ingressDomain := .Values.ingress.domain | required ".Values.ingress.domain is required." -}}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: knowledge-platform
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ $subDomainName }}.internal.{{ $environment }}.{{ $organization }}.{{ $ingressDomain }}
+    external-dns.alpha.kubernetes.io/target: internal.{{ $environment }}.{{ $organization }}.{{ $ingressDomain }}
+spec:
+  ingressClassName: platform-ingress-internal
+  rules:
+  - host: {{ $subDomainName }}.internal.{{ $environment }}.{{ $organization }}.{{ $ingressDomain }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: knowledge-platform
+            port:
+              number: 3000

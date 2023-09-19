@@ -1,6 +1,9 @@
 projectDir := $(realpath $(dir $(firstword $(MAKEFILE_LIST))))
 os := $(shell uname)
 VERSION ?= $(shell git rev-parse --short HEAD)
+DOMAIN ?= corecicd.com
+ORGANIZATION ?= cecg
+ENVIRONMENT ?= sandbox-gcp
 image_name = knowledge-platform
 image_tag = latest
 tenant_name = knowledge-platform
@@ -29,7 +32,7 @@ p2p-nft:
 .PHONY: p2p-dev
 p2p-dev: create-ns-dev 
 	kubectl get pods -n knowledge-platform
-	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --atomic
+	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --set ingress.domain=$(DOMAIN) --set ingress.organization=$(ORGANIZATION) --set ingres.subDomainName=$(tenant_name) --set ingress.environment=$(ENVIRONMENT) --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
 .PHONY: create-ns-dev
