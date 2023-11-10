@@ -1,6 +1,6 @@
 # Reference Knowledge Platform Deployment
 
-Extend the CECG Knowledge Platform to add custom content and deploy to the CECG IDP.
+Extend the CECG Knowledge Platform to add custom content and deploy to the CECG Develoepr Platform.
 
 Needs the following variables set:
 
