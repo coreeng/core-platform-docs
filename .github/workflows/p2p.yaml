@@ -7,10 +7,15 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   p2p:
-    uses: coreeng/reusable-p2p/.github/workflows/idp-p2p.yaml@v0.6.0
+    uses: coreeng/p2p/.github/workflows/p2p.yaml@main
     with:
+      env-name: ${{ vars.ENV }}
       project-id: ${{ vars.PROJECT_ID }}
       project-number: ${{ vars.PROJECT_NUMBER }}
       tenant-name: ${{ vars.TENANT_NAME }}
