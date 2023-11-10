@@ -6,11 +6,14 @@ pre = ""
 +++
 
 ## Platform Monitoring
+
 Platform monitoring is responsible for to scrape metrics on the cluster, apiServer and bastion and create out of the box dashboard. 
 This will allow monitoring over the whole platform or a team to monitor their application resources.
 
 ### Why use this module
+
 This will give users the visibility over the cluster to investigate issues and be proactive in the preventure of future problems.
+
 #### How can I monitor application resources?
 This dashboard will allow a team to monitori their application namespaces and check their status. It will show data like:
 * CPU Usage
@@ -21,6 +24,7 @@ This dashboard will allow a team to monitori their application namespaces and ch
 {{< figure src="/images/platform-monitoring/namespace-dashboard.png" title="Namespace Dashboard" >}}
 
 #### How can I monitor the whole cluster?
+
 The global view dashboard will give you visibility over the cluster as a whole.
 This will show you data like:
 * Nodes status
