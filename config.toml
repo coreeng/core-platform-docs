@@ -1,18 +1,18 @@
 baseURL = ''
 languageCode = 'en-us'
-title = 'CECG Developer Platform'
+title = 'Intergo Developer Platform'
 theme = 'hugo-theme-learn'
 enableEmoji = true
 # Title separator -- defaults to ::
 titleSeparator = "-"
 [params]
   themeVariant = "cecg"
-  company = "CECG"
-  org = "cecg"
-  environmentRepo = "https://github.com/coreeng/dplatform-environments"
-  email_org = "cecg.io"
-  github_org = "coreeng"
   environments = ["gcp-pre-dev", "gcp-dev", "gcp-prod"]
+  company = "Intergo"
+  org = "intergo"
+  environmentRepo = "https://github.com/intergo/platform-environments"
+  email_org = "intergotelecom.com"
+  github_org = "intergo"
 # Enable search
 [outputs]
   home = [ "HTML", "RSS", "JSON"]
