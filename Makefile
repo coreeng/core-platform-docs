@@ -23,12 +23,11 @@ p2p-functional:
 	@echo noop
 
 .PHONY: p2p-nft ## Noop for now
-p2p-nft: p2p-dev
-	@echo "deploying to dev"
+p2p-nft: 
+	@echo noop
 
 .PHONY: p2p-dev
 p2p-dev: create-ns-dev 
-	env
 	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --set domain=$(BASE_URL) --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
