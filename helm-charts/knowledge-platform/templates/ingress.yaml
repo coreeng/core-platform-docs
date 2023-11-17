@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: knowledge-platform
+spec:
+  ingressClassName: platform-ingress
+  rules:
+  - host: learn.{{ .Values.base_url }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: knowledge-platform 
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific

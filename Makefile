@@ -29,7 +29,7 @@ p2p-nft:
 .PHONY: p2p-dev
 p2p-dev: create-ns-dev 
 	kubectl get pods -n knowledge-platform
-	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --atomic
+	helm upgrade --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY) --domain=$(BASE_URL) --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
 .PHONY: create-ns-dev
