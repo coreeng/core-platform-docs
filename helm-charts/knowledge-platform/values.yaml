@@ -1,5 +1,5 @@
 registry:
-domian:
+domain:
 service:
   image: knowledge-platform:latest
 

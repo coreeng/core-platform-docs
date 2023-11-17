@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: platform-ingress
   rules:
-  - host: learn.{{ .Values.base_url }}
+  - host: learn.{{ .Values.domain }}
     http:
       paths:
       - backend:
