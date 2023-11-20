@@ -12,6 +12,7 @@ titleSeparator = "-"
   environmentRepo = "https://github.com/coreeng/dplatform-environments"
   email_org = "cecg.io"
   github_org = "coreeng"
+  environments = ["gcp-pre-dev", "gcp-dev", "gcp-prod"]
 # Enable search
 [outputs]
   home = [ "HTML", "RSS", "JSON"]

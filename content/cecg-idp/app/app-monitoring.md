@@ -7,7 +7,6 @@ pre = ""
 
 ## Accessing Grafana
 
-
 ### Via internal services
 
 Grafana is available at `grafana`.`internal_services.domain`
@@ -15,6 +14,9 @@ Grafana is available at `grafana`.`internal_services.domain`
 The `internal_services.domain` is in the config.yaml for the environment you 
 want to access grafana for in your [Environments Repo]({{< param environmentRepo >}}).
 
+The currently deployed grafanas:
+
+{{< grafanas >}}
 
 ### Via service port forwarding
 ```

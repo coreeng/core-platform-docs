@@ -10,11 +10,16 @@ pre = ""
 Platform monitoring is responsible for to scrape metrics on the cluster, apiServer and bastion and create out of the box dashboard. 
 This will allow monitoring over the whole platform or a team to monitor their application resources.
 
-### Why use this module
+### Platform Uptime
 
-This will give users the visibility over the cluster to investigate issues and be proactive in the preventure of future problems.
+Platform up time is measured by traffic continuously sent to a application deployed as part of the platform.
+
+To view uptime for each environment:
+
+{{< continuous-loads >}}
 
 #### How can I monitor application resources?
+
 This dashboard will allow a team to monitori their application namespaces and check their status. It will show data like:
 * CPU Usage
 * Memory usage

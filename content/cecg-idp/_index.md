@@ -9,9 +9,14 @@ The {{< param company >}} Developer Platform is an implementation of a [Core Pla
 
 ## Accessing the Cluster 
 
+
 The Developer Platform is an entirely private cluster. The Kubernetes endpoint is not exposed to the Internet. 
 
 Go to your [Environments Repo]({{< param environmentRepo >}}) for the commands and configuration for accessing the cluster. 
+
+The environments supported in this deployment are:
+
+{{< environments >}}
 
 ## Operating the Platform
 
