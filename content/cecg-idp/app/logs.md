@@ -7,6 +7,8 @@ pre = ""
 
 Open [Grafana](../app-monitoring) for your environment.
 
+{{< grafanas >}}
+
 Go to `Explore` 
 
 Set datasource to `Cloud Logging`
