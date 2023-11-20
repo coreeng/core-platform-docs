@@ -7,6 +7,16 @@ pre = ""
 
 ## Accessing Grafana
 
+
+### Via internal services
+
+Grafana is available at `grafana`.`internal_services.domain`
+
+The `internal_services.domain` is in the config.yaml for the environment you 
+want to access grafana for in your [Environments Repo]({{< param environmentRepo >}}).
+
+
+### Via service port forwarding
 ```
 kubectl -n platform-monitoring port-forward service/platform-grafana-service 3000
 ```

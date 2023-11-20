@@ -24,5 +24,5 @@ internal_services:
 
 The domain must be different from your ingress_domains.
 
-DNS delegation for that domain should be configured as in [DNS](.)
+DNS delegation for that domain should be configured as in [DNS](../dns)
 
