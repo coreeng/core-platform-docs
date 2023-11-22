@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   p2p:
-    uses: coreeng/p2p/.github/workflows/p2p.yaml@main
+    uses: coreeng/p2p/.github/workflows/p2p.yaml@v0.15.0
     secrets:
       env_vars: |
         ENVIRONMENT=${{ vars.ENV }}
