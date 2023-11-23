@@ -1,5 +1,5 @@
 +++
-title = "Path to Production"
+title = "Pipeline"
 weight = 3
 chapter = false
 pre = ""
@@ -7,12 +7,9 @@ pre = ""
 
 ## Developer Platform P2P
 
-At CECG we're using github actions to deploy our reference IDP application. We've defined a pipeline [here](https://github.com/coreeng/reusable-p2p).
-
-This is what the shape of it lookes like:
-
-`| Build | ` -> `| Functional | ` -> `| NFT | ` -> `| Dev | `
-
+The common P2P enables you to focus on building your business logic and tests without
+wasting time on CI/CD tooling setup.
+All your custom logic should be added to your Makefile rather than directly in GitHub actions.
 
 ### Requirements
 

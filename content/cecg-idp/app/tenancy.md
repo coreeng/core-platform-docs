@@ -62,6 +62,18 @@ golang
 [s] indicates subnamespaces
 ```
 
+## Creating additional lightweight environments
+
+You have permission to create as many lightweight environments in your tenancy.
+
+All reference apps create at least:
+
+* functional - for stubbed functional tests 
+* nft - for stubbed functional tests
+
+Typically all lightweight environments are created in your dev cluster and only
+a single namespace per application is in production.
+
 
 
 
