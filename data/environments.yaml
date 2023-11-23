@@ -1,10 +1,10 @@
 environments:
 - name: gcp-pre-dev
-  ingress: gcp-pre-dev.cecg.platform.cecg.io
-  internal_services: gcp-pre-dev-internal.cecg.platform.cecg.io
+  ingress: gcp-pre-dev.intergo.platform.cecg.io
+  internal_services: gcp-pre-dev-internal.intergo.platform.cecg.io
 - name: gcp-dev
-  ingress: gcp-dev.cecg.platform.cecg.io
-  internal_services: gcp-dev-internal.cecg.platform.cecg.io
+  ingress: gcp-dev.intergo.platform.cecg.io
+  internal_services: gcp-dev-internal.intergo.platform.cecg.io
 - name: gcp-prod
-  ingress: gcp-prod.cecg.platform.cecg.io
-  internal_services: gcp-prod-internal.cecg.platform.cecg.io
+  ingress: gcp-prod.intergo.platform.cecg.io
+  internal_services: gcp-prod-internal.intergo.platform.cecg.io
