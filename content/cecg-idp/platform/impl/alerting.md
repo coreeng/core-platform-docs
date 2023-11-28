@@ -12,6 +12,11 @@ pre = ""
 Managed alertmanager is a single replica statefulset deployed with [Google Managed Prometheus](https://cloud.google.com/stackdriver/docs/managed-prometheus). 
 It receives alerts from the rule evaluator and sends notification to configured receivers.
 
+```
+kubectl -n gmp-system get sts alertmanager 
+kubectl -n gmp-system get deploy rule-evaluator
+```
+
 ### Alerts definitions
 
 Alerts are defined using [Rules](https://github.com/GoogleCloudPlatform/prometheus-engine/blob/v0.7.4/doc/api.md#rules), [ClusterRules](https://github.com/GoogleCloudPlatform/prometheus-engine/blob/v0.7.4/doc/api.md#clusterrules) or [GlobalRules](https://github.com/GoogleCloudPlatform/prometheus-engine/blob/v0.7.4/doc/api.md#globalrules).

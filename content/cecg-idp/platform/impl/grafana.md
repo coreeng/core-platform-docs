@@ -10,9 +10,10 @@ pre = ""
 Grafana is installed using the grafana operator which manages the grafana instance, dashboards and datasources using CRDs.
 CRDs API reference: https://grafana-operator.github.io/grafana-operator/docs/api/
 
-To access it locally:
+It runs as a deployment:
 ```
-kubectl -n platform-monitoring port-forward svc/platform-grafana-service 3000
+kubectl -n platform-monitoring get deploy grafana-operator
+kubectl -n platform-monitoring get deploy platform-grafana-deployment
 ```
 
 ### Dashboards
