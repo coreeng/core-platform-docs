@@ -29,6 +29,7 @@ repos:
   - https://github.com/{{< param github_org >}}/idp-reference-app-go
 admin-group: platform-accelerator-admin@{{< param email_org >}}
 readonly-group: platform-readonly@{{< param email_org >}}
+cloud-access: []
 ```
 
 * `environments` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you wan tto deploy to 
@@ -74,7 +75,16 @@ All reference apps create at least:
 Typically all lightweight environments are created in your dev cluster and only
 a single namespace per application is in production.
 
+To create a lightweight environemnt, in your tenancy namespace create:
 
+
+```
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: SubnamespaceAnchor
+metadata:
+  namespace: {tenant_name}
+  name: your-lightweight-env
+```
 
 
 
