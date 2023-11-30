@@ -14,9 +14,9 @@ The Developer Platform is an entirely private cluster. The Kubernetes endpoint i
 
 Before accessing a cluster, ensure you have the following installed:
 
-1.) gcloud 
-2.) kubectl
-3.) gke-cloud-auth-plugin
+1. gcloud 
+2. kubectl
+3. gke-cloud-auth-plugin
 
 Go to your [Environments Repo]({{< param environmentRepo >}}) for the commands and configuration for accessing the cluster. 
 
