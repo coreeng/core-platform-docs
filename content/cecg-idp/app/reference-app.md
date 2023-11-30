@@ -24,7 +24,7 @@ The following variable in GitHub needs to be set:
 Ones that are likely the same as the reference app you forked:
 
 * `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}})
-* `PROJECT_NUMBER`` from [Environments Repo]({{< param environmentRepo >}})
+* `PROJECT_NUMBER` from [Environments Repo]({{< param environmentRepo >}})
 * `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}})
 * `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to
 
@@ -38,4 +38,4 @@ environments for functional and non-functional testing.
 Merges to main by default do the same as a PR, and additionally deploy to a stable dev namespace that
 can be used for showcasing and integration testing.
 
-Next [learn more about the P2P](../p2p)
+Next [learn more about how to implement the P2P](../../p2p)
