@@ -16,6 +16,8 @@ To add a tenancy raise a PR to the [Environments Repo]({{< param environmentRepo
 
 For example here's a built in tenant for the golang reference app:
 
+Note that your tenancy name must be the same as the file name!
+
 ```
 name: golang 
 parent: reference-applications
@@ -38,6 +40,7 @@ cloud-access: []
 * All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
 
 Now you have a tenancy, you can deploy your first application by forking a [reference application](../reference-app)
+
 
 ## Accessing your namespaces
 
