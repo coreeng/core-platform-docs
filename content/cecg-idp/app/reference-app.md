@@ -15,6 +15,17 @@ Fork a Developer platform reference app:
 
 * [Golang Reference](https://github.com/{{< param github_org >}}/idp-reference-app-go)
 
+If you plan to use the above forked repo, ensure your repos section from your tenancy yaml contains your above forked repo, for example:
+
+```yaml
+...
+cost-centre: tenants
+environments:
+  - gcp-dev
+repos: [https://github.com/coquinncecg/idp-reference-app-go]
+...
+```
+
 ## Update the GitHub Variables
 
 The following variable in GitHub needs to be set:
