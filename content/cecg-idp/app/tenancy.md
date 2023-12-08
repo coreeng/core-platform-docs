@@ -34,7 +34,7 @@ readonly-group: platform-readonly@{{< param email_org >}}
 cloud-access: []
 ```
 
-* `environments` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you wan tto deploy to 
+* `environments` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to 
 * `admin-group` will get permission to do all actions in the created namespaces
 * `readonly-group` will get ready only access to the created namespaces
 * All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
