@@ -8,12 +8,9 @@ pre = ""
 You should have from the previous step:
 
 * Environment: e.g. `gcp-dev`
-* Tenancy e.g. `auth`
-* Repo name e.g. `https://github.com/{{< param github_org >}}/auth`
+* Tenancy e.g. `myfirsttenancy`
+* Repo name e.g. `https://github.com/<your-github-id>/idp-reference-app-go`
 
-Fork a Developer platform reference app:
-
-* [Golang Reference](https://github.com/{{< param github_org >}}/idp-reference-app-go)
 
 If you plan to use the above forked repo, ensure your repos section from your tenancy yaml contains your above forked repo, for example:
 
@@ -22,7 +19,7 @@ If you plan to use the above forked repo, ensure your repos section from your te
 cost-centre: tenants
 environments:
   - gcp-dev
-repos: [https://github.com/coquinncecg/idp-reference-app-go]
+repos: [https://github.com/<your-github-id>/idp-reference-app-go]
 ...
 ```
 
@@ -30,14 +27,14 @@ repos: [https://github.com/coquinncecg/idp-reference-app-go]
 
 The following variable in GitHub needs to be set:
 
-* `TENANT_NAME` from the tenancy you just created
+* `TENANT_NAME` from the tenancy you just created e.g. myfirsttenancy
 
 Ones that are likely the same as the reference app you forked:
 
-* `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}})
+* `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
 * `PROJECT_NUMBER` from [Environments Repo]({{< param environmentRepo >}})
-* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}})
-* `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to
+* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
+* `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to under `/environments/`
 
 ## Raise a PR
 
