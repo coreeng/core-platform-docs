@@ -14,32 +14,32 @@ cloud-access:
   - name: cloud-access
     provider: gcp
     kubernetes_service_accounts:
-      - infra-integration/sa
+      - <your_tenanncy>/sa
 ```
 
 * `name`: Use a short name for the cloud access, with letters and `-`s
 * `provider`: only `gcp` supported
-* `kubernetes_service_accounts`: a list of kubernetes service accounts that will be allowed to access the cloud ifnrastructure in the format `namespace/name` e.g. the service account `cat` in the namespace `dog` should be configured as `dog/cat`
+* `kubernetes_service_accounts`: a list of kubernetes service accounts that will be allowed to access the cloud ifnrastructure in the format `namespace/name` e.g. the service account `cat` in the namespace `myfirsttenancy` should be configured as `myfirsttenancy/cat`
 
 In your parent namespace (the one named after your tenancy run) run:
 
 ```
-TENANT_NAME=??? # your tenancy
+TENANT_NAME=??? # your tenancy e.g. myfirsttenancy
 NAME=cloud-access #replace this with the name you have configured under `cloud-access`
 kubectl get iamserviceaccount  -n $TENANT_NAME -o jsonpath='{.items[0].status.email}' $TENANT_NAME-$NAME'
 ```
 
-For example, for the tenant name `infra-integration` and the name `cloud-access`:
+For example, for the tenant name `myfirsttenancy` and the name `cloud-access`:
 
 ```
-kubectl -n infra-integration get iamserviceaccount infra-integration-cloud-access -o jsonpath='{.status.email}'
-infra-integration-cloud-access@core-platform-ab0596fc.iam.gserviceaccount.com
+kubectl -n myfirsttenancy get iamserviceaccount myfirsttenancy-cloud-access -o jsonpath='{.status.email}'
+myfirsttenancy-cloud-access@core-platform-ab0596fc.iam.gserviceaccount.com
 ```
 
 This gives us an IAM Service Account that any permissions can be added to in your target Cloud Infra project.
 
 ```
-infra-integration-cloud-access@core-platform-ab0596fc.iam.gserviceaccount.com
+myfirsttenancy-cloud-access@core-platform-ab0596fc.iam.gserviceaccount.com
 ```
 
 This is your `CLOUD_SERVICE_ACCOUNT``
