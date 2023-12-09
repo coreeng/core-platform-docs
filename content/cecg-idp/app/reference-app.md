@@ -32,8 +32,8 @@ The following variable in GitHub needs to be set:
 Ones that are likely the same as the reference app you forked:
 
 * `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
-* `PROJECT_NUMBER` from [Environments Repo]({{< param environmentRepo >}})
-* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
+* `PROJECT_NUMBER` from `gcloud projects describe $PROJECT_ID --format="value(projectNumber)`
+* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml` 
 * `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to under `/environments/`
 
 ## Raise a PR
