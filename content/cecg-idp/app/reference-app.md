@@ -41,6 +41,10 @@ Ones that are likely the same as the reference app you forked:
 Raising a PR will automatically build the app, push the docker image, and deploy it to
 environments for functional and non-functional testing.
 
+{{% notice note %}}
+If you have forked the reference app, you need to manually enable the workflows in your forked repository. To do this, go to your repository on GitHub,click on the 'Actions' tab and click on 'I understand my workflows, go ahead and enable them'.
+{{% /notice %}}
+
 ## Merge the PR
 
 Merges to main by default do the same as a PR, and additionally deploy to a stable dev namespace that
