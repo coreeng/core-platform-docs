@@ -32,8 +32,12 @@ The following variable in GitHub needs to be set:
 Ones that are likely the same as the reference app you forked:
 
 * `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
+
 * `PROJECT_NUMBER` from `gcloud projects describe $PROJECT_ID --format="value(projectNumber)`
-* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml` . **Note** the `BASE_URL` should not include the first level of the subdomain. An example of BASE_URL is `cecg.platform.cecg.io`
+
+* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml` .
+ **Note** the `BASE_URL` should not include the first level of the subdomain. An example of BASE_URL is `cecg.platform.cecg.io`
+
 * `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to under `/environments/`
 
 ## Raise a PR
@@ -42,8 +46,14 @@ Raising a PR will automatically build the app, push the docker image, and deploy
 environments for functional and non-functional testing.
 
 {{% notice note %}}
-If you have forked the reference app, you need to manually enable the workflows in your forked repository. To do this, go to your repository on GitHub,click on the 'Actions' tab and click on 'I understand my workflows, go ahead and enable them'.
+If you have forked the reference app, then:
+
+* You need to manually enable the workflows in your forked repository. To do this, navigate to your repository on GitHub. Click on the 'Actions' tab. If you see a notice about workflow permissions, click on 'I understand my workflows, go ahead and enable them'.
+
+* In the Makefile of your repository, change the `tenant_name` variable to match the name of the tenancy you created."
 {{% /notice %}}
+
+
 
 ## Merge the PR
 
