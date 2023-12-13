@@ -1,5 +1,6 @@
 registry:
 domain:
 service:
-  image: knowledge-platform:latest
+  image: knowledge-platform
+  tag: latest
 
