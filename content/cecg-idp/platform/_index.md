@@ -60,6 +60,8 @@ kubectl auth can-i get pods \
     --as-group=${GROUP}@${DOMAIN}
 ```
 
+> :bulb: **Tip:** For a full example check the [Developer Platform Environments](https://github.com/coreeng/dplatform-environments#developer-platform-environments) repo
+
 ## GCP Registry Access
 
 * To access artifact registries, use the following command to configure Docker:
