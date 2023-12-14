@@ -56,7 +56,7 @@ create-ns-dev: ## Create namespace for dev
 	}' resources/subns-anchor.yaml | kubectl apply -f - 	
 
 .PHONY: create-ns-functional
-create-ns-dev: ## Create namespace for dev
+create-ns-functional: ## Create namespace for functional tests
 	awk -v NAME="$(tenant_name)" -v ENV="functional" '{ \
 		sub(/{tenant_name}/, NAME);  \
 		sub(/{env}/, ENV);  \
