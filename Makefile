@@ -44,7 +44,7 @@ p2p-promote-to-extended-test:  p2p-promote-generic deploy-dev
 
 .PHONY: deploy-dev
 p2p-dev: create-ns-dev 
-	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY)/extended-test --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn --atomic
+	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY)/test --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
 .PHONY: create-ns-dev
