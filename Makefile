@@ -18,8 +18,9 @@ help-all:
 p2p-build: service-build service-push ## Builds the service image and pushes it to the registry
 
 .PHONY: p2p-functional ## Noop for now
-p2p-functional: 
-	@echo noop
+p2p-functional: create-ns-functional
+	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-functional --set registry=$(REGISTRY)/extended-test --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn-functional --atomic
+	helm list -n $(tenant_name)-functional ## list installed charts in the given tenant namespace
 
 .PHONY: p2p-nft ## Noop for now
 p2p-nft: 
@@ -43,7 +44,7 @@ p2p-promote-to-extended-test:  p2p-promote-generic deploy-dev
 
 .PHONY: deploy-dev
 p2p-dev: create-ns-dev 
-	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY)/extended-test --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --atomic
+	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY)/extended-test --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
 .PHONY: create-ns-dev
@@ -54,6 +55,13 @@ create-ns-dev: ## Create namespace for dev
 		print;  \
 	}' resources/subns-anchor.yaml | kubectl apply -f - 	
 
+.PHONY: create-ns-functional
+create-ns-dev: ## Create namespace for dev
+	awk -v NAME="$(tenant_name)" -v ENV="functional" '{ \
+		sub(/{tenant_name}/, NAME);  \
+		sub(/{env}/, ENV);  \
+		print;  \
+	}' resources/subns-anchor.yaml | kubectl apply -f - 	
 # Docker tasks
 
 .PHONY: service-build
