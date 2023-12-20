@@ -25,30 +25,31 @@ Your tenancy name must be the same as the file name!
 
 For example, if I want to create a tenancy with the name `myfirsttenancy`, then I will create a file named `myfirsttenancy.yaml` with the following structure:
 
-```
+```yaml
 name: myfirsttenancy 
 parent: sandboxes
 description: "IDP Reference Go Application"
-contact-email: idp-reference-application@{{< param email_org >}}
-cost-centre: platform
+contactEmail: idp-reference-application@{{< param email_org >}}
+costCentre: platform
 environments:
   - gcp-dev
 repos:
   - https://github.com/<your-github-id>/idp-reference-app-go
-admin-group: platform-accelerator-admin@{{< param email_org >}}
-readonly-group: platform-readonly@{{< param email_org >}}
-cloud-access: []
+adminGroup: platform-accelerator-admin@{{< param email_org >}}
+readonlyGroup: platform-readonly@{{< param email_org >}}
+cloudAccess: []
 ```
 
 * `name` - Name of your tenancy. Must be the same as your filename.
 * `parent` -   #Explain what parent is and list possible values.
 * `description` - Description for your tenancy.
-* `contact-email` - # Why do I need this? What is it used for?
-* `cost-centre` - # Why do I need this? What is it used for? In reference-app we have tenants and here platform
+* `contactEmail` - # Why do I need this? What is it used for?
+* `costCentre` - # Why do I need this? What is it used for? In reference-app we have tenants and here platform
 * `environments` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to 
-* `admin-group` - will get permission to do all actions in the created namespaces
-* `readonly-group` -  will get ready only access to the created namespaces
+* `adminGroup` - will get permission to do all actions in the created namespaces
+* `readonlyGroup` -  will get read only access to the created namespaces
 * `repos` - Your [forked application](./tenancy.md/#fork-refernce-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
+* `cloudAccess` - generates cloud provider specific machine identities for kubernetes service accounts to impersonate/assume
 
 
 ## Accessing your namespaces
