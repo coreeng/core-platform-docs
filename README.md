@@ -15,4 +15,3 @@ docker build . -t local-kp && docker run -p 8080:8080 local-kp
 ```
 
 Then access the knowledge-platform [here](http://localhost:8080)
-
