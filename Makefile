@@ -46,9 +46,9 @@ p2p-promote-to-extended-test: dest_repo_path=$(EXTENDED_TEST_PATH)
 p2p-promote-to-extended-test: p2p-promote-generic
 
 .PHONY: p2p-promote-to-prod
-p2p-promote-to-extended-test: source_repo_path=$(EXTENDED_TEST_PATH)
-p2p-promote-to-extended-test: dest_repo_path=$(PROD_PATH)
-p2p-promote-to-extended-test: p2p-promote-generic
+p2p-promote-to-prod: source_repo_path=$(EXTENDED_TEST_PATH)
+p2p-promote-to-prod: dest_repo_path=$(PROD_PATH)
+p2p-promote-to-prod: p2p-promote-generic
 
 .PHONY: deploy-dev
 p2p-dev: create-ns-dev 
