@@ -51,7 +51,7 @@ p2p-promote-to-prod: dest_repo_path=$(PROD_PATH)
 p2p-promote-to-prod: p2p-promote-generic
 
 .PHONY: deploy-dev
-p2p-dev: create-ns-dev 
+deploy-dev: create-ns-dev 
 	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
