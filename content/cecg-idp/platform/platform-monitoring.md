@@ -7,20 +7,28 @@ pre = ""
 
 ## Platform Monitoring
 
-Platform monitoring is responsible for to scrape metrics on the cluster, apiServer and bastion and create out of the box dashboard. 
-This will allow monitoring over the whole platform or a team to monitor their application resources.
+Platform monitoring is responsible for ensuring the quality of the platform by providing visibility on the health of 
+the platform and workloads running on it.
+It allows both platform operators and application teams answer two basic questions: what's broken and why?
+
+By collecting metrics from key platform components such as control plane, data plane, bastion as wells tenants workloads, 
+platform monitoring allows operators and application teams to: 
+- analyze after the facts (troubleshooting) or for long-term trends (e.g. how quickly is my database growing)
+- compare impact of software changes when introducing a new feature or breaking one
+- alert when something is broken or might break soon
+- help answer basic questions about the health of the system using dashboards
 
 ### Platform Uptime
 
-Platform up time is measured by traffic continuously sent to a application deployed as part of the platform.
+Platform uptime is measured by traffic continuously sent to an application deployed as part of the platform.
 
 To view uptime for each environment:
 
 {{< continuous-loads >}}
 
-#### How can I monitor application resources?
+### Application resource monitoring
 
-This dashboard will allow a team to monitori their application namespaces and check their status. It will show data like:
+This dashboard will allow a team to monitor their application namespaces and check their status. It will show data like:
 * CPU Usage
 * Memory usage
 * Pod status
@@ -28,21 +36,19 @@ This dashboard will allow a team to monitori their application namespaces and ch
 
 {{< figure src="/images/platform-monitoring/namespace-dashboard.png" title="Namespace Dashboard" >}}
 
-#### How can I monitor the whole cluster?
+### Cluster wide resource monitoring
 
 The global view dashboard will give you visibility over the cluster as a whole.
 This will show you data like:
 * Nodes status
-* CPU and Memory usage
-* CPU and Memory Limits
-* CPU and Memory Reserved
+* CPU and Memory usage, requests and limits
 * Pod and namespace count
 * Pods status
 
 {{< figure src="/images/platform-monitoring/global-dashboard.png" title="Global Dashboard" >}}
 
 
-#### How can do I know if my cluster connectivity is stable?
+### Cluster connectivity monitoring
 
 The platform-monitoring module also deploys continuous load. 
 This will create k6 injectors and pods with `podinfo`, always with a stable throughput allowing us to monitor with enough data the different percentils and any errors that occur to ensure that we can be proactive in investigating and fixing any issues.
@@ -50,33 +56,32 @@ This will create k6 injectors and pods with `podinfo`, always with a stable thro
 {{< figure src="/images/platform-monitoring/continuous-load-dashboard.png" title="Continuous load Dashboard" >}}
 
 
+### Platform liveness
 
-### What does it install
-* IAM for managed prom
-* Grafana operator 
-* Grafana 
-* Auth proxy to allow grafana to query prometheus
-* Datasource for managed prometheus
-* Dashboards
+Shows uptime and probe success rate and duration of key endpoints we monitor on the platform.
+It can also be used to check SSL expiry.
+
+**TODO upload new image here once we have traefik probes**
+
+{{< figure src="/images/platform-monitoring/platform-liveness-dashboard.png" title="Platform liveness" >}}
 
 
-### Kube state metrics
+### Platform alerts
 
-Note that GMP re-labels `namespace` to `exported_namespace` as it reserves namespace for the namespace of the pod that
-the metric is scraped from. When importing dashboards that rely on `kube-state-metrics` metrics, the queries must use `exported_namespace`.
+#### Firing and silenced alerts 
 
-## Grafana
+**TODO review once we have the alert dashboard**
 
-Installed using the grafana operator then managing the grafana instance and CRDs as CRs.
+Firing alerts can be viewed in the Grafana UI either via the Alerts dashboard or via the built-in Alerting section.
+Alerts can be silenced via the Alerting section by matching the alert(s) label that needs silencing.
 
-Accessing:
+{{< figure src="/images/platform-monitoring/alert-silencing.png" title="Alert silencing" >}}
 
+#### Alert notifications
+
+To send alerts to a dedicated slack channel, configure a [slack webhook](https://api.slack.com/messaging/webhooks) in your environment configuration:
 ```
-kubectl -n platform-monitoring port-forward svc/platform-grafana-service 3000
+platform_monitoring:
+  slack_alert_webhook: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-Dashboards are from https://github.com/dotdc/grafana-dashboards-kubernetes
-
-## GCP
-
-In GCP Platform Monitoring depends on Prometheus Managed Collection being enabled.

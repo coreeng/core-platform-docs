@@ -22,7 +22,7 @@ where the platform is running.
 
 ```
 TENANT_NAME=golang
-kubectl get iamserviceaccount  -n $TENANT_NAME -o=jsonpath='{.items[0].status.email}'
+kubectl get iamserviceaccount  -n $TENANT_NAME -o=jsonpath='{.status.email}' p2p-$TENANT_NAME
 p2p-golang@core-platform-b83d2ca6.iam.gserviceaccount.com
 ```
 

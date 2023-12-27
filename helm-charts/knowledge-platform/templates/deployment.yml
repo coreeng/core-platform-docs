@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: knowledge-platform 
-          image: {{ $registry }}/{{ .Values.service.image }}
+          image: {{ $registry }}/{{ .Values.service.image }}:{{ .Values.service.tag }}
           {{- if .Values.service.environmentVariables }}
           env:
             {{- range $key, $value := .Values.service.environmentVariables }}
