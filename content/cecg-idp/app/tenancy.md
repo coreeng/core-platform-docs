@@ -45,13 +45,13 @@ cloudAccess:
   - name: ca # Cloud Access. Keeping it short so the username is also short, biggest one will be ca-connected-app-functional which is 27 chars, for mysql 8.0 needs to be 32max. For 5.7 16 max
     provider: gcp
     kubernetesServiceAccounts:
-    - {{< param namespace >}}/{{< param k8s_service_account_name >}}
+    - <namespace>/<k8s_service_account_name>
 infrastructure:
   network:
       projects:
       - name: name
-        id: {{< param project_id >}}
-        environment: {{< param environment >}}
+        id: <project_id>
+        environment: <platform_environment>
 
 ```
 

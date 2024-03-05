@@ -15,8 +15,8 @@ infrastructure:
   network:
       projects:
       - name: name
-        id: {{< param project_id >}}
-        environment: {{< param environment >}}
+        id: <project_id>
+        environment: <platform_environment>
 ```
 This allows you to configure projects to be attached to the current one's shared VPC, allowing you use Private Service Access connections to databases in your own projects. This will attach your project to the the one on the environemnt. 
 {{% notice note %}}
