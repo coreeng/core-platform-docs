@@ -33,7 +33,7 @@ Ones that are likely the same as the reference app you forked:
 
 * `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
 
-* `PROJECT_NUMBER` from `gcloud projects describe $PROJECT_ID --format="value(projectNumber)`
+* `PROJECT_NUMBER` from `gcloud projects describe $PROJECT_ID --format="value(projectNumber)"`
 
 * `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml` .
  **Note** the `BASE_URL` should not include the first level of the subdomain. An example of BASE_URL is `cecg.platform.cecg.io`
