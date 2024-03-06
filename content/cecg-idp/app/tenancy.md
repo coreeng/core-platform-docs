@@ -9,7 +9,7 @@ A Tenancy is the unit of access to the developer platform. It contains readonly 
 and give you access to a namespace and a docker registry for images.
 Once you have a tenancy you can add sub namespaces for all your application testing needs.
 
-### Fork the refernce app
+### Fork the reference app
 
 Before creating your first tenancy , fork the [Golang Reference](https://github.com/{{< param github_org >}}/idp-reference-app-go) as you first application.
 
@@ -19,7 +19,11 @@ To add a tenancy raise a PR to the [Environments Repo]({{< param environmentRepo
 under `tenants/tenants/`
 
 {{% notice note %}}
-Your tenancy name must be the same as the file name!
+  Your tenancy name must be the same as the file name!
+{{% /notice %}}
+
+{{% notice note %}}
+  Groups need to be in the `gke-security-groups` group!
 {{% /notice %}}
 
 
@@ -37,7 +41,18 @@ repos:
   - https://github.com/<your-github-id>/idp-reference-app-go
 adminGroup: platform-accelerator-admin@{{< param email_org >}}
 readonlyGroup: platform-readonly@{{< param email_org >}}
-cloudAccess: []
+cloudAccess:
+  - name: ca # Cloud Access. Keeping it short so the username is also short, biggest one will be ca-connected-app-functional which is 27 chars, for mysql 8.0 needs to be 32max. For 5.7 16 max
+    provider: gcp
+    kubernetesServiceAccounts:
+    - <namespace>/<k8s_service_account_name>
+infrastructure:
+  network:
+      projects:
+      - name: name
+        id: <project_id>
+        environment: <platform_environment>
+
 ```
 
 * `name` - Name of your tenancy. Must be the same as your filename.
@@ -49,8 +64,12 @@ cloudAccess: []
 * `adminGroup` - will get permission to do all actions in the created namespaces
 * `readonlyGroup` -  will get read only access to the created namespaces
 * `repos` - Your [forked application](./tenancy.md/#fork-refernce-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
-* `cloudAccess` - generates cloud provider specific machine identities for kubernetes service accounts to impersonate/assume
-
+* `cloudAccess` - generates cloud provider specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your applicaiton is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
+* `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you use Private Service Access connections to databases in your own projects. This will attach your project to the the one on the environemnt. 
+{{% notice note %}}
+  This attachment is unique, you can only attach your project to a single other project.
+{{% /notice %}}
+This means that if you want to have your databases in `gcp-dev` and `gcp-prod` for example, your tenant will need 2 GCP projects to attach to each environment.
 
 ## Accessing your namespaces
 
