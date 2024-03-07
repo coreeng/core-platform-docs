@@ -24,10 +24,3 @@ This allows you to configure projects to be attached to the current one's shared
 {{% /notice %}}
 This means that if you want to have your databases in `gcp-dev` and `gcp-prod` for example, your tenant will need 2 GCP projects to attach to each environment.
 
-Creating and accessing a Database like Redis with PSA is simpler that cloudsql.
-After you configure your tenancy network, you'll be able to create your redis instance. There, you'll chose `PRIVATE_SERVICE_ACCESS" as the connetion mode and configure the developer-platform's network as the authorized network which is constructed like
-```
-  projects/${platform_project_id}/global/networks/${platform_environment}-network"
-```
-
-Once configure and deployed, the redis instance will be given a private IP from the PSA range and you'll be able to reach it without any more configurations from your pods.
