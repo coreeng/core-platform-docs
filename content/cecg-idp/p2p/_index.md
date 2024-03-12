@@ -29,11 +29,20 @@ Make sure you have these details:
 
 Having these, you're set to start deploying!
 
+{{% notice note %}}
+Having both, project id and project number, at the same time is redundant, because one can be derived from the other.
+But for historical reasons, both are present.
+Having project number is required for authentication
+using [google-github-actions/auth](https://github.com/google-github-actions/auth)
+and having the project id is required for all the other operations.
+Removing the project id (and deriving it from the project number) would require significant refactoring.
+{{% /notice %}}
+
 ### How to use?
 
-First, you need to configure your CI/CD to call our reusable pipiline by configuring your `p2p.yaml` inside your repo in `./github/workflows`
+First, you need to configure your CI/CD to call our reusable pipeline by configuring your `p2p.yaml` inside your repo in `./github/workflows`
 
-If you've started from a reference application this will already exist.
+If you've started from a reference application, this will already exist.
 
 ```
 name: P2P
