@@ -11,11 +11,11 @@ With CloudSQL you can configure the connectivity and the authentication via IAM 
 
 
 ## Auth
-Having a service account configured, we now need to tell the applicaiton running to use it. This can be done one of two ways
+Having a service account configured, we now need to tell the application running to use it. This can be done one of two ways
 * [CloudSQL Proxy](https://github.com/GoogleCloudPlatform/cloud-sql-proxy)
 * [CloudSQL connector library](https://cloud.google.com/sql/docs/mysql/connect-connectors)
 
-Google recommends using the the connectors whenever you can, but if it's not available for the language you're using, you can use the ClouSQLProxy.
+Google recommends using the the connectors whenever you can, but if it's not available for the language you're using, you can use the CloudSQLProxy.
 
 
 There are a few things you need to have in mind:
@@ -24,7 +24,7 @@ There are a few things you need to have in mind:
 {{% notice note %}}
   Service Account users are created without any Database permissions by default, and in order to do that, you need to manually give it the permissions you need. 
 {{% /notice %}}
-In case you dont have any other built-in username, you can configure by renning something like:
+In case you dont have any other built-in username, you can configure by running something like:
 ```bash
 USER_NAME="test_user"
 PROJECT_ID="<PROJECT_ID>"
@@ -54,11 +54,11 @@ For example, if you want it to access Cloud SQL it will need:
 * `roles/cloudsql.instanceUser`
 * `roles/serviceusage.serviceUsageConsumer`
 
-The first 2 are to have cloudsql client permissions and the last one if to be able to use a service that doesn't not belong to the project.
+The first 2 are to have cloudsql client permissions and the last one is to be able to use a service that doesn't not belong to the project.
 
 ### Billing
 
-To be able to connect, you need to specify to the client which billing account to use, as by defualt it will try to use the one where the SA is configured, which in this case will be one of the platform environments, but you want it to use your own project. 
+To be able to connect, you need to specify to the client which billing account to use, as by default it will try to use the one where the SA is configured, which in this case will be one of the platform environments, but you want it to use your own project. 
 For terraform, you can add these 2 env vars:
 ```bash
 export USER_PROJECT_OVERRIDE=true 

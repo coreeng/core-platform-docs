@@ -92,4 +92,4 @@ cat $(CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE) >> ~/.config/gcloud/application_de
 
 ### p2p-promote
 
-This setup makes promotion work in a similar way to the application. It will simply promoted the versioned docker artifact across different registry paths/registries as deploy to extended-test and prod the latest versions promoted to those environments.
+This setup makes promotion work in a similar way to the application. It will simply promote the versioned docker artifact across different registry paths/registries as deploy to extended-test and prod the latest versions promoted to those environments.
