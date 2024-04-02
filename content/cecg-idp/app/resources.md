@@ -6,16 +6,21 @@ pre = ""
 +++
 
 
-When deploying an application to the platform we need to make sure that it has enough resources to operate correctly.
-
-Kubernetes allows to set up `requests` and `limits` for the resources:
-- `requests` define the minimum amount of resources that are guaranteed to be available on the host and are reserved for the container. 
-The container will not start if this amount is not available.
-- `limits` specify the maximum amount of resources to be consumed by the container.
-
+When deploying an application to the platform we need to make sure that it has enough resources to operate correctly. 
 By the word *resources* we usually mean CPU and memory.
 
-### Memory
+Kubernetes allows us to set up `requests` and `limits` for the resources:
+
+- **requests** define the minimum amount of resources that are guaranteed to be available for the container.  
+- **limits** define the maximum amount of resources to be consumed by the container.
+
+The Kubernetes scheduler can use resource **requests** to select a node for the Pod to run on. 
+Each node has a maximum capacity for each of the resource types: the amount of CPU and memory it can provide for Pods. 
+The scheduler ensures that, for each resource type, the sum of the resource requests of the scheduled containers is less than the capacity of the node. 
+
+Defining resource **limits** helps ensure that containers never use all available underlying infrastructure provided by nodes.
+
+## Memory
 
 We define both requests and limits for memory as we need to have its consumption under control.
 If the application exceeds the memory limit then it is being terminated due to Out Of Memory condition (OOMKilled).
@@ -29,7 +34,7 @@ This means that either the limit is too low or there is a memory leak that needs
       memory: 100Mi
 ```
 
-### CPU Requests
+## CPU Requests
 
 A common approach is to set CPU requests without limits. This results in decent scheduling, high utilization of resources and fairness when all containers need CPU cycles.
 
@@ -44,7 +49,7 @@ The container have a minimum amount of CPU even when all the containers on the h
       memory: 100Mi
 ```
 
-### CPU Limits for Load Testing
+## CPU Limits for Load Testing
 
 When running stubbed NFT or extended test we need to have stable performance so that we can reliably validate TPS and latency thresholds.
 
