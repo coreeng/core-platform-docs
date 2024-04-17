@@ -1,6 +1,6 @@
 +++
 title = "Expose your service via Ingress"
-weight = 9
+weight = 10
 chapter = false
 pre = ""
 +++

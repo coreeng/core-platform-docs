@@ -1,6 +1,6 @@
 +++
 title = "Tenancy"
-weight = 1
+weight = 2
 chapter = false
 pre = ""
 +++
@@ -9,11 +9,20 @@ A Tenancy is the unit of access to the developer platform. It contains readonly 
 and give you access to a namespace and a docker registry for images.
 Once you have a tenancy you can add sub namespaces for all your application testing needs.
 
-### Fork the reference app
-
-Before creating your first tenancy , fork the [Golang Reference](https://github.com/{{< param github_org >}}/idp-reference-app-go) as you first application.
-
 ### Adding a tenancy
+
+#### Using `corectl`
+Run:
+```shell
+corectl tenant create
+```
+
+It will prompt you a series of questions about a new tenant. 
+Once you fill the form, `corectl`
+will create a PR in the [Environments Repo]({{< param environmentRepo >}}) with a new file for the tenancy.
+Once PR is merged, a configuration for the new tenant will be provisioned automatically.
+
+#### Manually
 
 To add a tenancy raise a PR to the [Environments Repo]({{< param environmentRepo >}}) 
 under `tenants/tenants/`

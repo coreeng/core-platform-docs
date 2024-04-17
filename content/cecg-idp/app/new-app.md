@@ -1,29 +1,42 @@
 +++
-title = "Deploy a reference app"
-weight = 2
+title = "Deploy a new application"
+weight = 3
 chapter = false
 pre = ""
 +++
 
+## Create a new application
+### Using `corectl`
+Run:
+```shell
+corectl app create <new-app-name> [<new-app-dir>]
+```
+It will:
+- prompt you a few additional questions, including template for the application.
+- create a new repository using the selected template
+- configure the created GitHub repository, so P2P workflows will run without an issue
+
+### Manually
+
 You should have from the previous step:
-
-* Environment: e.g. `gcp-dev`
 * Tenancy e.g. `myfirsttenancy`
-* Repo name e.g. `https://github.com/<your-github-id>/idp-reference-app-go`
+* Environment: e.g. `gcp-dev`
 
-
-If you plan to use the above forked repo, ensure your repos section from your tenancy yaml contains your above forked repo, for example:
-
+Create a new repository by forking a
+[Golang Reference](https://github.com/{{< param github_org >}}/idp-reference-app-go)
+or by creating a new repository from template using `corect template render...`.
+For the P2P workflows to work you need to have this repository to be present in `environments` list in the tenant file.
+For example
 ```yaml
 ...
 cost-centre: tenants
 environments:
   - gcp-dev
-repos: [https://github.com/<your-github-id>/idp-reference-app-go]
+repos: [https://github.com/<your-github-id>/<your-new-repository>]
 ...
 ```
 
-## Update the GitHub Variables
+#### Update the GitHub Variables
 
 The following variable in GitHub needs to be set:
 
@@ -35,8 +48,10 @@ Ones that are likely the same as the reference app you forked:
 
 * `PROJECT_NUMBER` from `gcloud projects describe $PROJECT_ID --format="value(projectNumber)"`
 
-* `BASE_URL` from `ingress_domains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml` .
+* `BASE_URL` from `ingressDomains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`.
  **Note** the `BASE_URL` should not include the first level of the subdomain. An example of BASE_URL is `cecg.platform.cecg.io`
+
+* `INTERNAL_SERVICES_DOMAIN` from `internalServices` [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`.
 
 * `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to under `/environments/`
 

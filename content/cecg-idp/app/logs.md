@@ -1,6 +1,6 @@
 +++
 title = "Aggregated Logs"
-weight = 9
+weight = 10
 chapter = false
 pre = ""
 +++

@@ -88,3 +88,7 @@ service-build:
 .PHONY: service-push
 service-push: ## Push the service image
 	docker image push $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag)
+
+.PHONY: run-local
+run-local: ## Build and run docker container locally
+	docker build . -t local-kp && docker run -p 8080:8080 local-kp
