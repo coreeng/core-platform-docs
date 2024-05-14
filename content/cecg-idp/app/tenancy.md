@@ -18,25 +18,35 @@ corectl tenant create
 ```
 
 It will prompt you a series of questions about a new tenant. 
+* `Tenant Name` - Name of the tenant.
+* `Parent` - Parent tenant name.
+* `Description` - Description for tenant.
+* `Contact Email` - Contact email for tenant.
+* `Cost centre` - Cost centre of tenant. Should be valid K8S label.
+* `Environments` - Environments, available to tenant.
+* `Reposirories` - Repositories, tenant is responsible for.
+* `Admin Group` - Admin group for tenant.
+* `Read-Only Group` - Readonly group for tenant.
+
 Once you fill the form, `corectl`
 will create a PR in the [Environments Repo]({{< param environmentRepo >}}) with a new file for the tenancy.
 Once PR is merged, a configuration for the new tenant will be provisioned automatically.
 
 #### Manually
 
-To add a tenancy raise a PR to the [Environments Repo]({{< param environmentRepo >}}) 
-under `tenants/tenants/`
+To manually define a new tenant, create the tenant yaml file in the `tenants/tenants` subdirectory of the [Environments Repo]({{< param environmentRepo >}})
+
 
 {{% notice note %}}
   Your tenancy name must be the same as the file name!
 {{% /notice %}}
 
 {{% notice note %}}
-  Groups need to be in the `gke-security-groups` group!
+  The Admin and Read-Only Groups need to be members of the `gke-security-groups` group!
 {{% /notice %}}
 
 
-For example, if I want to create a tenancy with the name `myfirsttenancy`, then I will create a file named `myfirsttenancy.yaml` with the following structure:
+For example, to create a new tenancy with the name `myfirsttenancy`, create a file named `myfirsttenancy.yaml` with the following structure:
 
 ```yaml
 name: myfirsttenancy 
@@ -69,9 +79,9 @@ infrastructure:
 * `description` - Description for your tenancy.
 * `contactEmail` - # Why do I need this? What is it used for?
 * `costCentre` - # Why do I need this? What is it used for? In reference-app we have tenants and here platform
-* `environments` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to 
-* `adminGroup` - will get permission to do all actions in the created namespaces
-* `readonlyGroup` -  will get read only access to the created namespaces
+* `environments` A YAML list of the environments in the [Environments Repo]({{< param environmentRepo >}}) in which you want to create a tenant.
+* `adminGroup` - Group members will have permissions to carry out all actions in the created namespaces (tenants).
+* `readonlyGroup` -  Group members will have read only access to the created namespaces (tenants).
 * `repos` - Your [forked application](./tenancy.md/#fork-refernce-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
 * `cloudAccess` - generates cloud provider specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your applicaiton is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
 * `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you use Private Service Access connections to databases in your own projects. This will attach your project to the the one on the environemnt. 
@@ -113,7 +123,7 @@ All reference apps create at least:
 * functional - for stubbed functional tests 
 * nft - for stubbed functional tests
 
-Typically all lightweight environments are created in your dev cluster and only
+Typically all lightweight environments are created in the dev cluster and only
 a single namespace per application is in production.
 
 To create a lightweight environemnt, in your tenancy namespace create:
