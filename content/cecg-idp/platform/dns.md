@@ -47,17 +47,17 @@ Value:
 
 ## Default Zone
 
-When your developer platform is initially deployed it comes with a zone under CECG's domain, including your organisation's `<name>``.
+When your developer platform is initially deployed it comes with a zone under CECG's domain, including your organisation's `<name>`.
 This is just to aid the initial developer experience and isn't intended for your production services.
 The domains follow this structure:
 
-<name>.platform.cecg.io
+`<name>.platform.cecg.io`
 
-<env>.<name>.platform.cecg.io
+`<env>.<name>.platform.cecg.io`
 
-<name> the name of the set of environments. Each set of environment typically is made up of pre-dev, dev, prod. 
+`<name>` the name of the set of environments. Each set of environment typically is made up of pre-dev, dev, prod. 
 
-<env> is the environment name within a developer platform.
+`<env>` is the environment name within a developer platform.
 
 For example, we (cecg) run our own instance of the core platform with a name of `cecg` so we will end up with:
 
