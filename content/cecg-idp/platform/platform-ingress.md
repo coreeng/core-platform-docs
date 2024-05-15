@@ -17,7 +17,7 @@ Platform Ingress is reponsible for creating the Ingress setup.
 * Public and Private access
 * Cloud DNS managed zones to manage the DNS
 * External DNS
-* 2 Traefik Ingress controllers, one for internal, and one for external traffic.
+* Traefik Ingress controller
 
 ## How does DNS work?
 
