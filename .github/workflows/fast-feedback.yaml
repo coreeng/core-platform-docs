@@ -19,9 +19,8 @@ jobs:
     secrets:
       git-token: ${{ secrets.GITHUB_TOKEN }} 
 
-  extendedtests:
+  fastfeedback:
     needs: [version]
-    uses: coreeng/p2p/.github/workflows/p2p-workflow-extended-test.yaml@v1
+    uses: coreeng/p2p/.github/workflows/p2p-workflow-fastfeedback.yaml@v1
     with:
       version: ${{ needs.version.outputs.version }}
-      main-branch: ref/branch/extended-test
