@@ -102,5 +102,6 @@ spec:
               number: 3000
 ```
 
+For more information on how to use this, please look at the [App Ingress section.](../app/ingress.md)
 ## Future work
 We aim to be tech agnostic and remove some redundancies, namely regarding external-dns annotations. For that we will create a mutating webhook that will inject the needed annotations based on the URL of the ingress. It will also check for conflicts in the configuration and block the creation of any already existing as that will cause the IC to load balance between 2 possibly completely distinct application
