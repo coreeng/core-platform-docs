@@ -75,4 +75,35 @@ iap-user-p2p-knowledge-platform                   68m   True    UpToDate   68m  
 workflow-identity-p2p-knowledge-platform          89m   True    UpToDate   89m
 ```
 
-For the above error the `compute-os-login-p2p-knowledge-platform` one is responisble for giving access.  
+For the above error the `compute-os-login-p2p-knowledge-platform` one is responsible for giving access.  
+
+
+
+## P2P Helm Numeric Value Error:
+### Error:
+P2P fails on the helm upgrade step, while trying to apply the helm charts 
+
+- ie running. `helm upgrade --host=localhost --set port=123`), results in error: 
+
+
+```
+ERROR: json: cannot unmarshal number into Go struct field EnvVar.spec.template.spec.containers.env.value of type string
+```
+
+This is caused by your helm chart which contains values that are to be overridden, as for example if in our helm chart we had the below with:
+
+```
+  host: {{ .Values.Host }}
+  port: {{ .Values.Port }}
+```
+
+where these are meant to be passed over to kubernetes manifests, we need to guarantee that both of them are treated as string and not as numeric. 
+
+So if in the example above where, you where trying to override with `--set port=123`, this causes parsing issues on the helm and kubernetes side. 
+
+### Solution
+To fix this, we can safely "quote" the variables in question as per below:
+```
+  host: {{ .Values.Host }}
+  port: {{ .Values.Port | quote }}
+```
