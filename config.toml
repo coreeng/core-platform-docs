@@ -15,4 +15,4 @@ titleSeparator = "-"
   environments = ["gcp-pre-dev", "gcp-dev", "gcp-prod"]
 # Enable search
 [outputs]
-  home = [ "HTML", "RSS", "JSON"]
+home = [ "HTML", "RSS", "JSON"]
