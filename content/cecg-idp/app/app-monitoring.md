@@ -120,10 +120,29 @@ This configuration assumes that your application exposes metrics on `metrics` en
 
 Grafana and Prometheus are not exposed by default. You have two options:
 
-- Create Ingress resources for internal domain. See [ingress instructions](./ingress.md)
+- Create Ingress resources for internal domain
 - Port forward Grafana and Prometheus
 
-### Port forward Grafana
+### Through Ingress
+
+To enable ingress for monitoring services you have to set respective values during the installation of the monitoring-stack chart.
+It should look like this:
+```bash
+helm -n {{ target-ns }} install monitoring-stack {{ monitoring-stack-chart-url }} \
+    --set tenantName={{ your-tenant-name }} \
+    --set internalServicesDomain={{ internal-services-domain }} \
+    --set prometheus.ingress.enabled=true \
+    --set grafana.ingress.enabled=true
+```
+
+Here:
+
+- `internal-services-domain` - domain of the internal services: `internal_services.domain`
+
+Grafana should be accessible by the URL: `{{ your-tenant-name }}-grafana.{{ internal-services-domain }}`
+Prometheus should be accessible by the URL: `{{ your-tenant-name }}-prometheus.{{ internal-services-domain }}`
+
+### Through port forward
 
 To port forward Grafana, run the command below and access it on [http://localhost:3000](http://localhost:3000)
 
