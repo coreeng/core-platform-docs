@@ -61,7 +61,8 @@ infrastructure:
       - name: name
         id: <project_id>
         environment: <platform_environment>
-
+betaFeatures:
+  - k6-operator
 ```
 
 * `name` - Name of your tenancy. Must be the same as your filename.
@@ -72,9 +73,12 @@ infrastructure:
 * `environments` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to 
 * `adminGroup` - will get permission to do all actions in the created namespaces
 * `readonlyGroup` -  will get read only access to the created namespaces
-* `repos` - Your [forked application](./tenancy.md/#fork-refernce-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
-* `cloudAccess` - generates cloud provider specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your applicaiton is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
-* `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you use Private Service Access connections to databases in your own projects. This will attach your project to the the one on the environemnt. 
+* `repos` - Your [application](./new-app.md) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
+* `cloudAccess` - generates cloud provider specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your application is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
+* `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment. 
+* `betaFeatures` - enables certain beta features for tenants:
+  * `k6-operator` - allows running tests with K6 Operator. 
+
 {{% notice note %}}
   This attachment is unique, you can only attach your project to a single other project.
 {{% /notice %}}
@@ -113,10 +117,10 @@ All reference apps create at least:
 * functional - for stubbed functional tests 
 * nft - for stubbed functional tests
 
-Typically all lightweight environments are created in your dev cluster and only
+Typically, all lightweight environments are created in your dev cluster and only
 a single namespace per application is in production.
 
-To create a lightweight environemnt, in your tenancy namespace create:
+To create a lightweight environment, in your tenancy namespace create:
 
 
 ```
