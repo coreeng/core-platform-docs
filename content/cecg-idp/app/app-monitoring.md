@@ -77,16 +77,19 @@ You should have deployed monitoring stack for your tenant.
 This monitoring stack consists of preconfigured Grafana and Prometheus instances.
 To install monitoring stack, run the following command:
 
->> TODO: WHAT IS THE URL???
 ```bash
-helm -n {{ target-ns }} install monitoring-stack {{ monitoring-stack-chart-url }} --set tenantName={{ your-tenant-name }}
+# Add helm repository
+helm repo add coreeng https://coreeng.github.com/public-assets
+helm repo update
+
+# Install the chart
+helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack --set tenantName={{ your-tenant-name }}
 ```
 
 Here:
-
 - `your-tenant-name` - name of the tenancy to be monitored. Prometheus will look for PodMonitors/ServiceMonitors in
   subnamespaces of this tenant.
-- `target-ns` - should be the tenancy namespace or a subnamespace of tenancy namespace
+
 
 ## Monitoring Application
 
@@ -125,10 +128,11 @@ Grafana and Prometheus are not exposed by default. You have two options:
 
 ### Through Ingress
 
-To enable ingress for monitoring services you have to set respective values during the installation of the monitoring-stack chart.
+To enable ingress for monitoring services,
+you have to set the respective values during the installation of the monitoring-stack chart.
 It should look like this:
 ```bash
-helm -n {{ target-ns }} install monitoring-stack {{ monitoring-stack-chart-url }} \
+helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack \
     --set tenantName={{ your-tenant-name }} \
     --set internalServicesDomain={{ internal-services-domain }} \
     --set prometheus.ingress.enabled=true \
