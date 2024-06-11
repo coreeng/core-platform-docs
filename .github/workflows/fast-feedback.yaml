@@ -23,4 +23,4 @@ jobs:
     needs: [version]
     uses: coreeng/p2p/.github/workflows/p2p-workflow-fastfeedback.yaml@v1
     with:
-     version: ${{ needs.version.outputs.version }}
+      version: ${{ needs.version.outputs.version }}
