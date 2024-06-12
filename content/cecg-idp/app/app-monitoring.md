@@ -79,7 +79,7 @@ To install monitoring stack, run the following command:
 
 ```bash
 # Add helm repository
-helm repo add coreeng https://coreeng.github.com/public-assets
+helm repo add coreeng https://coreeng.github.com/core-platform-assets
 helm repo update
 
 # Install the chart
@@ -95,7 +95,7 @@ Here:
 
 To monitor start monitoring your application,
 you have to create `ServiceMonitor` or `PodMonitor` resource for your application
-and put `tenant: {{ your-tenant-name }}` label on it.
+and put `monitoring/instance:: {{ your-tenant-name }}` label on it.
 By using tenant label, you define the target prometheus instance.
 Here is the example:
 
@@ -106,7 +106,7 @@ metadata:
   name: some-service
   labels:
     app.kubernetes.io/name: some-service
-    tenant: your-tenant-name
+    monitoring/instance: your-tenant-name
 spec:
   selector:
     matchLabels:
