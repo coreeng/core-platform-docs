@@ -103,5 +103,26 @@ spec:
 ```
 
 For more information on how to use this, please look at the [App Ingress section.](../app/ingress.md)
+
+## Autoscaling
+
+Platform Ingress scales automatically based on resource consumption to handle spikes of traffic.
+
+[Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) is enabled for Traefik pods and is configurable via `config.yaml`.
+
+The following example overrides resource requests for Traefik pods, sets a range for the number of replicas 
+and overrides the CPU usage percentage threshold.
+
+```yaml
+platformIngress:
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "300Mi"
+  minReplicas: 3
+  maxReplicas: 21
+  cpuPercent: 80
+```
+
 ## Future work
 We aim to be tech agnostic and remove some redundancies, namely regarding external-dns annotations. For that we will create a mutating webhook that will inject the needed annotations based on the URL of the ingress. It will also check for conflicts in the configuration and block the creation of any already existing as that will cause the IC to load balance between 2 possibly completely distinct application
