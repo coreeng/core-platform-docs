@@ -54,6 +54,29 @@ There's various pros and cons to not being subscribed, but some key points are:
 
 We are currently subscribed to the `REGULAR` channel.
 
+#### Our Kubernetes version
+We dynamically source our Kubernetes versions, via a datasource with version prefix filtering. 
+
+The below is responsible for fetching versions that match the provided prefix.
+
+```terraform
+data "google_container_engine_versions" "region_versions" {
+  provider       = google-beta
+  location       = var.gcp_region # Region definition as versions can vary between regions
+  version_prefix = "${local.k8s_version}." # This is the version filter, at the time of writing this, it's 1.29.
+}
+```
+
+Subsequently, we set the `kubernetes_version` like so:
+
+```terraform
+kubernetes_version = data.google_container_engine_versions.region_versions.release_channel_latest_version.REGULAR
+```
+
+The `kubernetes_version` field is then implicitly mapped to the `min_master_version` field, since as mentioned [above](#background-on-gke-versions) you can't
+explicitly declare a Kubernetes version, you can only declare the minimum you want installed in a cluster.
+
+
 ## Control Plane Upgrades
 
 When a control plane update takes place, during a maintenance window or through a manual update, some downtime could be expected,
@@ -126,7 +149,7 @@ Keep in mind that resources need to be available for the new surge nodes to come
 
 **Primary Pros**
 
-* Cost effective
+* Cost-effective
 * Simpler
 * Faster
 
@@ -136,11 +159,23 @@ Keep in mind that resources need to be available for the new surge nodes to come
 * No easy rollback(Requires manual downgrading of the affected nodes)
 * Main audience should be stateless applications(Where disruptions are more tolerated)
 
-## Our node upgrade strategy
+#### Our node upgrade strategy
 
-We use the default `SURGE` strategy, with `maxSurge` set to 1 (default) and `maxUnavailable` set to 0 (default).
+We use the `SURGE` strategy, with `max_surge` set to 1 and `max_unavailable` set to 0.
 What this means is that only one surge node is added at a time, thus one node is being upgraded, at a time. Also, pods can restart immediately
 on the new surge node.
 
-A `SURGE` strategy with the `maxSurge` and `maxUnavailable` values we use, is typically the slowest of the bunch(still much quicker that `blue-green`),
-but the least disruptive.
+A `SURGE` strategy with the `max_surge` and `max_unavailable` values we use, is typically the slowest of the bunch(still much quicker that `blue-green`),
+but the least disruptive. By tweaking those 2 values you can balance speed and disruption potential.
+
+#### Our node versions
+
+We do not explicitly set any version for our nodes, but we have 
+
+```terraform
+auto_upgrade  = true
+```
+
+in our `node_pool` configuration. What this means is that every time the Kubernetes control plane is upgraded,
+a node upgrade is scheduled automatically for the next maintenance window, to match that version. Naturally, the node and control plane
+versions won't be the same at all times, but it's fine as long as we adhere to the Kubernetes [version skew policy](https://kubernetes.io/releases/version-skew-policy/).
