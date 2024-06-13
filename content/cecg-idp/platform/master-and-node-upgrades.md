@@ -115,28 +115,6 @@ Some factors that could affect the overall duration of the upgrade:
 * [Node Affinity interactions](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
 * Attached Persistent Volumes (Detachment/Reattachment can take time)
 
-#### The BLUE-GREEN strategy
-
-This strategy involves GKE creating a new set of node resources (the "green" nodes), with the new node configuration before
-evicting any workloads on the original resources (the "blue" nodes). It's important to note that GKE will keep the "blue" nodes until
-all traffic have been shifted to the "green" nodes.
-
-**Primary Pros**
-
-* Rollback mid upgrade if issues arise are possible
-* A safe space(green) for testing out the release
-* As close to 0 downtime as possible
-
-**Primary Cons**
-
-* Significant cost
-* Complexity
-* Resources need to be available otherwise the upgrade will fail
-
-Upgrading using full environment replication is a resource-intensive approach. Upgrading requires creating a complete copy
-of the existing environment, effectively doubling resource needs. As mentioned earlier, this method
-requires having all the necessary resources upfront to prevent upgrade failures
-
 #### The SURGE strategy
 
 This strategy upgrades nodes in a rolling fashion. Nodes are drained of traffic, upgraded,
@@ -160,6 +138,25 @@ Keep in mind that resources need to be available for the new surge nodes to come
 * Potential Downtime (Apps running on the drained nodes )
 * No easy rollback(Requires manual downgrading of the affected nodes)
 * Main audience should be stateless applications(Where disruptions are more tolerated)
+
+#### The BLUE-GREEN strategy
+
+This strategy involves GKE creating a new set of node resources (the "green" nodes), with the new node configuration before
+evicting any workloads on the original resources (the "blue" nodes). It's important to note that GKE will keep the "blue" nodes until
+all traffic have been shifted to the "green" nodes.
+
+**Primary Pros**
+
+* Rollback mid upgrade if issues arise are possible
+* A safe space(green) for testing out the release
+* As close to 0 downtime as possible
+
+**Primary Cons**
+
+* Significant cost
+* Complexity
+* Need to have higher quota headroom that `SURGE` to work properly
+
 
 #### Our node upgrade strategy
 Both strategies have their use cases. In our case, 
