@@ -155,8 +155,7 @@ all traffic have been shifted to the "green" nodes.
 
 * Significant cost
 * Complexity
-* Need to have higher quota headroom that `SURGE` to work properly
-
+* Need to have much higher quota headroom than `SURGE` to work properly
 
 #### Our node upgrade strategy
 Both strategies have their use cases. In our case, 
