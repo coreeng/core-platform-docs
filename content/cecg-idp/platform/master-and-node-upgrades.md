@@ -131,9 +131,11 @@ all traffic have been shifted to the "green" nodes.
 
 * Significant cost
 * Complexity
+* Resources need to be available otherwise the upgrade will fail
 
-This strategy is quite resource intensive, as the original environment is replicated as part of the upgrade meaning that
-you effectively scale up to double the cluster size.
+Upgrading using full environment replication is a resource-intensive approach. Upgrading requires creating a complete copy
+of the existing environment, effectively doubling resource needs. As mentioned earlier, this method
+requires having all the necessary resources upfront to prevent upgrade failures
 
 #### The SURGE strategy
 
@@ -160,8 +162,8 @@ Keep in mind that resources need to be available for the new surge nodes to come
 * Main audience should be stateless applications(Where disruptions are more tolerated)
 
 #### Our node upgrade strategy
-
-We use the `SURGE` strategy, with `max_surge` set to 1 and `max_unavailable` set to 0.
+Both strategies have their use cases. In our case, 
+we use the `SURGE` strategy, with `max_surge` set to 1 and `max_unavailable` set to 0.
 What this means is that only one surge node is added at a time, thus one node is being upgraded, at a time. Also, pods can restart immediately
 on the new surge node.
 
