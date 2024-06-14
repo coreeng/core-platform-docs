@@ -90,7 +90,7 @@ You also can't make any cluster changes while the upgrade is taking place. Deplo
 
 #### Regional
 
-Regional clusters provide multi-zone, highly available Kubernetes masters(3 Zones). These masters are behind a loadbalancer, and upgrades
+Regional clusters provide multi-zone, highly available Kubernetes masters (3 Zones). These masters are behind a loadbalancer, and upgrades
 are being done in such a way that there is no disruption during an upgrade. The masters are upgraded once at a time, in no specific
 order, and each one of the masters is unavailable only during it's upgrade duration.
 
@@ -103,7 +103,7 @@ We utilize `Regional` clusters, meaning that downtime should be kept to the mini
 When it comes to upgrading your nodes, there's more than a single strategy. That being said, between the strategies, some steps remain common:
 
 * The node to be upgraded is cordoned so no new pods can be scheduled on it
-* The node to be upgraded is drained. All strategies respect the pod's `PDB`s(Pod Disruption Budgets) and
+* The node to be upgraded is drained. All strategies respect the pod's `PDB`s (Pod Disruption Budgets) and
   `GracefulTerminationPeriod` setting (Up to an hour for `SURGE`, and configurable for `BLUE-GREEN`)
 
 Depending on the strategy, node upgrades can take a few hours to finish.
@@ -135,9 +135,9 @@ Keep in mind that resources need to be available for the new surge nodes to come
 
 **Primary Cons**
 
-* Potential Downtime (Apps running on the drained nodes )
-* No easy rollback(Requires manual downgrading of the affected nodes)
-* Main audience should be stateless applications(Where disruptions are more tolerated)
+* Potential Downtime (Apps running on the drained nodes)
+* No easy rollback (Requires manual downgrading of the affected nodes)
+* Main audience should be stateless applications (Where disruptions are more tolerated)
 
 #### The BLUE-GREEN strategy
 
@@ -163,7 +163,7 @@ we use the `SURGE` strategy, with `max_surge` set to 1 and `max_unavailable` set
 What this means is that only one surge node is added at a time, thus one node is being upgraded, at a time. Also, pods can restart immediately
 on the new surge node.
 
-A `SURGE` strategy with the `max_surge` and `max_unavailable` values we use, is typically the slowest of the bunch(still much quicker that `blue-green`),
+A `SURGE` strategy with the `max_surge` and `max_unavailable` values we use, is typically the slowest of the bunch (still much quicker that `blue-green`),
 but the least disruptive. By tweaking those 2 values you can balance speed and disruption potential.
 
 #### Our node versions
