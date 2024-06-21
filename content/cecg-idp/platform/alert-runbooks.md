@@ -31,11 +31,9 @@ Each alert should contain a short description and a deep link to the correspondi
 
 ##### ClusterAutoscalerNoScaleUp
 
-Can't scale up because node auto-provisioning can't provision a node pool for the pod if it would exceed resource limits.
+Node auto-provisioning did not provision any node pool for the pending pod because doing so would violate  resource limits.
 
-Node auto-provisioning did not provision any node pool for the pending pod in the zone because doing so would violate  resource limits.
-
-Check GCP logs to get more details:
+For GCP/GKE, check logs to get more details:
 
 ```
 resource.type="k8s_cluster" AND
