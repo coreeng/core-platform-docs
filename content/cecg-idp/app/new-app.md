@@ -18,15 +18,18 @@ It will:
 
 ### Manually
 
-You should have from the previous step:
-* Tenancy e.g. `myfirsttenancy`
-* Environment: e.g. `gcp-dev`
-
-Create a new repository by forking a
-[Golang Reference](https://github.com/{{< param github_org >}}/idp-reference-app-go)
-or by creating a new repository from template using `corect template render...`.
-For the P2P workflows to work you need to have this repository to be present in `environments` list in the tenant file.
-For example
+- Create a new repository or pick an existing one
+- Render the template using `corectl template render <template-name> <path>`
+- Adjust the rendered template to your needs and push the changes
+  - Rendered templates has `.github/workflows` in the root. 
+    If you rendered the template not in the root of the repository,
+    you might need to move workflow files in `.github/workflow` in the root of the repository.
+    Unless you have autodiscovery implemented for your workflows,
+    similar to what is done in [core-platform-reference-applications](https://github.com/coreeng/core-platform-reference-applications).
+    In this case you can simply delete `.github/workflows` from the rendered template.
+- Configure P2P for the repository using `corectl p2p env sync <repository-path> <tenant-name>`
+- Make sure that the repository is present in the `tenants` list in the tenant file,
+  for example:
 ```yaml
 ...
 cost-centre: tenants
@@ -36,24 +39,16 @@ repos: [https://github.com/<your-github-id>/<your-new-repository>]
 ...
 ```
 
-#### Update the GitHub Variables
+### Forking [core-platform-reference-applications](https://github.com/coreeng/core-platform-reference-applications) repo
+This repo contains rendered software templates with configured P2P.
+It's possible to fork it and quickly configure it for your own environment.
+Read more details in README.md.
 
-The following variable in GitHub needs to be set:
+After the fork, you can use delete unnecessary files and folders, and start extending one or more existing applications.
 
-* `TENANT_NAME` from the tenancy you just created e.g. myfirsttenancy
+The structure of the repository implies that it contains separate related applications with distinct P2P lifecycles. 
 
-Ones that are likely the same as the reference app you forked:
-
-* `PROJECT_ID` from [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`
-
-* `PROJECT_NUMBER` from `gcloud projects describe $PROJECT_ID --format="value(projectNumber)"`
-
-* `BASE_URL` from `ingressDomains` in your [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`.
- **Note** the `BASE_URL` should not include the first level of the subdomain. An example of BASE_URL is `cecg.platform.cecg.io`
-
-* `INTERNAL_SERVICES_DOMAIN` from `internalServices` [Environments Repo]({{< param environmentRepo >}}) under `/environments/<env>/config.yaml`.
-
-* `ENV` which of the environments in [Environments Repo]({{< param environmentRepo >}}) you want to deploy to under `/environments/`
+To add P2P lifecycle, you should create a new folder with Makefile with P2P tasks.
 
 ## Raise a PR
 
@@ -61,7 +56,7 @@ Raising a PR will automatically build the app, push the docker image, and deploy
 environments for functional and non-functional testing.
 
 {{% notice note %}}
-If you have forked the reference app, then:
+If you have forked the core-platform-reference-applications repo, then:
 
 * You need to manually enable the workflows in your forked repository. To do this, navigate to your repository on GitHub. Click on the 'Actions' tab. If you see a notice about workflow permissions, click on 'I understand my workflows, go ahead and enable them'.
 
