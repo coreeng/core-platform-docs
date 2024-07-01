@@ -22,9 +22,11 @@ platform monitoring allows operators and application teams to:
 
 Platform uptime is measured by traffic continuously sent to an application deployed as part of the platform.
 
-To view uptime for each environment:
-
-{{< continuous-loads >}}
+To view uptime for each environment you can use `Continuous Load` Grafana dashboard. 
+To quickly access it, run:
+```bash
+corectl env open <env> grafana/continuous-load
+```
 
 ### Application resource monitoring
 
