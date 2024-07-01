@@ -5,6 +5,57 @@ chapter = false
 pre = ""
 +++
 
+## Autoscaling failures
+
+### 0/7 nodes are available: 7 Insufficient memory.
+
+```
+0/7 nodes are available: 7 Insufficient memory. preemption: 0/7 nodes are available: 1 Insufficient memory, 6 No preemption victims found for incoming pod.
+```
+
+Pods are stuck in `Pending` state. 
+
+Total memory requests for pods have exceeded the maximum memory that is allowed as part of node autoscaling in the cluster. 
+
+#### Resolution
+Update `config.yaml` to increase the memory limit of the cluster autoscaling. Example:
+```
+cluster:
+  gcp:
+    autoscaling:
+      cpuCores: 30
+      memoryGb: 140
+```
+
+After the limits have been applied to the cluster, the pod should transition from `Pending` to `Running` state.
+
+### 0/7 nodes are available: 7 Insufficient cpu.
+
+```
+0/7 nodes are available: 7 Insufficient cpu. preemption: 0/7 nodes are available: 1 Insufficient cpu, 6 No preemption victims found for incoming pod.
+```
+
+Pods are stuck in `Pending` state. 
+
+Total cpu requests for pods have exceeded the maximum cpu that is allowed for node autoscaling.
+
+### Resolution
+Update `config.yaml` to increase the cpu limit of the cluster autoscaling. Example:
+```
+cluster:
+  gcp:
+    autoscaling:
+      cpuCores: 60
+      memoryGb: 140
+```
+
+## Node Imbalance
+There are times where a node can be throttled e.g. 96% memory usage when other nodes have more than enough capacity to accomodate extra workloads.
+
+It is highly likely that pods running on that node do not have memory/cpu requests set. This causes kube scheduler to place significant load on one node as it uses the requests to target what nodes pods should be placed on.
+
+### Resolution
+Set [resource requests](../app/resources) for your application workloads to allow the kube scheduler better place your pods on nodes with appropiate capacity. For example if you request 2Gi memory for your pod, the scheduler will guarantee finding a node that has that capacity. 
 
 ## Deployment Failures
 
