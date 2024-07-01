@@ -23,7 +23,10 @@ WORKDIR /site
 # Copy the source files
 COPY content ./content
 COPY layouts ./layouts
-COPY assets/images ./images
+COPY assets ./assets
+COPY static ./static
+COPY themes ./themes
+COPY config.toml ./config.toml
 
 # Set ownership and permissions
 RUN chown -R hugo:hugo /site
@@ -33,4 +36,4 @@ USER hugo
 
 # Run Hugo
 ENTRYPOINT ["hugo"]
-CMD ["serve", "--bind", "0.0.0.0", "--port", "8080", "--verbose", "--verboseLog"]
+CMD ["serve", "--bind", "0.0.0.0", "--port", "8080", "--logLevel", "info"]
