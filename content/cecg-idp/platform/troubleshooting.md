@@ -5,6 +5,52 @@ chapter = false
 pre = ""
 +++
 
+## Autoscaling failures
+
+### 0/7 nodes are available: 7 Insufficient memory.
+
+```
+0/7 nodes are available: 7 Insufficient memory. preemption: 0/7 nodes are available: 1 Insufficient memory, 6 No preemption victims found for incoming pod.
+```
+
+Pods are stuck in `Pending` state. 
+
+Total memory requests for pods have exceeded the maximum memory that is allowed as part of node autoscaling in the cluster. 
+
+#### Resolution
+Update `config.yaml` to increase the memory limit of the cluster autoscaling. Example:
+```
+cluster:
+  gcp:
+    autoscaling:
+      cpuCores: 30
+      memoryGb: 140
+```
+
+After the limits have been applied to the cluster, the pod should transition from `Pending` to `Running` state.
+
+### 0/7 nodes are available: 7 Insufficient cpu.
+
+```
+0/7 nodes are available: 7 Insufficient cpu. preemption: 0/7 nodes are available: 1 Insufficient cpu, 6 No preemption victims found for incoming pod.
+```
+
+Pods are stuck in `Pending` state. 
+
+Total cpu requests for pods have exceeded the maximum cpu that is allowed for node autoscaling.
+
+### Resolution
+Update `config.yaml` to increase the cpu limit of the cluster autoscaling. Example:
+```
+cluster:
+  gcp:
+    autoscaling:
+      cpuCores: 60
+      memoryGb: 140
+```
+
+## Node Imbalance
+There are times where a node can be throttled e.g. 104% memory usage when other nodes have more than enough capacity to accomodate extra load 
 
 ## Deployment Failures
 
