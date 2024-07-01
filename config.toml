@@ -1,18 +1,12 @@
 baseURL = ''
 languageCode = 'en-us'
-title = 'CECG Developer Platform'
+title = 'CECG Core Platform'
 theme = 'hugo-theme-learn'
 enableEmoji = true
 # Title separator -- defaults to ::
 titleSeparator = "-"
 [params]
   themeVariant = "cecg"
-  company = "CECG"
-  org = "cecg"
-  environmentRepo = "https://github.com/coreeng/dplatform-environments"
-  email_org = "cecg.io"
-  github_org = "coreeng"
-  environments = ["gcp-pre-dev", "gcp-dev", "gcp-prod"]
 # Enable search
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
