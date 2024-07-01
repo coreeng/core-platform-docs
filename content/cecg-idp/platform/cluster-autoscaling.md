@@ -14,6 +14,13 @@ When running our platform on GCP/GKE we choose to operate clusters in [Standard 
 You can read more about [pricing for Standard mode](https://cloud.google.com/kubernetes-engine/pricing#standard_mode) clusters.
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://cloud.google.com/products/calculator).
 
+## Quotas
+
+By default, GCP applies `32` CPU quota per cluster.
+
+Autoscaling won't be able to provision new nodes when quota is reached.
+You may need to consider increasing the quota, so that you have enough resources to run your pods under peak loads.
+
 ## Node Pools
 
 In order to run the platform and tenant pods we need to have worker nodes.
@@ -47,21 +54,33 @@ In order to enable Node Auto-Provisioning you should specify:
 - autoscaling profile
 
 The available autoscaling profiles are:
-- `BALANCED`: The default profile for Standard clusters.
+- `BALANCED`: The **default** profile for Standard clusters.
 - `OPTIMIZE_UTILIZATION`: Prioritize optimizing utilization over keeping spare resources in the cluster.
   When you enable this profile, the cluster autoscaler scales down the cluster more aggressively.
   GKE can remove more nodes, and remove nodes faster.
 
 More about [Autoscaling profiles](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler#autoscaling_profiles).
 
-The following example configuration will enable Node Auto-Provisioning for the cluster via `config.yaml`:
+The following example configurations will enable Node Auto-Provisioning for the cluster via `config.yaml`:
+
+- By default, GCE quota is 32, we use a 2vCPU VM for the bastion, so that's 30 cores left
 
 ```yaml
 cluster:
   gcp:
     autoscaling:
-      cpuCores: 50
-      memoryGb: 100
+      cpuCores: 30
+      memoryGb: 200
+```
+
+- When GCE quota is raised to 64, we use a 2vCPU VM for the bastion, so that's 62 cores left
+
+```yaml
+cluster:
+  gcp:
+    autoscaling:
+      cpuCores: 62
+      memoryGb: 400
       profile: "OPTIMIZE_UTILIZATION"
 ```
 
