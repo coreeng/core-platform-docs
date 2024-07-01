@@ -55,7 +55,7 @@ There are times where a node can be throttled e.g. 96% memory usage when other n
 It is highly likely that pods running on that node do not have memory/cpu requests set. This causes kube scheduler to place significant load on one node as it uses the requests to target what nodes pods should be placed on.
 
 ### Resolution
-Set resource requests your your application workloads to allow the kube scheduler better place your pods on nodes with appropiate capacity. For example if you request 2Gi memory for your pod, the scheduler will guarantee finding a node that has that capacity. 
+Set [resource requests](../app/resources.md) for your application workloads to allow the kube scheduler better place your pods on nodes with appropiate capacity. For example if you request 2Gi memory for your pod, the scheduler will guarantee finding a node that has that capacity. 
 
 ## Deployment Failures
 
