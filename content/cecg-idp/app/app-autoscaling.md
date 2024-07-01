@@ -14,19 +14,23 @@ This can be done automatically with Kubernetes based on resource utilization.
 Make sure that [resource requests](../resources) are defined for the application. Autoscalers use them as a base-line to calculate utilization.
 {{% /notice %}}
 
+This section describes autoscaling mechanisms and provides some [guidelines](#guidelines) on how to scale an app with Core Platform.  
+
 ## Autoscalers
 
 Kubernetes provides [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) and [Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) (VPA) as out-of-the-box tools for scaling deployments:
 - HPA - mainly for stateless workloads
 - VPA - mainly for stateful and long-running workloads
 
-### HPA
+### Horizontal Pod Autoscaler
 
 Horizontal scaling means that the response to increased load is to deploy more pods.
 If the load decreases, HPA instructs the deployment to scale back down.
 
-Below is an example of HPA configuration for the Reference app.
-We specify the range for the number of replicas, [resources and thresholds](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics) when HPA should be triggered:
+Below is an example of HPA configuration for the Reference app. 
+We are scaling based on the CPU utilization, but we can use other resources (e.g. memory utilization) or a combination of them.
+
+We specify the range for the number of replicas, [resources and thresholds](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics) when HPA should be triggered. 
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -63,7 +67,7 @@ We can also affect how fast the application scales up by modifying [scaling beha
 ```
 
 
-### VPA
+### Vertical Pod Autoscaler
 
 VPA automatically adjusts the amount of CPU and memory requested by pods.
 VPA provides recommendations for resource usage over time, it works best with long-running homogenous workloads.
@@ -100,13 +104,19 @@ Due to the independence of these two controllers, when they are configured to op
 
 However, you can use VPA with HPA on separate resource metrics (e.g. VPA on memory and HPA on CPU) as well as with HPA on custom and external metrics.
 
-## Autoscaling configuration
+## Guidelines
 
-Autoscaling does not work by magic. We need to start by defining non-functional requirements for the application. For example, we require that:
+Autoscaling does not work by magic. We need to start by defining non-functional requirements for the application. 
+
+For example, we require that:
 - the application handles 30k TPS with P99 latency < 500 ms.
-- the traffic ramps up linearly from 0 to max in 3 minutes.
+- there are spikes when traffic ramps up linearly from 0 to max in 3 minutes.
 
-We prepare NFT scenarios to validate that the application meets the requirements for the load. 
+We choose which autoscaling mechanism to use:
+- To handle traffic spikes with a stateless app we should consider using HPA. 
+- We choose VPA for stateful long-running homogenous workloads. 
+
+We prepare [NFT](../../p2p/fast-feedback/p2p-nft) scenarios to validate that the application meets the requirements for the load. 
 We need to repeatedly run the tests to adjust the resource requests and fine-tune the thresholds to handle the required traffic patterns.
 
 The following is a non-exhaustive list of recommendations that can be applied to improve the results of the test:
