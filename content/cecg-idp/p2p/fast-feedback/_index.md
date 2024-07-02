@@ -47,10 +47,11 @@ jobs:
 #### Environments
 
 Create your environments with the following variables:
-* BASE_DOMAIN e.g. gcp-dev.cecg.platform.cecg.io
-* DPLATFORM environment name from platform-environments e.g. gcp-dev
-* PROJECT_ID project id from platform environments e.g. core-platform-efb3c84c
-* PROJECT_NUMBER project number for the project id above
+* `BASE_DOMAIN` e.g. `gcp-dev.cecg.platform.cecg.io`
+* `INTERNAL_SERVICES_DOMAIN` e.g. `gcp-dev-internal.cecg.platform.cecg.io`
+* `DPLATFORM` environment name from platform-environments e.g. `gcp-dev`
+* `PROJECT_ID` project id from platform environments e.g. `core-platform-efb3c84c`
+* `PROJECT_NUMBER` project number for the project id above
 
 {{< figure src="/images/p2p/git-environments.png" title="Git Environments" >}}
 
@@ -67,8 +68,8 @@ A single dev environment is enough for fastfeedback.
 
 Set the following repository variables (these may be set globally for your org):
 
-* `FAST_FEEDBACK` to {"include": [{"deploy_env": "gcp-dev"}]}
-* `EXTENDED_TEST` to {"include": [{"deploy_env": "gcp-dev"}]}
+* `FAST_FEEDBACK` to `{"include": [{"deploy_env": "gcp-dev"}]}`
+* `EXTENDED_TEST` to `{"include": [{"deploy_env": "gcp-dev"}]}`
 
 And specifically for your app set:
 

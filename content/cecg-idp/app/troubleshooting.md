@@ -1,9 +1,25 @@
 +++
 title = "Troubleshooting"
-weight = 10
+weight = 11
 chapter = false
 pre = ""
 +++
+
+## CreateContainerError: failed to reserve container name 
+The container runtime is unable to get the container into a running state so it's stuck in pending. 
+
+A potential cause could be resource starvation on nodes. Check the cpu/memory usage of the node the pod is running on:
+```
+kubectl top node $(kubectl get pod <pod-name> -o jsonpath='{.spec.nodeName}')
+
+NAME                                             CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+gke-sandbox-gcp-sandbox-gcp-pool-18d01f3c-xhd8   174m         9%     2047Mi          33%
+```
+
+If the node cpu/memory usage is high, it's possible the container runtime is struggling to find enough resources to be able to run the container.
+
+### Resolution
+Ensure that your pod has [cpu/memory requests set](../resources). This will allow the kube scheduler to to place your pods on better balanced nodes.
 
 ## P2P GCP Auth Fail
 
@@ -75,4 +91,35 @@ iap-user-p2p-knowledge-platform                   68m   True    UpToDate   68m  
 workflow-identity-p2p-knowledge-platform          89m   True    UpToDate   89m
 ```
 
-For the above error the `compute-os-login-p2p-knowledge-platform` one is responisble for giving access.  
+For the above error the `compute-os-login-p2p-knowledge-platform` one is responsible for giving access.  
+
+
+
+## P2P Helm Numeric Value Error:
+### Error:
+P2P fails on the helm upgrade step, while trying to apply the helm charts 
+
+- ie running. `helm upgrade --host=localhost --set port=123`), results in error: 
+
+
+```
+ERROR: json: cannot unmarshal number into Go struct field EnvVar.spec.template.spec.containers.env.value of type string
+```
+
+This is caused by your helm chart which contains values that are to be overridden, as for example if in our helm chart we had the below with:
+
+```
+  host: {{ .Values.Host }}
+  port: {{ .Values.Port }}
+```
+
+where these are meant to be passed over to kubernetes manifests, we need to guarantee that both of them are treated as string and not as numeric. 
+
+So if in the example above where, you where trying to override with `--set port=123`, this causes parsing issues on the helm and kubernetes side. 
+
+### Solution
+To fix this, we can safely "quote" the variables in question as per below:
+```
+  host: {{ .Values.Host }}
+  port: {{ .Values.Port | quote }}
+```

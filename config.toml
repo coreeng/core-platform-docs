@@ -15,4 +15,4 @@ titleSeparator = "-"
   github_org = "intergo"
 # Enable search
 [outputs]
-  home = [ "HTML", "RSS", "JSON"]
+home = [ "HTML", "RSS", "JSON"]

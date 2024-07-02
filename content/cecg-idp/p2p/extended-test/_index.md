@@ -60,5 +60,5 @@ jobs:
 This task will get the latest version that's on the `/extended-test` registry and execute the extended tests. If these are successful, it will promote the image to `prod`.
 
 ## Setup
-See the [fast-feedback](../fast-feedback/fast-feedback.md)
+See the [fast-feedback](../fast-feedback/fast-feedback)
 
