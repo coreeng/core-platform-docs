@@ -72,7 +72,7 @@ betaFeatures:
 * `environments` which of the environments in Environments Repo you want to deploy to 
 * `adminGroup` - will get permission to do all actions in the created namespaces
 * `readonlyGroup` - will get read-only access to the created namespaces
-* `repos` - Your [application](./new-app.md) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
+* `repos` - Your [application](./new-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
 * `cloudAccess` - generates cloud-provider-specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your application is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
 * `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment. 
 * `betaFeatures` - enables certain beta features for tenants:
@@ -126,7 +126,7 @@ To create a lightweight environment, in your tenancy namespace create:
 apiVersion: hnc.x-k8s.io/v1alpha2
 kind: SubnamespaceAnchor
 metadata:
-  namespace: {{ tenant-name }}
+  namespace: {tenant_name}
   name: your-lightweight-env
 ```
 

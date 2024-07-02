@@ -102,7 +102,7 @@ spec:
               number: 3000
 ```
 
-For more information on how to use this, please look at the [App Ingress section.](../app/ingress.md)
+For more information on how to use this, please look at the [App Ingress section.](../app/ingress)
 
 ## Autoscaling
 
