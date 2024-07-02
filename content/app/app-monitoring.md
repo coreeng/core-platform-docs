@@ -80,7 +80,7 @@ To install monitoring stack, run the following command:
 
 ```bash
 # Add helm repository
-helm repo add coreeng https://coreeng.github.com/core-platform-assets
+helm repo add coreeng https://coreeng.github.io/core-platform-assets
 helm repo update
 
 # Install the chart
