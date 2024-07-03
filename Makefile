@@ -91,4 +91,8 @@ service-push: ## Push the service image
 
 .PHONY: run-local
 run-local: ## Build and run docker container locally
-	docker build . -t local-kp && docker run -p 8080:8080 local-kp
+	docker build . -t local-kp && \
+	  docker run -p 8080:8080 \
+	    --env LIVE_RELOAD=true\
+	  	--env BASE_URL=http://localhost:8080\
+	  	local-kp

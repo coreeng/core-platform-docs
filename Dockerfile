@@ -27,6 +27,7 @@ COPY assets ./assets
 COPY static ./static
 COPY themes ./themes
 COPY config.toml ./config.toml
+COPY run.sh ./run.sh
 
 # Set ownership and permissions
 RUN chown -R hugo:hugo /site
@@ -35,5 +36,4 @@ RUN chown -R hugo:hugo /site
 USER hugo
 
 # Run Hugo
-ENTRYPOINT ["hugo"]
-CMD ["serve", "--bind", "0.0.0.0", "--port", "8080", "--logLevel", "info"]
+ENTRYPOINT ["/site/run.sh"]
