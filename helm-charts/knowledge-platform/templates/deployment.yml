@@ -18,9 +18,13 @@ spec:
     spec:
       containers:
         - name: knowledge-platform 
-          image: {{ $registry }}/{{ .Values.service.image }}:{{ .Values.service.tag }}
-          {{- if .Values.service.environmentVariables }}
+          image: "{{ $registry }}/{{ .Values.service.image }}:{{ .Values.service.tag }}"
           env:
+            - name: LIVE_RELOAD
+              value: "false"
+            - name: BASE_URL
+              value: "{{ .Values.subDomain }}.{{ .Values.domain }}"
+          {{- if .Values.service.environmentVariables }}
             {{- range $key, $value := .Values.service.environmentVariables }}
             - name: {{ $key }}
               value: {{ $value }}

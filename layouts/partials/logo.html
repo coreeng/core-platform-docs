@@ -1,1 +1,3 @@
-<img alt="" class="logo" src="/images/logo.png"/>
+{{ with resources.Get "images/logo.png" }}
+<img alt="" class="logo" src="{{ .RelPermalink }}">
+{{ end }}
