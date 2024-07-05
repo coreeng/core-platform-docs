@@ -3,21 +3,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: knowledge-platform
+  name: core-platform-docs
   labels:
-    app.kubernetes.io/name: knowledge-platform
+    app.kubernetes.io/name: core-platform-docs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: knowledge-platform
+      app.kubernetes.io/name: core-platform-docs
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: knowledge-platform
+        app.kubernetes.io/name: core-platform-docs
     spec:
       containers:
-        - name: knowledge-platform 
+        - name: core-platform-docs
           image: "{{ $registry }}/{{ .Values.service.image }}:{{ .Values.service.tag }}"
           env:
             - name: LIVE_RELOAD

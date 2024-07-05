@@ -1,5 +1,5 @@
 apiVersion: v2
-name: knowledge-platform
-description: Chart of the Knowledge Platform 
+name: core-platform-docs
+description: Chart of the Core Platform Docs
 type: application
 version: 0.1.0
