@@ -1,6 +1,6 @@
 +++
 title = "Resources: Requests vs Limits"
-weight = 10
+weight = 9
 chapter = false
 pre = ""
 +++
@@ -13,6 +13,10 @@ Kubernetes allows us to set up `requests` and `limits` for the resources:
 
 - **requests** define the minimum amount of resources that are guaranteed to be available for the container.  
 - **limits** define the maximum amount of resources to be consumed by the container.
+
+| :warning: WARNING                                                                                                |
+|:-----------------------------------------------------------------------------------------------------------------|
+| We recommend every critical workload has CPU and memory requests. Otherwise you aren't guaranteed any resources. |
 
 The Kubernetes scheduler can use resource **requests** to select a node for the Pod to run on. 
 Each node has a maximum capacity for each of the resource types: the amount of CPU and memory it can provide for Pods. 

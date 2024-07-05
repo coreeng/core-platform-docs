@@ -1,6 +1,6 @@
 +++
 title = "Accessing Cloud Infrastructure"
-weight = 10
+weight = 15
 chapter = false
 pre = ""
 +++

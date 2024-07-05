@@ -8,4 +8,4 @@ This repository contains assets to build and run the Core Platform documentation
 make run-local
 ```
 
-Then access the knowledge-platform [here](http://localhost:8080)
+Then access the docs [here](http://localhost:8080)

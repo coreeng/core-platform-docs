@@ -1,6 +1,6 @@
 +++
 title = "Troubleshooting"
-weight = 11
+weight = 20
 chapter = false
 pre = ""
 +++
