@@ -6,7 +6,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ $subDomain }}.{{ $domain }}
     external-dns.alpha.kubernetes.io/target: {{ $domain }}
-  name: knowledge-platform
+  name: core-platform-docs
 spec:
   ingressClassName: platform-ingress
   rules:
@@ -15,7 +15,7 @@ spec:
       paths:
       - backend:
           service:
-            name: knowledge-platform 
+            name: core-platform-docs
             port:
               number: 80
         path: /

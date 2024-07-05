@@ -1,5 +1,0 @@
-apiVersion: v2
-name: knowledge-platform
-description: Chart of the Knowledge Platform 
-type: application
-version: 0.1.0

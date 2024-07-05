@@ -2,6 +2,6 @@ registry:
 domain:
 subDomain:
 service:
-  image: knowledge-platform
+  image: core-platform-docs
   tag: latest
 

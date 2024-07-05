@@ -1,8 +1,8 @@
 projectDir := $(realpath $(dir $(firstword $(MAKEFILE_LIST))))
 os := $(shell uname)
-image_name = knowledge-platform
+image_name = core-platform-docs
 image_tag = $(VERSION)
-tenant_name = knowledge-platform
+tenant_name = docs
 FAST_FEEDBACK_PATH = fast-feedback
 EXTENDED_TEST_PATH = extended-test
 PROD_PATH = prod
@@ -22,7 +22,7 @@ p2p-build: service-build service-push ## Builds the service image and pushes it 
 
 .PHONY: p2p-functional ## Noop for now
 p2p-functional: create-ns-functional deploy-dev # Temporarily while the promotion step isn't authenticated and can't deploy there
-	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-functional --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn-functional --atomic
+	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name)-functional --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs-functional --atomic
 	helm list -n $(tenant_name)-functional ## list installed charts in the given tenant namespace
 
 .PHONY: p2p-nft ## Noop for now
@@ -52,12 +52,12 @@ p2p-promote-to-prod: p2p-promote-generic
 
 .PHONY: deploy-dev
 deploy-dev: create-ns-dev 
-	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name)-dev --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn --atomic
+	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name)-dev --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs --atomic
 	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
 .PHONY: p2p-prod
 p2p-prod:  
-	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name) --set registry=$(REGISTRY)/$(PROD_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=learn --atomic
+	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name) --set registry=$(REGISTRY)/$(PROD_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs --atomic
 	helm list -n $(tenant_name) ## list installed charts in the given tenant namespace
 
 .PHONY: p2p-extended-test

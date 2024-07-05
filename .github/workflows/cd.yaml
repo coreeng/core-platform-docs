@@ -1,4 +1,4 @@
-name: Fast Feedback
+name: Continous Deployment
 
 on:
   workflow_dispatch:
@@ -22,5 +22,17 @@ jobs:
   fastfeedback:
     needs: [version]
     uses: coreeng/p2p/.github/workflows/p2p-workflow-fastfeedback.yaml@v1
+    with:
+      version: ${{ needs.version.outputs.version }}
+
+  extended-test:
+    needs: [fastfeedback]
+    uses: coreeng/p2p/.github/workflows/p2p-workflow-extended-test.yaml@v1
+    with:
+      version: ${{ needs.version.outputs.version }}
+
+  prod:
+    needs: [extended-test]
+    uses: coreeng/p2p/.github/workflows/p2p-workflow-prod.yaml@v1
     with:
       version: ${{ needs.version.outputs.version }}
