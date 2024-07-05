@@ -32,7 +32,7 @@ jobs:
       version: ${{ needs.version.outputs.version }}
 
   prod:
-    needs: [get-latest-version]
+    needs: [extended-test]
     uses: coreeng/p2p/.github/workflows/p2p-workflow-prod.yaml@v1
     with:
       version: ${{ needs.version.outputs.version }}
