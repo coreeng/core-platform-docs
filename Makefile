@@ -57,7 +57,7 @@ deploy-dev: create-ns-dev
 
 .PHONY: p2p-prod
 p2p-prod:  
-	helm upgrade  --recreate-pods --install knowledge-platform helm-charts/knowledge-platform -n $(tenant_name) --set registry=$(REGISTRY)/$(PROD_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs --atomic
+	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name) --set registry=$(REGISTRY)/$(PROD_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs --atomic
 	helm list -n $(tenant_name) ## list installed charts in the given tenant namespace
 
 .PHONY: p2p-extended-test
