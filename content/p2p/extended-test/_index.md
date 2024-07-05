@@ -1,12 +1,18 @@
 +++
 title = "Quality Gate: Extended Test"
-weight = 3
+weight = 12
 chapter = false
 pre = ""
 +++
 
+The extended test quality date is for any test that you do not want to run on every commit e.g.
 
-Extended NFT can mean multiple things and there are a variety of issues it can assert.
+* Longer peak load tests
+* Soak tests
+
+Running these tests can be expensive and typically these are run once a day on the latest version of the application
+that has been promoted from fastfeedback.
+
 These are typically based on Non-Functional-Requirements(NFRs) which should state what’s the average load expected, peak traffic(both requests per second and concurrent users) and response times in the different percentiles.
 To simulate processing, it can be expected for a stub with a delay used to simulate processing time of a downstream application.
 

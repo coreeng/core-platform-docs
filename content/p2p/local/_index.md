@@ -1,6 +1,6 @@
 +++
 title = "Quality Gate: Local"
-weight = 1
+weight = 10
 chapter = false
 pre = ""
 +++
@@ -9,6 +9,7 @@ The first quality date is verification that can be done locally on the build age
 
 * Unit tests
 * Static verification
+* Security scanning
 
 Put all of this into the `p2p-build` task.
 

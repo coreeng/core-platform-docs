@@ -1,6 +1,6 @@
 +++
 title = "Quality Gate: Fast Feedback"
-weight = 2
+weight = 11
 chapter = false
 pre = ""
 +++

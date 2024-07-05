@@ -11,6 +11,24 @@ The common P2P enables you to focus on building your business logic and tests wi
 wasting time on CI/CD tooling setup.
 All your custom logic should be added to your Makefile rather than directly in GitHub actions.
 
+### Pipeline as a contract
+
+* The P2P is the contract that every application agrees to adhere to for continuous delivery
+* It is *light touch* in that it doesn't mandate many steps, just the most important types of testing
+  * You can use whatever tools you want from each stepk 
+
+## Quality Gates
+
+The P2P consists of the following quality gates:
+
+* Local: What you can do on the local build agent. The output of the local quality gate is a versioned, immutable artifact.
+   * Unit tests 
+   * Static verification
+* Fast Feedback: What you can do in a few minutes
+   * Deployed stubbed tests
+* Extended Tests
+* Once a version has been promoted from Extended tests it is ready for production 
+
 
 ## Automatic GH Action authentication
 
@@ -21,29 +39,23 @@ any sub namespace you create.
 
 ### Requirements
 
-In order to use this pipeline, you'll need to be a tenant in a CECG core platform.
-Make sure you have these details:
-- Project ID
-- Project Number
-- Tenant Name
+In order to use this pipeline, you'll need to be a tenant of a Core Platform.
+
+For any repo that you want to use the P2P from, use [`corectl`](../app/corectl)
+
+```
+corectl p2p env sync <app repository> <tenant> [flags]
+```
+
+If the repo was created by `corectl`, it will automatically set the required variables.
 
 Having these, you're set to start deploying!
 
-{{% notice note %}}
-Having both, project id and project number, at the same time is redundant, because one can be derived from the other.
-But for historical reasons, both are present.
-Having project number is required for authentication
-using [google-github-actions/auth](https://github.com/google-github-actions/auth)
-and having the project id is required for all the other operations.
-Removing the project id (and deriving it from the project number) would require significant refactoring.
-{{% /notice %}}
-
 ### How to use?
 
-First, you need to configure your CI/CD 
-to call our reusable pipelines by configuring your workflow files inside your repo in `./github/workflows`.
+If you've started from a skeleton app the P2P is already set up for you.
 
-If you created an application from template, those workflow files will be preconfigured for you.
+If you're adding it to an existing repo, see [deployment frequency](./deployment-frequency) for how to set up the GitHub actions P2P.
 
 Read more details about each step:
 - [Fast Feedback](./fast-feedback)
@@ -85,12 +97,15 @@ p2p-promote-to-prod:  ## Promote service to prod
 
 These will be the entrypoints of the pipeline. You can then extend these to do your custom actions. 
 
+What tool you use in each of the Makefile targets is up to you.
+
 ### GitHub Variables
 
 P2P pipelines expect some GitHub Variables to be configured.
 You can configure it either automatically using `corectl` or manually.
 
 #### Automatically
+
 You can automatically set/update variables using `corectl`:
 ```bash
 corectl p2p env sync <app-repository> <tenant-name>
