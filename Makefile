@@ -1,8 +1,8 @@
 projectDir := $(realpath $(dir $(firstword $(MAKEFILE_LIST))))
 os := $(shell uname)
-image_name = knowledge-platform
+image_name = core-platform-docs
 image_tag = $(VERSION)
-tenant_name = knowledge-platform
+tenant_name = docs
 FAST_FEEDBACK_PATH = fast-feedback
 EXTENDED_TEST_PATH = extended-test
 PROD_PATH = prod
