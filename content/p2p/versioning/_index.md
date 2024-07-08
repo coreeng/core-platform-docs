@@ -7,8 +7,6 @@ pre = ""
 
 The P2P starts with a versioned immutable artifact that is passed through the pipeline.
 
-## Versioning
-
 Versioning is a critical part of the software development lifecycle. It allows you to track changes to your codebase, and it helps you to understand what changes have been made and why. Versioning also helps you to manage dependencies and to ensure that your code is always up-to-date.
 
 ## Semantic Versioning Support

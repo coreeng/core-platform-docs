@@ -29,6 +29,11 @@ The P2P consists of the following quality gates:
 * Extended Tests
 * Once a version has been promoted from Extended tests it is ready for production 
 
+Two key concepts for the P2P are:
+
+* [Versioning](./versioning): The P2P promoted an immutable, versioned artifact through the pipeline
+* [Promotion](./promotion): Each time a quality gate is passed the immutable, versioned artifact is promoted
+
 
 ## Automatic GH Action authentication
 

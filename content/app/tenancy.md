@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-The Core Platform is a multi-tenant platform where each tenant gets their own segregated environments and P2p.
+The Core Platform is a multi-tenant platform where each tenant gets their own segregated environments and P2P.
 
 If you already have a tenancy you can jump to [new-app](./new-app) to deploy a new application.
 
