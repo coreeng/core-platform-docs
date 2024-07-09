@@ -1,0 +1,21 @@
++++
+title = "Managed Databases"
+weight = 1
+chapter = false
+pre = ""
++++
+
+## Benefits
+* Easy setup
+* Integration with existing Cloud Security methods (IAM Auth etc)
+* Less human resources involved in setting them up
+* Downtime SLA's provided
+* Easily configurable HA and scalability
+* Automatic upgrades
+* Out of the box backups
+* Out of the box data encryption, which is a requirement for things like PCI
+
+## Disadvantages
+* Vendor locked
+* Less configurable compared to self hosted
+* Higher running cost
