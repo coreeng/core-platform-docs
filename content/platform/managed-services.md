@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-## Benefits of using Managed databases
+## Benefits
 * Easy setup
 * Integration with existing Cloud Security methods (IAM Auth etc)
 * Less human resources involved in setting them up
