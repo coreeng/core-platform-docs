@@ -7,6 +7,8 @@ enableEmoji = true
 titleSeparator = "-"
 [params]
   themeVariant = "cecg"
+  customMermaidURL = "https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"
+  editURL = "https://github.com/coreeng/core-platform-docs/tree/main/content/"
 # Enable search
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
