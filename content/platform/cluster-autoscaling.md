@@ -89,19 +89,6 @@ Node pools need:
 We cannot explicitly define max CPU or memory for the node, we can do it only by choosing the proper machine type.
 {{% /notice %}}
 
-The following is an example of an explicitly defined node pool with machine type `e2-standard-4` that 
-autoscales from 0 to 5 nodes.
-
-```yaml
-cluster:
-  gcp:
-    additionalNodePools:
-      - name: "4-pool"
-        machineType: "e2-standard-4"
-        minCount: 0
-        maxCount: 5
-```
-
 GKE automatically creates new nodes in the pool until it reaches their maximum count.
 When limit is reached newly deployed pods will stay in Pending state waiting for resources to become available.
 
@@ -145,16 +132,6 @@ If there is not enough resources then pause pods are preempted and new pods take
 Next pause pods become unschedulable and force CA to scale up the cluster.
 
 For more details refer to [FAQ: How can I configure overprovisioning with Cluster Autoscaler](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler).
-
-The following example configuration will create 5 pause pods each requesting 1 CPU and 200Mi of memory:
-
-```yaml
-cluster:
-  overprovisioning:
-    replicas: 5
-    cpu: "1"
-    memory: "200Mi"
-```
 
 ### Platform Cost vs Autoscaling Speed
 
