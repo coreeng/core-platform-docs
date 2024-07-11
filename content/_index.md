@@ -16,6 +16,27 @@ your environments.
 
 ## Getting started
 
+Start by configuring the [Core Platform CLI](./corectl) and then follow the guides below.
+
+Once you've done that you can list and connect to environments. The Core Platform is a fully private cluster so
+`corectl` is used to create a temporary, private, tunnel to the cluster in each enviornment.
+
+```
+corectl env list
+ NAME         ID                      CLOUD PLATFORM
+ gcp-dev      core-platform-efb3c84c  GCP
+ gcp-pre-dev  core-platform-26f47174  GCP
+ gcp-prod     core-platform-e0d5e766  GCP
+corectl  env  connect
+    Select environment to connect to:
+
+  1. gcp-dev
+  2. gcp-pre-dev
+  3. gcp-prod
+```
+
+Now you're setup with `corectl`:
+
 - Want to deploy a new application? See [Deploying Applications](./app)
 - Want a full reference for how to use implement Continuous Delivery? See [Path to Production](./p2p)
 - Are you operationally responsible for the platform? See [Platform Operations](./platform)
