@@ -12,8 +12,17 @@ If you already have a tenancy you can jump to [new-app](./new-app) to deploy a n
 ## What is a tenant? 
 
 A Tenancy is the unit of access to the Core Platform.
-It contains a readonly and admin group and gives you access to a namespace and a docker registry for images.
+It contains a readonly and admin group and gives CI/CD actors
+(GitHub Actions) access to a namespace and a docker registry for images.
 Once you have a tenancy, you can add sub namespaces for all your application testing needs.
+
+Tenants are organized in the tree structure. 
+For each tenant, we create a [hierarchical namespace](https://github.com/kubernetes-sigs/hierarchical-namespaces).
+It helps to organize resources and access.
+Examples:
+- share of resource quotas
+- control access with network policies (give access to a tenant and all its children)
+- share prometheus instance for tenant children
 
 ### Adding a tenancy
 
@@ -29,7 +38,7 @@ Once the PR is merged, a configuration for the new tenant will be provisioned au
 You'll be prompted for:
 
 * `name` - Name of your tenancy. Must be the same as your filename.
-* `parent` -   #Explain what parent is and list possible values.
+* `parent` - Name of the parent tenant or `root`. Note: `root` tenant is created implicitly.
 * `description` - Description for your tenancy.
 * `contactEmail` - Metadata: Who is the contact for this tenancy? 
 * `costCentre` - Metadata: Used to split cloud costs. 
@@ -46,17 +55,21 @@ Groups need to be in the `gke-security-groups` group!
 
 Once the above PR that `corectl` creates is merged everyone in the groups will have access to the namespaces created for that tenancy.
 
-For example, for a tenancy named `myfirsttenancy`:
-
+If you access the cluster from the local machine, you need to connect to the cluster.
+The easiest way to do this is using `corectl`:
+```bash
+corectl env connect <env-name>
 ```
+
+For example, to check a namespace for a tenancy named `myfirsttenancy`:
+```bash
 kubectl get namespace myfirsttenancy
 NAME             STATUS   AGE
 myfirsttenancy   Active   30s
 ```
 
 With the [Hierarchical Namespace](https://kubernetes.io/blog/2020/08/14/introducing-hierarchical-namespaces/) kubectl plugin.
-
-```
+```bash
 kubectl hns tree myfirsttenancy
 myfirsttenancy
 ├── [s] myfirsttenancy-dev
@@ -65,6 +78,12 @@ myfirsttenancy
 
 [s] indicates subnamespaces
 ```
+
+> Note:
+> those `myfirsttenancy-[dev|funcitonal|nft]` namespaces are [lightweight environments](#creating-additional-lightweight-environments).
+> You might not have those in the output if you didn't create them.
+
+> Note: Instruction for installing the `hns` plugin for `kubectl` can be found [here](https://github.com/kubernetes-sigs/hierarchical-namespaces/releases)
 
 ## Creating additional lightweight environments
 
