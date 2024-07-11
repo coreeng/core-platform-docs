@@ -5,9 +5,14 @@ chapter = false
 pre = ""
 +++
 
-To set resources on your workloads you need to modify the manifest responsible for deploying your pods e.g. Deployments, Statefulsets or Pods. See [memory vs cpu](../../resources) on recommendations.
+{{% notice note %}}
+Setting resource requests can prevent Out of Memory (OOM) and CPU throttling for your workloads
+{{% /notice %}}
 
-## Set Memory Requests & Limits
+
+To set resources on your workloads you need to modify the manifest responsible for deploying your pods e.g. Deployments or Statefulsets. See [memory vs cpu](../../resources) for more details.
+
+## Memory Requests & Limits
 
 ```yaml
 apiVersion: apps/v1
@@ -28,7 +33,7 @@ spec:
                 memory: "1Gi"
 ```
 
-## Set CPU requests and limits
+## CPU Requests & Limits
 
 ```yaml
 apiVersion: apps/v1

@@ -7,6 +7,10 @@ pre = ""
 
 ## Alert notifications
 
+{{% notice note %}}
+Overprovisioning works well if need workloads to be provisioned immediately. 
+{{% /notice %}}
+
 To send alerts to a dedicated slack channel, configure a [slack webhook](https://api.slack.com/messaging/webhooks) in your `config.yaml`:
 
 ```yaml

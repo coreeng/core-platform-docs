@@ -5,10 +5,16 @@ chapter = false
 pre = ""
 +++
 
-Autoscaling your cluster can be done centrally using the `config.yaml` file. See [cluster autoscaling](../../cluster-autoscaling) for why you should autoscale.
+{{% notice warning %}}
+Cluster autoscaling will not work unless resource requests for your workloads are defined. See [setting resource requests](../../../app/how-tos/setting-resource-requests)
+{{% /notice %}}
+
+{{% notice note %}}
+Nodes typically take up to 80 to 120 seconds to boot. If this is too long for you, see [overprovisioning](../overprovision-pods)
+{{% /notice %}}
 
 ## Autoscale nodes
-Enable autoscaling in GCP cluster by setting maximum amount of cpu cores and memory cluster can have. Nodes count towards this total.
+Autoscaling can be enabled using the `config.yaml` file. See [cluster autoscaling](../../cluster-autoscaling) for more details of how autoscaling works.
 
 ```yaml
 cluster:
@@ -19,8 +25,8 @@ cluster:
       profile: "OPTIMIZE_UTILIZATION"
 ```
 
-## Additional node pools
-Define node pool with machine type g2-standard-4 and disk type pd-extreme that autoscales from 0 to 5 nodes.
+## Custom node pools
+Define node pool with machine type `g2-standard-4` and disk type pd-extreme that autoscales from 0 to 5 nodes.
 
 ```yaml
 cluster:
@@ -32,15 +38,8 @@ cluster:
         minCount: 0
         maxCount: 5
         labels:
-          e2: true"
+          e2: "true"
 ```
 
-## Overprovision Pods
-Create 5 pause pods that will request 1 CPU and 200Mi of memory. In total it will reserve 5 CPU and 1Gi of memory
-```yaml
-cluster:
-  overprovisioning:
-    replicas: 5
-    cpu: "1"
-    memory: "200Mi"
-```
+
+c
