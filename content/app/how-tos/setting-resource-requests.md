@@ -5,9 +5,15 @@ chapter = false
 pre = ""
 +++
 
-To set resources on your workloads you need to modify the manifest responsible for deploying your pods e.g. Deployments, Statefulsets or Pods. See [memory vs cpu](../../resources) on recommendations.
+{{% notice warning %}}
+Setting a low memory limit can lead to Out Of Memory kills of your application.
+{{% /notice %}}
 
-## Set Memory Requests & Limits
+{{% notice note %}}
+Setting resource requests can prevent Out of Memory (OOM) and CPU throttling for your workloads. It's usually best to not set CPU limits. See [memory vs cpu](../../resources) for more details.
+{{% /notice %}}
+
+## Memory Requests & Limits
 
 ```yaml
 apiVersion: apps/v1
@@ -28,7 +34,7 @@ spec:
                 memory: "1Gi"
 ```
 
-## Set CPU requests and limits
+## CPU Requests & Limits
 
 ```yaml
 apiVersion: apps/v1

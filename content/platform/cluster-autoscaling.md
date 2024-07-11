@@ -38,24 +38,24 @@ Assuming we are running a regional cluster with 3 zones, the minimal cost to ope
 
 ### Scaling with Node Auto-Provisioning
 
-Node Auto-Provisioning (NAP) is used to manage node pools.
+{{% notice note %}}
+Enabling autoscaling will enforce 1 node to be present in the pool at all times to ensure system pods are running. If you wish to scale down node pools to 0, you have the option of disabling autoscaling. See [limitations](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler#limitations) for more details.
+{{% /notice %}}
 
-NAP allows us to support workloads with various CPU and memory requests by creating node pools with optimal machine types.
+Node Auto-Provisioning (NAP) is used to manage node pools. It allows us to support workloads with various CPU and memory requests by creating node pools with optimal machine types.
 
 In order to enable Node Auto-Provisioning you should specify:
-- **number of CPU cores for the whole** cluster
-- **number of gigabytes of memory for the whole** cluster
+- **number of CPU cores** for the whole cluster
+- **number of gigabytes of memory** for the whole cluster
 - **autoscaling profile**
 
-Available autoscaling profiles:
+Available [Autoscaling Profiles](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler#autoscaling_profiles):
 - `BALANCED`: The default profile for Standard clusters that prioritises keeping resources available for incoming pods.
 - `OPTIMIZE_UTILIZATION`: Prioritise optimizing utilization over keeping spare resources in the cluster. The cluster autoscaler scales down the cluster more aggressively. GKE can remove more nodes, and remove nodes faster.
 
-More about [Autoscaling profiles](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler#autoscaling_profiles).
-
 The following examples enable Node Auto-Provisioning for the cluster via `config.yaml`:
 
-- By default, GCE quota is 32, we use a 2vCPU VM for the bastion, so that's 30 cores left
+- By default, GCE quota is 32, we reserve a 2vCPU VM for the bastion, so that's 30 cores left
 
 ```yaml
 cluster:
@@ -76,7 +76,7 @@ cluster:
       profile: "OPTIMIZE_UTILIZATION"
 ```
 
-### Explicit node pools configuration
+### Custom node pools configuration
 
 This is discouraged, but available for users for which the default pool doesn't work.
 
