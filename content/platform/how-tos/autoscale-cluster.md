@@ -13,7 +13,7 @@ Cluster autoscaling will not work unless resource requests for your workloads ar
 Nodes typically take up to 80 to 120 seconds to boot. If this is too long for you, see [overprovisioning](../overprovision-pods)
 {{% /notice %}}
 
-## Autoscale Nodes
+## Enable Autoscaling
 Autoscaling can be enabled using the `config.yaml` file. See [cluster autoscaling](../../cluster-autoscaling) for more details of how autoscaling works.
 
 ```yaml
@@ -25,7 +25,7 @@ cluster:
       profile: "OPTIMIZE_UTILIZATION"
 ```
 
-## Disable AutoScaling
+## Disable Autoscaling
 Simply remove `autoscaling` block from `config.yaml`
 
 #### Before:
