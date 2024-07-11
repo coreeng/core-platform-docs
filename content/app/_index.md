@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-Before you get started setup the [Core Platform CLI](./corectl).
+Before you get started setup the [Core Platform CLI](../corectl).
 
 Deploying an application to the Core Platform consists of:
 

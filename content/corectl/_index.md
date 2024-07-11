@@ -1,9 +1,9 @@
 +++
-title = "CoreCTL: Core Platform CLI"
-weight = 1
 chapter = false
-pre = ""
+pre = "Core Platform CLI"
 +++
+
+## Core Platform CLI: corectl
 
 `corectl` is a CLI tool to automate common operations with Core Platform:
 - creation of new tenancy
@@ -16,14 +16,14 @@ pre = ""
   Since the Core Platform configuration files are stored in a git repository, `corectl` will clone
   some repositories and make changes to the configuration files on your behalf.
 - calling GitHub APIs.
-  Some operations may require GitHub API calls to perform their job. 
+  Some operations may require GitHub API calls to perform their job.
   Example: to make P2P work,
   the user has to configure specific GitHub variables and environments for an application repository.
   `corectl` can configure it automatically.
 - executing other commands locally.
   Some operations may require running other CLI tools to perform an operation.
-  Example: connection to an environment. 
-  It requires cloud-specific CLI to be installed. 
+  Example: connection to an environment.
+  It requires cloud-specific CLI to be installed.
   `corectl` will use it and the Core Platform configuration to construct and run the correct command.
 
 To start working with `corectl`:
@@ -73,7 +73,7 @@ To run initialization run:
 corectl config init
 ```
 
-It saves configuration options and clones some repositories: 
+It saves configuration options and clones some repositories:
 - environments repository – the repository that holds the configuration settings and parameters for core platform
   environments.
 - software-templates repository – the repository featuring bootstrap templates designed for quick project setups.
@@ -99,4 +99,5 @@ Requirements for token:
 - Read-Write permissions for Workflows, since `corectl` might configure workflow files when creating new applications.
 - Read-Write permissions for Environments and Variables, since `corectl` might be used to configure P2P for repositories.
 - Read-Write permissions for Pull Requests, since `corectl` might be used to automatically generate Pull Requests with platform configuration updates.
+
 

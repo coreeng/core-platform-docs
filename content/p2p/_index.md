@@ -46,7 +46,7 @@ any sub namespace you create.
 
 In order to use this pipeline, you'll need to be a tenant of a Core Platform.
 
-For any repo that you want to use the P2P from, use [`corectl`](../app/corectl)
+For any repo that you want to use the P2P from, use [`corectl`](../corectl)
 
 ```
 corectl p2p env sync <app repository> <tenant> [flags]
