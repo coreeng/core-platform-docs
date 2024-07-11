@@ -5,12 +5,13 @@ chapter = false
 pre = ""
 +++
 
-{{% notice note %}}
-Setting resource requests can prevent Out of Memory (OOM) and CPU throttling for your workloads
+{{% notice warning %}}
+Setting a low memory limit can lead to Out Of Memory kills of your application.
 {{% /notice %}}
 
-
-To set resources on your workloads you need to modify the manifest responsible for deploying your pods e.g. Deployments or Statefulsets. See [memory vs cpu](../../resources) for more details.
+{{% notice note %}}
+Setting resource requests can prevent Out of Memory (OOM) and CPU throttling for your workloads. It's usually best to not set CPU limits. See [memory vs cpu](../../resources) for more details.
+{{% /notice %}}
 
 ## Memory Requests & Limits
 

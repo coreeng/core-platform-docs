@@ -13,7 +13,7 @@ Cluster autoscaling will not work unless resource requests for your workloads ar
 Nodes typically take up to 80 to 120 seconds to boot. If this is too long for you, see [overprovisioning](../overprovision-pods)
 {{% /notice %}}
 
-## Autoscale nodes
+## Autoscale Nodes
 Autoscaling can be enabled using the `config.yaml` file. See [cluster autoscaling](../../cluster-autoscaling) for more details of how autoscaling works.
 
 ```yaml
@@ -25,7 +25,38 @@ cluster:
       profile: "OPTIMIZE_UTILIZATION"
 ```
 
-## Custom node pools
+## Disable AutoScaling
+Simply remove `autoscaling` block from `config.yaml`
+
+#### Before:
+```yaml
+cluster:
+  gcp:
+    autoscaling:
+      cpuCores: 20
+      memoryGb: 80
+      profile: "OPTIMIZE_UTILIZATION"
+    additionalNodePools:
+      - name: "4-pool"
+        diskType: "pd-standard"
+        machineType: "e2-standard-4"
+        minCount: 0
+        maxCount: 5
+```
+
+#### After:
+```yaml
+cluster:
+  gcp:
+    additionalNodePools:
+      - name: "4-pool"
+        diskType: "pd-standard"
+        machineType: "e2-standard-4"
+        minCount: 0
+        maxCount: 5
+```
+
+## Custom Node Pools
 Define node pool with machine type `g2-standard-4` and disk type pd-extreme that autoscales from 0 to 5 nodes.
 
 ```yaml
@@ -40,6 +71,3 @@ cluster:
         labels:
           e2: "true"
 ```
-
-
-c
