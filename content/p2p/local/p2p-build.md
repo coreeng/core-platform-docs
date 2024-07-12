@@ -32,7 +32,7 @@ Tools for versioning will be added in a future version of the P2P.
 
 You set the `REGISTRY` env var as follows:
 
-`REGISTRY=europe-west2-docker.pkg.dev/${PROJECT_ID}/tenant`
+`REGISTRY=europe-west2-docker.pkg.dev/${PROJECT_ID}/tenant/${TENANT}`
 
 You can get the PROJECT_ID from your Environments Repo. 
 Typically, for local development you'll want the dev `PROJECT_ID`.
