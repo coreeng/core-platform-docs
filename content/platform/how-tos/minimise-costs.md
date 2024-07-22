@@ -22,7 +22,7 @@ Create a cluster with Spot instances, HDD disk and `e2-medium` disk type.
 cluster:
   gcp:
     additionalNodePools:
-      - name: "preempt-pool"
+      - name: "spot-pool"
         machineType: "e2-medium"
         diskType: "pd-standard"
         minCount: 0
@@ -31,5 +31,5 @@ cluster:
 
 # Nodepool with 5 VMs using standard will cost $162 per month
 
-# Nodepool with 5 VMs using premptible nodes will cost $61 per month
+# Nodepool with 5 VMs using spot nodes will cost $61 per month
 ```
