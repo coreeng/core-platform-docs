@@ -13,9 +13,9 @@ You can run workloads while keeping its base cost low using [spot capabilities](
 Default node pools hosting system pods run on standard VMs.
 {{% /notice %}}
 
-## Preemption
+## Spot Instancnes
 
-Spot instances work by using Compute Engine (CE) excess capacity. When CE needs to use some of that capacity for example during zonal outages, it will shut down preemptive to free up capacity.
+These instances work by using Compute Engine (CE) excess capacity. When CE needs to use some of that capacity for example during zonal outages, it will shut down those instances to free up capacity.
 
 ### Limitations
 - Spot instances are only available for [supported machine types](https://cloud.google.com/compute/docs/machine-resource#spot-machine-types)
