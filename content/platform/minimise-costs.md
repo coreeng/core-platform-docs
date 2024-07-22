@@ -5,15 +5,15 @@ chapter = false
 pre = ""
 +++
 
-The platform allows you to optimise your infrastructure for maximum cost efficiency. In situations where you have multiple environments, some may be significantly underutilised.
+The platform allows you to optimise your infrastructure for maximum cost efficiency. There may be situations where you are running workloads where availability is not a priority e.g. lower environments.
 
-You can run workloads while keeping its base cost low using [spot capabilities](https://cloud.google.com/compute/docs/instances/spot) offering 60-91% discount compared to standard virtual machines (VMs)
+Run workloads while keeping its base cost low using [spot capabilities](https://cloud.google.com/compute/docs/instances/spot) offering 60-91% discount compared to standard virtual machines (VMs)
 
 {{% notice note %}}
 Default node pools hosting system pods run on standard VMs.
 {{% /notice %}}
 
-## Spot Instancnes
+## Spot Instances
 
 These instances work by using Compute Engine (CE) excess capacity. When CE needs to use some of that capacity for example during zonal outages, it will shut down those instances to free up capacity.
 
