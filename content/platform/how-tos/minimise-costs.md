@@ -15,7 +15,7 @@ Preemption works well if you need to cut down costs for your clusters. See [mini
 
 
 ## Cluster setup with minimal costs
-Create a cluster with autoscaling disabled, preemptible nodes, HDD disk and `e2-medium` disk type.
+Create a cluster with preemptible instances, HDD disk and `e2-medium` disk type.
 
 
 ```yaml
