@@ -44,7 +44,8 @@ Spot VMs: $138
 
 Spot prices can change up to once every 30 days, but discounts for relevant resources are always in the 60-91% range.
 
-## Best Practices
+## Best Practices
+Following points are advised when running spot instances:
 
 - Pick smaller instance types to have a better chance of getting capacity
 - Run spot on weekends or evenings (off peak hours)
