@@ -27,17 +27,17 @@ data:
     dGVzdDokYXByMSRMOGhDb0gySiR3emZUYkpDUEtndjlhZm0xdUtuRG8uCgo=
 ```
 
-This contains 2 users, one on each line. The password here is expected to be encrypted and then the whole string encoded to base64. You can use the command `htpasswd -nb <user> <password> |  openssl base64` to generate each user.
+This contains 2 users, one on each line. The password here is expected to be encrypted and then the whole string encoded to base64. You can use the command `htpasswd -nb <user> <password> | openssl base64` to generate each user.
 
-Then you need to create a `middleware.traefik.io` object. If on your resource you come acorss a `middleware.traefik.containo.us`, that is an older version of Treaefik's CRD. It will still work but it will be deprecated in the future.
+Then you need to create a `middleware.traefik.io` object. If on your resource you come across a `middleware.traefik.containo.us`, that is an older version of Treaefik's CRD. It will still work but it will be deprecated in the future.
 The Middleware will look like this:
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: auth-middleware
-  namespace: golang
+  name: <middleareName>
+  namespace: <middlewareNamespace>
 spec:
   basicAuth:
     secret: authsecret
@@ -75,6 +75,6 @@ After you apply this, only the request authenticated with those users will be ab
 
 ## Debugging
 
-To validate that your Middleare has been applied successfully, check the Traefik Dashboard and ensure that it contains no errors.
+To validate that your Middleware has been applied successfully, check the Traefik Dashboard and ensure that it contains no errors.
 
 {{< figure src="/images/app/how-to/traefik-dashboard.png" title="Traefik Dashboard" >}}
