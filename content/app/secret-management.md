@@ -6,6 +6,7 @@ pre = ""
 +++
 
 # RBAC Model
+{{% notice info %}}
 Since secrets contain sensitive information, 
 it's important to understand the RBAC model for secret management. Here are the main rules:
 - A tenant can't access the secrets of another tenant. This is enforced by specifying the `<tenant_name>_` as secret name prefix.
@@ -13,6 +14,7 @@ it's important to understand the RBAC model for secret management. Here are the 
 - A tenant `readonlyGroup` can only access the secret values
 - P2P service account of a tenant can only add versions to existing secrets
 - Service accounts created as `cloudAccess` service accounts can only access the secret values
+{{% /notice %}}
 
 # Accessing secret value from a service
 We are using the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/introduction) to
@@ -66,16 +68,11 @@ spec:
   serviceAccountName: secret-sa
   containers:
   - image: alpine:3
-    imagePullPolicy: IfNotPresent
     name: mypod
     command:
       # Accessing the secret
       - cat
       - /var/secrets/secret.txt
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
     volumeMounts:
       # The path where all the secrets described in SecretProviderClass will be mounted
       - mountPath: "/var/secrets"

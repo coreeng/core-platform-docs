@@ -51,16 +51,11 @@ spec:
   serviceAccountName: secret-sa
   containers:
   - image: alpine:3
-    imagePullPolicy: IfNotPresent
     name: mypod
     command:
       # Accessing the secret
       - cat
       - /var/secrets/secret.txt
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
     volumeMounts:
       # The path where all the secrets described in SecretProviderClass will be mounted
       - mountPath: "/var/secrets"
