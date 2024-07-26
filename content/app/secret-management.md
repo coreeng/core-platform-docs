@@ -6,9 +6,9 @@ pre = ""
 +++
 
 # RBAC Model
-{{% notice info %}}
-Since secrets contain sensitive information, 
+Since secrets contain sensitive information,
 it's important to understand the RBAC model for secret management. Here are the main rules:
+{{% notice info %}}
 - A tenant can't access the secrets of another tenant. This is enforced by specifying the `<tenant_name>_` as secret name prefix.
 - A tenant `adminGroup` has full access to manage the tenants' secrets
 - A tenant `readonlyGroup` can only access the secret values
