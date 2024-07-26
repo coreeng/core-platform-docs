@@ -93,6 +93,7 @@ service-push: ## Push the service image
 run-local: ## Build and run docker container locally
 	docker build . -t local-kp && \
 	  docker run -p 8080:8080 \
+	    --volume ./:/site \
 	    --env LIVE_RELOAD=true\
 	  	--env BASE_URL=http://localhost:8080\
 	  	local-kp
