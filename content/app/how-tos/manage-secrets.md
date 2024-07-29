@@ -9,9 +9,12 @@ For more info visit detailed [documentation](../secret-management).
 
 # Accessing secret from service
 First of all, you need to have configured `cloudAccess` for your tenant. Provisioned service account will be used to
-access the secret.
+access the secret. Read more about `cloudAccess` [here](../accessing-cloud-infra)
 
 Next, you need to create `SecretStorageClass` object in your namespace that will describe the secrets you want to access.
+
+> **Note:** if you don't have a secret created in your secret storage, [here is the instruction](#create-secrets).
+
 Here is the example for the GCP Secret Manager:
 ```yaml
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -23,7 +26,7 @@ spec:
   provider: gcp
   parameters:
     secrets: |
-      - resourceName: "projects/{{ .projectId }}/secrets/{{ .tenantName }}_{{ .secretName }}/versions/latest"
+      - resourceName: "projects/{{ .projectNumber }}/secrets/{{ .tenantName }}_{{ .secretName }}/versions/latest"
         path: "secret.txt"
 ```
 
@@ -32,12 +35,12 @@ You also need to create a service account that will be used by the CSI Driver an
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: secret-sa
+  name: {{ .cloudAccess.kubernetesServiceAccount.name }}
   namespace: {{ .namespace }}
   annotations:
     # if you use GCP Secret Manager as your secret store, you need to impersonate cloudAccess service account,
     # so CSI Driver can fetch and mount the secret
-    iam.gke.io/gcp-service-account: {{ .tenantName }}-{{ .cloudAccessName }}@{{ .projectId }}.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: {{ .tenantName }}-{{ .cloudAccess.name }}@{{ .projectId }}.iam.gserviceaccount.com
 ```
 
 Finally, you need to create a `Pod` that will impersonate the service account created above and have the secret mounted by the CSI Driver:
@@ -48,7 +51,7 @@ metadata:
   name: mypod
   namespace: {{ .namespace }}
 spec:
-  serviceAccountName: secret-sa
+  serviceAccountName: {{ .cloudAccess.kubernetesServiceAccount.name }}
   containers:
   - image: alpine:3
     name: mypod

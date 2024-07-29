@@ -26,7 +26,7 @@ Here we assume that you already have a secret created in your secret storage.
 If not, [here is the instruction](#creating-a-secret)
 
 First of all, you need to have configured `cloudAccess` for your tenant. Provisioned service account will be used to
-access the secret.
+access the secret. Read more about `cloudAccess` [here](accessing-cloud-infra)
 
 Next, you need to create `SecretStorageClass` object in your namespace that will describe the secrets you want to access.
 Here is the example for the GCP Secret Manager:
@@ -40,7 +40,7 @@ spec:
   provider: gcp
   parameters:
     secrets: |
-      - resourceName: "projects/{{ .projectId }}/secrets/{{ .tenantName }}_{{ .secretName }}/versions/latest"
+      - resourceName: "projects/{{ .projectNumber }}/secrets/{{ .tenantName }}_{{ .secretName }}/versions/latest"
         path: "secret.txt"
 ```
 
@@ -49,12 +49,12 @@ You also need to create a service account that will be used by the CSI Driver an
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: secret-sa
+  name: {{ .cloudAccess.kubernetesServiceAccount.name }}
   namespace: {{ .namespace }}
   annotations:
     # if you use GCP Secret Manager as your secret store, you need to impersonate cloudAccess service account,
     # so CSI Driver can fetch and mount the secret
-    iam.gke.io/gcp-service-account: {{ .tenantName }}-{{ .cloudAccessName }}@{{ .projectId }}.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: {{ .tenantName }}-{{ .cloudAccess.name }}@{{ .projectId }}.iam.gserviceaccount.com
 ```
 
 Finally, you need to create a `Pod` that will impersonate the service account created above and have the secret mounted by the CSI Driver:
@@ -65,7 +65,7 @@ metadata:
   name: mypod
   namespace: {{ .namespace }}
 spec:
-  serviceAccountName: secret-sa
+  serviceAccountName: {{ .cloudAccess.kubernetesServiceAccount.name }}
   containers:
   - image: alpine:3
     name: mypod
