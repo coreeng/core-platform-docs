@@ -36,14 +36,14 @@ The Middleware will look like this:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: <middleareName>
+  name: <middlewareName>
   namespace: <middlewareNamespace>
 spec:
   basicAuth:
     secret: authsecret
 ```
 
-After this, we can reference it in our Ingress object with the _annotation_ `traefik.ingress.kubernetes.io/router.middlewares: <middlewareNamespace>-<middleareName>@kubernetescrd`, for example:
+After this, we can reference it in our Ingress object with the _annotation_ `traefik.ingress.kubernetes.io/router.middlewares: <middlewareNamespace>-<middlewareName>@kubernetescrd`, for example:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -77,4 +77,4 @@ After you apply this, only the request authenticated with those users will be ab
 
 To validate that your Middleware has been applied successfully, check the Traefik Dashboard and ensure that it contains no errors.
 
-{{< figure src="/images/app/how-to/traefik-dashboard.png" title="Traefik Dashboard" >}}
+{{< figure src="/images/app/how-to/traefik-basic-auth-dashboard.png" title="Traefik Dashboard" >}}
