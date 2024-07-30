@@ -14,7 +14,7 @@ This uses beta features in the platform and breaking changes may occur in the fu
 If on your resource you come across a `middleware.traefik.containo.us`, that is an older version of Treaefik's CRD. It will be deprecated in the future.
 {{% /notice %}}
 
-Create a `middleware.traefik.io` object to whitelist IP addresses:
+Create a `middleware.traefik.io` object to [whitelist IP addresses](https://doc.traefik.io/traefik/middlewares/http/ipwhitelist/):
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -25,7 +25,7 @@ metadata:
 spec:
   ipWhiteList:
     ipStrategy:
-      depth: 2 # depth is required as request is forwarded from load balancer
+      depth: 2 # depth is required as request is forwarded from load balancer. See https://doc.traefik.io/traefik/middlewares/http/ipwhitelist/#ipstrategydepth for more details
     sourceRange:
     - <ip-address>
     - <ip-address>
