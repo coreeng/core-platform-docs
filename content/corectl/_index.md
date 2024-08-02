@@ -64,6 +64,22 @@ make install
 Before usage, you should initialize `corectl`.
 It requires the following:
 - initialization file: `corectl.yaml`
+  ```
+  repositories:
+    cplatform: <environments-git-repo> # [Mandatory] repository clone path with your environments configuration
+    templates: <templates-git-repo> # [Mandatory] repository clone path with your software templates, optionally you can use our template repo: https://github.com/coreeng/core-platform-software-templates.git
+
+  p2p: # path to production configuration
+    fast-feedback: # [Mandatory] p2p stage
+      default-envs: # list of environments to use as a part of the fast-feedback stage, must match env names defined in repositories.cplatform
+      - <environment_name> 
+    extended-test: # [Mandatory] list of environments to use as a part of the extended-test stage, , must match env names defined in repositories.cplatform
+      default-envs:
+      - <eenvironment_name>
+    prod: # [Mandatory] list of environments to use as a part of the prod stage, , must match env names defined in repositories.cplatform
+      default-envs:
+      - <environment_name>
+  ```
   This file should be located in the root of your environments repository.
   You can find an example of this file [here](https://github.com/coreeng/corectl/blob/main/examples/init-example.yaml).
 - your personal GitHub token to perform operations on your behalf. See more info [here](#github-access-token)
