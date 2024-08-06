@@ -170,3 +170,25 @@ metadata:
 ```
 - Now tenant A's services can access secrets of tenant B's if they use the service account above.
 
+# Pricing
+{{% notice note %}}
+The following cost forecast assumes running 100 services. For further information please visit: https://cloud.google.com/secret-manager/pricing
+{{% /notice %}}
+
+## Access
+
+Each service accessing secret 1000 times in a month = $0.27
+
+Each service accessing secret 10k times in a month = $2.97
+
+## Rotation 
+
+Each service being rotated once in a month = $4.85 
+
+Each service being rotated 5 times in a month = $24.85
+
+## Active secret versions
+
+Each service having 1 active secret = $5.64 
+
+Each service having 5 active secrets = $29.64

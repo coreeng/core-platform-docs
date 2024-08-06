@@ -5,32 +5,42 @@ chapter = false
 pre = ""
 +++
 
-For more info visit detailed [documentation](../secret-management).
+For more info visit detailed [documentation](../../../app/secret-management).
 
 # Accessing secret from service
 First of all, you need to have configured `cloudAccess` for your tenant. Provisioned service account will be used to
-access the secret. Read more about `cloudAccess` [here](../accessing-cloud-infra)
+access the secret. Read more about `cloudAccess` [here](../../../app/accessing-cloud-infra)
 
 Next, you need to create `SecretStorageClass` object in your namespace that will describe the secrets you want to access.
 
 > **Note:** if you don't have a secret created in your secret storage, [here is the instruction](#create-secrets).
 
-Here is the example for the GCP Secret Manager:
+## Create SecretProviderClass for GCP
+
 ```yaml
-apiVersion: secrets-store.csi.x-k8s.io/v1
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
 kind: SecretProviderClass
 metadata:
   name: app-secrets
   namespace: {{ .namespace }}
 spec:
   provider: gcp
+  secretObjects:
+  - secretName: {{ .secretName }}
+    type: Opaque
+    data: 
+    - objectName: secret.txt
+      key: {{ .key }}
   parameters:
     secrets: |
       - resourceName: "projects/{{ .projectNumber }}/secrets/{{ .tenantName }}_{{ .secretName }}/versions/latest"
-        path: "secret.txt"
+        fileName: "secret.txt"
 ```
 
-You also need to create a service account that will be used by the CSI Driver and your service to access the secret:
+## Create Service Account used to access secret
+
+This will be used by the CSI driver
+
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -38,39 +48,55 @@ metadata:
   name: {{ .cloudAccess.kubernetesServiceAccount.name }}
   namespace: {{ .namespace }}
   annotations:
-    # if you use GCP Secret Manager as your secret store, you need to impersonate cloudAccess service account,
-    # so CSI Driver can fetch and mount the secret
+    # if you use GCP Secret Manager as your secret store, you need to impersonate cloudAccess service account to allow CSI Driver to fetch and mount the secret
     iam.gke.io/gcp-service-account: {{ .tenantName }}-{{ .cloudAccess.name }}@{{ .projectId }}.iam.gserviceaccount.com
 ```
 
-Finally, you need to create a `Pod` that will impersonate the service account created above and have the secret mounted by the CSI Driver:
+## Reference secret in application
+
+{{% notice note %}}
+In order for a secret to be available through env variables, it first must be mounted by pod accessing it.
+{{% /notice %}}
+
 ```yaml
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: mypod
+  name: foo
   namespace: {{ .namespace }}
 spec:
-  serviceAccountName: {{ .cloudAccess.kubernetesServiceAccount.name }}
-  containers:
-  - image: alpine:3
-    name: mypod
-    command:
-      # Accessing the secret
-      - cat
-      - /var/secrets/secret.txt
-    volumeMounts:
-      # The path where all the secrets described in SecretProviderClass will be mounted
-      - mountPath: "/var/secrets"
-        name: mysecret
-  volumes:
-  - name: mysecret
-    csi:
-      driver: secrets-store.csi.k8s.io
-      readOnly: true
-      volumeAttributes:
-        # Reference the SecretProviderClass created above
-        secretProviderClass: "app-secrets"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foo
+  template:
+    metadata:
+      labels:
+        app: foo
+    spec:
+      serviceAccountName: {{ .cloudAccess.kubernetesServiceAccount.name }}
+      containers:
+      - image: alpine:3
+        name: foo
+        # Accessing secret via environment variable
+        env:
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ .secretName }}
+              key: {{ .key }}
+        volumeMounts:
+          # The path where all the secrets described in SecretProviderClass will be mounted
+          - mountPath: "/var/secrets"
+            name: mysecret
+      volumes:
+      - name: mysecret
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            # Reference the SecretProviderClass created above
+            secretProviderClass: "app-secrets"
 ```
 
 # Create secrets
