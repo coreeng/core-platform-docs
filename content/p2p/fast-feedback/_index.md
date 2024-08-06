@@ -58,16 +58,16 @@ Every task will have kubectl access as your tenant
 
 
 ## What version to use
-On each build of the p2p pipeline it will create a vX t ag with just the major version that's updated on each build.
+On each build of the p2p pipeline it will create a vX tag with just the major version that's updated on each build.
 
 ## Promotion
 We want to ensure that we always use the same image. The promotion will consist in pulling the image that we want to promote and pushing to the new registry. 
-Due to the limitations of github actions, you can't stay authenticated to 2 project registries at the same time. For that reason, in order to promote an image across projects, you'll need to switch between authentications.
+Due to the limitations of github actions, you can't stay authenticated to two project registries at the same time. For that reason, in order to promote an image across projects, you'll need to switch between authentications.
 We'll make the auth values available in environment variables
 * `SOURCE_AUTH_OVERRIDE` will give you access to `SOURCE_REGISTRY`
 * `DEST_AUTH_OVERRIDE` will give you acccess to `REGISTRY`
 
-That way, to promote an image you will have osmething like
+That way, to promote an image you will have smething like
 ```
     export CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE=$(SOURCE_AUTH_OVERRIDE)  # Set the cloudsdk env var with the source auth value
 	gcloud auth configure-docker --quiet europe-west2-docker.pkg.dev # Configure registry
