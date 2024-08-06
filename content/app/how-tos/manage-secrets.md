@@ -83,7 +83,7 @@ spec:
         - name: SECRET_USERNAME
           valueFrom:
             secretKeyRef:
-              name: foosecret
+              name: {{ .secretName }}
               key: {{ .key }}
         volumeMounts:
           # The path where all the secrets described in SecretProviderClass will be mounted

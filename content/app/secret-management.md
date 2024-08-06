@@ -192,10 +192,3 @@ Each service being rotated 5 times in a month = $24.85
 Each service having 1 active secret = $5.64 
 
 Each service having 5 active secrets = $29.64
-
-
-
-
-
-
-
