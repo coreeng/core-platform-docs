@@ -55,7 +55,7 @@ metadata:
 ## Reference secret in application
 
 {{% notice note %}}
-In order for a secret to be available through env variables, it first must be mounted by at least one pod.
+In order for a secret to be available through env variables, it first must be mounted by pod accessing it.
 {{% /notice %}}
 
 ```yaml
