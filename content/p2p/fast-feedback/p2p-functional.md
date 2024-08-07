@@ -5,6 +5,6 @@ chapter = false
 pre = ""
 +++
 
-This tests are used that the end-to-end result is what we expect.
-We expect this to test against a deployed application.
-They should cover the different features and routes, both happy cases and fail cases. To simulate fail cases. To simulate fail scenarios like an error from a downstream dependency, it's often used mock services like [wiremock](https://wiremock.org/)
+These tests are used to run end-to-end tests and validate that the software features works as desired.
+We expect these tests to run against a deployed application.
+Tests should cover the different features and routes, both happy cases and fail cases. To simulate fail scenarios such as an error from a downstream dependency, it's recommended to use mock services like [wiremock](https://wiremock.org/)

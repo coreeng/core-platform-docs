@@ -15,7 +15,7 @@ All your custom logic should be added to your Makefile rather than directly in G
 
 * The P2P is the contract that every application agrees to adhere to for continuous delivery
 * It is *light touch* in that it doesn't mandate many steps, just the most important types of testing
-  * You can use whatever tools you want from each stepk 
+  * You can use whatever tools you want from each step
 
 ## Quality Gates
 
@@ -46,7 +46,7 @@ any sub namespace you create.
 
 In order to use this pipeline, you'll need to be a tenant of a Core Platform.
 
-For any repo that you want to use the P2P from, use [`corectl`](../corectl)
+For any repo that wasn't created out of Core Platform templates, but you would like to follow a recommended p2p standard, please use [`corectl`](../corectl) as below:
 
 ```
 corectl p2p env sync <app repository> <tenant> [flags]

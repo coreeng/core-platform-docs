@@ -76,8 +76,8 @@ python gcp-init.py root-init \
 
 This script is **idempotent**, if you encounter Cloud API failures, you can generally re-run the command and it will only create the missing resources.
 
-> ![WARNING]
-> If the errors are that your user doesn't have permissions to do something, that probably won't be fixed by re-running
+{{% notice warning %}}
+If the errors are that your user doesn't have permissions to do something, that probably won't be fixed by re-running
 
 ## Creating an environment
 
