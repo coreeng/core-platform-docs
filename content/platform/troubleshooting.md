@@ -83,6 +83,45 @@ When adding a new ingress domain the platform:
 * Creates a Cloud DNS Managed Zone. You need to set up delegation for this domain so that Cloud DNS becomes the Name server. 
 
 
+#### IPs not being whitelisted by traefik
+You have configured to whitelist IPs using traefik middlewares but are still getting forbidden when accessing endpoints from a valid IP address.
+
+##### Enable JSON logs
+Edit traefik deployment to add the arguments:
+```
+kind: Deployment
+metadata:
+  name: traefik
+  namespace: platform-ingress
+...
+spec:
+    containers:
+    - args:
+      - --log.level=DEBUG
+      - --log.format=json
+      - --accesslog=true
+      - --accesslog.format=json
+```
+
+#### View traefik logs
+
+```yaml
+kubectl logs -f deployment/traefik -n platform-ingress
+
+Logs:
+
+{"level":"debug","middlewareName":"platform-ingress-ready-ipwhitelist@kubernetescrd","middlewareType":"IPWhiteLister","msg":"Accepting IP 86.160.248.78","time":"2024-08-07T22:03:23Z"}
+```
+
+##### Check Load Balancer logs
+On the Google Console navigate to Logging Explorer navigate and run the following query
+```
+resource.type="http_load_balancer" resource.labels.project_id="<your-gcp-project-id>"
+```
+
+{{< figure src="/images/troubleshooting/loadbalancer_logs.png" title="Load Balancer Logs" >}}
+
+
 #### Actions
 
 ##### 1. Setup DNS Zone delegation for the new domain
