@@ -30,10 +30,5 @@ Tools for versioning will be added in a future version of the P2P.
 
 ## Executing p2p-build locally
 
-You set the `REGISTRY` env var as follows:
-
-`REGISTRY=europe-west2-docker.pkg.dev/${PROJECT_ID}/tenant/${TENANT}`
-
-You can get the PROJECT_ID from your Environments Repo. 
-Typically, for local development you'll want the dev `PROJECT_ID`.
+See [Run p2p locally](https://docs.gcp-prod.cecg.platform.cecg.io/p2p/p2p-locally/) section for more details.
 
