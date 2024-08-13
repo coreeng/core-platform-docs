@@ -5,6 +5,13 @@ chapter = false
 pre = ""
 +++
 
+
+{{% notice warning %}}
+Some of this functionality is listed as alpha on [their documentation](https://secrets-store-csi-driver.sigs.k8s.io/introduction#alpha-functionality), namely the `Sync with Kubernetes Secrets`. However, looking at the issues, the feature exists for at least 4 years, so might just never move out of alpha.
+In any case, when updating the CSI driver, do pay attention at the [Upgrades section](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/upgrades) of the CSI driver.
+{{% /notice %}}
+
+
 # RBAC Model
 Since secrets contain sensitive information,
 it's important to understand the RBAC model for secret management. Here are the main rules:
