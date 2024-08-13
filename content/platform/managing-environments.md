@@ -78,6 +78,7 @@ This script is **idempotent**, if you encounter Cloud API failures, you can gene
 
 {{% notice warning %}}
 If the errors are that your user doesn't have permissions to do something, that probably won't be fixed by re-running
+{{% /notice %}}
 
 ## Creating an environment
 
