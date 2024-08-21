@@ -10,7 +10,7 @@ pre = ""
 This contains a collection of runbooks that need to be followed for each alert raised on the platform.
 Each alert should contain a short description and a deep link to the corresponding alert in this document.
 
-##### KubePodCannotConnectToInternet
+#### KubePodCannotConnectToInternet
 
 1. Is this affecting pods network and node network too?
 
@@ -25,11 +25,12 @@ Each alert should contain a short description and a deep link to the correspondi
     curl https://www.google.com
     ```
 
-   Is that fails, check your NAT Gateway.
+   Is that fails, check your NAT Gateway. Dashboard can be found in `platform-monitoring/NAT Gateway` dashboard in
+   Grafana.
 
 2. Is the Cloud NAT configured correctly?
 
-##### ClusterAutoscalerNoScaleUp
+#### ClusterAutoscalerNoScaleUp
 
 Node auto-provisioning did not provision any node pool for the pending pod because doing so would violate resource
 limits.
@@ -44,7 +45,7 @@ log_id("container.googleapis.com/cluster-autoscaler-visibility") AND
 
 Review and update cluster-wide minimal resource limits set for cluster auto-scaler.
 
-##### KubeHpaReplicasMismatch
+#### KubeHpaReplicasMismatch
 
 Horizontal Pod Autoscaler has not matched the desired number of replicas for longer than 15 minutes.
 HPA was unable to schedule desired number of pods.
@@ -57,7 +58,7 @@ Check why HPA was unable to scale:
 
 In case of cluster-autoscaler you may need to set up preemptive pod pools to ensure nodes are created on time.
 
-##### KubeHpaMaxedOut
+#### KubeHpaMaxedOut
 
 Horizontal Pod Autoscaler (HPA) has been running at max replicas for longer than 15 minutes.
 HPA won’t be able to add new pods and thus scale application.
@@ -75,7 +76,7 @@ If using custom metrics then fine tune how app scales accordingly to it.
 
 Use performance tests to see how the app scales.
 
-##### ContainerInErrorState
+#### ContainerInErrorState
 
 Container is not starting up, stuck in waiting state.
 
@@ -104,3 +105,44 @@ Container is not starting up, stuck in waiting state.
 4. Can the pod be scheduled? Check request/limits on the container and ensure there is enough in the cluster. More info
    on debugging can be found
    in [GKE docs](https://cloud.google.com/kubernetes-engine/docs/troubleshooting#PodUnschedulable)
+
+#### NatGatewayHighPortUtilisation
+
+##### Meaning
+
+High port utilisation by NAT Gateway, port allocation reached 70%. Each external IP address provides 64,512 available
+ports that are shared by all VMs. Each port corresponds to a connection to unique destination address (IP:PORT:
+PROTOCOL). When NAT Gateway runs out of free ports, it will start dropping outbound packets (requests going out to
+the internet).
+
+##### Impact
+
+No outbound requests are affected at this point; however, you're getting closer to the limit. Once utilisation is closer
+to 100%, some outbound requests will be affected.
+
+{{% notice warning %}}
+Utilisation doesn't have to reach 100% for requests to be affected. NAT Gateway will try to allocate at least the number
+of ports specified in `network.public_nat_gateway.min_ports_per_vm` configuration. If there are not enough ports available to
+satisfy this value, no ports will be allocated to VM in need.
+{{% /notice %}}
+
+##### Diagnosis & Mitigation
+
+Follow [NAT Gateway IP Allocation Failures](../troubleshooting#nat-gateway-ip-allocation-failures) section.
+
+#### NatGatewayIpAllocationFailed
+
+##### Meaning
+
+Failure in allocating NAT IPs to any VM in the NAT gateway. In result, services residing on affected VM's will not be
+able to reach the internet. NAT Gateway allocates single IP to multiple VM's. When there are not enough available NAT
+source IP addresses and source port tuples (IP:PORT:PROTOCOL), the NAT Gateway won't be able to service any new outbound
+connections.
+
+##### Impact
+
+Some current outbound requests are affected.
+
+##### Diagnosis & Mitigation
+
+Follow [NAT Gateway IP Allocation Failures](../troubleshooting#nat-gateway-ip-allocation-failures) section.
