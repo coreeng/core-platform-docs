@@ -1,6 +1,6 @@
 +++
-title = "Platform Operations"
-weight = 1
+title = "Platform Features"
+weight = 6
 chapter = false
 pre = ""
 +++
