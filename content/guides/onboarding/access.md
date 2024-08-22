@@ -8,7 +8,7 @@ pre = "1.1.2 "
 
 
 #### Prerequisite
-- Configure [Core Platform CLI](../corectl).
+- Configure [Core Platform CLI](../../../corectl).
 
 
 ## Accessing your namespaces

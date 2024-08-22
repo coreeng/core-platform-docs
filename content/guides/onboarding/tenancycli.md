@@ -6,7 +6,7 @@ pre = "1.1 "
 +++
 
 #### Prerequisite
-- Configure [Core Platform CLI](../corectl).
+- Configure [Core Platform CLI](../../../corectl).
 
 ### Adding a tenancy with corectl
 
