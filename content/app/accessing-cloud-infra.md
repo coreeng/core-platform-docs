@@ -7,10 +7,10 @@ pre = ""
 
 Your applications can access Cloud Infrastructure in different Cloud Accounts.
 
-Enable Cloud Access in your tenancy via adding the `cloud-access` section at the top level:
+Enable Cloud Access in your tenancy via adding the `cloudAccess` section at the top level:
 
 ```
-cloud-access:
+cloudAccess:
   - name: ca
     provider: gcp
     environment: all
