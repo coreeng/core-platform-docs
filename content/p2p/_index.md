@@ -1,6 +1,6 @@
 +++
 title = "Path to Production"
-weight = 1
+weight = 5
 chapter = false
 pre = ""
 +++
@@ -37,7 +37,7 @@ Two key concepts for the P2P are:
 
 ## Automatic GH Action authentication
 
-As part of your [tenancy](../../app/tenancy) you define GitHub repos.
+As part of your [tenancy](../../guides/onboarding) you define GitHub repos.
 
 All of those repos get passwordless access to deploy to your namespaces and
 any sub namespace you create.
