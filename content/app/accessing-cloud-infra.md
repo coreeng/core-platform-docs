@@ -13,6 +13,7 @@ Enable Cloud Access in your tenancy via adding the `cloud-access` section at the
 cloud-access:
   - name: ca
     provider: gcp
+    environment: all
     kubernetesServiceAccounts:
       - <your_namespace>/sa
 ```
@@ -21,6 +22,7 @@ cloud-access:
     that has a max limit of 32 chars, just have that in mind when naming to ensure 
 * `provider`: only `gcp` supported
 * `kubernetesServiceAccounts`: a list of kubernetes service accounts that will be allowed to access the cloud infrastructure in the format `namespace/name` e.g. the service account `cat` in the namespace `myfirsttenancy` using the P2P should have `myfirsttenancy-functional/cat`, `myfirsttenancy-nft/cat`, `myfirsttenancy-prod/cat` and whatever other namespace you need.
+* `environment` is be used to specify the environment in which this specific Cloud Access configuration will be deployed. To deploy it in all of the environments where the tenant is configured, you can use the keyword `all` as the environments value.
 
 In your parent namespace (the one named after your tenancy run) run:
 
