@@ -7,7 +7,7 @@ pre = ""
 
 
 ## Platform Ingress
-Platform Ingress is reponsible for creating the Ingress setup.
+Platform Ingress is responsible for creating the Ingress setup.
 
 
 ## Design
