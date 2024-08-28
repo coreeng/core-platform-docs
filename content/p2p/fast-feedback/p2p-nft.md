@@ -1,6 +1,6 @@
 +++
 title = "Stubbed NFT"
-weight = 1
+weight = 2
 chapter = false
 pre = ""
 +++
