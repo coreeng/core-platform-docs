@@ -31,12 +31,14 @@ Each alert should contain a short description and a deep link to the correspondi
 
 ##### KubePodCannotConnectToDeveloperPortal
 
+Fires when the blackbox exporter is unable to connect to the developer portal.
+
 1. Is the developer portal running?
    ```
    kubectl -n developer-portal get all
    ```
 
-2. Are other alerts such as `KubePodCannotConnectToInternet` or `ContainerInErrorState` firing?
+2. Are other alerts such as [`KubePodCannotConnectToInternet`](#KubePodCannotConnectToInternet) or [`ContainerInErrorState`](#ContainerInErrorState) firing?
 
 3. What is preventing the pod from running?  
    ```
