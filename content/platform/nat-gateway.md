@@ -53,6 +53,11 @@ network:
     max_ports_per_vm: <set max number of ports per VM>
 ```
 
+## View assigned IP addresses
+
+To view all assigned IP addresses to the NAT Gateway
+follow [View NAT IP addresses assigned to a gateway](https://cloud.google.com/nat/docs/set-up-manage-network-address-translation#view_nat_ip_addresses_assigned_to_a_gateway)
+
 ## Increase allocated number of IP addresses
 
 {{% notice warning %}}
