@@ -186,11 +186,11 @@ kubectl describe gateway traefik -n platform-ingress
                network bandwidth, then check which pod belongs to that namespace in `Network Bandwith` graph in
                `platform-monitoring/Kubernetes/Views/Pods`.
         2. [Optional] Enable NAT Gateway logging if not already enabled. Logging provides more detailed information on
-           existing connections. To enable logs update `network.public_nat_gateway.logging` value to one of `ERRORS_ONLY`,
+           existing connections. To enable logs update `network.publicNatGateway.logging` value to one of `ERRORS_ONLY`,
            `TRANSLATIONS_ONLY`, `ALL`:
            ```
            network:
-             public_nat_gateway:
+             publicNatGateway:
                logging: TRANSLATIONS_ONLY - update to desired logging level
            ```
            See [Configure logging](https://cloud.google.com/nat/docs/monitoring) for log level explanation.
@@ -208,26 +208,26 @@ kubectl describe gateway traefik -n platform-ingress
    `environments/<env_name>/config.yaml` file:
    ```
    network:
-     public_nat_gateway:
-       ips: <number of IP's allocated> - increase this value to desired number of IP's
+     publicNatGateway:
+       ipCount: <number of IP's allocated> - increase this value to desired number of IP's
    ```
    Release the change and validate that port utilisation went down below 70%.
 
 2. Do you allocate too many min ports per VM?
     1. Go to Grafana `platform-monitoring/NAT Gateway` dashboard and validate allocated ports per VM against used ports
        per VM. Ensure to extend time span to take into account all traffic spikes. If most of the time ports are being
-       allocated but not used you can decrease the `min_ports_per_vm` setting in `environments/<env_name>/config.yaml`
+       allocated but not used you can decrease the `minPortsPerVm` setting in `environments/<env_name>/config.yaml`
        file:
        ```
        network:
-         public_nat_gateway:
-           min_ports_per_vm: <min number of ports allocated to single VM> - decrease this value to release ports
+         publicNatGateway:
+           minPortsPerVm: <min number of ports allocated to single VM> - decrease this value to release ports
        ```
        See [Choose a minimum number of ports per VM](https://cloud.google.com/nat/docs/tune-nat-configuration#choose-minimum)
        for further details.
     2. If all ports are utilised, check if you
        can [Reduce your port usage](https://cloud.google.com/nat/docs/troubleshooting#reduce-ports) otherwise increase
-       the `ips` value (section 1)
+       the `ipCount` value (section 1)
 
 {{% notice warning %}}
 Increasing the number of IPs is a safe operation; the existing connections won't be affected, however, decreasing the
@@ -242,7 +242,7 @@ for further details.
 Error: Error when reading or editing Address: googleapi: Error 400: External address used for NAT cannot be deleted., badRequest
 ```
 
-During updates to your `network.public_nat_gateway.ips` configuration when you try to remove already allocated IP address the
+During updates to your `network.publicNatGateway.ipCount` configuration when you try to remove already allocated IP address the
 update will fail. To decrease the number of allocated IPs, please drain it first then remove it from NAT Gateway
 manually before running IAC tool.
 Follow [Decrease allocated number of IP addresses](../nat-gateway#decrease-allocated-number-of-ip-addresses).

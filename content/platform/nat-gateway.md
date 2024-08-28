@@ -32,25 +32,25 @@ use [Manual NAT IP address assignment with dynamic port allocation](https://clou
 
 ```
 network:
-  public_nat_gateway: # [Optional] configuration for the NAT Gateway
-    ips: 2 # [Required] numer of IP addresses to allocate
+  publicNatGateway: # [Optional] configuration for the NAT Gateway
+    ipCount: 2 # [Required] numer of IP addresses to allocate
     logging: ERRORS_ONLY # [Optional] enable logging, available values: ERRORS_ONLY,TRANSLATIONS_ONLY,ALL, when not provided no logging is enabled, we recommend setting to ERRORS_ONLY
-    min_ports_per_vm: 64 # [Optional] min number of ports per VM, when not provided default (64) is used
-    max_ports_per_vm: 128 # [Optional] max number of port per VM, when not provided default (32,768) is used
-    tcp_established_idle_timeout_sec: 1200 # [Optional] timeout (in seconds) for TCP established connections (default 1200), only update when necessary, otherwise leave default
-    tcp_transitory_idle_timeout_sec: 30 # [Optional] timeout (in seconds) for TCP transitory connections (default 30), only update when necessary, otherwise leave default
-    tcp_time_wait_timeout_sec: 120 # [Optional] timeout (in seconds) for TCP connections that are in TIME_WAIT state (default 120), only update when necessary, otherwise leave default
+    minPortsPerVm: 64 # [Optional] min number of ports per VM, when not provided default (64) is used
+    maxPortsPerVm: 128 # [Optional] max number of port per VM, when not provided default (32,768) is used
+    tcpEstablishedIdleTimeoutSec: 1200 # [Optional] timeout (in seconds) for TCP established connections (default 1200), only update when necessary, otherwise leave default
+    tcpTransitoryIdleTimeoutSec: 30 # [Optional] timeout (in seconds) for TCP transitory connections (default 30), only update when necessary, otherwise leave default
+    tcpTimeWaitTimeoutSec: 120 # [Optional] timeout (in seconds) for TCP connections that are in TIME_WAIT state (default 120), only update when necessary, otherwise leave default
 ```
 
 #### Recommended overrides
 
 ```
 network:
-  public_nat_gateway: # [Optional] configuration for the NAT Gateway
-    ips: <numbers of IPs to allocate>
+  publicNatGateway: # [Optional] configuration for the NAT Gateway
+    ipCount: <numbers of IPs to allocate>
     logging: ERRORS_ONLY # enable logging for packet drops due to NAT IP allocation
-    min_ports_per_vm: <set min number of ports per VM>
-    max_ports_per_vm: <set max number of ports per VM>
+    minPortsPerVm: <set min number of ports per VM>
+    maxPortsPerVm: <set max number of ports per VM>
 ```
 
 ## View assigned IP addresses
@@ -95,7 +95,7 @@ for further details.
 
 All IP addresses are created sequentially, following naming convention `<env>-nat-ext-ip-<number>`, numbered from 0 to
 X. During IP address reservation the platform stores those IPs in an ordered list. We recommend that you remove one IP
-address at a time. Decreasing `network.public_nat_gateway.ips` number by one causes removal of a last IP address in GCP,
+address at a time. Decreasing `network.publicNatGateway.ipCount` number by one causes removal of a last IP address in GCP,
 therefore **make sure you drain last IP address**. In case you remove/drain the wrong address, the release fails as you
 cannot delete addresses that are still allocated to NAT Gateway.
 
@@ -109,18 +109,18 @@ cannot delete addresses that are still allocated to NAT Gateway.
     2. enable NAT Logging by:
    ```
    network:
-     public_nat_gateway:
+     publicNatGateway:
        logging: ALL
        ...
    ```
    and checking that there are no logs for open connections associated to drained IP address.
 4. Remove drained IP address assignment from NAT Gateway in UI.
-5. Update `network.public_nat_gateway` configuration and release:
+5. Update `network.publicNatGateway` configuration and release:
 
    ```
    network:
-     public_nat_gateway:
-       ips: 2 # decrease this number to desired number of IP addresses
+     publicNatGateway:
+       ipCount: 2 # decrease this number to desired number of IP addresses
        ...
    ```
 6. Notify any third parties on source IP changes for outbound connections so they can update their allowlists.
@@ -167,7 +167,7 @@ in [Switch assignment method](https://cloud.google.com/nat/docs/ports-and-addres
    ```
    curl -I www.google.com
    ```
-4. Remove `network.public_nat_gateway` section from platform environment configuration and release.
+4. Remove `network.publicNatGateway` section from platform environment configuration and release.
 
 ### Troubleshooting
 

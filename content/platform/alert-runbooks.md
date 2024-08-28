@@ -122,7 +122,7 @@ to 100%, some outbound requests will be affected.
 
 {{% notice warning %}}
 Utilisation doesn't have to reach 100% for requests to be affected. NAT Gateway will try to allocate at least the number
-of ports specified in `network.public_nat_gateway.min_ports_per_vm` configuration. If there are not enough ports available to
+of ports specified in `network.publicNatGateway.minPortsPerVm` configuration. If there are not enough ports available to
 satisfy this value, no ports will be allocated to VM in need.
 {{% /notice %}}
 
