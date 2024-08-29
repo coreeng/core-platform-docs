@@ -4,12 +4,12 @@ weight = 300
 chapter = false
 pre = "2.1 "
 +++
+{{% notice warning %}}
+**Prerequisites**
 
-## Prerequisites
-
-- Configure the [Core Platform CLI](../../corectl/).
-- Complete the [Onboarding Tenancy](../onboarding/).
-
+1) Configure the [Core Platform CLI](../../corectl/).
+2) Complete the [Onboarding Tenancy](../onboarding/).
+{{% /notice %}}
 ## Create a New Application
 
 First update the corectl config :
@@ -21,7 +21,7 @@ corectl config update
 To create a new application, use the following corectl command:
 
 
-`<new-app-name>`: Your application's name. This will create a GitHub repository with the pattern <github_org>/<new-app-name>.
+`<new-app-name>`: Your application's name. This will create a GitHub repository with the pattern `<github_org>/<new-app-name>`.
 
 
 `<new-app-dir>`: (Optional) If specified, this will create a local directory named <new-app-dir>. If not specified, a directory with the name <new-app-name> will be created.

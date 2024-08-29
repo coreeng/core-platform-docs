@@ -5,8 +5,11 @@ chapter = false
 pre = "1.1 "
 +++
 
-#### Prerequisite
-- Configure [Core Platform CLI](../../../corectl).
+{{% notice warning %}}
+**Prerequisites**
+1) Configure [Core Platform CLI](../../../corectl).
+{{% /notice %}}
+
 
 ### Adding a tenancy with corectl
 
@@ -19,13 +22,13 @@ Once the PR is merged, a configuration for the new tenant will be provisioned au
 
 You'll be prompted for:
 
-* `tenant name` - Name of your tenancy. Must be the same as your filename.
+* `tenant name` - Name of your tenancy.
 * `parent tenant` - Name of the parent tenant or `root`. Note: `root` tenant is created implicitly.
 * `description` - Description for your tenancy.
 * `contactEmail` - Metadata: Who is the contact for this tenancy? 
 * `costCentre` - Metadata: Used to split cloud costs. 
-* `repoositories` - (Optional) Your application repository for Core Platform. If you dont have one you car create after by follwoing the guide for [Deploy a New Application](../../deployapp/) 
-* `environments` which of the environments in Environments Repo you want to deploy to (select on or more with Space)
+* `repositories` - (Optional) Your application repository for Core Platform. If you dont have one you car create after by follwoing the guide for [Deploy a New Application](../../deployapp/) 
+* `environments` which of the platform environments in Environments Repo you want to deploy to (select on or more with Space)
 * `adminGroup` - will get permission to do all actions in the created namespaces
 * `readonlyGroup` - will get read-only access to the created namespaces
 
