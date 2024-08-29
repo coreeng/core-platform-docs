@@ -27,7 +27,7 @@ You'll be prompted for:
 * `description` - Description for your tenancy.
 * `contactEmail` - Metadata: Who is the contact for this tenancy? 
 * `costCentre` - Metadata: Used to split cloud costs. 
-* `repositories` - (Optional) Your application repository for Core Platform. If you dont have one you car create after by follwoing the guide for [Deploy a New Application](../../deployapp/) 
+* `repositories` - (Optional) Your application repository for Core Platform. If you dont have one you can create after by following the guide for [Deploying a New Application](../../deployapp/) 
 * `environments` which of the platform environments in Environments Repo you want to deploy to (select on or more with Space)
 * `adminGroup` - will get permission to do all actions in the created namespaces
 * `readonlyGroup` - will get read-only access to the created namespaces

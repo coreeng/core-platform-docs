@@ -23,9 +23,11 @@ To create a lightweight environment, in your tenancy namespace create:
 
 
 ```
+kubectl apply -f - <<EOF
 apiVersion: hnc.x-k8s.io/v1alpha2
 kind: SubnamespaceAnchor
 metadata:
   namespace: {tenant_name}
   name: your-lightweight-env
+EOF
 ```

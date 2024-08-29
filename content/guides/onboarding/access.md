@@ -47,25 +47,3 @@ myfirsttenancy
 
 > Note: Instruction for installing the `hns` plugin for `kubectl` can be found [here](https://github.com/kubernetes-sigs/hierarchical-namespaces/releases)
 
-## Creating additional lightweight environments
-
-You have permission to create as many lightweight environments in your tenancy.
-
-All reference apps create at least:
-
-* functional - for stubbed functional tests 
-* nft - for stubbed functional tests
-
-Typically, all lightweight environments are created in your dev cluster and only
-a single namespace per application is in production.
-
-To create a lightweight environment, in your tenancy namespace create:
-
-
-```
-apiVersion: hnc.x-k8s.io/v1alpha2
-kind: SubnamespaceAnchor
-metadata:
-  namespace: {tenant_name}
-  name: your-lightweight-env
-```
