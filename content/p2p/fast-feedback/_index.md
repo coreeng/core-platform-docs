@@ -10,8 +10,24 @@ The aim of this pipeline shape is to provide fast feedback on the provided code.
 We've defined a pipeline using github actions [here](https://github.com/coreeng/p2p).
 
 What we propose looks like this:
-{{< figure src="/images/p2p/fast-feedback.png" title="Fast Feedback" >}}
+{{< mermaid >}}
+sequenceDiagram
+actor User
+User->>+Git: push to branch
+Git->>+Git: build image
+Git->>+Dev Registry: Push image to '/test'    
+Git->>+Dev k8s: Deploy to Functional + Run tests
+Git->>+Dev k8s: Deploy to NFT + Run tests
+Git->>+Dev k8s: Deploy to Integration + Run tests
+alt only when the branch is main
+Git->>+Dev Registry: Promote image from '/test' to '/extended-test'
+end
+{{< /mermaid >}}
 
+{{% notice warning %}}
+Currently Integration tests (`p2p-integration` target) is optional. The workflow will skip this step when no `p2p-integration` target is found in Makefile. 
+This is introduced as a temporary measure to avoid breaking changes. It will be removed in the future releases. Makefile target `p2p-integration` will be mandatory.
+{{% /notice %}}
 
 ## Usage
 ```
@@ -52,6 +68,7 @@ Every task will have kubectl access as your tenant
 
 #### p2p-build
 #### p2p-functional
+#### p2p-integration
 #### p2p-nft
 #### p2p-build
 #### p2p-promote-to-extended-test
