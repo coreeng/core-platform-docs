@@ -30,6 +30,24 @@ Each alert should contain a short description and a deep link to the correspondi
 
 2. Is the Cloud NAT configured correctly?
 
+#### KubePodCannotConnectToDeveloperPortal
+
+Fires when the blackbox exporter is unable to connect to the developer portal.
+
+1. Is the developer portal running?
+   ```
+   kubectl -n developer-portal get all
+   ```
+
+2. Are other alerts such as [`KubePodCannotConnectToInternet`](#KubePodCannotConnectToInternet) or [`ContainerInErrorState`](#ContainerInErrorState) firing?
+
+3. What is preventing the pod from running?  
+   ```
+   kubectl -n developer-portal logs deployment.apps/developer-portal
+   ```
+
+4. Are there errors relating to the database?
+
 #### ClusterAutoscalerNoScaleUp
 
 Node auto-provisioning did not provision any node pool for the pending pod because doing so would violate resource
