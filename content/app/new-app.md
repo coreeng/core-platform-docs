@@ -28,6 +28,28 @@ It will:
 - create a new repository using the selected template
 - configure the created GitHub repository, so P2P workflows will run without an issue
 
+### Create an application as part of a monorepo
+
+Instead of creating a new repository for each of the application you can create a single repository
+and add the applications as sub-directories.
+
+First create a new root repository 
+
+```shell
+corectl app create <new-monorepo-name> --tenant <tenant-name> --nonint
+```
+
+This will create an empty repository with necessary variables preconfigured for the P2P to work.
+
+Now create a new application in sub-directory, you will be prompted for a template to use.
+
+```shell
+cd <new-monorepo-name>
+corectl app create <new-app-name> --tenant <sub-tenant-name>
+```
+
+Your new application will be created in a new PR for a monorepo. This will give you a chance to review the changes.
+Once you're happy with the changes, merge the PR.
 
 ## Raise a PR
 
