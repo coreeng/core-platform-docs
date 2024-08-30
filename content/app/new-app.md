@@ -30,7 +30,7 @@ It will:
 
 ### Create an application as part of a monorepo
 
-Instead of creating a new repository for each of the application you can create a single repository
+Instead of creating a new repository for each of the applications, you can create a single repository
 and add the applications as sub-directories.
 
 First create a new root repository 
