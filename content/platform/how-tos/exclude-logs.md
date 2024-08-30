@@ -1,0 +1,25 @@
++++
+title = "Exclude Logs"
+weight = 4
+chapter = false
+pre = ""
++++
+
+## Log exclusions
+
+To change log retention or set up [exclusion filters](https://cloud.google.com/logging/docs/routing/overview#exclusions) configure in your `config.yaml`:
+
+```yaml
+platformLogging:
+  logRetentionDays: 10
+  exclusionFilters:
+  - name: my-exclusion
+    description: Excludes info messages from my-container
+    filter: resource.labels.container_name = my-container AND severity = Info
+```
+
+Exclusion filters use the Logging [query language](https://cloud.google.com/logging/docs/view/logging-query-language)
+
+{{% notice note %}}
+Log entries are excluded after they are received by the Logging API. The number of API calls is not reduced by excluding log entries.
+{{% /notice %}}
