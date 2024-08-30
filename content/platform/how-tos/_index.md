@@ -9,4 +9,5 @@ pre = ""
 * [Overprovision Pods](./overprovision-pods)
 * [Minimise costs](./minimise-costs)
 * [Setup Alerts](./setup-alerts)
+* [Exclude Logs](./exclude-logs)
 
