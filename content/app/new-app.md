@@ -41,7 +41,7 @@ corectl app create <new-monorepo-name> --tenant <tenant-name> --nonint
 
 This will create an empty repository with necessary variables preconfigured for the P2P to work.
 
-Now create a new application in sub-directory, you will be prompted for a template to use.
+Now create a new application in the sub-directory. You will be prompted for a template to use.
 
 ```shell
 cd <new-monorepo-name>
