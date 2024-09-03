@@ -38,7 +38,7 @@ Simple structure where there is only one application in the repository.
 
 Key points:
 
-- There is only one p2p workflow
+- There is only one p2p lifecycle
 - All application code, tests, and deployment configurations reside in root directory
 
 
@@ -56,7 +56,7 @@ app-tenant
 ```
 
 A single tenant `app-tenant` is created as a root for the app.
-To isolate resources related to specific workflow stage we create a subnamespaces via 
+To isolate resources related to specific lifecycle stage we create a subnamespaces via 
 [hierarchical namespaces](https://github.com/kubernetes-sigs/hierarchical-namespaces).
 The `app-tenant` name is stored in a GitHub repository variable `TENANT_NAME`
 
@@ -112,7 +112,7 @@ Key features:
    - Each application resides in its own directory (`app1/`, `app2/`).
    - Applications contain all necessary files and configurations, including `Dockerfile`, `Makefile`, source code, tests, and Helm charts.
 
-2. Isolated Workflows:
+2. Isolated Lifecycles:
    - GitHub Actions workflows are defined separately for each application.
 
 3. Application-Specific Build and Deployment:
@@ -213,7 +213,7 @@ Key features:
    - The main `Chart.yaml` and `values.yaml` files define the overall workload configuration.
    - Subcharts for individual applications ideally stored externally
 
-4. Shared Workflows:
+4. Shared Lifecycle:
    - GitHub Actions workflows are defined for the entire workload, not individual applications.
 
 5. Resource Management:
