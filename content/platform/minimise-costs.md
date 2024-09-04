@@ -53,4 +53,4 @@ Following points are recommended when running spot instances:
 
 ## Enable Spot Instances
 
-See [spot instances](../how-tos/minimise-costs).
+See [spot instances](./how-tos/minimise-costs).

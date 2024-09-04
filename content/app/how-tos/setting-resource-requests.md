@@ -10,7 +10,7 @@ Setting a low memory limit can lead to Out Of Memory kills of your application.
 {{% /notice %}}
 
 {{% notice note %}}
-Setting resource requests can prevent Out of Memory (OOM) and CPU throttling for your workloads. It's usually best to not set CPU limits. See [memory vs cpu](../../resources) for more details.
+Setting resource requests can prevent Out of Memory (OOM) and CPU throttling for your workloads. It's usually best to not set CPU limits. See [memory vs cpu](../resources) for more details.
 {{% /notice %}}
 
 ## Memory Requests & Limits

@@ -6,7 +6,7 @@ pre = ""
 +++
 
 {{% notice note %}}
-Overprovisioning works well if workloads need to be provisioned immediately. See [why you need overprovisioning](../../cluster-autoscaling#overprovisioning).
+Overprovisioning works well if workloads need to be provisioned immediately. See [why you need overprovisioning](../cluster-autoscaling#overprovisioning).
 {{% /notice %}}
 
 ## Overprovision Pods

@@ -64,7 +64,7 @@ place significant load on one node as it uses the requests to target what nodes 
 
 ### Resolution
 
-Set [resource requests](../../app/resources) for your application workloads to allow the kube scheduler better place
+Set [resource requests](../app/resources) for your application workloads to allow the kube scheduler better place
 your pods on nodes with appropiate capacity. For example if you request 2Gi memory for your pod, the scheduler will
 guarantee finding a node that has that capacity.
 
@@ -143,7 +143,7 @@ resource.type="http_load_balancer" resource.labels.project_id="<your-gcp-project
 
 ##### 1. Setup DNS Zone delegation for the new domain
 
-See [dns delegation setup](../dns)
+See [dns delegation setup](./dns)
 
 #### 2. Restart cert manager
 
@@ -245,7 +245,7 @@ Error: Error when reading or editing Address: googleapi: Error 400: External add
 During updates to your `network.publicNatGateway.ipCount` configuration when you try to remove already allocated IP address the
 update will fail. To decrease the number of allocated IPs, please drain it first then remove it from NAT Gateway
 manually before running IAC tool.
-Follow [Decrease allocated number of IP addresses](../nat-gateway#decrease-allocated-number-of-ip-addresses).
+Follow [Decrease allocated number of IP addresses](./nat-gateway#decrease-allocated-number-of-ip-addresses).
 
 ### NAT Gateway high error count in logs
 

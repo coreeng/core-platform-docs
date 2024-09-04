@@ -1,7 +1,7 @@
 FROM alpine:3.20
 
 # The Hugo version
-ARG HUGO_VERSION=0.128.0
+ARG HUGO_VERSION=0.132.1
 
 # Add a non-root user
 RUN addgroup -S hugo && adduser -S -G hugo hugo
@@ -24,9 +24,8 @@ WORKDIR /site
 COPY content ./content
 COPY layouts ./layouts
 COPY assets ./assets
-COPY static ./static
 COPY themes ./themes
-COPY config.toml ./config.toml
+COPY hugo.toml ./hugo.toml
 COPY run.sh ./run.sh
 
 # Set ownership and permissions
