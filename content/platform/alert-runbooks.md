@@ -39,7 +39,7 @@ Fires when the blackbox exporter is unable to connect to the developer portal.
    kubectl -n developer-portal get all
    ```
 
-2. Are other alerts such as [`KubePodCannotConnectToInternet`](#KubePodCannotConnectToInternet) or [`ContainerInErrorState`](#ContainerInErrorState) firing?
+2. Are other alerts such as [`KubePodCannotConnectToInternet`](#kubepodcannotconnecttointernet) or [`ContainerInErrorState`](#containerinerrorstate) firing?
 
 3. What is preventing the pod from running?  
    ```
@@ -146,7 +146,7 @@ satisfy this value, no ports will be allocated to VM in need.
 
 ##### Diagnosis & Mitigation
 
-Follow [NAT Gateway IP Allocation Failures](../troubleshooting#nat-gateway-ip-allocation-failures) section.
+Follow [NAT Gateway IP Allocation Failures](./troubleshooting#nat-gateway-ip-allocation-failures) section.
 
 #### NatGatewayIpAllocationFailed
 
@@ -163,4 +163,4 @@ Some current outbound requests are affected.
 
 ##### Diagnosis & Mitigation
 
-Follow [NAT Gateway IP Allocation Failures](../troubleshooting#nat-gateway-ip-allocation-failures) section.
+Follow [NAT Gateway IP Allocation Failures](./troubleshooting#nat-gateway-ip-allocation-failures) section.

@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-Open [Grafana](../app-monitoring) for your environment:
+Open [Grafana](./app-monitoring) for your environment:
 ```bash
 coreclt env open <env> grafana
 ```

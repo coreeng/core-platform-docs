@@ -19,7 +19,7 @@ gke-sandbox-gcp-sandbox-gcp-pool-18d01f3c-xhd8   174m         9%     2047Mi     
 If the node cpu/memory usage is high, it's possible the container runtime is struggling to find enough resources to be able to run the container.
 
 ### Resolution
-Ensure that your pod has [cpu/memory requests set](../resources). This will allow the kube scheduler to to place your pods on better balanced nodes.
+Ensure that your pod has [cpu/memory requests set](./resources). This will allow the kube scheduler to to place your pods on better balanced nodes.
 
 ## P2P GCP Auth Fail
 

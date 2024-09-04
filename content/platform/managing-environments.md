@@ -139,7 +139,7 @@ gcloud iap oauth-brands create --application_title="Core Platform" --support_ema
 
 #### DNS Delegation
 
-See [DNS Delegation](../dns) and [Identity Provider Login](../internal-services)
+See [DNS Delegation](./dns) and [Identity Provider Login](./internal-services)
 
 
 

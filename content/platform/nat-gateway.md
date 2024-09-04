@@ -172,6 +172,6 @@ in [Switch assignment method](https://cloud.google.com/nat/docs/ports-and-addres
 ### Troubleshooting
 
 For troubleshooting Platform NAT Gateway see
-Follow [NAT Gateway IP Allocation Failures](../troubleshooting#nat-gateway-ip-allocation-failures) section.
+Follow [NAT Gateway IP Allocation Failures](./troubleshooting#nat-gateway-ip-allocation-failures) section.
 For more generic information on common issues and how to solve them with Cloud NAT
 see [Troubleshooting guide](https://cloud.google.com/nat/docs/troubleshooting)

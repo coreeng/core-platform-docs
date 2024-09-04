@@ -10,7 +10,7 @@ Spot instances are not recommended for running workloads that are not fault tole
 {{% /notice %}}
 
 {{% notice note %}}
-Spot works well if you need to cut down costs for your clusters. See [minimising costs](../../minimise-costs).
+Spot works well if you need to cut down costs for your clusters. See [minimising costs](../minimise-costs).
 {{% /notice %}}
 
 

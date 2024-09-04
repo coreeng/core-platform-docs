@@ -6,7 +6,7 @@ pre = ""
 +++
 
 {{% notice note %}}
-Make sure that [resource requests](../resources) are defined for the application. Autoscalers use them as a base-line to calculate utilization.
+Make sure that [resource requests](./resources) are defined for the application. Autoscalers use them as a base-line to calculate utilization.
 {{% /notice %}}
 
 Applications are scaled vertically or horizontally to be able to handle the increasing load. 
@@ -114,15 +114,15 @@ We choose which autoscaling mechanism to use:
 - To handle traffic spikes with a stateless app we should consider using HPA. 
 - We choose VPA for stateful long-running homogenous workloads. 
 
-We prepare [NFT](../../p2p/fast-feedback/p2p-nft) scenarios to validate that the application meets the requirements for the load. 
+We prepare [NFT](../p2p/fast-feedback/p2p-nft) scenarios to validate that the application meets the requirements for the load. 
 We need to repeatedly run the tests to adjust the resource requests and fine-tune the thresholds to handle the required traffic patterns.
 
 The following is a list of recommendations that can be applied to improve the results of the test:
 
 - Ensure the load generator (e.g. K6) have enough resources and connections to generate the load.
-- If Platform Ingress is a bottleneck then ask Platform Operators to check [Traefik resources and autoscaling configuration](../../platform/platform-ingress/#autoscaling).
-- If pods are stuck in Pending state then ask Platform Operators to check [Cluster Autoscaling configuration](../../platform/cluster-autoscaling/) to make sure it has enough resources.
-- If pods are stuck in Pending state, slowing down the autoscaling, then you may need to over-provision resources. Ask Platform Operators to check [Cluster Overprovisioning configuration](../../platform/cluster-autoscaling/#cluster-overprovisioning).
+- If Platform Ingress is a bottleneck then ask Platform Operators to check [Traefik resources and autoscaling configuration](../platform/platform-ingress#autoscaling).
+- If pods are stuck in Pending state then ask Platform Operators to check [Cluster Autoscaling configuration](../platform/cluster-autoscaling) to make sure it has enough resources.
+- If pods are stuck in Pending state, slowing down the autoscaling, then you may need to over-provision resources. Ask Platform Operators to check [Cluster Overprovisioning configuration](../platform/cluster-autoscaling#cluster-overprovisioning).
 - If the app is dying due to OOM, you may need to give more memory and/or increase the minimum number of replicas.
 - If the app is not responding to readiness/liveness probes, you need to give more CPU and/or increase the minimum number of replicas.
 - If the app is not scaling-up fast enough, then you may need to lower the thresholds for resource utilization and/or adjust scaling behavior (see HPA configuration).
@@ -138,4 +138,4 @@ There are several dashboards that can help you better understand the behavior of
 - Reference App Load Testing
 
 
-Refer to [Application Monitoring](../app-monitoring) and [Platform Monitoring](../../platform/platform-monitoring) sections for more details.
+Refer to [Application Monitoring](./app-monitoring) and [Platform Monitoring](../platform/platform-monitoring) sections for more details.

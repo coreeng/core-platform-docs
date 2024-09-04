@@ -26,7 +26,7 @@ Out of the box we will provide a subdomain of `cecg.io`. If they have their own 
 
 The platform-ingress module install a Gateway object that creates a GCP load balancer.  External DNS picks that up and registers them with A records with the LB IP. All other domains are registered as CNAME records pointing to the A records.
 
-If they use our `cecg.io` domain, there is an additional step that needs to be done for DNS Delegation. Since we own the domain, when trying to resolve anytihing '*.cecg.io` it will hit our DNS managed zones. We can however delegate the resolution of certain subdomains to specific. See [DNS](../dns).
+If they use our `cecg.io` domain, there is an additional step that needs to be done for DNS Delegation. Since we own the domain, when trying to resolve anytihing '*.cecg.io` it will hit our DNS managed zones. We can however delegate the resolution of certain subdomains to specific. See [DNS](./dns).
 
 
 ### DNS delegation
