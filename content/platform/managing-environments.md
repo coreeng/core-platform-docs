@@ -13,22 +13,6 @@ The platform by default comes with a single organisation made up of three enviro
 * **dev**: Used for all development enviornments, functional testing, integrated testing, performance testing
 * **prod**: Production
 
-## platform-cli
-
-Your Environments Repo contains a script for entering the platform docker image:
-Authenticate with gcloud then:
-
-```
-./dplatform-cli
-Usage:
-  ./dplatform-cli environment_name [release_version]
-
-Valid environments:
-  gcp-pre-dev
-  gcp-dev
-  gcp-prod
-```
-
 ## Gcp init
 
 The `gcp-init` tool comes bundled inside the platform docker image. From inside the image:
