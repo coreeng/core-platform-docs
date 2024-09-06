@@ -5,33 +5,29 @@ chapter = false
 pre = ""
 +++
 
-Core Platform is your ultimate all-in-one developer platform designed to turbocharge your software development journey from Day 1. The Core Platform creates self-service infrastructure for application development and deployment based on Kubernetes in a cloud platform.
+Core Platform is your ultimate all-in-one developer platform designed to turbocharge your software development journey from Day 1 
 
-Create a new application from a blueprint and have provisioned infrastructure in all existing environments, and a full path to production SDLC with CI/CD pipelines __in minutes__.
-
-The core platform infrastructure is elastic, expanding to meet your requirements and reducing to minimise costs with no work required from infrastructure teams.
-
-The core platform is multi-tenanted, which allows for the most efficient possible use of resources, minimising costs, with no action required to increase the number of users, apps and teams/departments. The core platform extends Kubernetes multi-tenant features allowing safe segregation across teams/departments and engineers/apps.
-
-![Overview](core-platform-overview.drawio.png)
-
-For future features see [Roadmap](roadmap.md)
+![overview.png](overview.png)
 
 See capabilities relevant to your role:
-* [Application Developer](#application-developer-capabilities)
 * [Platform Operator](#platform-operator-capabilities)
+* [Application Developer](#application-developer-capabilities)
+
+## Platform Operator Capabilities
+
+### Full Infrastructure Environments
+
+![img.png](envs.png)
+
+### Fully Private Infrastructure
+
+* All infrastructure is private with CLI for creating a encrypted tunnel to connect to from workstations
+
 
 ## Application Developer Capabilities
 
-Developer capabilities are self-service - no need to coordinate with infrastructure teams.
-
-### Full Application Environments
-
-* Self-service request for a full set of environments for a new service
-* Get additional environments for an existing service e.g. to do additional testing
-
-See:
-* [Tenancy](/app/tenancy/) for how to onboard onto the platform and get environments
+A developer capability is one that engineers can do for themselves without the need
+to coordinate with infrastructure teams.
 
 ### Pipelines
 
@@ -44,6 +40,15 @@ See:
 * [Path to Production](/p2p/) for reference on each stage of the path to production 
 * [New application](/app/new-app/) for **automatic** repo, pipeline and app templating
 * [Repo structure](/app/repo-structure/) for how to layout your repo 
+ 
+
+### Full Application Environments
+
+* Self-service request for a full set of environments for a new service
+* Get additional environments for an existing service e.g. to do additional testing
+
+See:
+* [Tenancy](/app/tenancy/) for how to onboard onto the platform and get environments
 
 ### OCI Registries as a service
 
@@ -51,7 +56,7 @@ See:
 
 ### Exposing a service (TLS)
 
-* Self-service ability to expose services to the Internet with automatic TLS.
+8 Self-service ability to expose services to the Internet with automatic TLS.
 
 ### Application blueprints
 
@@ -64,8 +69,8 @@ See:
 ### Aggregated Monitoring
 
 * Logs automatically collected for all your application instances and searchable in once place 
-* Key performance metrics collected out of the box and the ability to define custom metrics
-* Ability to deploy a per-tenant monitoring stack
+* Key performance metrics collected out of the box and the ability to define custom metrics collection
+* Ability to deploy a per tenant monitoring stack
 
 See:
 * [Application Monitoring](/app/app-monitoring)
@@ -92,15 +97,5 @@ See:
 
 See: 
 * [Accessing Cloud Infrastructure](/app/accessing-cloud-infra/)
-* [Accessing Private Service Access](/app/accessing-psa/)
-
-## Platform Operator Capabilities
-
-### Full Infrastructure Environments
-
-![img.png](envs.png)
-
-### Fully Private Infrastructure
-
-* All infrastructure is private with CLI for creating a encrypted tunnel to connect to from workstations
+* [Accessing Cloud Infrastructure](/app/accessing-psa/)
 
