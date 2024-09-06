@@ -56,7 +56,7 @@ See:
 
 ### Exposing a service (TLS)
 
-8 Self-service ability to expose services to the Internet with automatic TLS.
+* Self-service ability to expose services to the Internet with automatic TLS.
 
 ### Application blueprints
 
