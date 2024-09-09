@@ -10,9 +10,8 @@ The Core Platform is a full developer platform, usable out of the box, on GCP (s
 The big project miletones were:
 * **Inception**: initial agreement with initial beta customer to adopt the platform as we build it
 * **Dev Onboarding**: unblocking developers with environments and pipeliens
-* **Full Onbaording**: guarantee that environments will be long lived and not rebuilt
-* **Production Ready**: ready for production worklods, CECG migrates its first production app onto its insnce 
-* **Production Ready**: ready for production worklods, CECG migrates its first production app onto its insnce
+* **Full Onbaording**: guarantee that environments will be long-lived and not rebuilt
+* **Production Ready**: ready for production worklods, CECG migrates its first production app onto its instance
 * **Devex**: after production ready, focus on onboarding experience and operations with a new CLI
 
 ![timeline.png](timeline.png)
