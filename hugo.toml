@@ -15,8 +15,7 @@ titleSeparator = "-"
 [params]
   themeVariant = "cecg"
   customMermaidURL = "https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"
-  # if editURL is set, an "Edit" button will be rendered on each page linking to the github source
-#  editURL = "https://github.com/coreeng/core-platform-docs/tree/main/content/"
+  editURL = "https://github.com/coreeng/core-platform-docs/tree/main/content/"
   disableLandingPageButton = true
   alwaysopen = false
   collapsibleMenu = true

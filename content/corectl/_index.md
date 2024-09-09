@@ -1,6 +1,8 @@
 +++
+title = "Core Platform CLI"
+weight = 20
 chapter = false
-pre = "Core Platform CLI"
+pre = ""
 +++
 
 ## Core Platform CLI: corectl
