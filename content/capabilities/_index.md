@@ -17,7 +17,10 @@ See capabilities relevant to your role:
 
 ### Full Infrastructure Environments
 
-![img.png](envs.png)
+A full set of environments to reliably deploy new versions of the platform without affecting
+application developers (tenants).
+
+![Envs](envs.png)
 
 ### Fully Private Infrastructure
 
