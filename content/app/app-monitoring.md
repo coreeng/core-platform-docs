@@ -256,7 +256,7 @@ spec:
 To create Grafana plugins for dashboards or datasources, you need to specify an additional field, `plugins`.
 
 {{% notice important %}}
-Due to an open bug in the Grafana Operator, when creating Datasources/Dashboards CRs with plugins, you need to modify (e.g., change annotations) all applied CRs you created in order to trigger the reconciliation loop with a new hash and update Grafana immediately with all changes. Otherwise, you need to wait for the resyncPeriod you set on the CRs.
+Due to an open bug in the Grafana Operator, when creating/updating/deleting Datasources/Dashboards CRs **with plugins**, you need to modify (e.g., change annotations) all applied CRs you created in order to trigger the reconciliation loop with a new hash and update Grafana immediately with all changes. Otherwise, you need to wait for the resyncPeriod you set on the CRs.
 
 This is a temporary workaround until the bug is fixed.
 
