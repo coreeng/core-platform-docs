@@ -22,7 +22,7 @@ based on the requirements of the current beta customers.
 ### Policy: Encode your standards into the platform
 
 * Industry best practices encoded into the platform e.g. Docker best standards
-* Ability for you to encode your own cusetom standards e.g. No services exposed over HTTP
+* Ability for you to encode your own custom standards e.g. No services exposed over HTTP
 
 ### Transparent Encryption
 
