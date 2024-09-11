@@ -86,7 +86,11 @@ helm repo update
 
 # Install the chart
 helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack --set tenantName={{ your-tenant-name }}
+```
 
+To upgrade installed monitoring stack, run the following command:
+
+```bash
 #Upgrade installed chart
 helm -n {{ target-ns }} upgrade monitoring-stack coreeng/monitoring-stack --set tenantName={{ your-tenant-name }}
 ```
@@ -145,9 +149,23 @@ helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack \
     --set internalServicesDomain={{ internal-services-domain }} \
     --set prometheus.ingress.enabled=true \
     --set grafana.ingress.enabled=true
-
-#Upgrade installed chart
 ```
+
+To upgrade installed monitoring stack, run the following command:
+
+```bash
+#Upgrade installed chart
+helm -n {{ target-ns }} upgrade monitoring-stack coreeng/monitoring-stack \
+    --set tenantName={{ your-tenant-name }} \
+    --set internalServicesDomain={{ internal-services-domain }} \
+    --set prometheus.ingress.enabled=true \
+    --set grafana.ingress.enabled=true
+```
+
+{{% notice note %}}
+ `your-tenant-name` - name of the tenancy to be monitored. Prometheus will look for PodMonitors/ServiceMonitors in
+  subnamespaces of this tenant.
+{{% /notice %}}
 
 
 {{% notice note %}}
@@ -211,14 +229,14 @@ spec:
 ```
 
 
-## Creating Grafana Datasources
+## Using Grafana Datasources
 
 To create Grafana Datasources you have to create `GrafanaDatasource` CR.
 If you create it directly with UI, the changes will not be persisted for long,
-so it's advised to use Grafana UI for designing your Dashboard and then export it to CR.
+so it's advised to use Grafana UI for designing your Datasource and then export it to CR.
 
 When creating GrafanaDatasource, you have to specify Grafana instance selector, so Grafana Operator can inject your
-dashboard in Grafana instance:
+datasource in Grafana instance:
 
 ```yaml
 apiVersion: grafana.integreatly.org/v1beta1
