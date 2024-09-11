@@ -23,7 +23,7 @@ Ensure that your pod has [cpu/memory requests set](./resources). This will allow
 
 ## P2P GCP Auth Fail
 
-I've got a new app and when the P2P tries to authenticate with Google Cloud it fails with an error like this:
+I've got a new app, and when the P2P tries to authenticate with Google Cloud, it fails with an error like this:
 
 ```
 Error: google-github-actions/auth failed with: retry function failed after 4 attempts: failed to generate Google Cloud federated token for projects/{{ project-number }}/locations/global/workloadIdentityPools/p2p-knowledge-platform/providers/p2p-knowledge-platform: (400) {"error":"invalid_target","error_description":"The target service indicated by the \"audience\" parameters is invalid. This might either be because the pool or provider is disabled or deleted or because it doesn't exist."}
@@ -31,41 +31,56 @@ Error: google-github-actions/auth failed with: retry function failed after 4 att
 
 This is likely as the tenant definition has either not been deployed or doesn't contain the GitHub repo. Without this the GitGub Action does not have permission to authenticate with GCP.
 
-Helpful commands to validate (may need a platform admin to run):
+To find the problem with your tenant deployment, you can either:
+- use ArgoCD UI by accessing `https://argocd.{{ internalServices.domain }}` 
+- `kubectl` CLI (may need a platform admin to run):
 
+> **Note:** all of this is internal implementation details of the platform and may change in the future.
+
+### Check tenant deployment status
+> Does the tenant exist? Is it healthy? Is it synchedd?
+
+With `kubectl`:
 ```
 kubectl get -n argocd apps <tenant-name>
 NAME                 SYNC STATUS   HEALTH STATUS
 <tenant-name>        Synced        Healthy
 ```
 
-Does the tenant exist? Is it healthy? Is it synchedd?
+With the ArgoCD UI:
+{{< figure src="/images/app/troubleshooting/check-tenant-deployment-status.png"
+    title="Check tenant deployment status" >}}
 
-If not:
+### If tenant is not synched/healthy, what is the reason?
 
+With `kubectl`:
 ```
 kubectl -n argocd describe app <tenant-name>
 ```
-
 Why is it not synched/healthy will be in the output.
 
+With the ArgoCD UI:
+{{< figure src="/images/app/troubleshooting/tenant-degraded-components.png" title="Tenant degraded components" >}}
 
-Does the tenant have the right repo?
 
+### Does the tenant have the right repo?
+
+With `kubectl`:
 ```
-
 kubectl get -n argocd apps <tenant-name> -o yaml
 ```
 
-Should contain output which includes:
-
+It should contain output which includes:
 ```
  - name: tenant.repos
    value: '["https://github.com/{{ github-org }}/{{ github-repo }}"]'
 ```
 
-If you've added the repo to the tenant but it isn't shown here then likely the new tenant definition hasn't been deployed to the environment.
+With the ArgoCD UI (App Details > Parameters):
+{{< figure src="/images/app/troubleshooting/tenant-repos.png" title="Tenant repos" >}}
 
+If you've added the repo to the tenant,
+but it isn't shown here, then likely the new tenant definition hasn't been deployed to the environment.
 
 ## P2P Kubeconfig can not setup tunnel
 
