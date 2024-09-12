@@ -82,4 +82,3 @@ The Core Platform is now ready for production.
 
 * Multi tenent access to secrets in GCP Secret Manager 
 * Static NAT IPs
-* 
