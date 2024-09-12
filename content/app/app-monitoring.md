@@ -229,7 +229,7 @@ spec:
 ```
 
 
-## Using Grafana Datasources
+## Creating Grafana Datasources
 
 To create Grafana Datasources you have to create `GrafanaDatasource` CR.
 If you create it directly with UI, the changes will not be persisted for long,
@@ -269,7 +269,7 @@ spec:
 ```
 
 
-## Creating Grafana Plugins for Dashboards/Datasources
+## Using Grafana Plugins for Dashboards/Datasources
 
 To create Grafana plugins for dashboards or datasources, you need to specify an additional field, `plugins`.
 
