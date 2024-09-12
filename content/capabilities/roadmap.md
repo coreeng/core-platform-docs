@@ -10,6 +10,11 @@ based on the requirements of the current beta customers.
 
 ## 2024 Q4
 
+### Cost Allocation
+
+* See the cost of the base platform
+* Cost break down per tenant (application)
+
 ### Developer Portal
 
 * Onboard and discover capabilities
