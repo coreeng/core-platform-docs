@@ -76,6 +76,7 @@ Examples of Application-Specific Metrics:
 
 You should have deployed monitoring stack for your tenant.
 This monitoring stack consists of preconfigured Grafana and Prometheus instances.
+
 To install monitoring stack, run the following command:
 
 ```bash
@@ -87,9 +88,18 @@ helm repo update
 helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack --set tenantName={{ your-tenant-name }}
 ```
 
-Here:
-- `your-tenant-name` - name of the tenancy to be monitored. Prometheus will look for PodMonitors/ServiceMonitors in
+To upgrade installed monitoring stack, run the following command:
+
+```bash
+#Upgrade installed chart
+helm -n {{ target-ns }} upgrade monitoring-stack coreeng/monitoring-stack --set tenantName={{ your-tenant-name }}
+```
+
+{{% notice note %}}
+ `your-tenant-name` - name of the tenancy to be monitored. Prometheus will look for PodMonitors/ServiceMonitors in
   subnamespaces of this tenant.
+{{% /notice %}}
+
 
 
 ## Monitoring Application
@@ -133,6 +143,7 @@ To enable ingress for monitoring services,
 you have to set the respective values during the installation of the monitoring-stack chart.
 It should look like this:
 ```bash
+#Instlal helm chart
 helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack \
     --set tenantName={{ your-tenant-name }} \
     --set internalServicesDomain={{ internal-services-domain }} \
@@ -140,12 +151,29 @@ helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack \
     --set grafana.ingress.enabled=true
 ```
 
-Here:
+To upgrade installed monitoring stack, run the following command:
 
-- `internal-services-domain` - domain of the internal services: `internal_services.domain`
+```bash
+#Upgrade installed chart
+helm -n {{ target-ns }} upgrade monitoring-stack coreeng/monitoring-stack \
+    --set tenantName={{ your-tenant-name }} \
+    --set internalServicesDomain={{ internal-services-domain }} \
+    --set prometheus.ingress.enabled=true \
+    --set grafana.ingress.enabled=true
+```
 
-Grafana should be accessible by the URL: `{{ your-tenant-name }}-grafana.{{ internal-services-domain }}`
-Prometheus should be accessible by the URL: `{{ your-tenant-name }}-prometheus.{{ internal-services-domain }}`
+{{% notice note %}}
+ `your-tenant-name` - name of the tenancy to be monitored. Prometheus will look for PodMonitors/ServiceMonitors in
+  subnamespaces of this tenant.
+{{% /notice %}}
+
+
+{{% notice note %}}
+`internal-services-domain` - domain of the internal services: `internal_services.domain`
+{{% /notice %}}
+
++ Grafana should be accessible by the URL: `{{ your-tenant-name }}-grafana.{{ internal-services-domain }}`
++ Prometheus should be accessible by the URL: `{{ your-tenant-name }}-prometheus.{{ internal-services-domain }}`
 
 ### Through port forward
 
@@ -171,12 +199,135 @@ When creating GrafanaDashboard, you have to specify Grafana instance selector, s
 dashboard in Grafana instance:
 
 ```yaml
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: my-grafana-dashboard
+spec:
   instanceSelector:
     matchLabels:
       grafana: grafana-{{ your-tenant-name }}
+  .
+  .
+  .
 ```
 
 In addition, in case your GrafanaDashboard is not in the same namespace as your monitoring stack, you have to specify an additional field:
 ```yaml
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: my-grafana-dashboard
+spec:
+  instanceSelector:
+    matchLabels:
+      grafana: grafana-{{ your-tenant-name }}
   allowCrossNamespaceImport: "true"
+  .
+  .
+  .
+```
+
+
+## Creating Grafana Datasources
+
+To create Grafana Datasources you have to create `GrafanaDatasource` CR.
+If you create it directly with UI, the changes will not be persisted for long,
+so it's advised to use Grafana UI for designing your Datasource and then export it to CR.
+
+When creating GrafanaDatasource, you have to specify Grafana instance selector, so Grafana Operator can inject your
+datasource in Grafana instance:
+
+```yaml
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: my-datasource
+spec:
+  instanceSelector:
+    matchLabels:
+      grafana: grafana-{{ your-tenant-name }}
+  .
+  .
+  .
+```
+
+In addition, in case your GrafanaDatasource is not in the same namespace as your monitoring stack, you have to specify an additional field:
+```yaml
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: my-datasource
+spec:
+  instanceSelector:
+    matchLabels:
+      grafana: grafana-{{ your-tenant-name }}
+  allowCrossNamespaceImport: "true"
+  .
+  .
+  .
+```
+
+
+## Using Grafana Plugins for Dashboards/Datasources
+
+To create Grafana plugins for dashboards or datasources, you need to specify an additional field, `plugins`.
+
+{{% notice important %}}
+Due to an open bug in the Grafana Operator, when creating/updating/deleting Datasources/Dashboards CRs **with plugins**, you need to modify (e.g., change annotations) all applied CRs you created in order to trigger the reconciliation loop with a new hash and update Grafana immediately with all changes. Otherwise, you need to wait for the resyncPeriod you set on the CRs.
+
+This is a temporary workaround until the bug is fixed.
+
+{{% /notice %}}
+
+Here is an example of a plugin for a datasource:
+
+```yaml
+kind: GrafanaDatasource
+metadata:
+  name: my-questdb
+spec:
+  instanceSelector:
+    matchLabels:
+      grafana: grafana-{{ your-tenant-name }}
+  plugins:
+    - name: questdb-questdb-datasource
+      version: 0.1.4
+  datasource:
+    name: questdb
+    access: proxy
+    type: questdb-questdb-datasource
+    database: qdb
+    url: my-questdb-headless.questdb.svc:8812
+    user: admin
+    jsonData:
+      sslmode: disable
+      maxOpenConns: 100
+      maxIdleConns: 100
+      connMaxLifetime: 14400
+    secureJsonData:
+      password: quest
+
+```
+
+Here is an example of a plugin for dashboards:
+
+```yaml
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: keycloak-dashboard
+spec:
+  instanceSelector:
+    matchLabels:
+      grafana: grafana-{{ your-tenant-name }}
+  plugins:
+    - name: grafana-piechart-panel
+      version: 1.3.9
+  json: >
+  {
+    .
+    .
+    .
+  }
 ```
