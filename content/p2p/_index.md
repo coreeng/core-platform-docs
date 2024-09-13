@@ -17,6 +17,8 @@ All your custom logic should be added to your Makefile rather than directly in G
 * It is *light touch* in that it doesn't mandate many steps, just the most important types of testing
   * You can use whatever tools you want from each step
 
+![p2p.png](p2p.png)
+
 ## Quality Gates
 
 The P2P consists of the following quality gates:
