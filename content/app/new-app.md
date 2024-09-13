@@ -63,7 +63,11 @@ can be used for showcasing or integration testing.
 
 Next [learn more about how to implement the P2P](../../p2p)
 
-### Manually raising a PR
+## Manually raising a PR
+
+{{% notice note %}}
+`corectl` does this for you. Only follow this section if you want to manually interact with the environments repo.
+{{% /notice %}}
 
 If you don't want to use `corectl` you can raise PRs against your environments repo.
 

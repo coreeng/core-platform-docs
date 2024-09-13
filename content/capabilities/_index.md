@@ -13,24 +13,27 @@ See capabilities relevant to your role:
 * [Platform Operator](#platform-operator-capabilities)
 * [Application Developer](#application-developer-capabilities)
 
-## Platform Operator Capabilities
-
-### Full Infrastructure Environments
-
-A full set of environments to reliably deploy new versions of the platform without affecting
-application developers (tenants).
-
-![Envs](envs.png)
-
-### Fully Private Infrastructure
-
-* All infrastructure is private with CLI for creating a encrypted tunnel to connect to from workstations
-
 
 ## Application Developer Capabilities
 
 A developer capability is one that engineers can do for themselves without the need
 to coordinate with infrastructure teams.
+
+* [Environments as a service](#full-application-environments)
+* [Pipelines as a service](#pipelines)
+* [Registries as a service](#oci-registries-as-a-service)
+* [Application Blue Prints](#application-blueprints)
+* [Aggregated Monitoring](#aggregated-monitoring)
+* [Hosted Dashboards](#hosted-dashboards)
+* [Integrate with Cloud Infrastructure](#access-infrastructure)
+
+### Full Application Environments
+
+* Self-service request for a full set of environments for a new service
+* Get additional environments for an existing service e.g. to do additional testing
+
+See:
+* [Tenancy](/app/tenancy/) for how to onboard onto the platform and get environments
 
 ### Pipelines
 
@@ -44,15 +47,6 @@ See:
 * [New application](/app/new-app/) for **automatic** repo, pipeline and app templating
 * [Repo structure](/app/repo-structure/) for how to layout your repo 
  
-
-### Full Application Environments
-
-* Self-service request for a full set of environments for a new service
-* Get additional environments for an existing service e.g. to do additional testing
-
-See:
-* [Tenancy](/app/tenancy/) for how to onboard onto the platform and get environments
-
 ### OCI Registries as a service
 
 * Environments come with highly available registries local to each environment
@@ -100,4 +94,17 @@ See:
 
 See: 
 * [Accessing Cloud Infrastructure](/app/accessing-cloud-infra/)
+
+## Platform Operator Capabilities
+
+### Full Infrastructure Environments
+
+A full set of environments to reliably deploy new versions of the platform without affecting
+application developers (tenants).
+
+![Envs](envs.png)
+
+### Fully Private Infrastructure
+
+* All infrastructure is private with CLI for creating a encrypted tunnel to connect to from workstations
 

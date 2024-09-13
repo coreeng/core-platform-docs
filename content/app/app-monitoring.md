@@ -5,8 +5,6 @@ chapter = false
 pre = ""
 +++
 
-# Generic Metrics
-
 ## Accessing Grafana
 
 ### Via internal services
