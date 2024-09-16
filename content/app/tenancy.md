@@ -30,12 +30,7 @@ Examples:
 corectl tenant create
 ```
 
-It will prompt you a series of questions about a new tenant. 
-Once you fill the form, `corectl`
-will create a PR in the Environments Repo with a new file for the tenancy.
-Once the PR is merged, a configuration for the new tenant will be provisioned automatically.
-
-You'll be prompted for:
+You'll be prompted for the following information about your new tenant:
 
 * `name` - Name of your tenancy. Must be the same as your filename.
 * `parent` - Name of the parent tenant or `root`. Note: `root` tenant is created implicitly.
@@ -46,10 +41,18 @@ You'll be prompted for:
 * `adminGroup` - will get permission to do all actions in the created namespaces
 * `readonlyGroup` - will get read-only access to the created namespaces
 
+Once you fill the form, `corectl` will create a PR in the Environments Repo with a new file for the tenancy.
+Once the PR is merged, a configuration for the new tenant will be provisioned automatically.
+
+In order to see your new tenancy in `corectl` you will need to run
+
+```shell
+corectl config update
+```
+
 {{% notice note %}}
 Groups need to be in the `gke-security-groups` group!
 {{% /notice %}}
-
 
 ## Accessing your namespaces
 
