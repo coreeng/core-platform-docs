@@ -57,7 +57,7 @@ cluster:
 ## Node Imbalance
 
 There are times where a node can be throttled e.g. 96% memory usage when other nodes have more than enough capacity to
-accomodate extra workloads.
+accommodate extra workloads.
 
 It is highly likely that pods running on that node do not have memory/cpu requests set. This causes kube scheduler to
 place significant load on one node as it uses the requests to target what nodes pods should be placed on.
@@ -65,7 +65,7 @@ place significant load on one node as it uses the requests to target what nodes 
 ### Resolution
 
 Set [resource requests](../app/resources) for your application workloads to allow the kube scheduler better place
-your pods on nodes with appropiate capacity. For example if you request 2Gi memory for your pod, the scheduler will
+your pods on nodes with appropriate capacity. For example if you request 2Gi memory for your pod, the scheduler will
 guarantee finding a node that has that capacity.
 
 ## Deployment Failures
@@ -183,7 +183,7 @@ kubectl describe gateway traefik -n platform-ingress
             3. correlate this information
                with `Network Received by Namespace` graph
                in `platform-monitoring/Kubernetes/Views/Global` dashboard on Grafana. To find namespace that uses most
-               network bandwidth, then check which pod belongs to that namespace in `Network Bandwith` graph in
+               network bandwidth, then check which pod belongs to that namespace in `Network Bandwidth` graph in
                `platform-monitoring/Kubernetes/Views/Pods`.
         2. [Optional] Enable NAT Gateway logging if not already enabled. Logging provides more detailed information on
            existing connections. To enable logs update `network.publicNatGateway.logging` value to one of `ERRORS_ONLY`,

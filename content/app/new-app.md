@@ -10,7 +10,7 @@ pre = ""
 The Core Platform with a single command will configure:
 
 * A new repository
-* A template application demonstrating full continous delivery:
+* A template application demonstrating full continuous delivery:
   * Versioning 
   * Functional testing
   * Non-functional testing

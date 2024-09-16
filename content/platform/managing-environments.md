@@ -10,7 +10,7 @@ pre = ""
 The platform by default comes with a single organisation made up of three environments:
 
 * **pre-dev**: Stage new versions of the platform before releasing to application engineers
-* **dev**: Used for all development enviornments, functional testing, integrated testing, performance testing
+* **dev**: Used for all development environments, functional testing, integrated testing, performance testing
 * **prod**: Production
 
 ## Gcp init

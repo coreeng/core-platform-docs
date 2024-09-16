@@ -141,7 +141,7 @@ To enable ingress for monitoring services,
 you have to set the respective values during the installation of the monitoring-stack chart.
 It should look like this:
 ```bash
-#Instlal helm chart
+#Install helm chart
 helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack \
     --set tenantName={{ your-tenant-name }} \
     --set internalServicesDomain={{ internal-services-domain }} \

@@ -68,7 +68,7 @@ We can also affect how fast the application scales up by modifying [scaling beha
 ### Vertical Pod Autoscaler (VPA)
 
 Automatically adjusts the amount of CPU and memory requested by pods.
-VPA provides recommendations for resource usage over time, it works best with long-running homogenous workloads.
+VPA provides recommendations for resource usage over time, it works best with long-running homogeneous workloads.
 It can both down-scale pods that are over-requesting resources, and also up-scale pods that are under-requesting resources based on historical usage.
 
 There are four modes in which VPA operates: `Auto`, `Recreate`, `Initial`, `Off`. Refer to [VPA docs](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#quick-start) for more details.
@@ -112,7 +112,7 @@ For example, we require:
 
 We choose which autoscaling mechanism to use:
 - To handle traffic spikes with a stateless app we should consider using HPA. 
-- We choose VPA for stateful long-running homogenous workloads. 
+- We choose VPA for stateful long-running homogeneous workloads. 
 
 We prepare [NFT](../p2p/fast-feedback/p2p-nft) scenarios to validate that the application meets the requirements for the load. 
 We need to repeatedly run the tests to adjust the resource requests and fine-tune the thresholds to handle the required traffic patterns.

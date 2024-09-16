@@ -39,4 +39,4 @@ The important parts are:
 
 Your service will now be available over the Internet over TLS.
 
-To have a deeper understanding of how the Plaform Ingress feature is designed, check the [Platform Ingress Overview.](../platform/platform-ingress)
+To have a deeper understanding of how the Platform Ingress feature is designed, check the [Platform Ingress Overview.](../platform/platform-ingress)

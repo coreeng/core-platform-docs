@@ -6,7 +6,7 @@ pre = ""
 +++
 
 {{% notice warning %}}
-Horizontal Pod Autoscaler and Veritical Pod Autoscaler should not be used together to scale the same metric. See [using HPA & VPA in conjunction](../app-autoscaling#combining-hpa--vpa)
+Horizontal Pod Autoscaler and Vertical Pod Autoscaler should not be used together to scale the same metric. See [using HPA & VPA in conjunction](../app-autoscaling#combining-hpa--vpa)
 {{% /notice %}}
 
 For more details on how autoscaling works see [Autoscaling in depth](../app-autoscaling).

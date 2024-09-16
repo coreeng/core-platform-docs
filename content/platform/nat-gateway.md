@@ -33,7 +33,7 @@ use [Manual NAT IP address assignment with dynamic port allocation](https://clou
 ```
 network:
   publicNatGateway: # [Optional] configuration for the NAT Gateway
-    ipCount: 2 # [Required] numer of IP addresses to allocate
+    ipCount: 2 # [Required] number of IP addresses to allocate
     logging: ERRORS_ONLY # [Optional] enable logging, available values: ERRORS_ONLY,TRANSLATIONS_ONLY,ALL, when not provided no logging is enabled, we recommend setting to ERRORS_ONLY
     minPortsPerVm: 64 # [Optional] min number of ports per VM, when not provided default (64) is used
     maxPortsPerVm: 128 # [Optional] max number of port per VM, when not provided default (32,768) is used

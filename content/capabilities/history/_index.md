@@ -9,7 +9,7 @@ The Core Platform is a full developer platform, usable out of the box, on GCP (s
 
 The big project miletones were:
 * **Inception**: initial agreement with initial beta customer to adopt the platform as we build it
-* **Dev Onboarding**: unblocking developers with environments and pipeliens
+* **Dev Onboarding**: unblocking developers with environments and pipelines
 * **Full Onbaording**: guarantee that environments will be long-lived and not rebuilt
 * **Production Ready**: ready for production worklods, CECG migrates its first production app onto its instance
 * **Devex**: after production ready, focus on onboarding experience and operations with a new CLI
@@ -20,7 +20,7 @@ The big project miletones were:
 
 The product was kicked off in August 2023. With the following milestones set based on:
 * Unblocking app developers as soon as possible < 2 weeks
-* Unblock app develoeprs doing a full path to production < 3 months
+* Unblock app developers doing a full path to production < 3 months
 * Prove out the operations model of a user platform operator deploying new versions
 * Final set of long-lived environments in < 3 months
 * Production ready in < 6 months
@@ -57,7 +57,7 @@ By the end of the quarter the following milestones were met:
 
 The following milestones were met on time:
 * All Environments Not-Live (PreDev, Dev, Prod), including but not limited to:
-  * [Cloud Access](/app/accessing-cloud-infra/) - the ability for workloads to access cloud workloads outside of the   platform securely without passwrods
+  * [Cloud Access](/app/accessing-cloud-infra/) - the ability for workloads to access cloud workloads outside of the   platform securely without passwords
   * Slack integration for alerts
   * Consolidated Alerting Dashboard
   * Ingress - expose services over TLS

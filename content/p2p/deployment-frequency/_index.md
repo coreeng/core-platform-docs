@@ -15,10 +15,10 @@ Or a hybrid of one of the above e.g. Fast feedback and extended test run right a
 
 ## Right away
 
-Create a single CD.yaml worklfow file in your repo in `./github/workflows` with the following content:
+Create a single CD.yaml workflow file in your repo in `./github/workflows` with the following content:
 
 ```yaml
-name: Continous Deployment
+name: Continuous Deployment
 
 on:
   workflow_dispatch:
