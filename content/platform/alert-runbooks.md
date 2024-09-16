@@ -203,6 +203,8 @@ For example, some of the tenant permissions might be missing.
 ##### Diagnosis & Mitigation
 
 1. Identify the problematic component by checking the ArgoCD UI: https://argocd.{{ internalServices.domain }}
-2. If the resource can't be updated because it's immutable, 
-   you can try to sync it with `Replace` and `Force` options via ArgoCD UI: https://argocd.{{ internalService.domain }}.
+2. If the resource can't be updated because it's immutable,
+   it's most probably a bug and should be fixed by Core Platform team. 
+   But you can try to do a quick fix by syncing it with `Replace` and `Force` options via ArgoCD UI:
+   https://argocd.{{ internalService.domain }}.
    It requires admin access to the ArgoCD UI.
