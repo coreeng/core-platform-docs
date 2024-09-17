@@ -185,7 +185,7 @@ For example, some of the tenant permissions might be missing.
     - If the error is related to environment configuration, fix the configuration.
     - If the errors can be fixed by re-applying the manifests,
       you can do so by running Sync operation for the resource with `Replace` and `Force` options.
-      It requires admin access to the ArgoCD UI.
+      Here is the [How-to](./how-tos/sync-argocd-app) on how to do it.
     - If it doesn't help, contact the Core Platform team.
 
 #### ArgoCDApplicationIsNotSynced
@@ -205,6 +205,5 @@ For example, some of the tenant permissions might be missing.
 1. Identify the problematic component by checking the ArgoCD UI: https://argocd.{{ internalServices.domain }}
 2. If the resource can't be updated because it's immutable,
    it's most probably a bug and should be fixed by Core Platform team. 
-   But you can try to do a quick fix by syncing it with `Replace` and `Force` options via ArgoCD UI:
-   https://argocd.{{ internalService.domain }}.
-   It requires admin access to the ArgoCD UI.
+   But you can try to do a quick fix by syncing it with `Replace` and `Force` options via ArgoCD UI.
+   Here is the [How-to](./how-tos/sync-argocd-app) on how to do it.
