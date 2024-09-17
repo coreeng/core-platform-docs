@@ -7,7 +7,7 @@ pre = ""
 
 The Core Platform is a multi-tenant platform where each tenant gets their own segregated environments and P2P.
 
-If you already have a tenancy you can jump to [new-app](./new-app) to deploy a new application.
+If you already have a tenancy, you can jump to [new-app](./new-app) to deploy a new application.
 
 ## What is a tenant? 
 
@@ -125,3 +125,16 @@ This attachment is unique, you can only attach your project to a single other pr
 {{% /notice %}}
 This means that if you want to have your databases in `gcp-dev` and `gcp-prod` for example, your tenant will need 2 GCP projects to attach to each environment.
 
+## Deleting a tenancy
+
+To delete a tenancy, you have to:
+1. Delete all the child tenancies.
+2. Delete all the subnamespaces with applications of the tenancy.
+3. Delete tenant configuration file related to the tenancy from the Environments Repo and merge the PR with this change.
+
+Once the PR is merged and GitHub pipeline is finished running, the tenancy will be deleted.
+
+{{% notice note %}}
+If the tenant namespace has subnamespaces,
+the platform will be unable to delete the tenant, and all tenant related resources will be left in the cluster.
+{{% /notice %}}
