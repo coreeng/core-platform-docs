@@ -40,7 +40,7 @@ GRANT ALL PRIVILEGES ON `reference-db`.* TO `myfirsttenancy-ca`@`%`;
 This will:
 * Create a user
 * Allow the IP you're connecting from to temporarily access the database
-* Grant all priviledges on the created database to the SA user on all hosts
+* Grant all privileges on the created database to the SA user on all hosts
 
 After this, feel free to delete the `test_user` user, or store its details in your preferred SM.
 

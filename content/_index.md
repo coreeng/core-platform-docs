@@ -19,7 +19,7 @@ your environments.
 Start by configuring the [Core Platform CLI](./corectl) and then follow the guides below.
 
 Once you've done that you can list and connect to environments. The Core Platform is a fully private cluster so
-`corectl` is used to create a temporary, private, tunnel to the cluster in each enviornment.
+`corectl` is used to create a temporary, private, tunnel to the cluster in each environment.
 
 ```
 corectl env list

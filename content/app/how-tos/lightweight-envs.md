@@ -22,7 +22,7 @@ myfirsttenancy
 ```
 
 > Note:
-> those `myfirsttenancy-[dev|funcitonal|nft]` namespaces are [lightweight environments](#creating-additional-lightweight-environments).
+> those `myfirsttenancy-[dev|functional|nft]` namespaces are [lightweight environments](#creating-additional-lightweight-environments).
 > You might not have those in the output if you didn't create them.
 
 > Note: Instruction for installing the `hns` plugin for `kubectl` can be found [here](https://github.com/kubernetes-sigs/hierarchical-namespaces/releases)

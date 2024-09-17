@@ -82,9 +82,9 @@ We want to ensure that we always use the same image. The promotion will consist 
 Due to the limitations of github actions, you can't stay authenticated to two project registries at the same time. For that reason, in order to promote an image across projects, you'll need to switch between authentications.
 We'll make the auth values available in environment variables
 * `SOURCE_AUTH_OVERRIDE` will give you access to `SOURCE_REGISTRY`
-* `DEST_AUTH_OVERRIDE` will give you acccess to `REGISTRY`
+* `DEST_AUTH_OVERRIDE` will give you access to `REGISTRY`
 
-That way, to promote an image you will have smething like
+That way, to promote an image you will have something like
 ```
     export CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE=$(SOURCE_AUTH_OVERRIDE)  # Set the cloudsdk env var with the source auth value
 	gcloud auth configure-docker --quiet europe-west2-docker.pkg.dev # Configure registry
