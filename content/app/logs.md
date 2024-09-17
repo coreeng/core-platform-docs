@@ -7,7 +7,7 @@ pre = ""
 
 Open [Grafana](./app-monitoring) for your environment:
 ```bash
-coreclt env open <env> grafana
+corectl env open <env> grafana
 ```
 
 Go to `Explore` 
