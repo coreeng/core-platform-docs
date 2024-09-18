@@ -164,3 +164,46 @@ Some current outbound requests are affected.
 ##### Diagnosis & Mitigation
 
 Follow [NAT Gateway IP Allocation Failures](./troubleshooting#nat-gateway-ip-allocation-failures) section.
+
+
+#### ArgoCDApplicationIsNotHealthy
+
+##### Meaning
+
+One of the application components is not healthy, resulting in the whole application being marked as unhealthy.
+
+##### Impact 
+
+Tenant resources are allocated as the ArgoCD applications,
+meaning that part of the tenant functionality might not be working as expected.
+For example, some of the tenant permissions might be missing.
+
+##### Diagnosis & Mitigation
+
+1. Identify the problematic component by checking the ArgoCD UI: https://argocd.{{ internalServices.domain }}
+2. Act accordingly to the error:
+    - If the error is related to environment configuration, fix the configuration.
+    - If the errors can be fixed by re-applying the manifests,
+      you can do so by running Sync operation for the resource with `Replace` and `Force` options.
+      Here is the [How-to](./how-tos/sync-argocd-app) on how to do it.
+    - If it doesn't help, contact the Core Platform team.
+
+#### ArgoCDApplicationIsNotSynced
+
+##### Meaning
+
+Application components state is different from the desired state.
+
+##### Impact
+
+Tenant resources are allocated as the ArgoCD applications,
+meaning that part of the tenant functionality might not be working as expected.
+For example, some of the tenant permissions might be missing.
+
+##### Diagnosis & Mitigation
+
+1. Identify the problematic component by checking the ArgoCD UI: https://argocd.{{ internalServices.domain }}
+2. If the resource can't be updated because it's immutable,
+   it's most probably a bug and should be fixed by Core Platform team. 
+   But you can try to do a quick fix by syncing it with `Replace` and `Force` options via ArgoCD UI.
+   Here is the [How-to](./how-tos/sync-argocd-app) on how to do it.
