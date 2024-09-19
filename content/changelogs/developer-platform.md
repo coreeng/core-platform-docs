@@ -9,14 +9,21 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.24.1"
+release: "0.25.1"
 
 environment: "gcp-dev"
 ...
 ```
 
 
-# Changelog
+## v0.25.1
+
+### What's Changed
+* add feature, remove feature, add extra files by @nzacharia
+* bug(argocd): Fix argocd IAMPolicyMembers related errors by @Mugenor
+* feature(argocd): Add alerts for argocd applications by @Mugenor
+* bug(platform-secret-manager): Reference secret with projectNumericId instead of projectId. It caused the condition to be invalid by @Mugenor
+* fix(iap): remove IAP backend errors after provisioning + alerts for no auth on internal services endpoint by @tombart
 
 ## v0.25.0
 ### What's Changed
