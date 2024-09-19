@@ -39,9 +39,10 @@ Fires when the blackbox exporter is unable to connect to the developer portal.
    kubectl -n developer-portal get all
    ```
 
-2. Are other alerts such as [`KubePodCannotConnectToInternet`](#kubepodcannotconnecttointernet) or [`ContainerInErrorState`](#containerinerrorstate) firing?
+2. Are other alerts such as [`KubePodCannotConnectToInternet`](#kubepodcannotconnecttointernet) or [
+   `ContainerInErrorState`](#containerinerrorstate) firing?
 
-3. What is preventing the pod from running?  
+3. What is preventing the pod from running?
    ```
    kubectl -n developer-portal logs deployment.apps/developer-portal
    ```
@@ -165,14 +166,13 @@ Some current outbound requests are affected.
 
 Follow [NAT Gateway IP Allocation Failures](./troubleshooting#nat-gateway-ip-allocation-failures) section.
 
-
 #### ArgoCDApplicationIsNotHealthy
 
 ##### Meaning
 
 One of the application components is not healthy, resulting in the whole application being marked as unhealthy.
 
-##### Impact 
+##### Impact
 
 Tenant resources are allocated as the ArgoCD applications,
 meaning that part of the tenant functionality might not be working as expected.
@@ -204,6 +204,44 @@ For example, some of the tenant permissions might be missing.
 
 1. Identify the problematic component by checking the ArgoCD UI: https://argocd.{{ internalServices.domain }}
 2. If the resource can't be updated because it's immutable,
-   it's most probably a bug and should be fixed by Core Platform team. 
+   it's most probably a bug and should be fixed by Core Platform team.
    But you can try to do a quick fix by syncing it with `Replace` and `Force` options via ArgoCD UI.
    Here is the [How-to](./how-tos/sync-argocd-app) on how to do it.
+
+#### NoIapAuthOnInternalServiceDomain
+
+##### Meaning
+
+Some or all services on the platform's designated internal services domain can be accessed without authentication. For
+more information on platform's authenticated endpoints see [Platform ingress](./platform-ingress.md) and 
+[Internal services](./internal-services.md) page. This alert is triggered by accessing `podinfo` svc 
+on `https://ready.{{ internalServices.domain }}` as unauthenticated user and receiving `200` response code 
+(expected `302` redirect to google auth)
+
+##### Impact
+
+Potentially, we're exposing internal endpoints on public network that can be accessed by anyone. This is `major`
+incident and should be dealt with immediately.
+
+##### Diagnosis & Mitigation
+
+1. Validate that you can access internal endpoint without authentication:
+   ```
+   curl -v https://ready.{{ internalServices.domain }}
+   ```
+   You'll get statusCode `200` if you can, otherwise `301` redirect to google auth endpoint.
+2. Go to IAP configuration in [GCP console](https://console.cloud.google.com/security/iap) and select a project.
+3. You'll see two backend services (one for each k8s traefik svc), ensure the backend service with name containing
+   `platform-ingress-traefik-iap` has `IAP` enabled. The other should have `IAP` disabled.
+4. Ensure there is no errors in `Status` column on both backend services. In case of errors, re-enabled IAP on affected
+   backend service and re-test.
+5. Validate environment `Gateway` configuration
+   ```
+   k -n platform-ingress get httproute
+   ```
+   Check that `HOSTNAMES` are correctly configured, where `{{ ingressDomains.domain }}` should point to IAP disabled
+   backend service (traefik), and `{{ internalServices.domain }}` should point to IAP enabled one (traefik-iap)
+   ```
+   k -n platform-ingress get gateway -o yaml
+   ``` 
+   Check that `allowedRoutes` are correctly configured according to `httpRoutes`
