@@ -9,14 +9,25 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.25.1"
+release: "0.25.2"
 
 environment: "gcp-dev"
 ...
 ```
 
+## v0.25.2
 
-## v0.25.1
+### What's Changed
+* fix(ingress): renamed misconfigured file in ingress module by @tombart
+* docs(postmortem): added post-mortem md file to describe past issues/mitigations by @tombart
+* Updating terraform providers by @tmcalves 
+* bug(mtka): Revert migration to IAMPartialPolicy by @Mugenor
+
+## v0.25.1 
+
+{{% notice warning %}}
+This version is unstable, do not use this version
+{{% /notice %}}
 
 ### What's Changed
 * add feature, remove feature, add extra files by @nzacharia
