@@ -11,7 +11,7 @@ Another point of consideration for integration testing is when features come tog
 Integration testing is essential to the SDLC, it provides a consistent approach in validating the stability of the whole environment, as well as the integration points between services.
 We expect these tests to run against a deployed application.
 
-### Main characteristics:
+### Main characteristics
 
 - Fast Integration off main branch
 - HA Environment Treated Like Prod

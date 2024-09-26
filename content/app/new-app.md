@@ -9,13 +9,13 @@ pre = ""
 
 The Core Platform with a single command will configure:
 
-* A new repository
-* A template application demonstrating full continuous delivery:
-  * Versioning 
-  * Functional testing
-  * Non-functional testing
-  * Promotion between a set of standard environments
-  * Deployment to production
+- A new repository
+- A template application demonstrating full continuous delivery:
+  - Versioning
+  - Functional testing
+  - Non-functional testing
+  - Promotion between a set of standard environments
+  - Deployment to production
 
 After running this command, and triggering the resulting GitHub workflow you'll have an
 application ready to deploy to production on every commit!
@@ -23,7 +23,9 @@ application ready to deploy to production on every commit!
 ```shell
 corectl app create <new-app-name> [<new-app-dir>]
 ```
+
 It will:
+
 - prompt you a few additional questions, including template for the application.
 - create a new repository using the selected template
 - configure the created GitHub repository, so P2P workflows will run without an issue
@@ -33,7 +35,7 @@ It will:
 Instead of creating a new repository for each of the applications, you can create a single repository
 and add the applications as sub-directories.
 
-First create a new root repository 
+First create a new root repository
 
 ```shell
 corectl app create <new-monorepo-name> --tenant <tenant-name> --nonint
@@ -83,6 +85,7 @@ If you don't want to use `corectl` you can raise PRs against your environments r
 - Configure P2P for the repository using `corectl p2p env sync <repository-path> <tenant-name>`
 - Make sure that the repository is present in the `tenants` list in the tenant file,
   for example:
+
 ```yaml
 ...
 cost-centre: tenants

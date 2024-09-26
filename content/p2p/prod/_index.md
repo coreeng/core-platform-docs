@@ -6,11 +6,13 @@ pre = ""
 +++
 
 ## How to use this on the pipeline?
+
 These should be triggered by a cron on git actions, and the pipeline will look like:
 {{< figure src="/images/p2p/prod.png" title="Production" >}}
 
 ## Usage
-```
+
+```yaml
 name: Prod
 
 on:
@@ -35,4 +37,4 @@ jobs:
       version: ${{ needs.get-latest-version.outputs.version }}
 ```
 
-This task will get the latest version that's on the `prod` registry and execute the prod deployment task. 
+This task will get the latest version that's on the `prod` registry and execute the prod deployment task.

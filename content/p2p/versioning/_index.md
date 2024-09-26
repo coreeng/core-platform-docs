@@ -13,7 +13,7 @@ Versioning is a critical part of the software development lifecycle. It allows y
 
 The P2P comes with a workflow that creates semantic versions for your application.
 
-```
+```yaml
   version:
     uses: coreeng/p2p/.github/workflows/p2p-version.yaml@v1
     secrets:

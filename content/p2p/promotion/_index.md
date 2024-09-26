@@ -23,7 +23,7 @@ The Core Platform uses Container Registry artifact copying as the promotion mech
 
 All reference applications and skeletons come with a helper task to do this:
 
-```
+```makefile
 .PHONY: p2p-promote-generic
 p2p-promote-generic:  ## Generic promote functionality
     corectl p2p promote $(image_name):${image_tag} \
@@ -41,6 +41,7 @@ The task:
 * Pushes the image to the `destination` registry
 
 The P2P sets all the variables:
+
 * SOURCE_REGISTRY
 * REGISTRY for the destination registry
 * SOURCE_AUTH_OVERRIDE
@@ -49,6 +50,7 @@ The P2P sets all the variables:
 `corectl p2p promote` defaults to environment variables set by P2P, so you don't need to set them explicitly.
 
 Here is the full list of flags:
+
 ```bash
 corectl p2p promote -h
 Promotes image from source to destination registry. Only GCP is supported for now
@@ -68,12 +70,11 @@ Flags:
 
 For lower environments these may be the same registry so the `source_repo_path` and `dest_repo_path` are included
 
-
 The steps are:
 
 * After Fastfeedback on the main branch `p2p-promote-to-extended-test` is executed where the default implementation for all applications is:
- 
-```
+
+```makefile
 .PHONY: p2p-promote-to-extended-test
 p2p-promote-to-extended-test: source_repo_path=$(FAST_FEEDBACK_PATH)
 p2p-promote-to-extended-test: dest_repo_path=$(EXTENDED_TEST_PATH)
@@ -82,7 +83,7 @@ p2p-promote-to-extended-test:  p2p-promote-generic
 
 * After extended test the `p2p-promote-to-prod` is executed where the default implementation for all applications is:
 
-```
+```makefile
 .PHONY: p2p-promote-to-prod
 p2p-promote-to-prod:  source_repo_path=$(EXTENDED_TEST_PATH)
 p2p-promote-to-prod:  dest_repo_path=$(PROD_PATH)

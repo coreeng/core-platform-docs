@@ -6,6 +6,7 @@ pre = ""
 +++
 
 Once you have a [tenancy](/app/tenancy/) you can create as many lightweight environments as you like e.g. for
+
 * Testing
 * Experimentation
 
@@ -41,8 +42,7 @@ a single namespace per application is in production.
 
 To create a lightweight environment, in your tenancy namespace create:
 
-
-```
+```yaml
 apiVersion: hnc.x-k8s.io/v1alpha2
 kind: SubnamespaceAnchor
 metadata:

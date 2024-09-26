@@ -12,4 +12,5 @@ Click the links to go to each section.
 ## Changelogs
 
 ### [Developer Platform](developer-platform.md)
+
 ### [Path to Production](p2p.md)

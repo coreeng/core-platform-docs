@@ -8,6 +8,7 @@ pre = ""
 For more info visit detailed [documentation](../../../app/secret-management).
 
 # Accessing secret from service
+
 First of all, you need to have configured `cloudAccess` for your tenant. Provisioned service account will be used to
 access the secret. Read more about `cloudAccess` [here](../../../app/accessing-cloud-infra)
 
@@ -100,32 +101,39 @@ spec:
 ```
 
 # Create secrets
+
 ## GCP Secret Manager
+
 You can either use [Secret Manager UI Console](https://cloud.google.com/security/products/secret-manager) or `gcloud` CLI.
 It should be fairly straightforward to create a secret using UI.
 
 Here is the example of using `gcloud` CLI:
+
 ```bash
 gcloud secrets create <tenant-name>_<secret-name> --data-file=./secret-value.txt
 ```
+
 This command will create a secret with name `<tenant-name>_<secret-name>` and the first version with value taken from `./secret-value.txt` file.
 You can omit `--data-file` parameter to create a secret with no versions.
 
 To add a new version for the secret, you can use the following command:
+
 ```bash
 gcloud secrets versions add <tenant-name>_<secret-name> --data-file=./new-secret-value.txt
 ```
 
 # Accessing secrets
+
 ## GCP Secret manager
+
 You can either use [Secret Manager UI Console](https://cloud.google.com/security/products/secret-manager) or `gcloud` CLI.
 It should be fairly straightforward to access a secret using UI.
 
 Here is the example of using `gcloud` CLI:
+
 ```bash
 gcloud secrets versions access <version> --secret <tenant-name>_<secret-name>
 ```
 
 This command will print the value of the specified secret version.
 You can also specify version alias or `latest` as `<version>`.
-

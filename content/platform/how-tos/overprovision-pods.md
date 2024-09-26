@@ -10,7 +10,9 @@ Overprovisioning works well if workloads need to be provisioned immediately. See
 {{% /notice %}}
 
 ## Overprovision Pods
+
 Create 5 pause pods that will request 1 CPU and 200Mi of memory. In total it will reserve 5 CPU and 1Gi of memory
+
 ```yaml
 cluster:
   overprovisioning:

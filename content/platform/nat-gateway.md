@@ -30,7 +30,7 @@ use [Manual NAT IP address assignment with dynamic port allocation](https://clou
 
 ### Platform environment configuration
 
-```
+```yaml
 network:
   publicNatGateway: # [Optional] configuration for the NAT Gateway
     ipCount: 2 # [Required] number of IP addresses to allocate
@@ -44,7 +44,7 @@ network:
 
 #### Recommended overrides
 
-```
+```yaml
 network:
   publicNatGateway: # [Optional] configuration for the NAT Gateway
     ipCount: <numbers of IPs to allocate>
@@ -107,22 +107,25 @@ cannot delete addresses that are still allocated to NAT Gateway.
     1. checking `Port Allocation[NAT Gateway]` graph
        in `NAT Gateway` Grafana dashboard, there should be no port allocation from drained IP.
     2. enable NAT Logging by:
-   ```
+
+   ```yaml
    network:
      publicNatGateway:
        logging: ALL
        ...
    ```
+
    and checking that there are no logs for open connections associated to drained IP address.
 4. Remove drained IP address assignment from NAT Gateway in UI.
 5. Update `network.publicNatGateway` configuration and release:
 
-   ```
+   ```yaml
    network:
      publicNatGateway:
        ipCount: 2 # decrease this number to desired number of IP addresses
        ...
    ```
+
 6. Notify any third parties on source IP changes for outbound connections so they can update their allowlists.
 
 ## Migrate to static (manual) IP allocation
@@ -137,13 +140,16 @@ in [Switch assignment method](https://cloud.google.com/nat/docs/ports-and-addres
 2. Validate changes in
    GCP [IP addresses](https://console.cloud.google.com/networking/addresses/list), [NAT Gateway](https://console.cloud.google.com/net-services/nat/list)
 3. Test outbound connection from the cluster
-   ```
+
+   ```shell
    kubectl run tmp-shell --rm -it --image nicolaka/netshoot -- /bin/bash # pod network
    kubectl run tmp-shell --rm -it --image nicolaka/netshoot --overrides='{ "spec": { "hostNetwork" : true }  }' -- /bin/bash # host network
    ```
+
    Once in the container run (if it fails, double check that Google is up
    on [uptime](https://uptime.com/upstatus/google.co.uk?start=20240821&end=20240821))
-   ```
+
+   ```shell
    curl -I www.google.com
    ```
 
@@ -158,15 +164,19 @@ in [Switch assignment method](https://cloud.google.com/nat/docs/ports-and-addres
    with a single IP
 2. Manually update NAT Gateway configuration in GCP UI to set `Cloud NAT IP addresses` field to `Automatic`, then save.
 3. Test outbound connection from the cluster
-   ```
+
+   ```shell
    kubectl run tmp-shell --rm -it --image nicolaka/netshoot -- /bin/bash # pod network
    kubectl run tmp-shell --rm -it --image nicolaka/netshoot --overrides='{ "spec": { "hostNetwork" : true }  }' -- /bin/bash # host network
    ```
+
    Once in the container run (if it fails, double check that Google is up
    on [uptime](https://uptime.com/upstatus/google.co.uk?start=20240821&end=20240821))
-   ```
+
+   ```shell
    curl -I www.google.com
    ```
+
 4. Remove `network.publicNatGateway` section from platform environment configuration and release.
 
 ### Troubleshooting

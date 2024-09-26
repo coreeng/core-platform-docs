@@ -17,7 +17,7 @@ The platform by default comes with a single organisation made up of three enviro
 
 The `gcp-init` tool comes bundled inside the platform docker image. From inside the image:
 
-```
+```shell
 cd gcp-init
 source .venv/bin/activiate
 python gcp-init.py --help
@@ -38,9 +38,9 @@ This will generate JSON credentials for your user account, and move them to a fi
 
 Before running `root-init`, we need to check some GCP permissions. Before we can initialize a "parent" (a GCP org or folder), we need the following:
 
-  - `roles/viewer` on the parent
-  - `roles/resourcemanager.folderCreator` on the parent
-  - `roles/resourcemanager.projectCreator` on the parent
+* `roles/viewer` on the parent
+* `roles/resourcemanager.folderCreator` on the parent
+* `roles/resourcemanager.projectCreator` on the parent
 
 We can now run the `root-init` command from within the `dplatform-cli`:
 
@@ -112,7 +112,7 @@ The IAP Brand needs to be manually created before deploying the Core Platform.
 After running the environment creation. Get the project id under the new environments folder
 then run:
 
-```
+```shell
 PLATFORM_ADMIN_GROUP=???
 PROJECT=???
 gcloud iap oauth-brands create --application_title="Core Platform" --support_email="$PLATFORM_ADMIN_GROUP" --project $PROJECT
@@ -124,8 +124,3 @@ gcloud iap oauth-brands create --application_title="Core Platform" --support_ema
 #### DNS Delegation
 
 See [DNS Delegation](./dns) and [Identity Provider Login](./internal-services)
-
-
-
-
-

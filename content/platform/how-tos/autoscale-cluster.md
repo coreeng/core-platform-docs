@@ -14,6 +14,7 @@ Nodes typically take up to 80 to 120 seconds to boot. If this is too long for yo
 {{% /notice %}}
 
 ## Enable Autoscaling
+
 Autoscaling can be enabled using the `config.yaml` file. See [cluster autoscaling](../cluster-autoscaling) for more details of how autoscaling works.
 
 ```yaml
@@ -26,9 +27,11 @@ cluster:
 ```
 
 ## Disable Autoscaling
+
 Simply remove `autoscaling` block from `config.yaml`
 
-#### Before:
+### Before
+
 ```yaml
 cluster:
   gcp:
@@ -44,7 +47,8 @@ cluster:
         maxCount: 5
 ```
 
-#### After:
+### After
+
 ```yaml
 cluster:
   gcp:
@@ -57,6 +61,7 @@ cluster:
 ```
 
 ## Custom Node Pools
+
 Define node pool with machine type `g2-standard-4` and disk type pd-extreme that autoscales from 0 to 5 nodes.
 
 ```yaml

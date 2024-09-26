@@ -11,4 +11,3 @@ pre = ""
 * [Connect to CloudSQL](./connect-to-cloudsql)
 * [Connect to MemoryStore](./connect-to-memstore)
 * [Manage secrets](./manage-secrets)
-

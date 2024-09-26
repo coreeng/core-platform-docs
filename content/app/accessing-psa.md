@@ -18,9 +18,9 @@ infrastructure:
         id: <project_id>
         environment: <platform_environment>
 ```
-This allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment. 
+
+This allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment.
 {{% notice note %}}
   This attachment is unique, you can only attach your project to a single other project.
 {{% /notice %}}
 This means that if you want to have your databases in `dev` and `prod` environments for example, your tenant will need 2 GCP projects to attach to each environment.
-

@@ -9,7 +9,7 @@ pre = ""
 Make sure that [resource requests](./resources) are defined for the application. Autoscalers use them as a base-line to calculate utilization.
 {{% /notice %}}
 
-Applications are scaled vertically or horizontally to be able to handle the increasing load. 
+Applications are scaled vertically or horizontally to be able to handle the increasing load.
 When traffic goes up, you add more resources (CPU and/or memory) and/or deploy more replicas.
 When traffic goes down, you revert back to the initial state to minimise costs.
 This can be done automatically with Kubernetes based on resource utilization.
@@ -19,6 +19,7 @@ This section describes autoscaling mechanisms and provides some [guidelines](#gu
 ## Autoscalers
 
 Kubernetes provides [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) and [Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) (VPA) as out-of-the-box tools for scaling deployments:
+
 - **HPA** - for stateless workloads
 - **VPA** - for stateful and long-running workloads
 
@@ -28,7 +29,7 @@ Horizontal scaling response to increased load is to deploy more pods.
 If the load decreases, HPA instructs the deployment to scale back down.
 
 Below is an example of HPA configuration for the Reference app to scale based on CPU Utilization. (We can use other resources e.g. memory utilization or a combination of them)
-We specify the range for the number of replicas, [resources and thresholds](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics) when HPA should be triggered. 
+We specify the range for the number of replicas, [resources and thresholds](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics) when HPA should be triggered.
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -53,7 +54,7 @@ spec:
           averageUtilization: 60
 ```
 
-We can also affect how fast the application scales up by modifying [scaling behavior](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#configurable-scaling-behavior). This policy allows pods to scale up 1000% every 15 seconds. 
+We can also affect how fast the application scales up by modifying [scaling behavior](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#configurable-scaling-behavior). This policy allows pods to scale up 1000% every 15 seconds.
 
 ```yaml
   behavior:
@@ -63,7 +64,6 @@ We can also affect how fast the application scales up by modifying [scaling beha
           value: 1000
           periodSeconds: 15
 ```
-
 
 ### Vertical Pod Autoscaler (VPA)
 
@@ -104,17 +104,19 @@ However, you can use VPA with HPA on separate resource metrics (e.g. VPA on memo
 
 ## Guidelines
 
-To autoscale, we need to start by defining non-functional requirements for the application. 
+To autoscale, we need to start by defining non-functional requirements for the application.
 
 For example, we require:
+
 - the application to handle 30k TPS with P99 latency < 500 ms.
 - there are spikes when traffic ramps up linearly from 0 to max in 3 minutes.
 
 We choose which autoscaling mechanism to use:
-- To handle traffic spikes with a stateless app we should consider using HPA. 
-- We choose VPA for stateful long-running homogeneous workloads. 
 
-We prepare [NFT](../p2p/fast-feedback/p2p-nft) scenarios to validate that the application meets the requirements for the load. 
+- To handle traffic spikes with a stateless app we should consider using HPA.
+- We choose VPA for stateful long-running homogeneous workloads.
+
+We prepare [NFT](../p2p/fast-feedback/p2p-nft) scenarios to validate that the application meets the requirements for the load.
 We need to repeatedly run the tests to adjust the resource requests and fine-tune the thresholds to handle the required traffic patterns.
 
 The following is a list of recommendations that can be applied to improve the results of the test:
@@ -133,9 +135,9 @@ As for any type of performance testing, try changing only one parameter at a tim
 ### Dashboards
 
 There are several dashboards that can help you better understand the behavior of the system:
+
 - Kubernetes / Views
 - Traefik Official Kubernetes Dashboard
 - Reference App Load Testing
-
 
 Refer to [Application Monitoring](./app-monitoring) and [Platform Monitoring](../platform/platform-monitoring) sections for more details.

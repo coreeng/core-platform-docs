@@ -14,7 +14,7 @@ Tenants are organised via the Hierarchical Namespace Controller
 
 The application teams can create tenancies under root or another top level folder e.g. tenants
 
-```
+```shell
 ❯ kubectl hns tree root
 root
 ├── cecg-system
@@ -32,8 +32,3 @@ root
 
 [s] indicates subnamespaces
 ```
-
-
-
-
-
