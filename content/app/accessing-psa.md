@@ -8,7 +8,7 @@ pre = ""
 
 Your applications can be configured to be attached to the platforms shared VPC.
 
-This can be enabled in your tenancy via adding the `infrastructure.network` section at the top level:
+This can be enabled in your tenancy via adding the `infrastructure.network` section of your tenant definition in your platform environments repository at the top level:
 
 ```yaml
 infrastructure:
