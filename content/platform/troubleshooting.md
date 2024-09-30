@@ -7,9 +7,9 @@ pre = ""
 
 ## Autoscaling failures
 
-### 0/7 nodes are available: 7 Insufficient memory.
+### 0/7 nodes are available: 7 Insufficient memory
 
-```
+```text
 0/7 nodes are available: 7 Insufficient memory. preemption: 0/7 nodes are available: 1 Insufficient memory, 6 No preemption victims found for incoming pod.
 ```
 
@@ -22,7 +22,7 @@ cluster.
 
 Update `config.yaml` to increase the memory limit of the cluster autoscaling. Example:
 
-```
+```yaml
 cluster:
   gcp:
     autoscaling:
@@ -32,9 +32,9 @@ cluster:
 
 After the limits have been applied to the cluster, the pod should transition from `Pending` to `Running` state.
 
-### 0/7 nodes are available: 7 Insufficient cpu.
+### 0/7 nodes are available: 7 Insufficient cpu
 
-```
+```text
 0/7 nodes are available: 7 Insufficient cpu. preemption: 0/7 nodes are available: 1 Insufficient cpu, 6 No preemption victims found for incoming pod.
 ```
 
@@ -46,7 +46,7 @@ Total cpu requests for pods have exceeded the maximum cpu that is allowed for no
 
 Update `config.yaml` to increase the cpu limit of the cluster autoscaling. Example:
 
-```
+```yaml
 cluster:
   gcp:
     autoscaling:
@@ -70,14 +70,14 @@ guarantee finding a node that has that capacity.
 
 ## Deployment Failures
 
-#### Local port [xxxx] is not available
+### Local port [xxxx] is not available
 
 A local port is used locally on the GitHub agent to IAP proxy to the Kubernetes API server.
 Sometimes a randomly selected port is not available.
 
 #### Logs
 
-```
+```text
 2023-11-17T16:31:21.6142491Z --- Start tunnel (IAP)
 2023-11-17T16:31:28.1159411Z ERROR: (gcloud.compute.start-iap-tunnel) Local port [57834] is not available.
 ```
@@ -88,23 +88,23 @@ The job can be re-run using re-run failed jobs
 
 ## Ingress / TLS Failures
 
-#### A new ingress domain is not working
+### A new ingress domain is not working
 
 When adding a new ingress domain the platform:
 
 * Creates a Cloud DNS Managed Zone. You need to set up delegation for this domain so that Cloud DNS becomes the Name
   server.
 
-#### IPs not being allowlisted by traefik
+### IPs not being allowlisted by traefik
 
 You have configured to allowlist IPs using traefik middlewares but are still getting forbidden when accessing endpoints
 from a valid IP address.
 
-##### Enable JSON logs
+#### Enable JSON logs
 
 Edit traefik deployment to add the arguments:
 
-```
+```yaml
 kind: Deployment
 metadata:
   name: traefik
@@ -133,7 +133,7 @@ Logs:
 
 On the Google Console navigate to Logging Explorer navigate and run the following query
 
-```
+```sql
 resource.type="http_load_balancer" resource.labels.project_id="<your-gcp-project-id>"
 ```
 
@@ -149,13 +149,13 @@ See [dns delegation setup](./dns)
 
 Cert manager at times does not find the new Cloud DNS Zone. If this is the case you'll see cert manager logs like:
 
-```
+```text
 E1124 04:28:57.742110       1 controller.go:167] "cert-manager/challenges: re-queuing item due to error processing" err="No matching GoogleCloud domain found for domain XXXX.XX." key="platform-ingress/ingress-tls-secure-1-2070261079-2597927957"
 ```
 
 Restarting cert manager:
 
-```
+```shell
 kubectl delete pods -n platform-ingress -l app=cert-manager
 ```
 
@@ -165,7 +165,7 @@ On restarting the error should go away. If not, raise a support ticket with the 
 * Cert Manager
 * Output from:
 
-```
+```shell
 kubectl get pods -n platform-ingress
 kubectl get certificates -n platform-ingress
 kubectl get certificaterequests -n platform-ingress
@@ -188,11 +188,13 @@ kubectl describe gateway traefik -n platform-ingress
         2. [Optional] Enable NAT Gateway logging if not already enabled. Logging provides more detailed information on
            existing connections. To enable logs update `network.publicNatGateway.logging` value to one of `ERRORS_ONLY`,
            `TRANSLATIONS_ONLY`, `ALL`:
-           ```
+
+           ```yaml
            network:
              publicNatGateway:
                logging: TRANSLATIONS_ONLY - update to desired logging level
            ```
+
            See [Configure logging](https://cloud.google.com/nat/docs/monitoring) for log level explanation.
     2. Cluster Autoscaller is creating an excessive number of VMs. Validate in GCP dashboard, node-pools, metrics
     3. The Cluster grew naturally and more source NAT IPs are required. If above are not causing the issue, validate
@@ -206,11 +208,13 @@ kubectl describe gateway traefik -n platform-ingress
 
    Increase the number of IPs allocated to NAT Gateway. Update number of IPs in your
    `environments/<env_name>/config.yaml` file:
-   ```
+
+   ```yaml
    network:
      publicNatGateway:
        ipCount: <number of IP's allocated> - increase this value to desired number of IP's
    ```
+
    Release the change and validate that port utilisation went down below 70%.
 
 2. Do you allocate too many min ports per VM?
@@ -218,11 +222,13 @@ kubectl describe gateway traefik -n platform-ingress
        per VM. Ensure to extend time span to take into account all traffic spikes. If most of the time ports are being
        allocated but not used you can decrease the `minPortsPerVm` setting in `environments/<env_name>/config.yaml`
        file:
-       ```
+
+       ```yaml
        network:
          publicNatGateway:
            minPortsPerVm: <min number of ports allocated to single VM> - decrease this value to release ports
        ```
+
        See [Choose a minimum number of ports per VM](https://cloud.google.com/nat/docs/tune-nat-configuration#choose-minimum)
        for further details.
     2. If all ports are utilised, check if you
@@ -238,7 +244,7 @@ for further details.
 
 ### NAT Gateway provisioning/updates failures
 
-```
+```text
 Error: Error when reading or editing Address: googleapi: Error 400: External address used for NAT cannot be deleted., badRequest
 ```
 

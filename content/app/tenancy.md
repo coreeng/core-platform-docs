@@ -9,20 +9,20 @@ The Core Platform is a multi-tenant platform where each tenant gets their own se
 
 If you already have a tenancy, you can jump to [new-app](./new-app) to deploy a new application.
 
-## What is a tenant? 
+## What is a tenant?
 
 A Tenancy is the unit of access to the Core Platform.
-It contains a readonly and admin group and gives CI/CD actors
+It contains a readonly and an admin group and gives CI/CD actors
 (GitHub Actions) access to a namespace and a docker registry for images.
-Once you have a tenancy, you can add sub namespaces for all your application testing needs.
+Once you have a tenancy, you can add sub-namespaces for all your application testing needs.
 
-Tenants are organized in the tree structure. 
+Tenants are organized in a tree structure.
 For each tenant, we create a [hierarchical namespace](https://github.com/kubernetes-sigs/hierarchical-namespaces).
-It helps to organize resources and access.
-Examples:
-- share of resource quotas
-- control access with network policies (give access to a tenant and all its children)
-- share prometheus instance for tenant children
+A tenancy can be used to configure:
+
+- resource quotas for a tenant and it's children
+- access control via network policies on a per-tenant basis. (e.g. granting another tenancy network access to your tenant)
+- a shared prometheus instance for a tenant and it's children
 
 ### Adding a tenancy
 
@@ -32,14 +32,14 @@ corectl tenant create
 
 You'll be prompted for the following information about your new tenant:
 
-* `name` - Name of your tenancy. Must be the same as your filename.
-* `parent` - Name of the parent tenant or `root`. Note: `root` tenant is created implicitly.
-* `description` - Description for your tenancy.
-* `contactEmail` - Metadata: Who is the contact for this tenancy? 
-* `costCentre` - Metadata: Used to split cloud costs. 
-* `environments` which of the environments in Environments Repo you want to deploy to
-* `adminGroup` - will get permission to do all actions in the created namespaces
-* `readonlyGroup` - will get read-only access to the created namespaces
+- `name` - Name of your tenancy. Must be the same as your filename.
+- `parent` - Name of the parent tenant or `root`. Note: `root` tenant is created implicitly.
+- `description` - Description for your tenancy.
+- `contactEmail` - Metadata: Who is the contact for this tenancy?
+- `costCentre` - Metadata: Used to split cloud costs.
+- `environments` which of the environments in Environments Repo you want to deploy to
+- `adminGroup` - will get permission to do all actions in the created namespaces
+- `readonlyGroup` - will get read-only access to the created namespaces
 
 Once you fill the form, `corectl` will create a PR in the Environments Repo with a new file for the tenancy.
 Once the PR is merged, a configuration for the new tenant will be provisioned automatically.
@@ -60,18 +60,20 @@ Once the above PR that `corectl` creates is merged everyone in the groups will h
 
 If you access the cluster from the local machine, you need to connect to the cluster.
 The easiest way to do this is using `corectl`:
-```bash
+
+```shell
 corectl env connect <env-name>
 ```
 
 For example, to check a namespace for a tenancy named `myfirsttenancy`:
-```bash
+
+```shell
 kubectl get namespace myfirsttenancy
 NAME             STATUS   AGE
 myfirsttenancy   Active   30s
 ```
 
-#### Manually raising a PR for a new tenancy
+### Manually raising a PR for a new tenancy
 
 {{% notice note %}}
 `corectl` does this for you. Only follow this section if you want to manually interact with the environments repo.
@@ -82,7 +84,6 @@ To add a tenancy raise a PR to the Environments Repo under `tenants/tenants/` in
 {{% notice note %}}
 Your tenancy name must be the same as the file name!
 {{% /notice %}}
-
 
 For example, if I want to create a tenancy with the name `myfirsttenancy`, then I will create a file named `myfirsttenancy.yaml` with the following structure:
 
@@ -113,12 +114,11 @@ betaFeatures:
   - k6-operator
 ```
 
-
-* `repos` - Your [application](./new-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
-* `cloudAccess` - generates cloud-provider-specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your application is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
-* `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment.
-* `betaFeatures` - enables certain beta features for tenants:
-  * `k6-operator` - allows running tests with K6 Operator.
+- `repos` - Your [application](./new-app) URL. All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
+- `cloudAccess` - generates cloud-provider-specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your application is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
+- `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment.
+- `betaFeatures` - enables certain beta features for tenants:
+  - `k6-operator` - allows running tests with K6 Operator.
 
 {{% notice note %}}
 This attachment is unique, you can only attach your project to a single other project.
@@ -128,6 +128,7 @@ This means that if you want to have your databases in `gcp-dev` and `gcp-prod` f
 ## Deleting a tenancy
 
 To delete a tenancy, you have to:
+
 1. Delete all the child tenancies.
 2. Delete all the subnamespaces with applications of the tenancy.
 3. Delete tenant configuration file related to the tenancy from the Environments Repo and merge the PR with this change.

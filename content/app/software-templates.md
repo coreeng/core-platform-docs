@@ -6,7 +6,8 @@ pre = ""
 +++
 
 ## What is a software template?
-Software template provide pre-built, standardized structures for common types of applications. This allows 
+
+Software template provide pre-built, standardized structures for common types of applications. This allows
 developers to:
 
 - Quickly start new projects without building the basic architecture from scratch
@@ -14,29 +15,28 @@ developers to:
 - Follow best practices and proven patterns built into the template
 - Focus on implementing specific business logic rather than generic boilerplate code
 
-This efficiency can significantly reduce development time, especially for common application types, allowing teams 
+This efficiency can significantly reduce development time, especially for common application types, allowing teams
 to deliver projects faster and with more consistency.
-                                          
+
 ## CECG Software Templates
 
-CECG provides software templates that integrate the entire P2P lifecycle, 
-offering a significant advantage in application development. 
+CECG provides software templates that integrate the entire P2P lifecycle,
+offering a significant advantage in application development.
 
 These templates:
+
 - Incorporate the full P2P process out-of-the-box
 - Include built-in deployment pipelines with gated stages
 - Enable developers to start from zero and rapidly create a functional application
-                
-You can find the templates in the [CECG Software Templates repository](https://github.com/coreeng/core-platform-software-templates)
 
+You can find the templates in the [CECG Software Templates repository](https://github.com/coreeng/core-platform-software-templates)
 
 ## Integration via corectl
 
 Corectl leverages the templates to create a new project via `corectl app create` command.
 
-To ease authoring of a new software template there is a command `corectl template render` that will render a 
+To ease authoring of a new software template there is a command `corectl template render` that will render a
 template into a new directory.
-
 
 ## Parameters
 
@@ -48,11 +48,13 @@ There are 2 types of parameters:
 2. Implicit parameters set by corectl when creating a new application
 
 ### Custom parameters
+
 Custom parameters are defined in the `template.yaml` file.
 
 They are defined in the `parameters` section of the file.
 
 For example:
+
 ```yaml
 parameters:
   - name: appName
@@ -64,8 +66,8 @@ parameters:
 
 When rendering a template corectl will prompt user for the values of the parameters.
 
-
 ### Implicit parameters
+
 Implicit parameters are set by corectl when creating a new application.
 
 At the moment, there are 4 implicit parameters:
@@ -92,4 +94,3 @@ At the moment, there are 4 implicit parameters:
 
 - `name` is the name of the application
 - `tenant` is the tenant used to deploy the application
-

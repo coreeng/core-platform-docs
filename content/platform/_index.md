@@ -6,6 +6,7 @@ pre = ""
 +++
 
 ## Accessing the Platform
+
 This documentation guides platform users on accessing the CECG Kubernetes platform on Google Cloud Platform (GCP).
 
 ## Prerequisites
@@ -31,11 +32,13 @@ The GKE + Google Groups native integration requires an additional configuration 
 ## Cluster Access
 
 ### Using `corectl`
+
 ```bash
 corectl env connect <environment-name>
 ```
 
 ### Manually
+
 * Start IAP Tunnel:
 
 ```bash
@@ -77,4 +80,3 @@ gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev
 ```
 
 * Now, you have read and write access to `${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/tenant`.
-

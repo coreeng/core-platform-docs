@@ -24,18 +24,17 @@ All your custom logic should be added to your Makefile rather than directly in G
 The P2P consists of the following quality gates:
 
 * Local: What you can do on the local build agent. The output of the local quality gate is a versioned, immutable artifact.
-   * Unit tests 
-   * Static verification
+  * Unit tests
+  * Static verification
 * Fast Feedback: What you can do in a few minutes
-   * Deployed stubbed tests
+  * Deployed stubbed tests
 * Extended Tests
-* Once a version has been promoted from Extended tests it is ready for production 
+* Once a version has been promoted from Extended tests it is ready for production
 
 Two key concepts for the P2P are:
 
 * [Versioning](./versioning): The P2P promoted an immutable, versioned artifact through the pipeline
 * [Promotion](./promotion): Each time a quality gate is passed the immutable, versioned artifact is promoted
-
 
 ## Automatic GH Action authentication
 
@@ -50,7 +49,7 @@ In order to use this pipeline, you'll need to be a tenant of a Core Platform.
 
 For any repo that wasn't created out of Core Platform templates, but you would like to follow a recommended p2p standard, please use [`corectl`](../corectl) as below:
 
-```
+```shell
 corectl p2p env sync <app repository> <tenant> [flags]
 ```
 
@@ -65,14 +64,16 @@ If you've started from a skeleton app the P2P is already set up for you.
 If you're adding it to an existing repo, see [deployment frequency](./deployment-frequency) for how to set up the GitHub actions P2P.
 
 Read more details about each step:
-- [Fast Feedback](./fast-feedback)
-- [Extended Test](./extended-test)
-- [Prod Deployment](./prod)
+
+* [Fast Feedback](./fast-feedback)
+* [Extended Test](./extended-test)
+* [Prod Deployment](./prod)
 
 ### Makefile
 
 The pipelines assume you have a Makefile and that in that Makefile you have the following tasks:
-```
+
+```makefile
 .PHONY: p2p-build 
 p2p-build: ## Build phase
     echo "##### EXECUTING P2P-BUILD #####"
@@ -102,7 +103,7 @@ p2p-promote-to-prod:  ## Promote service to prod
     echo "##### EXECUTING P2P-PROMOTE-TO-PROD #####"
 ```
 
-These will be the entrypoints of the pipeline. You can then extend these to do your custom actions. 
+These will be the entrypoints of the pipeline. You can then extend these to do your custom actions.
 
 What tool you use in each of the Makefile targets is up to you.
 
@@ -114,6 +115,7 @@ You can configure it either automatically using `corectl` or manually.
 #### Automatically
 
 You can automatically set/update variables using `corectl`:
+
 ```bash
 corectl p2p env sync <app-repository> <tenant-name>
 ```
@@ -121,6 +123,7 @@ corectl p2p env sync <app-repository> <tenant-name>
 #### Manually
 
 Create your environments with the following variables:
+
 * `BASE_DOMAIN` e.g. `gcp-dev.cecg.platform.cecg.io`
 * `INTERNAL_SERVICES_DOMAIN` e.g. `gcp-dev-internal.cecg.platform.cecg.io`
 * `DPLATFORM` environment name from platform-environments e.g. `dev`
@@ -128,7 +131,6 @@ Create your environments with the following variables:
 * `PROJECT_NUMBER` project number for the project id above
 
 {{< figure src="/images/p2p/git-environments.png" title="Git Environments" >}}
-
 
 Usually you need at least two environments, e.g.
 

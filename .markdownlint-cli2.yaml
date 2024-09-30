@@ -1,0 +1,14 @@
+config:
+  line-length: false
+  single-title: false
+  no-blanks-blockquote: false
+  no-duplicate-heading:
+    siblings_only: true
+  no-bare-urls: false
+
+# Fix any fixable errors
+# fix: true
+
+globs:
+  - content/**/*.md
+  - '*.{md,markdown}'

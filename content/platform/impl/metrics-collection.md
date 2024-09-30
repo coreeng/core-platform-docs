@@ -10,10 +10,11 @@ pre = ""
 The platform uses [Google Managed Prometheus](https://cloud.google.com/stackdriver/docs/managed-prometheus)
 which comes with a scalable backend prometheus storage and metrics collectors that scrape exposed metrics endpoints
 such as kubelet/cadvisor and kube state metrics via CRDs.
-CRDs are defined here: https://github.com/GoogleCloudPlatform/prometheus-engine/blob/v0.7.4/doc/api.md
+CRDs are defined here: <https://github.com/GoogleCloudPlatform/prometheus-engine/blob/v0.7.4/doc/api.md>
 
 The GMP operator runs as a deployment
-```
+
+```shell
 kubectl -n gmp-system get deploy gmp-operator
 ```
 
@@ -25,7 +26,8 @@ These can be used to assess the health of your pods, deployment, jobs and many o
 They generally start with `kube_`.
 
 It runs as a deployment:
-```
+
+```shell
 kubectl -n gmp-public get deploy kube-state-metrics
 ```
 
@@ -49,7 +51,8 @@ and other information about the node, such as status
 
 This is used to probe key endpoints on or outside the platform, so we can monitor uptime and SSL expiry of components with TLS termination.
 It runs as a deployment:
-```
+
+```shell
 kubectl -n platform-monitoring get deploy prometheus-blackbox-exporter
 ```
 
@@ -57,6 +60,7 @@ kubectl -n platform-monitoring get deploy prometheus-blackbox-exporter
 
 Collects hardware and OS-level system metrics exposed on the node. Metrics include host memory, cpu, disk and network.
 It runs as a daemonset:
-```
+
+```shell
 kubectl -n gmp-public get ds node-exporter
 ```

@@ -7,7 +7,7 @@ pre = ""
 
 The Core Platform P2P can be configured to deploy your application in one of three modes:
 
-* *Right away:* Fast feedback runs right away, followed by extended test, followed by production deployment. 
+* *Right away:* Fast feedback runs right away, followed by extended test, followed by production deployment.
 * *On a schedule:* Fast feedback runs right away, extended test and production run on a schedule.
 * *Manually:* Fast feedback runs right away, extended test and production are manually triggered.
 
@@ -58,10 +58,10 @@ jobs:
       version: ${{ needs.version.outputs.version }}
 ```
 
-
 ## Schedule
 
 This is the configuration all templates come with where:
+
 * Fast feedback runs for every commit to main
 * Extended test runs once a day, on the latest version that passed fastfeedback
 * Production runs once a day, on the latest version that passed extended test
@@ -126,7 +126,7 @@ jobs:
       version: ${{ needs.get-latest-version.outputs.version }}
 ```
 
-### Prod 
+### Prod
 
 ```yaml
 name: Prod
@@ -152,7 +152,6 @@ jobs:
     with:
       version: ${{ needs.get-latest-version.outputs.version }}
 ```
-
 
 ## Manually
 

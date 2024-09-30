@@ -15,13 +15,14 @@ The `internal_services.domain` is in the config.yaml for the environment you
 want to access grafana for in your Environments Repo.
 
 You can quickly access it by running:
-```bash
+
+```shell
 corectl env open <env> grafana
 ```
 
 ### Via service port forwarding
 
-```
+```shell
 kubectl -n platform-monitoring port-forward service/platform-grafana-service 3000
 ```
 
@@ -32,10 +33,10 @@ Then access [Grafana](http://localhost:3000)
 This dashboard will allow a team to monitor their application namespaces and check their status. It will show data
 like:
 
-* CPU Usage
-* Memory usage
-* Pod status
-* Pod restart count
+- CPU Usage
+- Memory usage
+- Pod status
+- Pod restart count
 
 {{< figure src="images/platform-monitoring/namespace-dashboard.png" title="Namespace Dashboard" >}}
 
@@ -44,12 +45,12 @@ like:
 The global view dashboard will give you visibility over the cluster as a whole.
 This will show you data like:
 
-* Nodes status
-* CPU and Memory usage
-* CPU and Memory Limits
-* CPU and Memory Reserved
-* Pod and namespace count
-* Pods status
+- Nodes status
+- CPU and Memory usage
+- CPU and Memory Limits
+- CPU and Memory Reserved
+- Pod and namespace count
+- Pods status
 
 {{< figure src="/images/platform-monitoring/global-dashboard.png" title="Global Dashboard" >}}
 
@@ -98,8 +99,6 @@ helm -n {{ target-ns }} upgrade monitoring-stack coreeng/monitoring-stack --set 
   subnamespaces of this tenant.
 {{% /notice %}}
 
-
-
 ## Monitoring Application
 
 To monitor start monitoring your application,
@@ -140,6 +139,7 @@ Grafana and Prometheus are not exposed by default. You have two options:
 To enable ingress for monitoring services,
 you have to set the respective values during the installation of the monitoring-stack chart.
 It should look like this:
+
 ```bash
 #Install helm chart
 helm -n {{ target-ns }} install monitoring-stack coreeng/monitoring-stack \
@@ -165,13 +165,12 @@ helm -n {{ target-ns }} upgrade monitoring-stack coreeng/monitoring-stack \
   subnamespaces of this tenant.
 {{% /notice %}}
 
-
 {{% notice note %}}
 `internal-services-domain` - domain of the internal services: `internal_services.domain`
 {{% /notice %}}
 
-+ Grafana should be accessible by the URL: `{{ your-tenant-name }}-grafana.{{ internal-services-domain }}`
-+ Prometheus should be accessible by the URL: `{{ your-tenant-name }}-prometheus.{{ internal-services-domain }}`
+- Grafana should be accessible by the URL: `{{ your-tenant-name }}-grafana.{{ internal-services-domain }}`
+- Prometheus should be accessible by the URL: `{{ your-tenant-name }}-prometheus.{{ internal-services-domain }}`
 
 ### Through port forward
 
@@ -205,12 +204,11 @@ spec:
   instanceSelector:
     matchLabels:
       grafana: grafana-{{ your-tenant-name }}
-  .
-  .
-  .
+...
 ```
 
 In addition, in case your GrafanaDashboard is not in the same namespace as your monitoring stack, you have to specify an additional field:
+
 ```yaml
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -221,11 +219,8 @@ spec:
     matchLabels:
       grafana: grafana-{{ your-tenant-name }}
   allowCrossNamespaceImport: "true"
-  .
-  .
-  .
+...
 ```
-
 
 ## Creating Grafana Datasources
 
@@ -245,12 +240,11 @@ spec:
   instanceSelector:
     matchLabels:
       grafana: grafana-{{ your-tenant-name }}
-  .
-  .
-  .
+...
 ```
 
 In addition, in case your GrafanaDatasource is not in the same namespace as your monitoring stack, you have to specify an additional field:
+
 ```yaml
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDatasource
@@ -261,11 +255,8 @@ spec:
     matchLabels:
       grafana: grafana-{{ your-tenant-name }}
   allowCrossNamespaceImport: "true"
-  .
-  .
-  .
+...
 ```
-
 
 ## Using Grafana Plugins for Dashboards/Datasources
 
@@ -324,8 +315,6 @@ spec:
       version: 1.3.9
   json: >
   {
-    .
-    .
-    .
+    ...
   }
 ```

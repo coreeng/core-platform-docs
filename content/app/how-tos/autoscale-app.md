@@ -12,7 +12,9 @@ Horizontal Pod Autoscaler and Vertical Pod Autoscaler should not be used togethe
 For more details on how autoscaling works see [Autoscaling in depth](../app-autoscaling).
 
 ## Horizontal Scaling using CPU
+
 Increase pod replicas if cpu of pod exceeds 60%
+
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -37,7 +39,9 @@ spec:
 ```
 
 ## Horizontal Scaling using Memory
+
 Increase pod replicas if memory usage exceeds 60%
+
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -62,7 +66,9 @@ spec:
 ```
 
 ## Vertical Scaling
-Pod cpu/memory requests will automatically be updated based on utilisation. If you do not wish VPA to update pod requests, set `updateMode: Off` 
+
+Pod cpu/memory requests will automatically be updated based on utilisation. If you do not wish VPA to update pod requests, set `updateMode: Off`
+
 ```yaml
 apiVersion: autoscaling.k8s.io/v1beta2
 kind: VerticalPodAutoscaler
@@ -88,4 +94,3 @@ spec:
           memory: 1Gi
         controlledResources: ["cpu", "memory"]
 ```
-

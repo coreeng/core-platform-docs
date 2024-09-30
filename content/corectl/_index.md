@@ -8,12 +8,14 @@ pre = ""
 ## Core Platform CLI: corectl
 
 `corectl` is a CLI tool to automate common operations with Core Platform:
+
 - creation of new tenancy
 - creation of new application from template
 - connect to environment
 - others
 
 `corectl` does its job by:
+
 - manipulating the Core Platform configuration files.
   Since the Core Platform configuration files are stored in a git repository, `corectl` will clone
   some repositories and make changes to the configuration files on your behalf.
@@ -29,11 +31,14 @@ pre = ""
   `corectl` will use it and the Core Platform configuration to construct and run the correct command.
 
 To start working with `corectl`:
+
 1. Install its binary
 2. Initialize `corectl`
 
 ## Install `corectl` binary
+
 ### From release
+
 You can find release versions of `corectl` [here](https://github.com/coreeng/corectl/releases).
 
 ```bash
@@ -54,6 +59,7 @@ sudo mv ./corectl /usr/local/bin/corectl
 ```
 
 ### From source
+
 To install `corectl` from source, you need to have [Go](https://go.dev/learn/) installed.
 
 ```bash
@@ -63,10 +69,13 @@ make install
 ```
 
 ## Initialize `corectl`
+
 Before usage, you should initialize `corectl`.
 It requires the following:
+
 - initialization file: `corectl.yaml`
-  ```
+
+  ```yaml
   repositories:
     cplatform: <environments-git-repo> # [Mandatory] repository clone path with your environments configuration
     templates: <templates-git-repo> # [Mandatory] repository clone path with your software templates, optionally you can use our template repo: https://github.com/coreeng/core-platform-software-templates.git
@@ -82,34 +91,44 @@ It requires the following:
       default-envs:
       - <environment_name>
   ```
+
   This file should be located in the root of your environments repository.
   You can find an example of this file [here](https://github.com/coreeng/corectl/blob/main/examples/init-example.yaml).
 - your personal GitHub token to perform operations on your behalf. See more info [here](#github-access-token)
 
 To run initialization run:
+
 ```bash
 corectl config init
 ```
 
 It saves configuration options and clones some repositories:
+
 - environments repository – the repository that holds the configuration settings and parameters for core platform
   environments.
 - software-templates repository – the repository featuring bootstrap templates designed for quick project setups.
   You can either build your own library of templates or use/extended [the one provided by CECG](https://github.com/coreeng/core-platform-software-templates).
 
 ## GitHub Access Token
+
 You can provide one of the following types of GitHub Access tokens:
+
 - [Classic Personal Access Token](#classic-personal-access-token)
 - [Fine-Grained Token](#fine-grained-tokens)
+
 ### Classic Personal Access Token
+
 Scopes required:
+
 - `repo`, since `corectl` needs access to read, create repositories, create PullRequests, configure environments and variables for the repositories.
 - `workflow`, since `corectl` may create workflow files when creating new applications.
 
 ### Fine-grained tokens
+>
 > **_NOTE_**: Your organization has to enable use of fine-grained tokens for this to be possible.
 
 Requirements for token:
+
 - It should have access to all your organization repositories, since `corectl` might be used to create and configure new repositories.
 - Read-Write permissions for Administrations, since `corectl` might be used to create new repositories for applications.
 - Read-Write permissions for Contents, since `corectl` will try to clone repositories with configuration and might be used to update contents of the repository.
@@ -117,5 +136,3 @@ Requirements for token:
 - Read-Write permissions for Workflows, since `corectl` might configure workflow files when creating new applications.
 - Read-Write permissions for Environments and Variables, since `corectl` might be used to configure P2P for repositories.
 - Read-Write permissions for Pull Requests, since `corectl` might be used to automatically generate Pull Requests with platform configuration updates.
-
-

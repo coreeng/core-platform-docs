@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-## Authenticating to other GCP projects 
+## Authenticating to other GCP projects
 
 Out of the box the Cloud service account that your github actions impersonate
 only has access to deploy to your namespaces in the platform.
@@ -20,7 +20,7 @@ where the platform is running.
 
 1. Retrieve the name of your P2P service account in the environment you want to deploy to e.g. for the golang reference app:
 
-```
+```shell
 TENANT_NAME=golang
 kubectl get iamserviceaccount  -n $TENANT_NAME -o=jsonpath='{.status.email}' p2p-$TENANT_NAME
 p2p-golang@{{ project-id }}.iam.gserviceaccount.com
@@ -40,7 +40,7 @@ When your make tasks are executed you will already be authenticated with gcloud 
 
 To be able to impersonate the above service account, annotate your service account with the
 
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -51,8 +51,8 @@ metadata:
 
 Your pods should use this service account, then anytime they use a Google Cloud library they will assume the identity of the service account.
 
-
 ## P2P
+
 Infrastructure code should implement the steps of the P2P. But who do these work?
 
 ### p2p-build
@@ -63,28 +63,30 @@ This image should have everything it needs to successfully deploy the infrastruc
 ### p2p-function / p2p-nft
 
 These steps should pull the image that was just pushed in the p2p-build. It then should do a `docker run` with passing different args.
-```
+
+```yaml
 docker-apply:
-	mkdir -p ~/.config
-	mkdir -p ~/.config/gcloud
-	cat $(CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE) >> ~/.config/gcloud/application_default_credentials.json
-	
-	docker run --rm \
-	-e ENV=${ENV} \
-	-e ENVIRONMENT=${environment} \
-	-e TERRAFORM_ARGS="-auto-approve" \
-	-v ~/.config/gcloud/:/root/.config/gcloud \
-	-v "${PWD}/Makefile:/app/Makefile" \
-	-v "${PWD}/environments/${environment}/config.yaml:/app/environments/${environment}/config.yaml" \
-	$(REGISTRY)/${repo_path}/infra:$(VERSION) \
-	make infra-apply
+  mkdir -p ~/.config
+  mkdir -p ~/.config/gcloud
+  cat $(CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE) >> ~/.config/gcloud/application_default_credentials.json
+
+  docker run --rm \
+  -e ENV=${ENV} \
+  -e ENVIRONMENT=${environment} \
+  -e TERRAFORM_ARGS="-auto-approve" \
+  -v ~/.config/gcloud/:/root/.config/gcloud \
+  -v "${PWD}/Makefile:/app/Makefile" \
+  -v "${PWD}/environments/${environment}/config.yaml:/app/environments/${environment}/config.yaml" \
+  $(REGISTRY)/${repo_path}/infra:$(VERSION) \
+  make infra-apply
 ```
 
 #### Docker Auth
+
 On GithubActions, you'll be authenticated to the platform, so you can reuse those credential to run using docker.
 The above `docker-apply` task will copy the credentials on the application_default_credentials.json and then mount that as a volume in the docker run, making the commands in the docker use those credentials.
 
-```
+```yaml
 ...
 cat $(CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE) >> ~/.config/gcloud/application_default_credentials.json
 ...

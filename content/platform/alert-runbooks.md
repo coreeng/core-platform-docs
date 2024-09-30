@@ -15,12 +15,14 @@ Each alert should contain a short description and a deep link to the correspondi
 1. Is this affecting pods network and node network too?
 
    Run a pod on the host network
-    ```
+
+    ```shell
     kubectl run testbox --rm -it --image ubuntu:18.04 --overrides='{ "spec": { "hostNetwork" : true }  }' -- /bin/bash 
     ```
 
    Then check you can reach the internet.
-    ```
+
+    ```shell
     apt-get update && apt-get install curl -y
     curl https://www.google.com
     ```
@@ -35,15 +37,17 @@ Each alert should contain a short description and a deep link to the correspondi
 Fires when the blackbox exporter is unable to connect to the developer portal.
 
 1. Is the developer portal running?
-   ```
+
+   ```shell
    kubectl -n developer-portal get all
    ```
 
-2. Are other alerts such as [`KubePodCannotConnectToInternet`](#kubepodcannotconnecttointernet) or [
-   `ContainerInErrorState`](#containerinerrorstate) firing?
+2. Are other alerts such as [`KubePodCannotConnectToInternet`](#kubepodcannotconnecttointernet) or
+   [`ContainerInErrorState`](#containerinerrorstate) firing?
 
 3. What is preventing the pod from running?
-   ```
+
+   ```shell
    kubectl -n developer-portal logs deployment.apps/developer-portal
    ```
 
@@ -56,7 +60,7 @@ limits.
 
 For GCP/GKE, check logs to get more details:
 
-```
+```sql
 resource.type="k8s_cluster" AND
 log_id("container.googleapis.com/cluster-autoscaler-visibility") AND
 ( "noScaleUp" )
@@ -101,22 +105,27 @@ Container is not starting up, stuck in waiting state.
 
 1. Identify which pod is causing the issue
    in grafana:
-   ```
+
+   ```text
    https://<grafana_url>/explore?orgId=1&left=%7B%22datasource%22:%22gmp-datasource%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22editorMode%22:%22code%22,%22expr%22:%22sum%28kube_pod_container_status_waiting_reason%7Breason%20%21%3D%5C%22ContainerCreating%5C%22%7D%29%20by%20%28reason,%20pod%29%20%3E%200%22,%22legendFormat%22:%22__auto%22,%22range%22:true,%22instant%22:true%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D)
    ```
 
 2. What is preventing pod to start? Is the container in CrashLoopBackOff? Check pod events:
-   ```
+
+   ```shell
    kubectl -n <pod_namespace> describe pod <pod_name>
    ```
+
    If in CrashLoopBackOff state, check the process within the container is correctly configured. More info
    on debugging can be
    found in [GKE docs](https://cloud.google.com/kubernetes-engine/docs/troubleshooting#CrashLoopBackOff)
 
 3. Is the image being pulled correctly? Check namespace events:
-   ```
+
+   ```shell
    kubectl -n <pod_namespace> get events --sort-by=.lastTimestamp
    ```
+
    If in ErrImagePull or ImagePullBackOff check if the container name is configured correctly and the tag exists in the
    registry. More info on debugging can be
    found in [GKE docs](https://cloud.google.com/kubernetes-engine/docs/troubleshooting#CrashLoopBackOff)
@@ -213,9 +222,9 @@ For example, some of the tenant permissions might be missing.
 ##### Meaning
 
 Some or all services on the platform's designated internal services domain can be accessed without authentication. For
-more information on platform's authenticated endpoints see [Platform ingress](./platform-ingress.md) and 
-[Internal services](./internal-services.md) page. This alert is triggered by accessing `podinfo` svc 
-on `https://ready.{{ internalServices.domain }}` as unauthenticated user and receiving `200` response code 
+more information on platform's authenticated endpoints see [Platform ingress](./platform-ingress.md) and
+[Internal services](./internal-services.md) page. This alert is triggered by accessing `podinfo` svc
+on `https://ready.{{ internalServices.domain }}` as unauthenticated user and receiving `200` response code
 (expected `302` redirect to google auth)
 
 ##### Impact
@@ -226,9 +235,11 @@ incident and should be dealt with immediately.
 ##### Diagnosis & Mitigation
 
 1. Validate that you can access internal endpoint without authentication:
-   ```
+
+   ```shell
    curl -v https://ready.{{ internalServices.domain }}
    ```
+
    You'll get statusCode `200` if you can, otherwise `301` redirect to google auth endpoint.
 2. Go to IAP configuration in [GCP console](https://console.cloud.google.com/security/iap) and select a project.
 3. You'll see two backend services (one for each k8s traefik svc), ensure the backend service with name containing
@@ -236,12 +247,16 @@ incident and should be dealt with immediately.
 4. Ensure there is no errors in `Status` column on both backend services. In case of errors, re-enabled IAP on affected
    backend service and re-test.
 5. Validate environment `Gateway` configuration
+
+   ```shell
+   kubectl get httproute -n platform-ingress
    ```
-   k -n platform-ingress get httproute
-   ```
+
    Check that `HOSTNAMES` are correctly configured, where `{{ ingressDomains.domain }}` should point to IAP disabled
    backend service (traefik), and `{{ internalServices.domain }}` should point to IAP enabled one (traefik-iap)
+
+   ```shell
+   kubectl get gateway -n platform-ingress -o yaml
    ```
-   k -n platform-ingress get gateway -o yaml
-   ``` 
+
    Check that `allowedRoutes` are correctly configured according to `httpRoutes`

@@ -7,7 +7,7 @@ pre = ""
 
 To expose an HTTP service over TLS, you add a Kubernetes Ingress resource, e.g.
 
-```
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -35,7 +35,7 @@ The important parts are:
 
 * `external-dns.alpha.kubernetes.io/target` must match one of the ingress domains defined in environment config yaml file in Environments Repo
 * `external-dns.alpha.kubernetes.io/hostname` has to be a subdomain of the target
-* `ingressClassName` must be platform-ingress 
+* `ingressClassName` must be platform-ingress
 
 Your service will now be available over the Internet over TLS.
 

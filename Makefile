@@ -20,6 +20,10 @@ help-all:
 .PHONY: p2p-build
 p2p-build: service-build service-push ## Builds the service image and pushes it to the registry
 
+.PHONY: lint
+lint:
+	markdownlint-cli2
+
 .PHONY: p2p-functional ## Noop for now
 p2p-functional: create-ns-functional deploy-dev # Temporarily while the promotion step isn't authenticated and can't deploy there
 	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name)-functional --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs-functional --atomic
@@ -84,7 +88,7 @@ create-ns-functional: ## Create namespace for functional tests
 .PHONY: service-build
 service-build:
 	docker build --file Dockerfile --tag $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag) .
-	
+
 .PHONY: service-push
 service-push: ## Push the service image
 	docker image push $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag)

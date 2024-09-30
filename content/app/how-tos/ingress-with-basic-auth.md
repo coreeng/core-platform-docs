@@ -10,9 +10,11 @@ This uses beta features in the platform and breaking changes may occur in the fu
 {{% /notice %}}
 
 ## What you need to know
+
 To create ingress with out of the box basic authentication, you need to use the Traefik CRD `Middleware`.
 
 ## How does it work?
+
 First we need to create a secret with a list of users we want to use:
 
 ```yaml

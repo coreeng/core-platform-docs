@@ -18,6 +18,7 @@ Default node pools hosting system pods run on standard VMs.
 These instances work by using Compute Engine (CE) excess capacity. When CE needs to use some of that capacity for example during zonal outages, it will shut down those instances to free up capacity.
 
 ### Limitations
+
 - Spot instances are only available for [supported machine types](https://cloud.google.com/compute/docs/machine-resource#spot-machine-types)
 - Spot instances are not always available
 - Not covered by any Service Level Agreement (SLA)
@@ -30,6 +31,7 @@ To see more, check out [spot limitations](https://cloud.google.com/compute/docs/
 ## Cost comparison
 
 The following parameters are provided for node pools:
+
 - Number of instances: `5`
 - Machine Type: `e2-standard-2`
 - Boot Disk Type: `standard persistent disk`
@@ -45,6 +47,7 @@ Spot VMs: $138
 Spot prices can change up to once every 30 days, but discounts for relevant resources are always in the 60-91% range.
 
 ## Best Practices
+
 Following points are recommended when running spot instances:
 
 - Pick smaller instance types to have a better chance of getting capacity

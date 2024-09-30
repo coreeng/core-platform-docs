@@ -7,7 +7,7 @@ pre = ""
 
 The platform supports running wide range of workloads while keeping its base cost low. It provides autoscaling capabilities to adjust the capacity of the cluster to handle flucations in traffic. When the traffic goes down, the cluster reduces to normal size.
 
-When running our platform on GCP/GKE we choose to operate clusters in [Standard mode](https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters#modes). 
+When running our platform on GCP/GKE we choose to operate clusters in [Standard mode](https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters#modes).
 You can read more about [pricing for Standard mode](https://cloud.google.com/kubernetes-engine/pricing#standard_mode) clusters.
 To generate a cost estimate based on your usage, use the [pricing calculator](https://cloud.google.com/products/calculator).
 
@@ -45,11 +45,13 @@ Enabling autoscaling will enforce 1 node to be present in the pool at all times 
 Node Auto-Provisioning (NAP) is used to manage node pools. It allows us to support workloads with various CPU and memory requests by creating node pools with optimal machine types.
 
 In order to enable Node Auto-Provisioning you should specify:
+
 - **number of CPU cores** for the whole cluster
 - **number of gigabytes of memory** for the whole cluster
 - **autoscaling profile**
 
 Available [Autoscaling Profiles](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler#autoscaling_profiles):
+
 - `BALANCED`: The default profile for Standard clusters that prioritises keeping resources available for incoming pods.
 - `OPTIMIZE_UTILIZATION`: Prioritise optimizing utilization over keeping spare resources in the cluster. The cluster autoscaler scales down the cluster more aggressively. GKE can remove more nodes, and remove nodes faster.
 
@@ -81,6 +83,7 @@ cluster:
 This is discouraged, but available for users for which the default pool doesn't work.
 
 Node pools need:
+
 - machine type, e.g. `e2-standard-4`
 - range for the number of nodes in the pool.
 - optional taints and labels
@@ -127,6 +130,7 @@ that needs to scale quickly to be able to handle traffic spikes.
 ### Solution
 
 ### Overprovisioning
+
 Can be configured using deployment running pause pods with very low assigned priority (see [Priority Preemption](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/)) which keeps resources that can be used by other pods.
 If there is not enough resources then pause pods are preempted and new pods take their place.
 Next pause pods become unschedulable and force CA to scale up the cluster.
@@ -135,6 +139,6 @@ For more details refer to [FAQ: How can I configure overprovisioning with Cluste
 
 ### Platform Cost vs Autoscaling Speed
 
-Cluster Overprovisioning will make the scheduling of new Pods faster, but may require additional costs. 
+Cluster Overprovisioning will make the scheduling of new Pods faster, but may require additional costs.
 
 There is a choice between keeping the operational cost of the platform low and reserving additional resources for faster autoscaling.

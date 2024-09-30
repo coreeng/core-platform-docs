@@ -6,7 +6,7 @@ pre = ""
 +++
 
 
-When deploying an application to the platform we need to make sure that it has enough resources to operate correctly. 
+When deploying an application to the platform we need to make sure that it has enough resources to operate correctly.
 By the word *resources* we usually mean CPU and memory.
 
 Kubernetes allows us to set up `requests` and `limits` for the resources:
@@ -18,9 +18,9 @@ Kubernetes allows us to set up `requests` and `limits` for the resources:
 |:-----------------------------------------------------------------------------------------------------------------|
 | **We recommend every critical workload has CPU and memory requests. Otherwise you aren't guaranteed any resources.** |
 
-The Kubernetes scheduler uses **resource requests** to select a node for a Pod to run on. 
-Each node has a maximum capacity for each of the resource types: the amount of CPU and memory it can provide for Pods. 
-The scheduler ensures that, for each resource type, the `sum of the resource requests of the scheduled containers is less than the capacity of the node`. 
+The Kubernetes scheduler uses **resource requests** to select a node for a Pod to run on.
+Each node has a maximum capacity for each of the resource types: the amount of CPU and memory it can provide for Pods.
+The scheduler ensures that, for each resource type, the `sum of the resource requests of the scheduled containers is less than the capacity of the node`.
 
 Defining **resource limits** helps ensure that containers never use all available underlying infrastructure provided by nodes.
 
@@ -28,7 +28,7 @@ Defining **resource limits** helps ensure that containers never use all availabl
 
 Defining both requests and limits for memory ensures balanced control over consumption.
 If the application exceeds the memory limit then it is being terminated due to Out Of Memory condition (OOMKilled).
-This means that either the limit is too low or there is a memory leak that needs to be investigated. 
+This means that either the limit is too low or there is a memory leak that needs to be investigated.
 
 ```yaml
   resources:
@@ -36,7 +36,7 @@ This means that either the limit is too low or there is a memory leak that needs
       memory: 50Mi
     limits:
       memory: 100Mi
-``` 
+```
 
 ## CPU Requests
 

@@ -11,4 +11,3 @@ pre = ""
 * [Setup Alerts](./setup-alerts)
 * [Exclude Logs](./exclude-logs)
 * [Sync ArgoCD App](./sync-argocd-app)
-

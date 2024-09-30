@@ -13,10 +13,9 @@ Spot instances are not recommended for running workloads that are not fault tole
 Spot works well if you need to cut down costs for your clusters. See [minimising costs](../minimise-costs).
 {{% /notice %}}
 
-
 ## Cluster setup with minimal costs
-Create a cluster with Spot instances, HDD disk and `e2-medium` disk type.
 
+Create a cluster with Spot instances, HDD disk and `e2-medium` disk type.
 
 ```yaml
 cluster:

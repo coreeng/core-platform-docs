@@ -6,6 +6,7 @@ pre = ""
 +++
 
 ## Benefits
+
 * Easy setup
 * Integration with existing Cloud Security methods (IAM Auth etc)
 * Less human resources involved in setting them up
@@ -16,6 +17,7 @@ pre = ""
 * Out of the box data encryption, which is a requirement for things like PCI
 
 ## Disadvantages
+
 * Vendor locked
 * Less configurable compared to self hosted
 * Higher running cost

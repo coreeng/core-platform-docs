@@ -1,0 +1,9 @@
+*
+!.git
+!.markdownlint-cli2.yaml
+!assets
+!content
+!hugo.toml
+!layouts
+!run.sh
+!themes

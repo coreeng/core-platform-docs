@@ -10,6 +10,7 @@ This uses beta features in the platform and breaking changes may occur in the fu
 {{% /notice %}}
 
 ## Create middleware
+
 {{% notice note %}}
 If on your resource you come across a `middleware.traefik.containo.us`, that is an older version of Treaefik's CRD. It will be deprecated in the future.
 {{% /notice %}}
@@ -66,11 +67,13 @@ After you apply this, only users with whitelisted IPs will be able to use that i
 ## Debugging
 
 ### Dashboard
+
 To validate that your Middleware has been applied successfully, check the Traefik Dashboard and ensure that it contains no errors.
 
 {{< figure src="/images/app/how-to/traefik-ipwhitelist-dashboard.png" title="Traefik Dashboard" >}}
 
 ### Logs
+
 Check traefik logs to see whether request is being whitelisted:
 
 {{< figure src="/images/app/how-to/traefik-logs.png" title="Traefik Logs" >}}

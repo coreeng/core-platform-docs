@@ -16,21 +16,20 @@ For further information on this subject, take a look at [this](https://cloud.goo
 
 Without going into too much depth, there are currently 3 Release Channels:
 
-#### RAPID
+### RAPID
 
 This channel delivers the absolute latest features, but with the caveat that these features may not be fully proven in
 production environments. It's ideal for staying on the bleeding edge but comes with potential risks.
 
-#### REGULAR
+### REGULAR
 
 This is the default option and strikes a balance between providing new features and ensuring stability.
 Upgrades happen every few weeks, giving you access to new features without being the first adopter.
 
-#### STABLE
+### STABLE
 
 This channel prioritizes stability and only receives the most well-tested updates. Upgrades occur less frequently than
 the Regular channel, making it suitable for production workloads requiring maximum uptime and reliability
-
 
 #### Not subscribing to a release channel
 
@@ -40,12 +39,12 @@ though is explicitly define the release channel to either `null` or `unspecified
 GKE will still upgrade your clusters on a scheduled basis, usually move them on to the next minor version, and apply security patches.
 There's various pros and cons to not being subscribed, but some key points are:
 
-**Benefits**
+##### Benefits
 
 * More control over the timing of your upgrades
 * Can stay on a specific Kubernetes version for a longer time
 
-**Drawbacks**
+##### Drawbacks
 
 * Manual management is required, you will have to keep an eye out for newer Kubernetes versions and security patches and apply those yourself
 * Some security risks are also involved as if you don't update in a timely manner your cluster might become vulnerable to security exploits.
@@ -55,7 +54,8 @@ There's various pros and cons to not being subscribed, but some key points are:
 We are currently subscribed to the `REGULAR` channel.
 
 #### Our Kubernetes version
-We dynamically source our Kubernetes versions, via a datasource with version prefix filtering. 
+
+We dynamically source our Kubernetes versions, via a datasource with version prefix filtering.
 
 The below is responsible for fetching versions that match the provided prefix.
 
@@ -76,25 +76,24 @@ kubernetes_version = data.google_container_engine_versions.region_versions.relea
 The `kubernetes_version` field is then implicitly mapped to the `min_master_version` field, since as mentioned [above](#background-on-gke-versions) you can't
 explicitly declare a Kubernetes version, you can only declare the minimum you want installed in a cluster.
 
-
 ## Control Plane Upgrades
 
 When a control plane update takes place, during a maintenance window or through a manual update, some downtime could be expected,
 depending on the `Location` type of your cluster.
 
-#### Zonal
+### Zonal
 
 The Zonal Kubernetes clusters only have one master node backing them, and when an upgrade is taking place, there could be
 several minutes of master downtime. This means that `kubectl` stops working, and applications that require the Kubernetes API stop working.
 You also can't make any cluster changes while the upgrade is taking place. Deployments, services and various other Kubernetes constructs still work during this time.
 
-#### Regional
+### Regional
 
 Regional clusters provide multi-zone, highly available Kubernetes masters (3 Zones). These masters are behind a loadbalancer, and upgrades
 are being done in such a way that there is no disruption during an upgrade. The masters are upgraded once at a time, in no specific
 order, and each one of the masters is unavailable only during it's upgrade duration.
 
-#### Our Location Type
+### Our Location Type
 
 We utilize `Regional` clusters, meaning that downtime should be kept to the minimum while upgrading the control plane.
 
@@ -115,7 +114,7 @@ Some factors that could affect the overall duration of the upgrade:
 * [Node Affinity interactions](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
 * Attached Persistent Volumes (Detachment/Reattachment can take time)
 
-#### The SURGE strategy
+### The SURGE strategy
 
 This strategy upgrades nodes in a rolling fashion. Nodes are drained of traffic, upgraded,
 and brought back online while the remaining nodes continue handling traffic. Steps include:
@@ -127,38 +126,39 @@ and brought back online while the remaining nodes continue handling traffic. Ste
 
 Keep in mind that resources need to be available for the new surge nodes to come up, otherwise GKE won't start a node upgrade.
 
-**Primary Pros**
+#### Primary Pros
 
 * Cost-effective
 * Simpler
 * Faster
 
-**Primary Cons**
+#### Primary Cons
 
 * Potential Downtime (Apps running on the drained nodes)
 * No easy rollback (Requires manual downgrading of the affected nodes)
 * Main audience should be stateless applications (Where disruptions are more tolerated)
 
-#### The BLUE-GREEN strategy
+### The BLUE-GREEN strategy
 
 This strategy involves GKE creating a new set of node resources (the "green" nodes), with the new node configuration before
 evicting any workloads on the original resources (the "blue" nodes). It's important to note that GKE will keep the "blue" nodes until
 all traffic have been shifted to the "green" nodes.
 
-**Primary Pros**
+#### Primary Pros
 
 * Rollback mid upgrade if issues arise are possible
 * A safe space(green) for testing out the release
 * As close to 0 downtime as possible
 
-**Primary Cons**
+#### Primary Cons
 
 * Significant cost
 * Complexity
 * Need to have much higher quota headroom than `SURGE` to work properly
 
-#### Our node upgrade strategy
-Both strategies have their use cases. In our case, 
+### Our node upgrade strategy
+
+Both strategies have their use cases. In our case,
 we use the `SURGE` strategy, with `max_surge` set to 1 and `max_unavailable` set to 0.
 What this means is that only one surge node is added at a time, thus one node is being upgraded, at a time. Also, pods can restart immediately
 on the new surge node.
@@ -166,9 +166,9 @@ on the new surge node.
 A `SURGE` strategy with the `max_surge` and `max_unavailable` values we use, is typically the slowest of the bunch (still much quicker that `blue-green`),
 but the least disruptive. By tweaking those 2 values you can balance speed and disruption potential.
 
-#### Our node versions
+### Our node versions
 
-We do not explicitly set any version for our nodes, but we have 
+We do not explicitly set any version for our nodes, but we have
 
 ```terraform
 auto_upgrade  = true

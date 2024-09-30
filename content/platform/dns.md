@@ -9,7 +9,7 @@ The Core Platform supports as many DNS Zones for regular Ingress.
 
 Configure them in environment config.yaml e.g.
 
-```
+```yaml
 ingress_domains:
   - name: default
     domain: "gcp-dev.cecg.platform.cecg.io"
@@ -20,13 +20,13 @@ ingress_domains:
 Before Ingress can function, you must delegate the configured zone to the Google nameservers.
 These nameservers are not fixed, and can be seen after deployment of platform Ingress with the following command:
 
-```
+```shell
 kubectl -n platform-ingress get dnsmanagedzones.dns.cnrm.cloud.google.com -o=jsonpath='{.items[0].status.nameServers}'
 ```
 
 The output will look something like:
 
-```
+```shell
   * ns-cloud-e1.googledomains.com.
   * ns-cloud-e2.googledomains.com.
   * ns-cloud-e3.googledomains.com.
@@ -35,9 +35,9 @@ The output will look something like:
 
 Once you have these values setup NS records in your DNS provider's configuration e.g.:
 
-```
-Type: NS	
-Name: gcp-pre-dev.cecg.platform	
+```yaml
+Type: NS 
+Name: gcp-pre-dev.cecg.platform 
 Value: 
   * ns-cloud-e1.googledomains.com.
   * ns-cloud-e2.googledomains.com.
@@ -55,7 +55,7 @@ The domains follow this structure:
 
 `<env>.<name>.platform.cecg.io`
 
-`<name>` the name of the set of environments. Each set of environment typically is made up of pre-dev, dev, prod. 
+`<name>` the name of the set of environments. Each set of environment typically is made up of pre-dev, dev, prod.
 
 `<env>` is the environment name within a Core Platform.
 
