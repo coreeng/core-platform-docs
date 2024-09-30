@@ -21,12 +21,14 @@ RUN apk add --no-cache git
 WORKDIR /site
 
 # Copy the source files
-COPY content ./content
-COPY layouts ./layouts
-COPY assets ./assets
-COPY themes ./themes
-COPY hugo.toml ./hugo.toml
-COPY run.sh ./run.sh
+COPY . .
+
+# Run the linter, but don't add it to the build
+RUN apk add --no-cache npm && \
+    npm install markdownlint-cli2 --global && \
+    markdownlint-cli2 && \
+    npm uninstall markdownlint-cli2 --global && \
+    apk del npm
 
 # Set ownership and permissions
 RUN chown -R hugo:hugo /site

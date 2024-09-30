@@ -19,14 +19,8 @@ jobs:
     secrets:
       git-token: ${{ secrets.GITHUB_TOKEN }}
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: DavidAnson/markdownlint-cli2-action@v17
-
   fastfeedback:
-    needs: [version, lint]
+    needs: [version]
     uses: coreeng/p2p/.github/workflows/p2p-workflow-fastfeedback.yaml@v1
     with:
       version: ${{ needs.version.outputs.version }}

@@ -84,7 +84,7 @@ create-ns-functional: ## Create namespace for functional tests
 .PHONY: service-build
 service-build:
 	docker build --file Dockerfile --tag $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag) .
-	
+
 .PHONY: service-push
 service-push: ## Push the service image
 	docker image push $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag)
