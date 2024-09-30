@@ -15,9 +15,11 @@ release: "0.26.0"
 environment: "gcp-dev"
 ...
 ```
+
 ## v0.26.0
 
 ### What's Changed
+
 * Update dependencies by @kkonstan
 * Explicitly set cpu_policy_manager to the default by @kkonstan
 * Update tf modules by @kkonstan
