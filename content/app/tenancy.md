@@ -52,6 +52,8 @@ corectl config update
 
 {{% notice note %}}
 Groups need to be in the `gke-security-groups` group!
+If you are a new tenant the the platform, you should create new admin and readOnly groups and either ask a platform operator to add them
+to `gke-security-groups` or add those groups to an already existing member of that group like `platform-readonly`.
 {{% /notice %}}
 
 ## Accessing your namespaces
