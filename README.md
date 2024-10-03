@@ -24,5 +24,5 @@ You can use `markdownlint-cli2` to check your changes, this is the linter used b
 
 ```shell
 npm install markdownlint-cli2 --global
-markdownlint-cli2
+make lint
 ```

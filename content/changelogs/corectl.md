@@ -10,20 +10,22 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
-
 ## v0.25.2
 
 ### What's Changed
+
 * Add --dry-run support to `app create` and `tenant create`,  add logging to git, github, and filesystem operations. Add Wizard component. Rework bubbletea component hierarchy by @Malet
 
 ## v0.25.1
 
 ### What's Changed
+
 * bug(app-create): Fix issue when creating an app in monorepo is not possible, because it couldn't create relative path from absolute and relative path. by @Mugenor
 
 ## v0.25.0
 
 ### What's Changed
+
 * App create catch error by @nzacharia
 * feat(cmd): add release version command by @Malet
 * chore(deps): update developer-platform dependency by @Malet
@@ -33,22 +35,26 @@ From connecting to cluster, creating templated applications and a lot more!
 ## v0.24.1
 
 ### What's Changed
-* fix: correctly allow creation of monorepo app by @lukasz-kaniowski 
+
+* fix: correctly allow creation of monorepo app by @lukasz-kaniowski
 
 ## v0.24.0
 
 ### What's Changed
-* feature: convenience commands by @Mugenor 
+
+* feature: convenience commands by @Mugenor
 
 ## v0.23.1
 
 ### What's Changed
+
 * feature(template-parameters): Support custom template parameters by @Mugenor
 * Set working_directory and version_prefix arguments for monorepo flow by @lukasz-kaniowski
 
 ## v0.23.0
 
 ### What's Changed
+
 * 395: improve error messages on init command by @tombart
 * updated developer-platform lib to latest by @tombart
 * export env variables required to run onboarded apps p2p makefile targets by @tombart
@@ -61,12 +67,14 @@ From connecting to cluster, creating templated applications and a lot more!
 ## v0.20.0
 
 ### What's Changed
+
 * Make env connect env argument optional by @chbatey
 * p2p promote command by @lukasz-kaniowski
 
 ## v0.18.1
 
 ### What's Changed
+
 * bug(tenant-create): multiselect pickers were not shown by @Mugenor
 * feature(cfg): Remove tenant from config by @Mugenor
 * feature(connect): Small fixes to env-connect by @Mugenor
@@ -74,6 +82,7 @@ From connecting to cluster, creating templated applications and a lot more!
 ## v0.18.0
 
 ### What's Changed
+
 * LICENCE and README by @chbatey
 * feat(env): add list command by @SennaSemakula
 * feat(env): connect to environment command by @SennaSemakula
@@ -85,6 +94,7 @@ From connecting to cluster, creating templated applications and a lot more!
 ## v0.11.1
 
 ### What's Changed
+
 * Initial implementation by @Mugenor
 * add INTERNAL_DOMAIN to envs by @SergeiSizov
 * change to INTERNAL_SERVICES_DOMAIN after discussions by @SergeiSizov
