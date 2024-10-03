@@ -15,4 +15,4 @@ Click the links to go to each section.
 
 ### [Path to Production](p2p.md)
 
-### [Path to Production](corectl.md)
+### [Corectl](corectl.md)
