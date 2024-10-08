@@ -43,7 +43,7 @@ You also need to create a service account that will be used by the CSI Driver an
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .cloudAccess.kubernetesServiceAccount.name }}
+  name: {{ .cloudAccess.kubernetesServiceAccount.name }} #"sa" for cloud access page example
   namespace: {{ .namespace }}
   annotations:
     # if you use GCP Secret Manager as your secret store, you need to impersonate cloudAccess service account,
@@ -61,7 +61,7 @@ metadata:
   name: mypod
   namespace: {{ .namespace }}
 spec:
-  serviceAccountName: {{ .cloudAccess.kubernetesServiceAccount.name }}
+  serviceAccountName: {{ .cloudAccess.kubernetesServiceAccount.name }} #"sa" for cloud access page example
   containers:
   - image: alpine:3
     name: mypod
@@ -82,6 +82,11 @@ spec:
         # Reference the SecretProviderClass created above
         secretProviderClass: "app-secrets"
 ```
+
+{{% notice note %}}
+All of the above will need a service account in each of the namespaces the app will be deployed to, so if using the standard p2p, and helm it would make sense to configure these all as a helm chart templates with the app (the project ID and number should be parameterised if the app is deployed to multiple environments). This will ensure it is created correctly for e.g. <app>-functional, <app>-nft  etc. sub-namespaces
+{{% /notice %}}
+
 
 ## Creating a secret
 
