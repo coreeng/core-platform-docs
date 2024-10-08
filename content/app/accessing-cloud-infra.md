@@ -60,7 +60,7 @@ metadata:
 ```
 
 {{% notice note %}}
-You will need a service account in each of the namespaces the app will be deployed to, so if using the standard p2p, and helm it would make sense to configure this as a helm chart template with the app (the project ID should be parameterised if the app is deployed to multiple environments).  This will ensure it is created correctly for e.g. <app>-functional, <app>-nft etc. sub-namespaces 
+You will need a service account in each of the namespaces the app will be deployed to, so if using the standard p2p, and helm it would make sense to configure this as a helm chart template with the app (the project ID should be parameterised if the app is deployed to multiple environments).  This will ensure it is created correctly for e.g. app-functional, app-nft etc. sub-namespaces.
 {{% /notice %}}
 
 Your pods should use this service account, then anytime they use a Google Cloud library they will assume the identity of the service account.

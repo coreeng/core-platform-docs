@@ -84,9 +84,8 @@ spec:
 ```
 
 {{% notice note %}}
-All of the above will need a service account in each of the namespaces the app will be deployed to, so if using the standard p2p, and helm it would make sense to configure these all as a helm chart templates with the app (the project ID and number should be parameterised if the app is deployed to multiple environments). This will ensure it is created correctly for e.g. <app>-functional, <app>-nft  etc. sub-namespaces
+All of the above will need a service account in each of the namespaces the app will be deployed to, so if using the standard p2p, and helm it would make sense to configure these all as a helm chart templates with the app (the project ID and number should be parameterised if the app is deployed to multiple environments). This will ensure it is created correctly for e.g. app-functional, app-nft  etc. sub-namespaces.
 {{% /notice %}}
-
 
 ## Creating a secret
 
