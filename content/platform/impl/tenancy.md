@@ -26,6 +26,7 @@ root
 │   └── golang
 │       ├── [s] golang-functional
 │       └── [s] golang-nft
+│       └── [s] golang-integration
 └── tenants
     ├── cecg-playground
     └── devops-playground

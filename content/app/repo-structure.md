@@ -49,6 +49,7 @@ app-tenant
 ├── [s] app-tenant-extended
 ├── [s] app-tenant-functional
 └── [s] app-tenant-nft
+└── [s] app-tenant-integration
 
 [s] indicates subnamespaces
 ```
@@ -125,10 +126,12 @@ parent-tenant
 │   ├── [s] app1-extended
 │   ├── [s] app1-functional
 │   └── [s] app1-nft
+│   └── [s] app1-integration
 └── app2-tenant
     ├── [s] app2-extended
     ├── [s] app2-functional
     └── [s] app2-nft
+    └── [s] app2-integration
 
 [s] indicates subnamespaces
 ```
@@ -140,7 +143,7 @@ Key aspects:
    - Each application has its own child tenant.
 
 2. Isolated Testing Environments:
-   - Subnamespaces are created for different testing stages (extended, functional, nft) within each application's
+   - Subnamespaces are created for different testing stages (extended, functional, nft, integration) within each application's
      tenant.
 
 3. Authentication:
@@ -203,7 +206,7 @@ Key features:
 
 2. Consolidated Testing:
    - Tests are conducted at the workload level, encompassing all applications.
-   - The `tests/` directory includes subdirectories for different testing phases: `functional/`, `extended/`, and `nft/` (non-functional tests).
+   - The `tests/` directory includes subdirectories for different testing phases: `functional/`, `extended/`, `integration/` and `nft/` (non-functional tests).
 
 3. Unified Helm Chart:
    - A single Helm chart (`helm-charts/coupled-workload/`) is used for the entire workload.
@@ -224,6 +227,7 @@ parent-tenant
     ├── [s] coupled-workload-extended
     ├── [s] coupled-workload-functional
     └── [s] coupled-workload-nft
+    └── [s] coupled-workload-integration
 
 [s] indicates subnamespaces
 ```
@@ -235,7 +239,7 @@ Key aspects:
    - The coupled workload has a single child tenant, promoting unified resource management.
 
 2. Shared Namespace Environments:
-   - Subnamespaces are created for different testing environments (extended, functional, nft) within the coupled workload tenant.
+   - Subnamespaces are created for different testing environments (extended, functional, nft, integration) within the coupled workload tenant.
    - All applications in the workload share these namespaces, facilitating integrated testing and deployment.
 
 3. Resource Isolation:

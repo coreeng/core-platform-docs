@@ -22,7 +22,7 @@ A tenancy can be used to configure:
 
 - resource quotas for a tenant and it's children
 - access control via network policies on a per-tenant basis. (e.g. granting another tenancy network access to your tenant)
-- a shared prometheus instance for a tenant and it's children
+- a shared prometheus instance for a tenant and its children
 
 ### Adding a tenancy
 

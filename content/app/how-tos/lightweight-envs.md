@@ -18,12 +18,13 @@ myfirsttenancy
 ├── [s] myfirsttenancy-dev
 ├── [s] myfirsttenancy-functional
 └── [s] myfirsttenancy-nft
+└── [s] myfirsttenancy-integration
 
 [s] indicates subnamespaces
 ```
 
 > Note:
-> those `myfirsttenancy-[dev|functional|nft]` namespaces are [lightweight environments](#creating-additional-lightweight-environments).
+> those `myfirsttenancy-[dev|functional|nft|integration]` namespaces are [lightweight environments](#creating-additional-lightweight-environments).
 > You might not have those in the output if you didn't create them.
 
 > Note: Instruction for installing the `hns` plugin for `kubectl` can be found [here](https://github.com/kubernetes-sigs/hierarchical-namespaces/releases)
@@ -35,7 +36,8 @@ You have permission to create as many lightweight environments in your tenancy.
 All reference apps create at least:
 
 * functional - for stubbed functional tests
-* nft - for stubbed functional tests
+* nft - for stubbed non-functional tests
+* integration - for integration tests
 
 Typically, all lightweight environments are created in your dev cluster and only
 a single namespace per application is in production.
