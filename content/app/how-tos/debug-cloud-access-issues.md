@@ -28,7 +28,7 @@ image:
 apiVersion: v2
 name: gcloud-debug-pod
 version: 0.1.0
-description: A simple debug pod for running gcloud commands using the wow service account
+description: A simple debug pod for running gcloud commands using the cloud access service account
 ```
 
 #### templates/debug-pod.yaml
