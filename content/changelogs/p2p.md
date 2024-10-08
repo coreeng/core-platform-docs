@@ -17,6 +17,12 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.47
+
+### What's Changed
+
+* Migrate to PLATORM_ENVIRONMENT  by @chbatey
+
 ## v1.6.46
 
 ### What's Changed

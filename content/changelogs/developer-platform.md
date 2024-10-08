@@ -10,11 +10,29 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.26.0"
+release: "0.26.2"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.26.2
+
+### What's Changed
+
+* fix(kubewarden): set correct version numbers by @Malet
+* Create platform priority classes by @tmcalves
+* Fix priority class values to max value by @tmcalves
+* Cilium taints by @nzacharia
+* Fix platform-monitor indentation template by @tmcalves
+* Sandbox nodepool config by @Malet
+* fix(tests): skip autoscaling func test when config is disabled by @Malet
+
+## v0.26.1
+
+### What's Changed
+
+* fix(bastion): fix bug with IAP permissions being lost after platform … by @Malet
 
 ## v0.26.0
 
