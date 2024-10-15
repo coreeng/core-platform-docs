@@ -48,6 +48,6 @@ p2p-build: docker-login build-docker ## Builds the service image and pushes it t
 
 .PHONY: docker-login
 docker-login: # Login to docker
-	echo $(DOCKERHUB_PAT) | docker login -u $(DOCKERHUB_USER) --password-stdin
+  echo $(DOCKERHUB_PAT) | docker login -u $(DOCKERHUB_USER) --password-stdin
 
 ```
