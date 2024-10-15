@@ -17,6 +17,24 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.50
+
+### What's Changed
+
+* chore(iapc): Use original iapc repo instead of our fork, since we got our fix merged by @Mugenor
+
+## v1.6.49
+
+### What's Changed
+
+* features(iap): PoC – migrate to iapc tool since default gcloud iap tunnel is unstable by @Mugenor
+
+## v1.6.48
+
+### What's Changed
+
+* Tweak Platform matrix pattern by @tmcalves
+
 ## v1.6.47
 
 ### What's Changed

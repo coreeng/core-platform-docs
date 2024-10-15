@@ -10,11 +10,23 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.26.2"
+release: "0.26.4"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.26.4
+
+### What's Changed
+
+* feat(adr): add ADR for IAP IAM permissions by @Malet
+* Rework rebuild by @tmcalves
+* Add a per-environment lock for deploying/destroying environments by @kkonstan
+* Add network viewer role by @tmcalves
+* features(iap): PoC – test go-iapc tool stability, since default gcloud iap tunnel is unstable by @Mugenor
+* adjust time for flaky alerts by @nzacharia
+* chore(iap): mention `iapc` in CONTRIBUTING.md by @Mugenor
 
 ## v0.26.2
 
