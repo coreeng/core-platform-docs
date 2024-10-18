@@ -26,13 +26,20 @@ First, you're going to need some information as pre-requisites:
 
 ## Creating the project
 
-With the above data, using gcloud is the easiest to create a new project. You can run
+With the above data, using gcloud is the easiest way to create a new project. 
+
+{{% notice warning %}}
+If you don't have permissions to run this, you might need to reach out to your Platform Operator or Cloud Administrator.
+{{% /notice %}}
+
+
+You can do these by running the commands:
 
 ```sh
 
 gcloud projects create ${NEW_PROJECT_ID} --billing-project ${PROJECT_ID}  --folder ${FOLDER_ID}
 
-```sh
+```
 
 Don't let the parameter name `--billing-project` confuse you into thinking this will be the billing-account id, that's for the next step.
 
