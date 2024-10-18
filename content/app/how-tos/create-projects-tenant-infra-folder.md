@@ -26,12 +26,11 @@ First, you're going to need some information as pre-requisites:
 
 ## Creating the project
 
-With the above data, using gcloud is the easiest way to create a new project. 
+With the above data, using gcloud is the easiest way to create a new project.
 
 {{% notice warning %}}
 If you don't have permissions to run this, you might need to reach out to your Platform Operator or Cloud Administrator.
 {{% /notice %}}
-
 
 You can do these by running the commands:
 
