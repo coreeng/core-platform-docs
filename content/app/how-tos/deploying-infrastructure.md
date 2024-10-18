@@ -60,7 +60,7 @@ Infrastructure code should implement the steps of the P2P. But who do these work
 The build phase should package the whole infrastructure code in a docker image. That image should be versioned and pushed to the platform provided registry.
 This image should have everything it needs to successfully deploy the infrastructure, meaning Terraform, Terragrunt, etc..
 
-### p2p-function / p2p-nft
+### p2p-function / p2p-nft / p2p-integration
 
 These steps should pull the image that was just pushed in the p2p-build. It then should do a `docker run` with passing different args.
 

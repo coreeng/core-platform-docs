@@ -20,7 +20,7 @@ cloudAccess:
 
 * `name`: Use a short name for the cloud access, with letters and `-`s (32 character limit). For CloudSQL, this will be your IAM SA username.
 * `provider`: only `gcp` is currently supported.
-* `kubernetesServiceAccounts`: a list of kubernetes service accounts that will be allowed to access the cloud infrastructure in the format `namespace/name` e.g. the service account `cat` in the namespace `myfirsttenancy` using the P2P should have `myfirsttenancy-functional/cat`, `myfirsttenancy-nft/cat`, `myfirsttenancy-prod/cat` and whatever other namespace you need.
+* `kubernetesServiceAccounts`: a list of kubernetes service accounts that will be allowed to access the cloud infrastructure in the format `namespace/name` e.g. the service account `sa` in the namespace `myfirsttenancy` using the P2P should have `myfirsttenancy-functional/sa`, `myfirsttenancy-nft/sa`, `myfirsttenancy/sa`, `myfirsttenancy/sa` and whatever other namespace you need.
 * `environment` is be used to specify the environment in which this specific Cloud Access configuration will be deployed. To deploy it in all of the environments where the tenant is configured, you can use the keyword `all` as the environments value.
 
 In your parent namespace (the one named after your tenancy run) run:
@@ -44,19 +44,21 @@ This gives us an IAM Service Account that any permissions can be added to in you
 myfirsttenancy-ca@{{ project-id }}.iam.gserviceaccount.com
 ```
 
-This is your `CLOUD_SERVICE_ACCOUNT``
-
 ### Annotate Kubernetes Service Accounts
 
-To be able to impersonate the above service account, annotate your service account with the
+To be able to impersonate the above service account, annotate your service account with the IAM Service Account. For example:
 
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: NAME
+  name: sa # (the name of the configured kubernetesServiceAccount, after the /)
   annotations:
-    iam.gke.io/gcp-service-account: CLOUD_SERVICE_ACCOUNT
+    iam.gke.io/gcp-service-account: myfirsttenancy-ca@{{ project-id }}.iam.gserviceaccount.com
 ```
+
+{{% notice note %}}
+You will need a service account in each of the namespaces the app will be deployed to, so if using the standard p2p, and helm it would make sense to configure this as a helm chart template with the app (the project ID should be parameterised if the app is deployed to multiple environments).  This will ensure it is created correctly for each sub-namespace (e.g. app-functional, app-nft etc.).
+{{% /notice %}}
 
 Your pods should use this service account, then anytime they use a Google Cloud library they will assume the identity of the service account.

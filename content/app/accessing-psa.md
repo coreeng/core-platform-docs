@@ -24,3 +24,5 @@ This allows you to configure projects to be attached to the current one's shared
   This attachment is unique, you can only attach your project to a single other project.
 {{% /notice %}}
 This means that if you want to have your databases in `dev` and `prod` environments for example, your tenant will need 2 GCP projects to attach to each environment.
+
+This will share the core platform network with the <project_id> configured. It is then necessary to configure resources in that project to explicitly use the shared network. This will then mean they will be reachable from the core platform.
