@@ -1,7 +1,6 @@
-
 +++
 title = "Create GCP Project for Tenant Infrastructure"
-weight = 3
+weight = 4
 chapter = false
 pre = ""
 +++
@@ -19,24 +18,32 @@ On that folder, each tenant can create different GCP projects where they can cre
 # How?
 
 First, you're going to need some information as pre-requisites:
+
 * Knowing the parent project (projectId in environments config.yaml) - `PROJECT_ID`
 * Knowing the folder ID of the tenant-infra folder  - `FOLDER_ID`
 * Know the billing account ID. This can be an existing one, or you can create a new one via the UI - `BILLING_ACCOUNT_ID`
 * Have a unique name for the new project. If it's not unique the creating command with fail and you can try another name. - `NEW_PROJECT_ID`
 
 ## Creating the project
+
 With the above data, using gcloud is the easiest to create a new project. You can run
+
 ```sh
+
 gcloud projects create ${NEW_PROJECT_ID} --billing-project ${PROJECT_ID}  --folder ${FOLDER_ID}
-```
+
+```sh
 
 Don't let the parameter name `--billing-project` confuse you into thinking this will be the billing-account id, that's for the next step.
 
 ## Associating Billing Account
 
 You now can link the billing account to it:
-```
+
+```sh
+
 gcloud billing projects link ${NEW_PROJECT_ID} --billing-account=${BILLING_ACCOUNT_ID}
+
 ```
 
 And that's it! The project is now ready to have infrastructure
@@ -44,6 +51,7 @@ And that's it! The project is now ready to have infrastructure
 # Next steps
 
 For next steps, you can follow up with:
+
 * [How to Deploy Infrastructe with P2P](./deploying-infrastructure.md)
 * [Connect to CloudSQL](./connect-to-cloudsql.md)
 * [Connect to MemoryStore(Redis)](./connect-to-memstore.md)
