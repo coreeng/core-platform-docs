@@ -41,6 +41,11 @@ You'll be prompted for the following information about your new tenant:
 - `adminGroup` - will get permission to do all actions in the created namespaces
 - `readonlyGroup` - will get read-only access to the created namespaces
 
+> *Note*:
+> You are encouraged
+> to use different `adminGroup` and `readonlyGroup` for each tenant because of cloud restrictions and security reasons.
+> Maximum number of duplicated `adminGroup` or `readonlyGroup` is 20.
+
 Once you fill the form, `corectl` will create a PR in the Environments Repo with a new file for the tenancy.
 Once the PR is merged, a configuration for the new tenant will be provisioned automatically.
 
