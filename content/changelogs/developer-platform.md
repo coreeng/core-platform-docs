@@ -10,11 +10,22 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.26.4"
+release: "0.26.5"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.26.5
+
+### What's Changed
+
+chore(iapc): Use original iapc repo instead of our fork, since we got our fix merged by @Mugenor in #608
+bug: fix typo by @Mugenor in #609
+feat(docs): add proposed ADR for change to secret iam by @Malet in #604
+Switch networkViewer with networkUser permission for default group by @tmcalves in #610
+Update dependencies by @kkonstan in #611
+features(tenant): Check for tenant group duplications by @Mugenor in #612
 
 ## v0.26.4
 
