@@ -20,12 +20,12 @@ environment: "gcp-dev"
 
 ### What's Changed
 
-chore(iapc): Use original iapc repo instead of our fork, since we got our fix merged by @Mugenor in #608
-bug: fix typo by @Mugenor in #609
-feat(docs): add proposed ADR for change to secret iam by @Malet in #604
-Switch networkViewer with networkUser permission for default group by @tmcalves in #610
-Update dependencies by @kkonstan in #611
-features(tenant): Check for tenant group duplications by @Mugenor in #612
+* chore(iapc): Use original iapc repo instead of our fork, since we got our fix merged by @Mugenor in #608
+* bug: fix typo by @Mugenor in #609
+* feat(docs): add proposed ADR for change to secret iam by @Malet in #604
+* Switch networkViewer with networkUser permission for default group by @tmcalves in #610
+* Update dependencies by @kkonstan in #611
+* features(tenant): Check for tenant group duplications by @Mugenor in #612
 
 ## v0.26.4
 
