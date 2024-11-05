@@ -27,7 +27,7 @@ A tenancy can be used to configure:
 ### Adding a tenancy
 
 ```shell
-corectl tenant create
+corectl tenants create
 ```
 
 You'll be prompted for the following information about your new tenant:
