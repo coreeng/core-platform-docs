@@ -41,7 +41,7 @@ To start working with `corectl`:
 
 You can find release versions of `corectl` [here](https://github.com/coreeng/corectl/releases).
 
-```bash
+```sh
 VERSION='0.18.0'
 # Darwin is for MacOS, Linux is for Linux
 # Note: Windows is not supported
@@ -60,9 +60,17 @@ sudo mv ./corectl /usr/local/bin/corectl
 
 ### From source
 
-To install `corectl` from source, you need to have [Go](https://go.dev/learn/) installed.
+To install `corectl` from source, you need to have [Go](https://go.dev/learn/) and [golangci-lint](https://golangci-lint.run/) installed.
 
-```bash
+
+### Golangci-lint
+```sh
+# binary will be $(go env GOPATH)/bin/golangci-lint
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.61.0
+golangci-lint --version
+```
+
+```sh
 git clone https://github.com/coreeng/corectl.git
 cd corectl
 make install
@@ -98,7 +106,7 @@ It requires the following:
 
 To run initialization run:
 
-```bash
+```sh
 corectl config init
 ```
 
