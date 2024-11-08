@@ -21,7 +21,7 @@ After running this command, and triggering the resulting GitHub workflow you'll 
 application ready to deploy to production on every commit!
 
 ```shell
-corectl app create <new-app-name> [<new-app-dir>]
+corectl apps create <new-app-name> [<new-app-dir>]
 ```
 
 It will:
@@ -42,7 +42,7 @@ and add the applications as sub-directories.
 First create a new root repository
 
 ```shell
-corectl app create <new-monorepo-name> --tenant <tenant-name> --nonint
+corectl apps create <new-monorepo-name> --tenant <tenant-name> --nonint
 ```
 
 This will create an empty repository with necessary variables preconfigured for the P2P to work.
