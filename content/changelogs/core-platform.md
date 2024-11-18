@@ -1,5 +1,5 @@
 +++
-title = "Developer Platform"
+title = "Core Platform"
 weight = 1
 chapter = false
 pre = ""
