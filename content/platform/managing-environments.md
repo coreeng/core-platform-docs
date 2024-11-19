@@ -27,7 +27,7 @@ python gcp-init.py --help
 
 It is expected to have a single organisation, meaning one set of environments.
 
-Before execute `dplatform-cli` we use any of the commands, we need to generate some Application Default Credentials (ADC):
+Before execute `core-platform-cli` we use any of the commands, we need to generate some Application Default Credentials (ADC):
 
 ```shell
 gcloud auth application-default login
@@ -42,7 +42,7 @@ Before running `root-init`, we need to check some GCP permissions. Before we can
 * `roles/resourcemanager.folderCreator` on the parent
 * `roles/resourcemanager.projectCreator` on the parent
 
-We can now run the `root-init` command from within the `dplatform-cli`:
+We can now run the `root-init` command from within the `core-platform-cli`:
 
 ```shell
 PARENT_FOLDER=??? # e.g. folders/12345
