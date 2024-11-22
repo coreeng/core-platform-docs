@@ -71,9 +71,14 @@ make install
 ## Initialize `corectl`
 
 Before usage, you should initialize `corectl`.
-It requires the following:
+
+The Core Platform stores environment configuration in a git repository within your organisation. Ensure you know this repo before continuing.
+
+Corectl requires the following:
 
 - initialization file: `corectl.yaml`
+
+  The initialisation file for corectl should be located in the root of your environment repo, and you should take a copy of it from there. A generic example follows:
 
   ```yaml
   repositories:
@@ -91,9 +96,7 @@ It requires the following:
       default-envs:
       - <environment_name>
   ```
-
-  This file should be located in the root of your environments repository.
-  You can find an example of this file [here](https://github.com/coreeng/corectl/blob/main/examples/init-example.yaml).
+  
 - your personal GitHub token to perform operations on your behalf. See more info [here](#github-access-token)
 
 To run initialization run:
