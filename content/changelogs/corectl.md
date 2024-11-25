@@ -10,6 +10,12 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
+## v0.26.2
+
+### What's Changed
+
+* Reducing logging level for IAP tunnels
+
 ## v0.25.2
 
 ### What's Changed
