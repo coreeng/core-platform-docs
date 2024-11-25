@@ -10,6 +10,48 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
+## v0.26.2
+
+### What's Changed
+
+* Reducing logging level for IAP tunnels.
+
+## v0.26.1
+
+### What's Changed
+
+* Bump to latest platform.
+* Makefile in style of developer platform.
+* Fix linting, so CI fails.
+
+## v0.26.0
+
+### What's Changed
+
+* Swap out connect implementation to use IAPC.
+
+## v0.25.5
+
+### What's Changed
+
+* Use git shell for pull + push operations.
+
+## v0.25.4
+
+### What's Changed
+
+* Use Tag instead of Version as version label.
+* Validate tenant creation with respect to all other tenants.
+
+## v0.25.3
+
+### What's Changed
+
+* In case coloring was disabled, the internal value was not updated. Fix the condition.
+* Trigger workflow in monorepo only for changed apps.
+* Display skipped task message in case repository is already present in tenant definition.
+* Add update command
+
 ## v0.25.2
 
 ### What's Changed
