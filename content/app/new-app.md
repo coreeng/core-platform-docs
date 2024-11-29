@@ -42,7 +42,7 @@ and add the applications as sub-directories.
 First create a new root repository
 
 ```shell
-corectl apps create <new-monorepo-name> --tenant <tenant-name> --nonint
+corectl apps create <new-monorepo-name> --tenant <tenant-name> --non-interactive
 ```
 
 This will create an empty repository with necessary variables preconfigured for the P2P to work.
