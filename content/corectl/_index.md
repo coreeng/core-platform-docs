@@ -107,7 +107,7 @@ p2p: # path to production configuration
     - <environment_name>
 ```
 
-To run initialization run:
+To  initialise `corectl` run:
 
 ```bash
 corectl config init -f /PATH/TO/corectl.yaml
