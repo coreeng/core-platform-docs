@@ -74,35 +74,43 @@ Before usage, you should initialize `corectl`.
 
 The Core Platform stores environment configuration in a git repository within your organisation. Ensure you know this repo before continuing.
 
-Corectl requires the following:
+You will also need a personal GitHub token to perform operations on your behalf. See more info [here](#github-access-token).
 
-- initialization file: `corectl.yaml`
+### Easy init
 
-  The initialisation file for corectl should be located in the root of your environment repo, and you should take a copy of it from there. A generic example follows:
-
-  ```yaml
-  repositories:
-    cplatform: <environments-git-repo> # [Mandatory] repository clone path with your environments configuration
-    templates: <templates-git-repo> # [Mandatory] repository clone path with your software templates, optionally you can use our template repo: https://github.com/coreeng/core-platform-software-templates.git
-
-  p2p: # path to production configuration
-    fast-feedback: # [Mandatory] p2p stage
-      default-envs: # list of environments to use as a part of the fast-feedback stage, must match env names defined in repositories.cplatform
-      - <environment_name> 
-    extended-test: # [Mandatory] list of environments to use as a part of the extended-test stage, , must match env names defined in repositories.cplatform
-      default-envs:
-      - <eenvironment_name>
-    prod: # [Mandatory] list of environments to use as a part of the prod stage, , must match env names defined in repositories.cplatform
-      default-envs:
-      - <environment_name>
-  ```
-  
-- your personal GitHub token to perform operations on your behalf. See more info [here](#github-access-token)
-
-To run initialization run:
+Just run:
 
 ```bash
 corectl config init
+```
+
+And `corectl` will ask you to enter your GitHub token and the URL for the Core Platform environments repository.
+
+### Initialisation for advanced users
+
+Instead of pointing to the Core Platform environments repository, you can craft your own initialization file, which is typically named `corectl.yaml`. A generic example follows:
+
+```yaml
+repositories:
+  cplatform: <environments-git-repo> # [Mandatory] repository clone path with your environments configuration
+  templates: <templates-git-repo> # [Mandatory] repository clone path with your software templates, optionally you can use our template repo: https://github.com/coreeng/core-platform-software-templates.git
+
+p2p: # path to production configuration
+  fast-feedback: # [Mandatory] p2p stage
+    default-envs: # list of environments to use as a part of the fast-feedback stage, must match env names defined in repositories.cplatform
+    - <environment_name> 
+  extended-test: # [Mandatory] list of environments to use as a part of the extended-test stage, , must match env names defined in repositories.cplatform
+    default-envs:
+    - <eenvironment_name>
+  prod: # [Mandatory] list of environments to use as a part of the prod stage, , must match env names defined in repositories.cplatform
+    default-envs:
+    - <environment_name>
+```
+
+To  initialise `corectl` run:
+
+```bash
+corectl config init -f /PATH/TO/corectl.yaml
 ```
 
 It saves configuration options and clones some repositories:
