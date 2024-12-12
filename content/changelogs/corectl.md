@@ -7,7 +7,7 @@ pre = ""
 
 # What is it?
 
-This is a CLI tool for CECG's [Core Platform](
+This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
 ## v0.27.1
