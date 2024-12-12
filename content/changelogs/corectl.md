@@ -7,8 +7,33 @@ pre = ""
 
 # What is it?
 
-This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
+This is a CLI tool for CECG's [Core Platform](
 From connecting to cluster, creating templated applications and a lot more!
+
+## v0.27.1
+
+### What's Changed
+
+* 522-confirm-app-monorepo: Improve user experience when creating app in monorepo by @fabricetriboix
+* 519-corectl-simple-init: Use config init from environments repo by default by @fabricetriboix
+* Use ubuntu-24.04 instead of ubuntu-latest by @kkonstan
+* Update dependencies by @kkonstan
+
+## v0.27.0
+
+### What's Changed
+
+* Rebrand developer-platfrom -> core-platform by @kkonstan
+
+## v0.26.3
+
+### What's Changed
+
+* Remove duplicate definitions on app commands. by @withnale
+* Disable showing usage once processing begins by @withnale
+* 427-env-select: Improve environment selection by @fabricetriboix
+* 475-monorepo-msg: Fix message shown to the user when creating an appa monorepo by @fabricetriboix
+* Added initial implementation of background env connect by @withnale
 
 ## v0.26.2
 

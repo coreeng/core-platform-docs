@@ -17,6 +17,36 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.55
+
+### What's Changed
+
+* Rebrand developer-platfrom -> core-platform by @kkonstan
+
+## v1.6.54
+
+### What's Changed
+
+* Rebrand from Developer Platform to Core Platform by @kkonstan
+
+## v1.6.53
+
+### What's Changed
+
+* Switch app workflows from ubuntu-latest to ubuntu-24.04 by @kkonstan
+
+## v1.6.52
+
+### What's Changed
+
+* Switch platform workflows from ubuntu-latest to ubuntu-24.04 by @kkonstan
+
+## v1.6.51
+
+### What's Changed
+
+* fix(logging): update iapc, reduce iapc log level to WARN by @Malet
+
 ## v1.6.50
 
 ### What's Changed

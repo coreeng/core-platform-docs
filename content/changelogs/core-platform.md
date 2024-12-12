@@ -10,11 +10,98 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.26.5"
+release: "0.27.2"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.27.2
+
+### What's Changed
+
+* Update yq to 4.44.6 / terragrunt to 0.69.9 by @kkonstan
+* Disable developer-portal feature from all environments by @kkonstan
+* Removing developer portal alerts and probes by @tmcalves
+* Update dependencies by @kkonstan
+* Ommiting secret management resources on platform tenants by @tmcalves
+
+## v0.27.1
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+* Addressing issues with alerts by @tmcalves
+* Test positive and negative scenario of an IP whitelist by @tmcalves
+* Fixes bug on IP whitelist test for when there are multiple domains by @tmcalves
+
+## v0.27.0
+
+### What's Changed
+
+* Rebrand developer-platfrom -> core-platform by @kkonstan
+
+## v0.26.11
+
+### What's Changed
+
+* Update CONTRIBUTING.md by @fabricetriboix
+* Improve CONTRIBUTING.md guide based on feedback by @kkonstan
+* 456-accept-single-quotes: Refactor the code to accept any special character by @fabricetriboix
+
+## v0.26.10
+
+### What's Changed
+
+* feat(versions): updating kubectl and aws cli patch versions by @arehmandev
+
+## v0.26.9
+
+### What's Changed
+
+* Rename dplatform-cli to core-platform-cli by @kkonstan
+* Rename Slack alert channels by @kkonstan
+* Rebrand aws network annotations by @kkonstan
+* Fix tf formatting by @kkonstan
+* Update tool versions by @fabricetriboix
+
+## v0.26.8
+
+### What's Changed
+
+* Update links from dplatform-environments to core-platform-environments by @kkonstan
+* Update USAGE.md for new repos by @chbatey
+* Add key repos in CONTRIBUTING.md by @kkonstan
+* Rebrand from Developer Platform to Core Platform by @kkonstan
+* Reformulate one of the steps to make it clearer by @fabricetriboix
+* Rebrand from Developer Platform to Core Platform by @kkonstan
+
+## v0.26.7
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+
+## v0.26.6
+
+### What's Changed
+
+* Update ONBOARDING.md by @emmersonkelly
+* Add validation for parent environments by @tmcalves
+* docs: update onboarding and contributing by @ricfeatherstone
+* Update CONTRIBUTING.md with some principles by @chbatey
+* fix(yq): Better yq checks in makefile by @dark0dave
+* Fix yq version detection by @kkonstan
+* Update libsqlite3-dev version pinning on portal container by @kkonstan
+* Switch from ubuntu-latest to ubuntu-24.04 by @kkonstan
+* Remove skopeo workaround for ubuntu-22.04 by @kkonstan
+* fix(compatibility): Fixes for compatibility by @dark0dave
+* Update gcp-init dependencies by @kkonstan
+* fix(permissions): Fix permissions on groups, enables groups to admin folders by @dark0dave
+* Make gcp-init idempotent again by @kkonstan
+* Update dependencies by @kkonstan
+* feat(bin): Add bin check by @dark0dave
+* Update Terraform modules by @kkonstan
 
 ## v0.26.5
 
