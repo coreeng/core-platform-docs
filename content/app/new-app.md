@@ -94,7 +94,6 @@ If you don't want to use `corectl` you can raise PRs against your environments r
 
 ```yaml
 ...
-cost-centre: tenants
 environments:
   - gcp-dev
 repos: [https://github.com/<your-github-id>/<your-new-repository>]
