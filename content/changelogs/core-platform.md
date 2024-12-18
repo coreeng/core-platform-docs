@@ -10,11 +10,21 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.27.2"
+release: "0.28.0"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.28.0
+
+### What's Changed
+
+* Upgrade terragrunt to 0.69.10 by @kkonstan
+* Add tf logic to exclude secret manager objects from tenants by @tmcalves
+* Update dependencies by @kkonstan
+* Remove aux3 test tenant by @kkonstan
+* Remove cost centre tenant attribute by @kkonstan
 
 ## v0.27.2
 
