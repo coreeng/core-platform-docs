@@ -10,11 +10,18 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.28.0"
+release: "0.29.0"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.29.0
+
+### What's Changed
+
+* Clean leftover resources for IAM Policies by @tmcalves
+* Add tenant specific Makefile targets by @kkonstan
 
 ## v0.28.0
 
