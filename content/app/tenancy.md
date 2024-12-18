@@ -36,7 +36,6 @@ You'll be prompted for the following information about your new tenant:
 - `parent` - Name of the parent tenant or `root`. Note: `root` tenant is created implicitly.
 - `description` - Description for your tenancy.
 - `contactEmail` - Metadata: Who is the contact for this tenancy?
-- `costCentre` - Metadata: Used to split cloud costs.
 - `environments` which of the environments in Environments Repo you want to deploy to
 - `adminGroup` - will get permission to do all actions in the created namespaces
 - `readonlyGroup` - will get read-only access to the created namespaces
@@ -99,7 +98,6 @@ name: myfirsttenancy
 parent: sandboxes
 description: "Go Application"
 contactEmail: go-application@{{ email_org }}
-costCentre: platform
 environments:
   - gcp-dev
 repos:
