@@ -10,6 +10,31 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
+## v0.29.0
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+
+## v0.28.0
+
+### What's Changed
+
+* Remove cost centre tenant attribute by @kkonstan
+* Switch logger. Add ADR by @tmcalves
+
+## v0.27.2
+
+### What's Changed
+
+* Better error msg if gitconfig is missing by @fabricetriboix
+* Update dependencies by @kkonstan
+* Automatically update config repos by @fabricetriboix
+* Simplify confirmation dialogue by @fabricetriboix
+* Fix env selection for tenant create by @fabricetriboix
+* Show a tenants tree by @fabricetriboix
+* Update README file by @fabricetriboix
+
 ## v0.27.1
 
 ### What's Changed
