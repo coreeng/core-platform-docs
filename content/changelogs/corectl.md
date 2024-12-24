@@ -10,6 +10,26 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
+## v0.29.3
+
+### What's Changed
+
+* Improve env connect logging output and reduce verbosity by @kkonstan
+
+## v0.29.2
+
+* Update dependencies by @kkonstan
+* Fix proxy and update command with logger instead of wizard by @tmcalves
+* go fmt by @kkonstan
+
+### What's Changed
+
+## v0.29.1
+
+* Log output to file that is sent to stream output by @tmcalves
+
+### What's Changed
+
 ## v0.29.0
 
 ### What's Changed
