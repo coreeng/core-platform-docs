@@ -17,6 +17,36 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.60
+
+### What's Changed
+
+* Use separate step for tunnel using iapc by @kkonstan
+
+## v1.6.59
+
+### What's Changed
+
+* Remove Google SDK step by @kkonstan
+
+## v1.6.58
+
+### What's Changed
+
+* Use new artifact targets for tenant plan/apply by @kkonstan
+
+## v1.6.57
+
+### What's Changed
+
+* Remove NumPy and Google SDK beta, only used for legacy IAP tunnel by @kkonstan
+
+## v1.6.56
+
+### What's Changed
+
+* Run nft and integration at the same time as functional by @chbatey
+
 ## v1.6.55
 
 ### What's Changed
