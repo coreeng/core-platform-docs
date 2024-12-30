@@ -121,6 +121,9 @@ it's important to understand the RBAC model for secret management. Here are the 
 - A tenant `readonlyGroup` can only access the secret values
 - P2P service account of a tenant can only add versions to existing secrets
 - Service accounts created as `cloudAccess` service accounts can only access the secret values
+
+The secret management feature *will not work* if your tenant doesn't have the `adminGroup` and `readonlyGroup` configured.
+
   {{% /notice %}}
 
 ## Accessing a secret

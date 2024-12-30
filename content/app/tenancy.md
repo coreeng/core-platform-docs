@@ -37,13 +37,25 @@ You'll be prompted for the following information about your new tenant:
 - `description` - Description for your tenancy.
 - `contactEmail` - Metadata: Who is the contact for this tenancy?
 - `environments` which of the environments in Environments Repo you want to deploy to
-- `adminGroup` - will get permission to do all actions in the created namespaces
-- `readonlyGroup` - will get read-only access to the created namespaces
+- `adminGroup` - will get permission to do all actions in the created namespaces - optional
+- `readonlyGroup` - will get read-only access to the created namespaces - optional
 
-> *Note*:
-> You are encouraged
-> to use different `adminGroup` and `readonlyGroup` for each tenant because of cloud restrictions and security reasons.
-> Maximum number of duplicated `adminGroup` or `readonlyGroup` is 20.
+{{% notice warn %}}
+
+Both `adminGroup` and `readonlyGroup` are optional fields.
+However, without these set, the secret management feature will not work.
+You can still have access to tenant's namespaces by being in the parents admin and read-only groups,
+as it will inherit permissions to access children's resources, with the exception of the secrets.
+
+{{% /notice %}}
+
+{{% notice warn %}}
+
+You are encouraged
+to use different `adminGroup` and `readonlyGroup` for each tenant because of cloud restrictions and security reasons.
+Maximum number of duplicated `adminGroup` or `readonlyGroup` is 20.
+
+{{% /notice %}}
 
 Once you fill the form, `corectl` will create a PR in the Environments Repo with a new file for the tenancy.
 Once the PR is merged, a configuration for the new tenant will be provisioned automatically.
