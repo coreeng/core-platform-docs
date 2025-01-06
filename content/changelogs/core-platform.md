@@ -10,11 +10,21 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.29.3"
+release: "0.29.4"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.29.4
+
+### What's Changed
+
+* Fix scheduled-destroy by @kkonstan
+* Update dependencies by @kkonstan
+* Update Terraform modules by @kkonstan
+* Remove deprecated gcp ssh tunnel support by @kkonstan
+* Make proxy and tunnel optional by @kkonstan
 
 ## v0.29.3
 
