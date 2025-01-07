@@ -10,6 +10,14 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
+## v0.30.0
+
+### What's Changed
+
+* Switch from iap tunnel to dns endpoint by @kkonstan
+* Update go deps by @kkonstan
+* Error handling when exporting root p2p env vars by @tmcalves
+
 ## v0.29.3
 
 ### What's Changed
