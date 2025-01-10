@@ -8,12 +8,12 @@ pre = ""
 
 ## Validate configuration
 
-To get you started, ensure you've followed the [access cloud infrastructure documentation](../../../app/accessing-cloud-infra)
+To get you started, ensure you've followed the [access cloud infrastructure documentation](../../../app/accessing-cloud-infra).
 Having done that we can start debugging.
 
 ### Check tenant configuration
 
-Go to the `platform-environments` repo and ensure your tenant has it is properly configured.
+Go to the `platform-environments` repo and ensure your tenant has cloud access properly configured.
 
 ```yaml
 cloudAccess:
@@ -24,12 +24,13 @@ cloudAccess:
       - <your_namespace>/<sa-name>
 ```
 
-Looking at `kubernetesServiceAccounts`:
-
 * Have your changes been merged?
 * Has the pipeline finished?
+
+Looking at `kubernetesServiceAccounts`:
+
 * Is the namespace you're trying to connect from listed there?
-* Is the Service Account name matching? The kubernetes Service Account being used by your deployment/pod needs to match exactly what is defined there?
+* Does the Service Account name match? The Kubernetes Service Account being used by your deployment/pod needs to match exactly what is defined there?
 
 ### Tenant Provisioner status
 
@@ -43,13 +44,13 @@ a future release.
 
 If the issue is on CI creating the resources/connecting to your account, it might be an issue with the configured service account.
 Out of the box, the SA using on GH actions will work to deploy to your tenant's namespace in the Kubernetes Cluster, to use the same SA to deploy your infrastructure
-in a different GCP account, you need to ensure that SA has permission to do so
+in a different GCP account, you need to ensure that SA has permission to do so.
 
 #### Validate that the p2p service account has enough permission on your own GCP project
 
-The p2p Service account needs permission to deploy the infrastructure
+The p2p service account needs permission to deploy the infrastructure.
 
-The Principal will be `p2p-<tenantName>@<platformProjectId>.iam.gserviceaccount.com`
+The principal will be `p2p-<tenantName>@<platformProjectId>.iam.gserviceaccount.com`.
 
 The role of Owner will allow it to create anything it needs, feel free to make this more restrictive.
 
@@ -86,7 +87,7 @@ spec:
       args: ["-c", "sleep 3600"]
 ```
 
-This can help you understand if the issue is on your own GCP Account that hasn't give enough permissions to the service account.
+This can help you understand if the issue is on your own GCP Account that hasn't given enough permissions to the service account.
 
 This pod can be deployed to your namespace with:
 
