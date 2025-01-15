@@ -16,6 +16,18 @@ environment: "gcp-dev"
 ...
 ```
 
+## v0.30.2
+
+### What's Changed
+
+* Make admin and readonly groups optional by @tmcalves
+
+## v0.30.1
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+
 ## v0.30.0
 
 ### What's Changed
