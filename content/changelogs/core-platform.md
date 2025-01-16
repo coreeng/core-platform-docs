@@ -10,11 +10,19 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.30.0"
+release: "0.30.3"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.30.3
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+* Install gcloud cli from package by @kkonstan
+* Update dependencies by @kkonstan
 
 ## v0.30.2
 
