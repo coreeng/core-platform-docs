@@ -10,18 +10,24 @@ pre = ""
 This is a CLI tool for CECG's [Core Platform](https://www.cecg.io/core-platform/)!
 From connecting to cluster, creating templated applications and a lot more!
 
+## v0.30.3
+
+### What's Changed
+
+* Update Go dependencies by @kkonstan
+
 ## v0.30.2
 
 ### What's Changed
 
-* Update core-platform to 0.30.2
+* Update core-platform to 0.30.2 by @kkonstan
 
 ## v0.30.1
 
 ### What's Changed
 
-* Update go dependencies
-* bump core-platform 0.30.1
+* Update go dependencies by @kkonstan
+* bump core-platform 0.30.1 by @tim-codes
 
 ## v0.30.0
 
