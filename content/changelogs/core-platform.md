@@ -10,11 +10,24 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.30.3"
+release: "0.30.4"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.30.4
+
+### What's Changed
+
+* Improve contributing & onboarding guides by @kkonstan
+* Fix destroy error for environments that aren't provisioned by @kkonstan
+* Update tenants README.md by @kkonstan
+* Fix feature-destroy logic by @kkonstan
+* Suspend aws/azure sandboxes for scheduled destroy too by @kkonstan
+* Tweak feature destroy skip logic by @kkonstan
+* Update minimum gke version to 1.31 by @kkonstan
+* Update dependencies by @kkonstan
 
 ## v0.30.3
 
