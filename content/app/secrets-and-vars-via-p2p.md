@@ -14,7 +14,7 @@ Secrets and variables, configured in GitHub, can be passed to applications as En
 You will need to be in the admin role for the application's repository to be able to configure variables and secrets. This will automatically be the case for any repository you have created via `corectl app create`.
 {{% /notice %}}
 
-Secrets and variables can be managed in the Settings tab on a repository, by navigating to: Settings > Secrets and variables > Actions. 
+Secrets and variables can be managed in the Settings tab on a repository, by navigating to: Settings > Secrets and variables > Actions.
 
 {{< figure src="/images/app/github-secrets-vars.png" >}}
 
@@ -23,19 +23,19 @@ GitHub supports both Variables and Secrets:
 - Variables are exposed as plain text in the GitHub UI and should be used for anything non-sensitive
 - Secrets are encrypted and their value is not shown in the GitHub UI (also it is hidden in GitHub logs) and should be used for e.g. passwords, authentication tokens.
 
-Both variables and secrets can be either global or environment specific. 
+Both variables and secrets can be either global or environment specific.
 
-Some variables will already be configured by the P2P of the platform - this is documented [here]((../../../p2p#github-variables) - this page is documenting how add additional variables and secrets and pass them into your application. 
+Some variables will already be configured by the P2P of the platform - this is documented [here]((../../../p2p#github-variables) - this page is documenting how add additional variables and secrets and pass them into your application.
 
 ### Example
 
 For example let's configure:
 
-* A global variable
-* An environment specific variable
-* An environment specific secret
+- A global variable
+- An environment specific variable
+- An environment specific secret
 
-##### Global Variable
+#### Global Variable
 
 On the Settings tab on a repository, by navigating to: Settings > Secrets and variables > Actions, then the Variables tab, under **Repository Variables** click **New repository Variable**
 
@@ -47,15 +47,15 @@ add the variable with a value in this example let's call it GLOBAL_VARIABLE with
 
 Similarly global secrets can be added in the same way, but on the secrets tab, via **New repository secret**.
 
-##### Environment Specific Variable
+#### Environment Specific Variable
 
-Environment specific variables can be configured in GitHub via Settings > Environments, then chosing an environment. Out of the box our reference P2P setup will support both production and dev environments. 
+Environment specific variables can be configured in GitHub via Settings > Environments, then chosing an environment. Out of the box our reference P2P setup will support both production and dev environments.
 
 {{< figure src="/images/app/github-environments.png" >}}
 
 If you need further isolation (e.g. different setup for Functional vs NFT test environments) that's possible by configuring the variables in Dev and then only passing in specific variables to each Makefile target (covered below).
 
-To add an environment specific variable, click into the environment you want to configure (e.g. gcp-dev in this example) and click **Add environment variable**. 
+To add an environment specific variable, click into the environment you want to configure (e.g. gcp-dev in this example) and click **Add environment variable**.
 
 {{< figure src="/images/app/github-adding-env-specific-variable-before.png" >}}
 
@@ -63,7 +63,7 @@ In this example let's call it ENV_SPECIFIC_VAR with a value of ENV_VAR_GCP-DEV_V
 
 {{< figure src="/images/app/adding-env-specific-variable-after.png" >}}
 
-##### Environment Specific Secret
+#### Environment Specific Secret
 
 Environment specific secrets can be configured via Settings > Environments, then chosing an environment, and clicking **Add environment secrets**. N.B. Unlike variables, secret values cannot viewed in the GitHub UI or logs, and should be used for e.g. passwords, tokens etc.
 
@@ -81,7 +81,7 @@ Let's say we want to pass our above example variables and secrets into the appli
 
 To simplify the passing of variables and secrets to an application we can use a special variable called **ENV_VARS**. The platform P2P will automatically take everything that is configured in ENV_VARS and pass that in as environment variables, ENV_VARS expects to be a multi-line variable of the form KEY=VALUE on each line.
 
-In GitHub workflows, variables can be referred to via `${{ vars.NAME }}` and secrets via `${{ secrets.NAME }}` and in yaml a multi-line variable is denoted via a `|` character. 
+In GitHub workflows, variables can be referred to via `${{ vars.NAME }}` and secrets via `${{ secrets.NAME }}` and in yaml a multi-line variable is denoted via a `|` character.
 
 So to pass in all of the above example variables into the P2P we'd modify the application's fast-feedback yaml to add a `secrets:` block that defines all the variables we want in a multi-line `env_vars:` variable.
 
@@ -105,7 +105,7 @@ Every we add like the above will be passed into the execution context of the Mak
 
 ### Updating the Makefile
 
-The above steps have configured the variables and provided their values to the execution of the Makefile. The final step will be using them in our application via configuring them in the Makefile. The Makefile is in the root of the application in the repo and is the main interface between the P2P pipeline steps and the application itself. 
+The above steps have configured the variables and provided their values to the execution of the Makefile. The final step will be using them in our application via configuring them in the Makefile. The Makefile is in the root of the application in the repo and is the main interface between the P2P pipeline steps and the application itself.
 
 The Makefile has separate targets for each stage of the P2P pipeline. In this example we're going to add variables to just the application when running in the **integration** environment - but exactly the same steps can be added for other environments (though extended test and prod will require their respective GitHub worfkflows to be amended in the previous step).
 
@@ -120,26 +120,26 @@ to the relevant Makefile target. So for a full example that targets the integrat
 ```bash
 .PHONY: deploy-integration
 deploy-integration:  ## Deploy helm chart of the app to integration namespace
-	helm upgrade --install $(app_name) helm-charts/app -n $(tenant_name)-integration \
-		--set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) \
-		--set domain=$(BASE_DOMAIN) \
-		--set appUrlSuffix="-$(tenant_name)-integration" \
-		--set tag=$(image_tag) \
-		--set service.image=$(image_name) \
-		--set integration.image=$(image_name)-integration \
-		--set monitoring=$(MONITORING) \
-		--set dashboarding=$(DASHBOARDING) \
-		--set tenantName=$(tenant_name) \
-		--set appName=$(app_name) \
-		--set service.resources.requests.cpu=0m \
-		--set service.environmentVariables.ENV_SPECIFIC_VAR="${ENV_SPECIFIC_VAR}" \
-		--set service.environmentVariables.ENV_SPECIFIC_SECRET="${ENV_SPECIFIC_SECRET}" \
-		--set service.environmentVariables.GLOBAL_VARIABLE="${GLOBAL_VARIABLE}" \
-		--atomic
-	helm list -n $(tenant_name)-integration ## list installed charts in the given tenant namespace
+    helm upgrade --install $(app_name) helm-charts/app -n $(tenant_name)-integration \
+        --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) \
+        --set domain=$(BASE_DOMAIN) \
+        --set appUrlSuffix="-$(tenant_name)-integration" \
+        --set tag=$(image_tag) \
+        --set service.image=$(image_name) \
+        --set integration.image=$(image_name)-integration \
+        --set monitoring=$(MONITORING) \
+        --set dashboarding=$(DASHBOARDING) \
+        --set tenantName=$(tenant_name) \
+        --set appName=$(app_name) \
+        --set service.resources.requests.cpu=0m \
+        --set service.environmentVariables.ENV_SPECIFIC_VAR="${ENV_SPECIFIC_VAR}" \
+        --set service.environmentVariables.ENV_SPECIFIC_SECRET="${ENV_SPECIFIC_SECRET}" \
+        --set service.environmentVariables.GLOBAL_VARIABLE="${GLOBAL_VARIABLE}" \
+        --atomic
+    helm list -n $(tenant_name)-integration ## list installed charts in the given tenant namespace
 ```
 
-The application's  Kubernetes deployment manifest then needs to take care of supplying everything that is in `.Values.service.environmentVariables ` as an actual environment variable - **this is already done in our reference applications**. 
+The application's  Kubernetes deployment manifest then needs to take care of supplying everything that is in `.Values.service.environmentVariables` as an actual environment variable - **this is already done in our reference applications**.
 
 E.g. with something like the below in the `containers` `spec`
 
@@ -161,13 +161,13 @@ To validate all of the above has worked correctly, after the application is depl
 kubectl get pods -n <namespace>
 ```
 
-To get a running pod, and then: 
+To get a running pod, and then:
 
 ```bash
 kubectl exec -it <pod-name> -n <namespace> -- env
-``` 
+```
 
-To print out the environment. 
+To print out the environment.
 
 For the above examples this gives:
-
+TODO
