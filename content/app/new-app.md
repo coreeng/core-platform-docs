@@ -37,7 +37,7 @@ Now you have an application deployed to production. You can make changes by rais
 ### Raise a PR
 
 Raising a PR will automatically build the app, push the docker image, and deploy it to
-environments for functional and non-functional testing.
+environments for functional, non-functional, and integration testing.
 
 ### Merge the PR
 

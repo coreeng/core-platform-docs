@@ -43,12 +43,6 @@ Maximum number of duplicated `adminGroup` or `readonlyGroup` is 20.
 Once you fill the form, `corectl` will create a PR in the Environments Repo with a new file for the tenancy.
 Once the PR is merged, a configuration for the new tenant will be provisioned automatically.
 
-In order to see your new tenancy in `corectl` you will need to run
-
-```shell
-corectl config update
-```
-
 {{% notice note %}}
 Groups need to be in the `gke-security-groups` group!
 If you are a new tenant the the platform, you should create new admin and readOnly groups and either ask a platform operator to add them
