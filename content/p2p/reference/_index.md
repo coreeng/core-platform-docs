@@ -28,7 +28,6 @@ If the repo was created by `corectl`, it will automatically set the required var
 
 Having these, you're set to start deploying!
 
-
 ### GitHub Variables
 
 P2P pipelines expect some GitHub Variables to be configured.

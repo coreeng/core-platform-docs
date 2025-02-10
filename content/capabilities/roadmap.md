@@ -21,4 +21,3 @@ Larger ticket items that will be prioritised as users request them.
 ### AWS Support
 
 Full AWS parity with the current GCP support
-

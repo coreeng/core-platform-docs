@@ -16,13 +16,12 @@ the ability to test failure scenarios.
 
 Deploy to the following namespace
 
-```<app_name>-nft```
+`<app_name>-nft`
 
 Or if you have multiple apps in the same tenancy
 
-```<tenant>-<app-name>-nft```
+`<tenant>-<app-name>-nft`
 
 ### Run Tests
 
 Execute non-functional tests. We recommend using [k6] and software templates comewith example non-functional tests.
-

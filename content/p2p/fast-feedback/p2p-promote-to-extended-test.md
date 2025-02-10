@@ -12,7 +12,7 @@ extended test.
 
 The default implementation as provided by software templates rarely needs changing:
 
-```
+```Make
 p2p-promote-to-extended-test:
     corectl p2p promote <app-name>:${VERSION} \
         --source-stage $(FAST_FEEDBACK_PATH) \

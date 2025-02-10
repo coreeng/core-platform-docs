@@ -16,18 +16,12 @@ the ability to test failure scenarios.
 
 Deploy to the following namespace
 
-```<app_name>-functional```
+`<app_name>-functional`
 
  Or if you have multiple apps in the same tenancy
 
-```<tenant>-<app-name>-functional```
+`<tenant>-<app-name>-functional`
 
 ### Run Tests
 
 Execute functional tests, we recommend using a BDD framework. All software templates come with example tests.
-
-
-
-
-
-

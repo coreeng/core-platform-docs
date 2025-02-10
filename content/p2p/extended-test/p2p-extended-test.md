@@ -18,4 +18,3 @@ Deploy to the following namespace
 Or if you have multiple apps in the same tenancy
 
 ```<tenant>-<app-name>-extended```
-

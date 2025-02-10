@@ -26,7 +26,6 @@ A tenancy can be used to configure:
 
 ### Manually raising a PR for a new tenancy
 
-
 {{% notice note %}}
 `corectl` does this for you. Only follow this section if you want to manually interact with the environments repo.
 {{% /notice %}}

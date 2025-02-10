@@ -5,7 +5,6 @@ chapter = false
 pre = ""
 +++
 
-
 ## Manually raising a PR
 
 If you don't want to use `corectl` you can raise PRs against your environments repo.
@@ -20,12 +19,12 @@ If you don't want to use `corectl` you can raise PRs against your environments r
     similar to what is done in [core-platform-reference-applications](https://github.com/coreeng/core-platform-reference-applications).
     In this case you can simply delete `.github/workflows` from the rendered template.
 - Configure P2P for the repository using `corectl p2p env sync <repository-path> <tenant-name>`
-- Make sure that the repository is present in the `tenants` list in the tenant file,
-for example:
+- Make sure that the repository is present in the `tenants` list in the tenant file, for example:
+
 ```yaml
 ...
 environments:
   - gcp-dev
 repos: [https://github.com/<your-github-id>/<your-new-repository>]
 ...
-                                                ```
+```

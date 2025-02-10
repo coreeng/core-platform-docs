@@ -14,10 +14,11 @@ The purpose of P2P build is to
 
 For deployed testing to take place push a versioned artifact:
 
-```
+```sh
 docker image push $(REGISTRY)/$(EXTENDED_TEST_PATH)/<app-name>:$(VERSION)
 ```
 
 Variables set by the P2P that you can use:
+
 * REGISTRY
 * VERSION

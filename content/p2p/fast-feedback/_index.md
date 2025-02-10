@@ -8,9 +8,7 @@ pre = ""
 Fastfeedback gives engineers fast feedback on every change.
 It is run on every PR and on every commit to main.
 
-## Usage
-
-Implement the following Make tasks:
+Implement the following Make targets:
 
 * [p2p-build](./p2p-build)
 * [p2p-functional](./p2p-functional)

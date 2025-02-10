@@ -25,7 +25,6 @@ You'll be prompted for the following information about your new tenant:
 - `readonlyGroup` - will get read-only access to the created namespaces - optional
 
 {{% notice warn %}}
-
 Both `adminGroup` and `readonlyGroup` are optional fields.
 However, without these set, the secret management feature will not work.
 You can still have access to tenant's namespaces by being in the parents admin and read-only groups,

@@ -9,7 +9,7 @@ Make target: `p2p-promote-to-prod`
 
 The default implementation as provided by software templates rarely needs changing:
 
-```
+```sh
 p2p-promote-to-prod:
     corectl p2p promote <app-name>:${VERSION} \
         --source-stage $(EXTENDED_TEST_PATH) \
