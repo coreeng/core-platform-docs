@@ -25,6 +25,8 @@ When not on the main branch this will take the latest tag and append a commit ha
 When on main it increments the next minor version.
 Everything in the pipeline after this works on that version.
 
+For all future P2P steps the `$VERSION` variable will be set
+
 ## Incrementing the major version
 
 To increment the major version, create the tag `vX.0.0` where X is the next major version you want to use.

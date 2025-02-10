@@ -1,6 +1,6 @@
 +++
 title = "Promotion"
-weight = 2
+weight = 10
 chapter = false
 pre = ""
 +++

@@ -74,4 +74,3 @@ kubectl get namespace myfirsttenancy
 NAME             STATUS   AGE
 myfirsttenancy   Active   30s
 ```
-

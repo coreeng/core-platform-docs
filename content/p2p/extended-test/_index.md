@@ -1,6 +1,6 @@
 +++
 title = "Quality Gate: Extended Test"
-weight = 12
+weight = 3
 chapter = false
 pre = ""
 +++
@@ -71,7 +71,3 @@ jobs:
 ```
 
 This task will get the latest version that's on the `/extended-test` registry and execute the extended tests. If these are successful, it will promote the image to `prod`.
-
-## Setup
-
-See the [GitHub Variables](https://docs.gcp-prod.cecg.platform.cecg.io/p2p/#github-variables)

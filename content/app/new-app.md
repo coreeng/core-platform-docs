@@ -5,7 +5,6 @@ chapter = false
 pre = ""
 +++
 
-
 ## Create a new application
 
 The Core Platform with a single command will configure:
@@ -44,5 +43,3 @@ environments for functional and non-functional testing.
 
 Merges to main by default do the same as a PR, and additionally deploy to a stable dev namespace that
 can be used for showcasing or integration testing.
-
-

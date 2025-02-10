@@ -1,5 +1,5 @@
 +++
-title = "Executing P2P targets locally"
+title = "Local development"
 weight = 101
 chapter = false
 pre = ""
