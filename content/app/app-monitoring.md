@@ -20,7 +20,6 @@ You can quickly access it by running:
 corectl env open <env> grafana
 ```
 
-
 #### How can I monitor application resources?
 
 This dashboard will allow a team to monitor their application namespaces and check their status. It will show data

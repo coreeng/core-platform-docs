@@ -42,7 +42,6 @@ Two key concepts for the P2P are:
 * [Versioning](./versioning): The P2P promoted an immutable, versioned artifact through the pipeline
 * [Promotion](./reference/promotion): Each time a quality gate is passed the immutable, versioned artifact is promoted
 
-
 ### P2P Interface: giving you control
 
 Assuming you've started with a software template via corectl you already have a Makefile with the following tasks.
@@ -81,6 +80,7 @@ p2p-promote-to-extended-test: ## Promote service to extended test
 p2p-promote-to-prod:  ## Promote service to prod
     echo "##### EXECUTING P2P-PROMOTE-TO-PROD #####"
 ```
+
 These will be the entrypoints of the pipeline. You can then extend these to do your custom actions.
 
 What tool you use in each of the Makefile targets is up to you.

@@ -49,4 +49,3 @@ jobs:
     with:
      version: ${{ needs.version.outputs.version }}
 ```
-

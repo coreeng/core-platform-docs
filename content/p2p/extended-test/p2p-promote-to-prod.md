@@ -7,7 +7,6 @@ pre = ""
 
 Make target: `p2p-promote-to-prod`
 
-
 The default implementation as provided by software templates rarely needs changing:
 
 ```

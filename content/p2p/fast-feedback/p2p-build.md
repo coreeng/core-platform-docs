@@ -6,6 +6,7 @@ pre = ""
 +++
 
 The purpose of P2P build is to
+
 * Run any local tests + static verification
 * Build an immutable versioned artifact to pass through the rest of the P2P.
 
