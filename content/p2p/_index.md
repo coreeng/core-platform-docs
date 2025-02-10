@@ -1,6 +1,6 @@
 +++
 title = "Path to Production"
-weight = 10
+weight = 3
 chapter = false
 pre = ""
 +++

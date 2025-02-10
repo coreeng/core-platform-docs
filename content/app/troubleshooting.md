@@ -22,7 +22,7 @@ If the node cpu/memory usage is high, it's possible the container runtime is str
 
 ### Resolution
 
-Ensure that your pod has [cpu/memory requests set](./resources). This will allow the kube scheduler to to place your pods on better balanced nodes.
+Ensure that your pod has [cpu/memory requests set](/reference/resources). This will allow the kube scheduler to to place your pods on better balanced nodes.
 
 ## P2P GCP Auth Fail
 

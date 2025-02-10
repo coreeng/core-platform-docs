@@ -1,6 +1,6 @@
 +++
 title = "Capabilities & Roadmap"
-weight = 1
+weight = 99
 chapter = false
 pre = ""
 +++
@@ -47,7 +47,6 @@ See:
 * [Deploying an app](/app/)
 * [Path to Production](/p2p/) for reference on each stage of the path to production
 * [New application](/app/new-app/) for **automatic** repo, pipeline and app templating
-* [Repo structure](/app/repo-structure/) for how to layout your repo
 
 ### OCI Registries as a service
 
@@ -64,7 +63,7 @@ See:
 
 See:
 
-* [Templates](/app/software-templates/) for application blueprints
+* [Templates](/reference/software-templates/) for application blueprints
 
 ### Aggregated Monitoring
 
@@ -92,7 +91,7 @@ See:
 
 See:
 
-* [Secret Management](/app/secret-management/)
+* [Secret Management](/reference/secret-management/)
 
 ### Access infrastructure
 
@@ -100,7 +99,7 @@ See:
 
 See:
 
-* [Accessing Cloud Infrastructure](/app/accessing-cloud-infra/)
+* [Accessing Cloud Infrastructure](/reference/accessing-cloud-infra/)
 
 ## Platform Operator Capabilities
 

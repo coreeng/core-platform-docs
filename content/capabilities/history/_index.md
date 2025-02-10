@@ -61,7 +61,7 @@ By the end of the quarter the following milestones were met:
 The following milestones were met on time:
 
 * All Environments Not-Live (PreDev, Dev, Prod), including but not limited to:
-  * [Cloud Access](/app/accessing-cloud-infra/) - the ability for workloads to access cloud workloads outside of the   platform securely without passwords
+  * [Cloud Access](/reference/accessing-cloud-infra/) - the ability for workloads to access cloud workloads outside of the   platform securely without passwords
   * Slack integration for alerts
   * Consolidated Alerting Dashboard
   * Ingress - expose services over TLS

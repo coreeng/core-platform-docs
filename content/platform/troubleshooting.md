@@ -64,7 +64,7 @@ place significant load on one node as it uses the requests to target what nodes 
 
 ### Resolution
 
-Set [resource requests](../app/resources) for your application workloads to allow the kube scheduler better place
+Set [resource requests](/reference/resources) for your application workloads to allow the kube scheduler better place
 your pods on nodes with appropriate capacity. For example if you request 2Gi memory for your pod, the scheduler will
 guarantee finding a node that has that capacity.
 

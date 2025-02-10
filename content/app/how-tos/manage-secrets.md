@@ -5,12 +5,12 @@ chapter = false
 pre = ""
 +++
 
-For more info visit detailed [documentation](../../../app/secret-management).
+For more info visit detailed [documentation](/reference/secret-management).
 
 # Accessing secret from service
 
 First of all, you need to have configured `cloudAccess` for your tenant. Provisioned service account will be used to
-access the secret. Read more about `cloudAccess` [here](../../../app/accessing-cloud-infra)
+access the secret. Read more about `cloudAccess` [here](/reference/accessing-cloud-infra)
 
 Next, you need to create `SecretStorageClass` object in your namespace that will describe the secrets you want to access.
 

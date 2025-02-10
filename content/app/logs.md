@@ -1,6 +1,6 @@
 +++
-title = "Aggregated Logs"
-weight = 10
+title = "Application Logs"
+weight = 9
 chapter = false
 pre = ""
 +++
