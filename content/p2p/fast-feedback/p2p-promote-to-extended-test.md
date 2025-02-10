@@ -14,10 +14,10 @@ The default implementation as provided by software templates rarely needs changi
 
 ```
 p2p-promote-to-extended-test:
-	corectl p2p promote <app-name>:${VERSION} \
-		--source-stage $(FAST_FEEDBACK_PATH) \
-		--dest-registry $(REGISTRY) \
-		--dest-stage $(EXTENDED_TEST_PATH)
+    corectl p2p promote <app-name>:${VERSION} \
+        --source-stage $(FAST_FEEDBACK_PATH) \
+        --dest-registry $(REGISTRY) \
+        --dest-stage $(EXTENDED_TEST_PATH)
 ```
 
 This moves the immutable versioned artifact into the registry for extended test and will be

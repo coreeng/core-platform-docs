@@ -12,10 +12,10 @@ The default implementation as provided by software templates rarely needs changi
 
 ```
 p2p-promote-to-prod:
-	corectl p2p promote <app-name>:${VERSION} \
-		--source-stage $(EXTENDED_TEST_PATH) \
-		--dest-registry $(REGISTRY) \
-		--dest-stage $(PROD_PATH)
+    corectl p2p promote <app-name>:${VERSION} \
+        --source-stage $(EXTENDED_TEST_PATH) \
+        --dest-registry $(REGISTRY) \
+        --dest-stage $(PROD_PATH)
 ```
 
 This moves the immutable versioned artifact into the registry for production and will be
