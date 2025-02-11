@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-Make target: `p2p-nft`
+Make target: `p2p-functional`
 
 Shift left the verification of your application.
 

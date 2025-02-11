@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-Fastfeedback gives engineers fast feedback on every change.
+Fast feedback gives engineers fast feedback on every change.
 It is run on every PR and on every commit to main.
 
 Implement the following Make targets:

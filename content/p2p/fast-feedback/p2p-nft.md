@@ -24,4 +24,4 @@ Or if you have multiple apps in the same tenancy
 
 ### Run Tests
 
-Execute non-functional tests. We recommend using [k6] and software templates comewith example non-functional tests.
+Execute non-functional tests. We recommend using [k6] and software templates come with example non-functional tests.
