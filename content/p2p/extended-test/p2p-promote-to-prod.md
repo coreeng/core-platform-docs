@@ -9,7 +9,6 @@ Make target: `p2p-promote-to-prod`
 
 After successful run of `p2p-extended` the version is ready for production deployment.
 
-
 The default implementation as provided by software templates rarely needs changing:
 
 ```sh
