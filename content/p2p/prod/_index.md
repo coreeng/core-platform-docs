@@ -43,9 +43,3 @@ jobs:
 ```
 
 This task will get the latest version that's on the `prod` registry and execute the prod deployment task.
-
-### FAQs
-
-#### What if I don't have tests for one of the stages?
-
-* Leave it as a no-op and as you want to increase your maturity and aim for Continuous Delivery you already have the place to run them

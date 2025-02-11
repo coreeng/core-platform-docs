@@ -11,9 +11,14 @@ The P2P enables you to focus on building your business logic and tests without
 wasting time on CI/CD tooling setup.
 All your custom logic should be added to your Makefile rather than directly in GitHub actions.
 
-All you need to do is implement the steps in the Makefile in your repository and let the Core Platform do everyting else.
+All you need to do is implement the steps in the Makefile in your repository and let the Core Platform do everything else.
 
 Not ready to implement a step yet? Just leave it blank!
+
+## Represent change as an Immutable Deployable Versioned Artifact
+
+Regardless of what your change is for production, an application, terraform infrastructure, we build it into an
+Immutable Deployable Versioned Artifact, specfically an OCI image and promote it through the stages of the P2P.
 
 ### Pipeline as a contract
 
@@ -78,3 +83,9 @@ p2p-prod: ## Runs the service
 These will be the entrypoints of the pipeline. You can then extend these to do your custom actions.
 
 What tool you use in each of the Makefile targets is up to you.
+
+### FAQs
+
+#### What if I don't have tests for one of the stages?
+
+* Leave it as a no-op and as you want to increase your maturity and aim for Continuous Delivery you already have the place to run them

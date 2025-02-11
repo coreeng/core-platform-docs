@@ -12,10 +12,11 @@ The purpose of P2P build is to
 
 ## Pushing to the fast feedback registry
 
-For deployed testing to take place push a versioned artifact:
+For deployed testing to take place push a versioned artifact to the registry
+required for fast feedback:
 
 ```sh
-docker image push $(REGISTRY)/$(EXTENDED_TEST_PATH)/<app-name>:$(VERSION)
+docker image push $(REGISTRY)/$(FAST_FEEDBACK_PATH)/<app-name>:$(VERSION)
 ```
 
 Variables set by the P2P that you can use:
