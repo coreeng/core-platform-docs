@@ -11,9 +11,9 @@ The extended test quality gate is for any test that you do not want to run on ev
 * Soak tests
 
 Running these tests can be expensive and typically these are run once a day on the latest version of the application
-that has been promoted from fastfeedback.
+that has been promoted from fast feedback.
 
-These are typically based on Non-Functional-Requirements(NFRs) which should specify what’s the average load expected, peak traffic(both requests per second and concurrent users) and response times in the different percentiles.
+These are typically based on Non-Functional-Requirements (NFRs) which should specify what’s the average load expected, peak traffic (both requests per second and concurrent users) and response times in the different percentiles.
 To simulate processing time of a downstream application, a delay can be added on all integration endpoints.
 
 ## Types of test
