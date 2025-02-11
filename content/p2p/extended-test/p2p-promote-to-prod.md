@@ -1,5 +1,5 @@
 +++
-title = "Promote to extended test"
+title = "Promote to Prod"
 weight = 6
 chapter = false
 pre = ""
