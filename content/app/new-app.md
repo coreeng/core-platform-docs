@@ -1,5 +1,5 @@
 +++
-title = "Deploy a new application"
+title = "Create application"
 weight = 3
 chapter = false
 pre = ""
@@ -30,72 +30,16 @@ It will:
 - create a new repository using the selected template
 - configure the created GitHub repository, so P2P workflows will run without an issue
 
-### Create an application as part of a monorepo
+## Developer workflow
 
-{{% notice note %}}
-The recommended pattern is to create a tenant for the monorepo, and individual child tenants of that per application. See [Tenancy](./tenancy) for tenant creation.
-{{% /notice %}}
+Now you have an application deployed to production. You can make changes by raising PRs.
 
-Instead of creating a new repository for each of the applications, you can create a single repository
-and add the applications as sub-directories.
-
-First create a new root repository
-
-```shell
-corectl apps create <new-monorepo-name> --tenant <tenant-name> --non-interactive
-```
-
-This will create an empty repository with necessary variables preconfigured for the P2P to work.
-
-You should first setup an application specific sub-tenant - this will be a child tenant of the above.
-
-Now create a new application in the sub-directory. You will be prompted for a template to use.
-
-```shell
-cd <new-monorepo-name>
-corectl app create <new-app-name> --tenant <app-specific-child-tenant-name>
-```
-
-Your new application will be created in a new PR for a monorepo. This will give you a chance to review the changes.
-Once you're happy with the changes, merge the PR.
-
-## Raise a PR
+### Raise a PR
 
 Raising a PR will automatically build the app, push the docker image, and deploy it to
-environments for functional and non-functional testing.
+environments for functional, non-functional, and integration testing.
 
-## Merge the PR
+### Merge the PR
 
 Merges to main by default do the same as a PR, and additionally deploy to a stable dev namespace that
 can be used for showcasing or integration testing.
-
-Next [learn more about how to implement the P2P](../../p2p)
-
-## Manually raising a PR
-
-{{% notice note %}}
-`corectl` does this for you. Only follow this section if you want to manually interact with the environments repo.
-{{% /notice %}}
-
-If you don't want to use `corectl` you can raise PRs against your environments repo.
-
-- Create a new repository or pick an existing one
-- Render the template using `corectl template render <template-name> <path>`
-- Adjust the rendered template to your needs and push the changes
-  - Rendered templates has `.github/workflows` in the root.
-    If you rendered the template not in the root of the repository,
-    you might need to move workflow files in `.github/workflow` in the root of the repository.
-    Unless you have autodiscovery implemented for your workflows,
-    similar to what is done in [core-platform-reference-applications](https://github.com/coreeng/core-platform-reference-applications).
-    In this case you can simply delete `.github/workflows` from the rendered template.
-- Configure P2P for the repository using `corectl p2p env sync <repository-path> <tenant-name>`
-- Make sure that the repository is present in the `tenants` list in the tenant file,
-  for example:
-
-```yaml
-...
-environments:
-  - gcp-dev
-repos: [https://github.com/<your-github-id>/<your-new-repository>]
-...
-```

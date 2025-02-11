@@ -20,14 +20,6 @@ You can quickly access it by running:
 corectl env open <env> grafana
 ```
 
-### Via service port forwarding
-
-```shell
-kubectl -n platform-monitoring port-forward service/platform-grafana-service 3000
-```
-
-Then access [Grafana](http://localhost:3000)
-
 #### How can I monitor application resources?
 
 This dashboard will allow a team to monitor their application namespaces and check their status. It will show data

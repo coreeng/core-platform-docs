@@ -1,16 +1,21 @@
 +++
 title = "Production Deployment"
-weight = 15
+weight = 4
 chapter = false
 pre = ""
 +++
 
-## How to use this on the pipeline?
+Production deployment, by default once a day, takes the latest version that has passed [extended test](/p2p/extended-test/)
+and deploys it to production.
 
-These should be triggered by a cron on git actions, and the pipeline will look like:
-{{< figure src="/images/p2p/prod.png" title="Production" >}}
+Implement the following Make targets:
+
+* [p2p-prod](/p2p/prod/p2p-prod/)
 
 ## Usage
+
+If you've created your application with corectl from a software template the following workflow will be
+already configured.
 
 ```yaml
 name: Prod

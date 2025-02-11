@@ -7,7 +7,7 @@ pre = ""
 
 # Connectivity & Authentication
 
-With CloudSQL you can configure the connectivity and the authentication via IAM Service Accounts. For connectivity, please follow the setup [access cloud infrastructure](../../../app/accessing-cloud-infra)
+With CloudSQL you can configure the connectivity and the authentication via IAM Service Accounts. For connectivity, please follow the setup [access cloud infrastructure](/reference/accessing-cloud-infra)
 
 ## Auth
 

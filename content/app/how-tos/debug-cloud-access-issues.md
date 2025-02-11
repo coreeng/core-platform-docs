@@ -8,7 +8,7 @@ pre = ""
 
 ## Validate configuration
 
-To get you started, ensure you've followed the [access cloud infrastructure documentation](../../../app/accessing-cloud-infra).
+To get you started, ensure you've followed the [access cloud infrastructure documentation](/reference/accessing-cloud-infra).
 Having done that we can start debugging.
 
 ### Check tenant configuration

@@ -6,7 +6,7 @@ pre = ""
 +++
 
 {{% notice note %}}
-Make sure that [resource requests](./resources) are defined for the application. Autoscalers use them as a base-line to calculate utilization.
+Make sure that [resource requests](/reference/resources) are defined for the application. Autoscalers use them as a base-line to calculate utilization.
 {{% /notice %}}
 
 Applications are scaled vertically or horizontally to be able to handle the increasing load.
@@ -140,4 +140,4 @@ There are several dashboards that can help you better understand the behavior of
 - Traefik Official Kubernetes Dashboard
 - Reference App Load Testing
 
-Refer to [Application Monitoring](./app-monitoring) and [Platform Monitoring](../platform/platform-monitoring) sections for more details.
+Refer to [Application Monitoring](/app/app-monitoring) and [Platform Monitoring](../platform/platform-monitoring) sections for more details.

@@ -1,0 +1,73 @@
++++
+title = "Reference"
+weight = 200
+chapter = false
+pre = ""
++++
+
+Additional Information about how the P2P works.
+
+## Automatic GH Action authentication
+
+As part of your [tenancy](../../app/tenancy) you define GitHub repos.
+
+All of those repos get passwordless access to deploy to your namespaces and
+any sub namespace you create.
+
+### Requirements
+
+In order to use this pipeline, you'll need to be a tenant of a Core Platform.
+
+For any repo that wasn't created out of Core Platform templates, but you would like to follow a recommended p2p standard, please use [`corectl`](/corectl) as below:
+
+```shell
+corectl p2p env sync <app repository> <tenant> [flags]
+```
+
+If the repo was created by `corectl`, it will automatically set the required variables.
+
+Having these, you're set to start deploying!
+
+### GitHub Variables
+
+P2P pipelines expect some GitHub Variables to be configured.
+You can configure it either automatically using `corectl` or manually.
+
+#### Automatically
+
+You can automatically set/update variables using `corectl`:
+
+```bash
+corectl p2p env sync <app-repository> <tenant-name>
+```
+
+#### Manually
+
+Create your environments with the following variables:
+
+* `BASE_DOMAIN` e.g. `gcp-dev.cecg.platform.cecg.io`
+* `INTERNAL_SERVICES_DOMAIN` e.g. `gcp-dev-internal.cecg.platform.cecg.io`
+* `DPLATFORM` environment name from platform-environments e.g. `dev`
+* `PROJECT_ID` project id from platform environments e.g. `core-platform-efb3c84c`
+* `PROJECT_NUMBER` project number for the project id above
+
+{{< figure src="/images/p2p/git-environments.png" title="Git Environments" >}}
+
+Usually you need at least two environments, e.g.
+
+* `dev`
+* `prod`
+
+For an instance of the CECG Core Platform on GCP.
+
+A single dev environment is enough for Fast Feedback.
+
+Set the following repository variables (these may be set globally for your org):
+
+* `FAST_FEEDBACK` to `{"include": [{"deploy_env": "dev"}]}`
+* `EXTENDED_TEST` to `{"include": [{"deploy_env": "dev"}]}`
+* `PROD` to `{"include": [{"deploy_env": "prod"}]}`
+
+And specifically for your app set:
+
+* `TENANT_NAME` as configured in your tenancy in platform environments
