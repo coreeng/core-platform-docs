@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-Extended tests, by default, run once a day and is the palceholder for longer running tests that are too slow
+Extended tests, by default, run once a day and is the placeholder for longer running tests that are too slow
 or expensive to run on every commit.
 
 Implement the following Make targets:
