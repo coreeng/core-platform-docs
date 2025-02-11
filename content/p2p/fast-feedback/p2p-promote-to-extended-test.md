@@ -8,7 +8,7 @@ pre = ""
 Make target: `p2p-promote-to-extended-test`
 
 After successful run of `p2p-functional`, `p2p-integration`, and `p2p-nft` the version is considered ready for
-extended test.
+Extended Test.
 
 The default implementation as provided by software templates rarely needs changing:
 
@@ -21,4 +21,4 @@ p2p-promote-to-extended-test:
 ```
 
 This moves the immutable versioned artifact into the registry for extended test and will be
-picked up next time [extended test](/p2p/extended-test) runs
+picked up next time [Extended Test](/p2p/extended-test) runs
