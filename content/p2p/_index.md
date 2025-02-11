@@ -48,37 +48,30 @@ Assuming you've started with a software template via corectl you already have a 
 All you need to do is implement them for your application and the P2P will execute them at the right time.
 
 ```makefile
-.PHONY: p2p-build
 p2p-build: ## Build phase
     echo "##### EXECUTING P2P-BUILD #####"
 
-.PHONY: p2p-functional
 p2p-functional: ## Execute functional tests
     echo "##### EXECUTING P2P-FUNCTIONAL #####"
 
-.PHONY: p2p-nft
 p2p-nft:  ## Execute non-functional tests
     echo "##### EXECUTING P2P-NFT #####"
 
-.PHONY: p2p-integration
 p2p-integration:  ## Execute integration tests
     echo "##### EXECUTING P2P-INTEGRATION #####"
 
-.PHONY: p2p-extended-test
 p2p-extended-test: ## Runs extended tests
     echo "##### EXECUTING P2P-EXTENDED-TEST #####"
 
-.PHONY: p2p-prod
-p2p-prod: ## Runs the service
-    echo "##### EXECUTING P2P-PROD #####"
-
-.PHONY: p2p-promote-to-extended-test
 p2p-promote-to-extended-test: ## Promote service to extended test
     echo "##### EXECUTING P2P-PROMOTE-TO-EXTENDED-TEST #####"
 
-.PHONY: p2p-promote-to-prod
 p2p-promote-to-prod:  ## Promote service to prod
     echo "##### EXECUTING P2P-PROMOTE-TO-PROD #####"
+    
+p2p-prod: ## Runs the service
+    echo "##### EXECUTING P2P-PROD #####"
+
 ```
 
 These will be the entrypoints of the pipeline. You can then extend these to do your custom actions.
