@@ -33,6 +33,7 @@ The P2P consists of the following quality gates:
     * Static Verification
   * Deployed stubbed functional tests
   * Deployed stubbed non-functional tests
+  * Deployed integration tests
 * Extended Tests
   * Slower tests such as peak load tests
 * Once a version has been promoted from Extended tests it is ready for production
