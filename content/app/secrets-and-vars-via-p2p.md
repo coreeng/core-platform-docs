@@ -25,7 +25,7 @@ GitHub supports both variables and secrets:
 
 Secrets can be environment specific, but **only repository (i.e. global) variables are supported** (this is due to GitHub resolving variables before the environment is known - but resolves secrets as late as possible)
 
-Some variables will already be configured by the P2P of the platform - this is documented [here](../../../p2p#github-variables) - those variables should be left unchanged. The below covers how to add additional variables/secrets and pass them into your application.
+Some variables will already be configured by the P2P of the platform - this is documented [here](../../../p2p/reference#github-variables) - those variables should be left unchanged. The below covers how to add additional variables/secrets and pass them into your application.
 
 ### Example
 
