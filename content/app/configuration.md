@@ -11,7 +11,7 @@ These docs will talk about the various ways that configuration can be passed int
 
 ## Environment Variables via Deployment manifest
 
-Our reference applications will populate everything that's supplied via `.Values.service.environmentVariables` as environment variables to the application via a block in the `containers:` definition like:
+Our reference applications will populate everything that's supplied via `.Values.service.environmentVariables` as environment variables to the application via a block in the `containers:` definition, in the _Deployment_ manifest, like:
 
 ```yaml
 {{- if .Values.service.environmentVariables }}
@@ -23,7 +23,7 @@ Our reference applications will populate everything that's supplied via `.Values
 {{- end }}
 ```
 
-The above will loop over everything, and supply it as environment variables. You can supply additional literal values here, or values from variables in helm - For example:
+The above will loop over everything, and supply it as environment variables. You can supply additional literal values here, or values from variables in helm - for example:
 
 ```yaml
           env: 
@@ -125,12 +125,12 @@ The key lines are:
 
 ```bash
         -f helm-charts/config/common.yaml \
-        -f helm-charts/config/integration.yaml \
+        -f helm-charts/config/integration.yaml 
 ```
 
 This will ensure that helm sources values from the two new files, and the last file wins so integration properties will win out over common properties.
 
-Our application expects these to be supplied as DATABASE_HOSTNAME and APP_MODE - we then add the following block in our `deployments.yaml` template:
+If the application expects these to be supplied as DATABASE_HOSTNAME and APP_MODE - we then add the following block in our `deployments.yaml` template:
 
 ```yaml
           env:
