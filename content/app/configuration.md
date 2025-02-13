@@ -5,13 +5,13 @@ chapter = false
 pre = ""
 +++
 
-Generally speaking we'd suggest adopting the principles of the [twelve factor app](https://12factor.net/config) and pass in configuration via environment variables.
+Generally speaking we'd suggest adopting the principles of the [twelve factor app](https://12factor.net/config) and passing in configuration via environment variables.
 
-These docs will talk about the various ways that configuration can be stored and ultimately passed into the application.
+These docs will talk about the various ways that configuration can be passed into the application and stored.
 
-## Supplying Environment Variables to an app via the Deployment manifest
+## Environment Variables via Deployment manifest
 
-Our reference applications will populate everything that's supplied via .Values.service.environmentVariables as environment variables to the application via a block in the "containers:" definition like:
+Our reference applications will populate everything that's supplied via `.Values.service.environmentVariables` as environment variables to the application via a block in the `containers:` definition like:
 
 ```yaml
 {{- if .Values.service.environmentVariables }}
@@ -23,7 +23,7 @@ Our reference applications will populate everything that's supplied via .Values.
 {{- end }}
 ```
 
-You can supply additional literal values here, or values from variables in helm - For example:
+The above will loop over everything, and supply it as environment variables. You can supply additional literal values here, or values from variables in helm - For example:
 
 ```yaml
           env: 
@@ -39,15 +39,15 @@ You can supply additional literal values here, or values from variables in helm 
 {{- end }}
 ```
 
-The above sets the evironment variable `CONFIG_VAR1` to `CONFIG_VAR1_VALUE` and `CONFIG_VAR2` to the resolved value of `.Values.config.var2` which will be supplied to the helm context in some other way. Examples below will cover how to supply the values - the best approach depends on the nature of the configuration.
+The above sets the environment variable `CONFIG_VAR1` to `CONFIG_VAR1_VALUE` and `CONFIG_VAR2` to the resolved value of `.Values.config.var2` which will be supplied to helm in some other way. Examples below will cover how to supply the values - the best approach depends on the nature of the configuration.
 
-## Non sensitive configuration
+## Non-sensitive configuration
 
 For non-sensitive configuration the recommended approach is this is checked into a repository and managed through changes to the repository. Sensitive configuration (e.g. passwords, auth tokens etc.) should not be checked into the repo and a different approach is covered below.
 
-Whilst it is possible to manage configuration in the application's source code/resources, we cover a language and application-framework agonostic approach below - using helm chart values.
+Whilst it is possible to manage configuration in the application's source code/resources, we cover a language and application-framework agnostic approach below - using helm chart values.
 
-The general approach would be to introduce a config folder in `/helm-charts/config` and add files with values there and then add these to the relevant helm invocations in the Makefile.
+The general approach would be to introduce a config folder in `/helm-charts/config`, add files with values there and then add these to the relevant helm invocations in the Makefile.
 
 ### Common Configuration
 
@@ -128,7 +128,7 @@ The key lines are:
         -f helm-charts/config/integration.yaml \
 ```
 
-This will ensure that the helm invocation sources values from the two new files, and the last file wins so integration properties will win out over common properties.
+This will ensure that helm sources values from the two new files, and the last file wins so integration properties will win out over common properties.
 
 Our application expects these to be supplied as DATABASE_HOSTNAME and APP_MODE - we then add the following block in our `deployments.yaml` template:
 
@@ -160,7 +160,7 @@ Secrets can be managed in the Settings tab on a repository, by navigating to: Se
 
 {{< figure src="/images/app/github-secrets-vars.png" >}}
 
-GitHub supports both variables and secrets, but we would recommend using the above approach for instead of variables, and only using GitHub for secrets. Secrets are encrypted and their value is not shown in the GitHub UI (also it is hidden in GitHub logs) and should be used for e.g. passwords, authentication tokens.
+GitHub supports both variables and secrets, but we would recommend using the above approach for variables, and only using GitHub for secrets. Secrets are encrypted and their value is not shown in the GitHub UI (also it is hidden in GitHub logs) and should be used for e.g. passwords, authentication tokens.
 
 Secrets can be environment specific - this is covered below.
 
@@ -168,23 +168,19 @@ Some variables will already be configured by the P2P of the platform - this is d
 
 ### Common Sensitive Configuration
 
-On the repo for the application, navigate to: Settings > Secrets and variables > Actions and then the Secrets tab. Under **Repository secrets** click **New repository secret**. N.B. Unlike variables, secret values cannot viewed in the GitHub UI or logs, and should be used for e.g. passwords, tokens etc.
+On the repo for the application, navigate to: Settings > Secrets and variables > Actions and then the Secrets tab. Under **Repository secrets** click **New repository secret**. N.B. Unlike variables, secret values cannot viewed in the GitHub UI or logs.
 
 In this example below we'll make a secret called: GLOBAL_SECRET with a value of GLOBAL_PASSWORD-123
 
 ### Environment Specific Sensitive Configuration
 
-{{% notice note %}}
-Environment specific variables are not supported as they're resolved eagerly by GitHub, before the environment is known.
-{{% /notice %}}
-
-Environment specific secrets can be configured in GitHub via Settings > Environments, then chosing an environment. Out of the box our reference P2P setup will support both production and dev environments.
+Environment specific secrets can be configured in GitHub via Settings > Environments, then choosing an environment. Out of the box our reference P2P setup will support both production and dev environments.
 
 {{< figure src="/images/app/github-environments.png" >}}
 
 If you need further isolation (e.g. different setup for Functional vs NFT test environments) that's possible by configuring the secrets in dev and then only passing in specific variables to each Makefile target (covered below).
 
-Environment specific secrets can be configured via Settings > Environments, then chosing an environment, and clicking **Add environment secrets**. N.B. Unlike variables, secret values cannot viewed in the GitHub UI or logs, and should be used for e.g. passwords, tokens etc.
+Environment specific secrets can be configured via Settings > Environments, then choosing an environment, and clicking **Add environment secrets**.
 
 In this example below let's add a secret called ENV_SPECIFIC_SECRET with a value of GCP-DEV-PASSWORD-123.
 
@@ -194,7 +190,7 @@ In this example below let's add a secret called ENV_SPECIFIC_SECRET with a value
 
 As per the above we'll add both a common and environment specific secret in this example.
 
-The above steps will pass variables and secrets in to GitHub actions, but because we use re-usable workflows in GitHub actions additional steps are necessary to explicitly pass them through to the execution context that invokes the Makefile, and then changes are necessary in the Makefile to pass environment variables through to the application itself.
+The above steps the secrets in to GitHub actions, but because we use re-usable workflows in GitHub actions additional steps are necessary to explicitly pass them through to the execution context that invokes the Makefile, and then changes are necessary in the Makefile to pass environment variables through to the application itself.
 
 #### Updating the P2P workflow
 
@@ -232,7 +228,7 @@ The Makefile has separate targets for each stage of the P2P pipeline. In this ex
 Variables can be passed into the application via additions like:
 
 ```bash
---set service.environmentVariables.GLOBAL_VARIABLE="${GLOBAL_VARIABLE}"
+--set-literal service.environmentVariables.GLOBAL_VARIABLE="${GLOBAL_VARIABLE}"
 ```
 
 to the relevant Makefile target. So for a full example that targets the integration environment:
@@ -252,8 +248,8 @@ deploy-integration:  ## Deploy helm chart of the app to integration namespace
         --set tenantName=$(tenant_name) \
         --set appName=$(app_name) \
         --set service.resources.requests.cpu=0m \
-        --set service.environmentVariables.GLOBAL_SECRET="${GLOBAL_SECRET}" \
-        --set service.environmentVariables.ENV_SPECIFIC_SECRET="${ENV_SPECIFIC_SECRET}" \
+        --set-literal service.environmentVariables.GLOBAL_SECRET="${GLOBAL_SECRET}" \
+        --set-literal service.environmentVariables.ENV_SPECIFIC_SECRET="${ENV_SPECIFIC_SECRET}" \
         --atomic
     helm list -n $(tenant_name)-integration ## list installed charts in the given tenant namespace
 ```
