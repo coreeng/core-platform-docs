@@ -70,8 +70,8 @@ The helm invocation, and deployment chart will need to be modified as covered in
 
 Let's say we have the following configuration properties:
 
-- *mode* - a string value that configures some application behaviour
-- *databaseHostname* - the location of the application's database
+- _mode_ - a string value that configures some application behaviour
+- _databaseHostname_ - the location of the application's database
 
 It's possible that in different environments you'll want to run the application in different modes and against different databases.
 
