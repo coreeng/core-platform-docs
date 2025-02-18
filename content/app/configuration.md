@@ -11,7 +11,7 @@ These docs will talk about the various ways that configuration can be passed int
 
 ## Environment Variables via Deployment manifest
 
-Our reference applications will populate everything that's supplied via `.Values.service.environmentVariables` as environment variables to the application via a block in the `containers:` definition, in the _Deployment_ manifest, like:
+Our reference applications, and anything that uses our open-source app helm chart, will populate everything that's supplied via `.Values.service.environmentVariables` as environment variables to the application via a block in the `containers:` definition, in the _Deployment_ manifest, like:
 
 ```yaml
 {{- if .Values.service.environmentVariables }}
@@ -23,23 +23,9 @@ Our reference applications will populate everything that's supplied via `.Values
 {{- end }}
 ```
 
-The above will loop over everything, and supply it as environment variables. You can supply additional literal values here, or values from variables in helm - for example:
+The above will loop over everything, and supply it as environment variables.
 
-```yaml
-          env: 
-            - name: CONFIG_VAR1
-              value: CONFIG_VAR1_VALUE
-            - name: CONFIG_VAR2
-              value: {{ .Values.config.var2 }}
-{{- if .Values.service.environmentVariables }}
-            {{- range $key, $value := .Values.service.environmentVariables }}
-            - name: {{ $key }}
-              value: {{ $value }}
-          {{- end }}
-{{- end }}
-```
-
-The above sets the environment variable `CONFIG_VAR1` to `CONFIG_VAR1_VALUE` and `CONFIG_VAR2` to the resolved value of `.Values.config.var2` which will be supplied to helm in some other way. Examples below will cover how to supply the values - the best approach depends on the nature of the configuration.
+Various approaches are covered, which essenitally add additional entries to the environment variables map, e.g.  if you add: `.Values.service.environmentVariables.KEY`=`VALUE` you'll get an enviornment variable called KEY set to the given VALUE passed into your application.
 
 ## Non-sensitive configuration
 
@@ -51,14 +37,10 @@ The general approach would be to introduce a config folder in `/helm-charts/conf
 
 ### Common Configuration
 
-For common configuration two approaches are possible:
-
-- Add values in `helm-charts/app/values.yaml`
-  - This is viable approach if the configuration never needs to be overridden to be made environment specific
 - Add values to a file called e.g. `helm-charts/config/common.yaml`
   - This approach will allow parts of the configuration to be overridden easily to be made environment specific
 
-In each of the above approaches you can then ensure the values are added to the environment for the application as covered above, and in the full example below.
+The full example below shows how to pass this into the application.
 
 ### Environment Specific Configuration
 
@@ -70,8 +52,8 @@ The helm invocation, and deployment chart will need to be modified as covered in
 
 Let's say we have the following configuration properties:
 
-- _mode_ - a string value that configures some application behaviour
-- _databaseHostname_ - the location of the application's database
+- _MODE_ - a string value that configures some application behaviour
+- _DATABASE_HOSTNAME_ - the location of the application's database
 
 It's possible that in different environments you'll want to run the application in different modes and against different databases.
 
@@ -82,9 +64,10 @@ Let's add the configuration files:
 `helm-charts/config/common.yaml`
 
 ```yaml
-config:
-    mode: default
-    databaseHostname: common-database-url
+service:
+    environmentVariables: 
+        MODE: default
+        DATABASE_HOSTNAME: common-database-url
 ```
 
 and
@@ -92,8 +75,9 @@ and
 `helm-charts/config/integration.yaml`
 
 ```yaml
-config:
-    databaseHostname: integration-sql
+service:
+    environmentVariables: 
+        DATABASE_HOSTNAME: integration-sql
 ```
 
 We can then change the Makefile `deploy-integration` step to look like this:
@@ -130,14 +114,10 @@ The key lines are:
 
 This will ensure that helm sources values from the two new files, and the last file wins so integration properties will win out over common properties.
 
-If the application expects these to be supplied as DATABASE_HOSTNAME and APP_MODE - we then add the following block in our `deployments.yaml` template:
+We then add the following block in our `deployments.yaml` template - which ensures every environment variable is passed through to the app (this is already present in our reference applications)
 
 ```yaml
           env:
-            - name: DATABASE_HOSTNAME
-              value: {{ .Values.config.databaseHostname }}
-            - name: APP_MODE
-              value: {{  .Values.config.mode }}
           {{- if .Values.service.environmentVariables }}
             {{- range $key, $value := .Values.service.environmentVariables }}
             - name: {{ $key }}
