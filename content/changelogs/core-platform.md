@@ -10,11 +10,23 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.30.6"
+release: "0.30.8"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.30.8
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+
+## v0.30.7
+
+### What's Changed
+
+* Changed all monitoring module's polling intervals from 30s to 1m by @mitulamin
 
 ## v0.30.6
 
