@@ -10,11 +10,19 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.30.8"
+release: "0.30.9"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.30.9
+
+### What's Changed
+
+* Switch from --terragrunt-working-dir to --working-dir by @kkonstan
+* Switch from deprecated --terragrunt- to -- by @kkonstan
+* Update dependencies by @kkonstan
 
 ## v0.30.8
 
