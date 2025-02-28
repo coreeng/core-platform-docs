@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: core-platform-docs Fast Feedback
 
 on:
   workflow_dispatch:
@@ -16,23 +16,17 @@ permissions:
 jobs:
   version:
     uses: coreeng/p2p/.github/workflows/p2p-version.yaml@v1
+    with:
+      version-prefix: v
     secrets:
       git-token: ${{ secrets.GITHUB_TOKEN }}
 
   fastfeedback:
     needs: [version]
     uses: coreeng/p2p/.github/workflows/p2p-workflow-fastfeedback.yaml@v1
+    secrets:
+      env_vars: ${{ secrets.env_vars }}
     with:
+      app-name: core-platform-docs
       version: ${{ needs.version.outputs.version }}
-
-  extended-test:
-    needs: [version, fastfeedback]
-    uses: coreeng/p2p/.github/workflows/p2p-workflow-extended-test.yaml@v1
-    with:
-      version: ${{ needs.version.outputs.version }}
-
-  prod:
-    needs: [version, extended-test]
-    uses: coreeng/p2p/.github/workflows/p2p-workflow-prod.yaml@v1
-    with:
-      version: ${{ needs.version.outputs.version }}
+      working-directory: ./

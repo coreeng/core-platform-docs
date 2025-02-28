@@ -1,0 +1,27 @@
+name: core-platform-docs Extended Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 22 * * *'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  get-latest-version:
+    uses: coreeng/p2p/.github/workflows/p2p-get-latest-image-extended-test.yaml@v1
+    with:
+      image-name: core-platform-docs
+
+  extendedtests:
+    needs: [get-latest-version]
+    uses: coreeng/p2p/.github/workflows/p2p-workflow-extended-test.yaml@v1
+    secrets:
+      env_vars: ${{ secrets.env_vars }}
+    with:
+      app-name: core-platform-docs
+      version: ${{ needs.get-latest-version.outputs.version }}
+      version-prefix: v
+      working-directory: ./

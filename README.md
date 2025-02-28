@@ -7,7 +7,7 @@ This repository contains assets to build and run the Core Platform documentation
 This uses docker:
 
 ```shell
-make run-local
+make build-app run-app
 ```
 
 Then access the docs [here](http://localhost:8080)

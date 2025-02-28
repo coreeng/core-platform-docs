@@ -1,107 +1,53 @@
-projectDir := $(realpath $(dir $(firstword $(MAKEFILE_LIST))))
-os := $(shell uname)
-image_name = core-platform-docs
-image_tag = $(VERSION)
-tenant_name = docs
-FAST_FEEDBACK_PATH = fast-feedback
-EXTENDED_TEST_PATH = extended-test
-PROD_PATH = prod
+# Set tenant and app name
+P2P_TENANT_NAME ?= docs
+P2P_APP_NAME ?= core-platform-docs
 
-.PHONY: help-p2p
-help-p2p:
-	@grep -E '^[a-zA-Z1-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | grep p2p | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+# Download and include p2p makefile
+$(shell curl -fsSL "https://raw.githubusercontent.com/coreeng/p2p/v1/p2p.mk" -o ".p2p.mk")
+include .p2p.mk
 
-.PHONY: help-all
-help-all:
-	@grep -E '^[a-zA-Z1-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+# Define required p2p targets
+p2p-build: build-app push-app
+p2p-integration: deploy-integration
+p2p-prod: deploy-prod
 
-# P2P tasks
 
-.PHONY: p2p-build
-p2p-build: service-build service-push ## Builds the service image and pushes it to the registry
 
 .PHONY: lint
-lint:
-	markdownlint-cli2
+lint: ## Run lint checks
+	docker run --rm -i docker.io/hadolint/hadolint < Dockerfile
+	docker run --rm -i -v $(PWD):/workdir davidanson/markdownlint-cli2:v0.17.2
 
-.PHONY: p2p-functional ## Noop for now
-p2p-functional: create-ns-functional deploy-dev # Temporarily while the promotion step isn't authenticated and can't deploy there
-	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name)-functional --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs-functional --atomic
-	helm list -n $(tenant_name)-functional ## list installed charts in the given tenant namespace
 
-.PHONY: p2p-nft ## Noop for now
-p2p-nft: 
-	@echo noop
 
-.PHONY: p2p-integration ## Noop for now
-p2p-integration:
-	@echo noop
+.PHONY: build-app
+build-app: lint ## Build app
+	docker buildx build $(p2p_image_cache) --tag "$(p2p_image_tag)" --file Dockerfile .
 
-.PHONY: p2p-promote-generic
-p2p-promote-generic:  ## Generic promote functionality
-	@echo "$(red) Retagging version ${image_tag} from $(SOURCE_REGISTRY) to $(REGISTRY)"
-	export CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE=$(SOURCE_AUTH_OVERRIDE) ; \
-	gcloud auth configure-docker --quiet europe-west2-docker.pkg.dev; \
-	docker pull $(SOURCE_REGISTRY)/$(source_repo_path)/$(image_name):${image_tag} ; \
-	docker tag $(SOURCE_REGISTRY)/$(source_repo_path)/$(image_name):${image_tag} $(REGISTRY)/$(dest_repo_path)/$(image_name):${image_tag}
-	@echo "$(red) Pushing version ${image_tag}"
-	export CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE=$(DEST_AUTH_OVERRIDE) ; \
-	docker push $(REGISTRY)/$(dest_repo_path)/$(image_name):${image_tag}
 
-.PHONY: p2p-promote-to-extended-test
-p2p-promote-to-extended-test: source_repo_path=$(FAST_FEEDBACK_PATH)
-p2p-promote-to-extended-test: dest_repo_path=$(EXTENDED_TEST_PATH)
-p2p-promote-to-extended-test: p2p-promote-generic
 
-.PHONY: p2p-promote-to-prod
-p2p-promote-to-prod: source_repo_path=$(EXTENDED_TEST_PATH)
-p2p-promote-to-prod: dest_repo_path=$(PROD_PATH)
-p2p-promote-to-prod: p2p-promote-generic
+.PHONY: push-app
+push-app:
+	docker image push "$(p2p_image_tag)"
 
-.PHONY: deploy-dev
-deploy-dev: create-ns-dev 
-	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name)-dev --set registry=$(REGISTRY)/$(FAST_FEEDBACK_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs --atomic
-	helm list -n $(tenant_name)-dev ## list installed charts in the given tenant namespace
 
-.PHONY: p2p-prod
-p2p-prod:  
-	helm upgrade  --recreate-pods --install core-platform-docs helm-charts/core-platform-docs -n $(tenant_name) --set registry=$(REGISTRY)/$(PROD_PATH) --set domain=$(BASE_DOMAIN) --set service.tag=$(image_tag) --set subDomain=docs --atomic
-	helm list -n $(tenant_name) ## list installed charts in the given tenant namespace
 
-.PHONY: p2p-extended-test
-p2p-extended-test:  ## Runs extended tests
-	echo "### EXTENDED TESTS RUN ###"
-	
-.PHONY: create-ns-dev
-create-ns-dev: ## Create namespace for dev
-	awk -v NAME="$(tenant_name)" -v ENV="dev" '{ \
-		sub(/{tenant_name}/, NAME);  \
-		sub(/{env}/, ENV);  \
-		print;  \
-	}' resources/subns-anchor.yaml | kubectl apply -f - 	
+.PHONY: deploy-%
+deploy-%:
+	helm upgrade --install "$(p2p_app_name)" helm-charts/core-platform-docs -n "$(p2p_namespace)" \
+		--set subDomain="docs" \
+		--set registry="$(p2p_registry)" \
+		--set domain="$(BASE_DOMAIN)" \
+		--set service.tag="$(p2p_version)" \
+		--atomic
 
-.PHONY: create-ns-functional
-create-ns-functional: ## Create namespace for functional tests
-	awk -v NAME="$(tenant_name)" -v ENV="functional" '{ \
-		sub(/{tenant_name}/, NAME);  \
-		sub(/{env}/, ENV);  \
-		print;  \
-	}' resources/subns-anchor.yaml | kubectl apply -f - 	
-# Docker tasks
 
-.PHONY: service-build
-service-build:
-	docker build --file Dockerfile --tag $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag) .
 
-.PHONY: service-push
-service-push: ## Push the service image
-	docker image push $(REGISTRY)/$(FAST_FEEDBACK_PATH)/$(image_name):$(image_tag)
-
-.PHONY: run-local
-run-local: ## Build and run docker container locally
-	docker build . -t local-kp && \
-	  docker run -p 8080:8080 \
-	    --volume ./:/site \
-	    --env LIVE_RELOAD=true\
-	  	--env BASE_URL=http://localhost:8080\
-	  	local-kp
+.PHONY: run-app
+run-app: ## Run app
+	docker run --rm --name "$(p2p_app_name)" \
+		-p 8080:8080 \
+		--volume ./:/site \
+		-e LIVE_RELOAD=true\
+		-e BASE_URL=http://localhost:8080 \
+		"$(p2p_image_tag)"
