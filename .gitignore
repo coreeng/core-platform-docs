@@ -1,3 +1,9 @@
+# p2p makefile
+.p2p.mk
+
+# vi swapfiles
+*.swp
+
 /.idea/
 public
 *.iml

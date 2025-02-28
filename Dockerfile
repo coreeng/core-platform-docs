@@ -23,13 +23,6 @@ WORKDIR /site
 # Copy the source files
 COPY . .
 
-# Run the linter, but don't add it to the build
-RUN apk add --no-cache npm && \
-    npm install markdownlint-cli2 --global && \
-    markdownlint-cli2 && \
-    npm uninstall markdownlint-cli2 --global && \
-    apk del npm
-
 # Set ownership and permissions
 RUN chown -R hugo:hugo /site
 
