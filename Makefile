@@ -33,6 +33,10 @@ p2p-functional: create-ns-functional deploy-dev # Temporarily while the promotio
 p2p-nft: 
 	@echo noop
 
+.PHONY: p2p-integration ## Noop for now
+p2p-integration:
+	@echo noop
+
 .PHONY: p2p-promote-generic
 p2p-promote-generic:  ## Generic promote functionality
 	@echo "$(red) Retagging version ${image_tag} from $(SOURCE_REGISTRY) to $(REGISTRY)"
