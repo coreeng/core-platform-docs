@@ -1,5 +1,5 @@
 # Set tenant and app name
-P2P_TENANT_NAME ?= docs
+P2P_TENANT_NAME ?= core-platform-docs
 P2P_APP_NAME ?= core-platform-docs
 
 # Download and include p2p makefile
@@ -48,6 +48,6 @@ run-app: ## Run app
 	docker run --rm --name "$(p2p_app_name)" \
 		-p 8080:8080 \
 		--volume ./:/site \
-		-e LIVE_RELOAD=true\
+		-e LIVE_RELOAD=true \
 		-e BASE_URL=http://localhost:8080 \
 		"$(p2p_image_tag)"
