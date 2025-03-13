@@ -10,11 +10,20 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.30.9"
+release: "0.30.10"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.30.10
+
+### What's Changed
+
+* Allow tenant admin to use policy API group by @kkonstan
+* Update tf providers by @kkonstan
+* Update dependencies by @kkonstan
+* Add platform-portal feature by @kkonstan
 
 ## v0.30.9
 
