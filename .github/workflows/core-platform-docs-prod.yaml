@@ -2,6 +2,8 @@ name: core-platform-docs Prod
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [extended_test_success]
   schedule:
     - cron: '30 5 * * 1-5'
 
