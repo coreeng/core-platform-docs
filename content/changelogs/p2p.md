@@ -17,6 +17,126 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.82
+
+### What's Changed
+
+* Add env_vars support to platform workflows by @kkonstan
+
+## v1.6.81
+
+### What's Changed
+
+* Pass GITHUB_TOKEN to commands ran by platform-release.yaml by @kkonstan
+
+## v1.6.80
+
+### What's Changed
+
+* Pass GITHUB_TOKEN to commands ran by platform-execute-command.yaml by @kkonstan
+
+## v1.6.79
+
+### What's Changed
+
+* bug: Fix p2p-image task by @Mugenor
+
+## v1.6.78
+
+### What's Changed
+
+* Drop tenant from app suffix url by @kkonstan
+
+## v1.6.77
+
+### What's Changed
+
+* P2P_VERSION should default to something that's semver by @kkonstan
+
+## v1.6.76
+
+### What's Changed
+
+* Ensure GITHUB_TOKEN is set when executing p2p make targets by @kkonstan
+
+## v1.6.75
+
+### What's Changed
+
+* Add back p2p-image and new p2p-images to print primary and all image names by @kkonstan
+
+## v1.6.74
+
+### What's Changed
+
+* Explicitly disable cancel in progress for execute-command workflows by @kkonstan
+
+## v1.6.73
+
+### What's Changed
+
+* Move all p2p targets except promotion back to app repos by @kkonstan
+
+## v1.6.72
+
+### What's Changed
+
+* Fix typos in readme by @erikzele
+
+## v1.6.71
+
+### What's Changed
+
+* Adds P2P V2 functionality in a backwards compatible way, for testing by @kkonstan
+
+## v1.6.68
+
+### What's Changed
+
+* Get latest image based on semver not timestamp by @kkonstan
+
+## v1.6.67
+
+### What's Changed
+
+* Switch from container to artifact registry commands by @kkonstan
+
+## v1.6.66
+
+### What's Changed
+
+* Add Google Cloud SDK step back, but with skip_install by @kkonstan
+
+## v1.6.65
+
+### What's Changed
+
+* Switch gke eaccess from internal ip to dns based endpoint by @kkonstan
+
+## v1.6.64
+
+### What's Changed
+
+* Remove version prefix from the p2pversion output by @tmcalves
+
+## v1.6.63
+
+### What's Changed
+
+* Add version output to get latest version by @tmcalves
+
+## v1.6.62
+
+### What's Changed
+
+* Add step with version on name by @tmcalves
+
+## v1.6.61
+
+### What's Changed
+
+* Login to tenant registry by @tmcalves
+
 ## v1.6.60
 
 ### What's Changed
@@ -99,7 +219,7 @@ We always update the major and minor version on new releases. We recommend using
 
 ### What's Changed
 
-* Migrate to PLATORM_ENVIRONMENT  by @chbatey
+* Migrate to PLATORM_ENVIRONMENT by @chbatey
 
 ## v1.6.46
 
@@ -119,7 +239,7 @@ As explained in the [fast feedback section](../p2p/fast-feedback/), this right n
 * Updating actions versions by @tmcalves
 * add auth-azure step for vendor azure to platform-execute-command by @kkonstan
 * import platform-release.yaml from developer-platform's release.yaml by @kkonstan
-* Pin azure-auth to 1.5.1  by @kkonstan
+* Pin azure-auth to 1.5.1 by @kkonstan
 * Promote image when the trigger is a tag by @tmcalves
 * Typo fix by @tmcalves
 * set ARM_* variables to get terraform azure provider to use OIDC by @kkonstan
