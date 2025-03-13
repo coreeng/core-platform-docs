@@ -2,6 +2,8 @@ name: core-platform-docs Extended Test
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [fast_feedback_success]
   schedule:
     - cron: '0 22 * * *'
 
@@ -25,3 +27,16 @@ jobs:
       version: ${{ needs.get-latest-version.outputs.version }}
       version-prefix: v
       working-directory: ./
+
+  dispatch-prod:
+    needs: [extendedtests]
+    if: github.ref == 'refs/heads/main' && needs.extendedtests.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Prod Workflow
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/dispatches \
+          -d '{"event_type": "extended_test_success"}'
