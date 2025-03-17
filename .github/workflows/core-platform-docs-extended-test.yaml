@@ -2,8 +2,6 @@ name: core-platform-docs Extended Test
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 22 * * *'
 
 permissions:
   actions: write
