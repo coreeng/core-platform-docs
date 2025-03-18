@@ -10,11 +10,18 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.31.1"
+release: "0.31.2"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.31.2
+
+### What's Changed
+
+* Set correct tf vars for features-destroy like features-apply/features-plan by @kkonstan
+* Update dependencies by @kkonstan
 
 ## v0.31.1
 
