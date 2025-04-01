@@ -7,7 +7,8 @@ pre = ""
 
 Configuration should be injected to your application via environment variables.
 Configuration can be broken into two categories:
-  1) Common Configuration 
+
+  1) Common Configuration
   2) Environment Specific Configuration
 
 See [sensitive configuration](./secrets.md) for secrets.
@@ -15,7 +16,6 @@ See [sensitive configuration](./secrets.md) for secrets.
 ## Common Configuration
 
 - Add values to a file called `/config/common.yaml` to your repository.
-
 
 In the format:
 
@@ -37,8 +37,7 @@ service:
         DATABASE_HOSTNAME: integration-database-url
 ```
 
-
-## Injecting the configuration 
+## Injecting the configuration
 
 Inject `.Values.service.environmentVariables` as environment variables to the application via a block in the `containers:` definition, in the _Deployment_ manifest, like:
 
@@ -52,7 +51,7 @@ Inject `.Values.service.environmentVariables` as environment variables to the ap
 {{- end }}
 ```
 
-### Pass the files to the helm install on deploy e.g.
+Pass the files to the helm install on deploy:
 
 ```bash
 deploy-integration:  

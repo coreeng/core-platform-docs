@@ -17,7 +17,6 @@ Secrets can be managed in the Settings tab on a repository, by navigating to: Se
 
 {{< figure src="/images/app/github-secrets-vars.png" >}}
 
-
 ### Common Sensitive Configuration
 
 On the repo for the application, navigate to: Settings > Secrets and variables > Actions and then the Secrets tab. Under **Repository secrets** click **New repository secret**. N.B. Unlike variables, secret values cannot viewed in the GitHub UI or logs.
