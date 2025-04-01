@@ -57,7 +57,7 @@ Inject `.Values.service.environmentVariables` as environment variables to the ap
 ```bash
 deploy-integration:  
     helm upgrade --install $(app_name) helm-charts/app -n $(tenant_name)-integration \
-        -f helm-charts/config/common.yaml \
-        -f helm-charts/config/integration.yaml \
+        -f /config/common.yaml \
+        -f /config/integration.yaml \
       ...
 ```
