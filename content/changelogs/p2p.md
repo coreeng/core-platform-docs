@@ -17,6 +17,12 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.83
+
+### What's Changed
+
+* Use correct region for docker login by @kkonstan
+
 ## v1.6.82
 
 ### What's Changed
