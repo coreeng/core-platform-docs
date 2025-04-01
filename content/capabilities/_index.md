@@ -90,7 +90,7 @@ See:
 
 See:
 
-* [Configuration](/app/configuration/#sensitive-configuration)
+* [Secrets](/app/secrets/)
 
 ### Access infrastructure
 
