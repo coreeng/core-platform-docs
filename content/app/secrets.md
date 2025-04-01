@@ -25,7 +25,7 @@ In this example below we'll make a secret called: GLOBAL_SECRET with a value of 
 
 ### Environment Specific Sensitive Configuration
 
-Environment specific secrets can be configured in GitHub via Settings > Environments, then choosing an environment. Out of the box our reference P2P setup will support both production and dev environments.
+Environment specific secrets can be configured in GitHub via Settings > Environments, then choosing the correct platform environment. 
 
 {{< figure src="/images/app/github-environments.png" >}}
 
