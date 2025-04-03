@@ -1,6 +1,6 @@
 +++
 title = "Deploying Applications"
-weight = 2
+weight = 3
 chapter = false
 pre = ""
 +++

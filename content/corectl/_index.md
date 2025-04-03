@@ -1,6 +1,6 @@
 +++
 title = "Core Platform CLI"
-weight = 20
+weight = 2
 chapter = false
 pre = ""
 +++

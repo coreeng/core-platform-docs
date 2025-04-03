@@ -1,6 +1,6 @@
 +++
 title = "Quality Gate: Extended Test"
-weight = 3
+weight = 4
 chapter = false
 pre = ""
 +++
