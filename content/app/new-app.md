@@ -24,6 +24,10 @@ application ready to deploy to production on every commit!
 corectl apps create <new-app-name> [<new-app-dir>]
 ```
 
+{{% notice warn %}}
+`new-app-name` must be lower case, as Docker only allows lowercase letters for image names.
+{{% /notice %}}
+
 It will:
 
 - prompt you a few additional questions, including template for the application.
