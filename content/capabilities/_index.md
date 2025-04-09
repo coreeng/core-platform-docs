@@ -87,11 +87,10 @@ See:
 ### Secure Secrets
 
 * Ability to deploy secrets to all environments and access from your application
-* Extendable so you can orchestrate secrets into environments from your secrets store
 
 See:
 
-* [Secret Management](/reference/secret-management/)
+* [Secrets](/app/secrets/)
 
 ### Access infrastructure
 
