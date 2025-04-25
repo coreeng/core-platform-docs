@@ -10,11 +10,21 @@ pre = ""
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.31.3"
+release: "0.31.4"
 
 environment: "gcp-dev"
 ...
 ```
+
+## v0.31.4
+
+### What's Changed
+
+* Update ONBOARDING.md links by @jescard-tamer-cecg
+* Update CONTRIBUTING.md by @kkonstan
+* Update dependencies by @kkonstan
+* Update dependencies by @kkonstan
+* Shorten truncation of fullname template helpers by @pyoio
 
 ## v0.31.3
 

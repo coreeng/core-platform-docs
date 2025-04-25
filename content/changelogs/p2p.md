@@ -17,6 +17,12 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.84
+
+### What's Changed
+
+* Run integration test after functional/nft by @kkonstan
+
 ## v1.6.83
 
 ### What's Changed
