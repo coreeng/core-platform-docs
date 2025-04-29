@@ -5,7 +5,7 @@ chapter = false
 pre = ""
 +++
 
-Configuration should be injected to your application via environment variables.
+Configuration should be checked into your repository and injected to your application via environment variables.
 Configuration can be broken into two categories:
 
   1) Common Configuration
