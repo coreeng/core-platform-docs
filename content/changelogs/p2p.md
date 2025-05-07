@@ -17,6 +17,18 @@ We always update the major and minor version on new releases. We recommend using
 
 # Changelog
 
+## v1.6.86
+
+### What's Changed
+
+* Fix region support for extended test and promotions by @kkonstan
+
+## v1.6.85
+
+### What's Changed
+
+* Update CODEOWNERS by @kkonstan
+
 ## v1.6.84
 
 ### What's Changed
