@@ -5,7 +5,7 @@ const meta = {
   docs: {
     title: "Documentation",
     items: {
-      index: "QuickStart",
+      overview: "Overview",
       app: "Application",
     },
   },
