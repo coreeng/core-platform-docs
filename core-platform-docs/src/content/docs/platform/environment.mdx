@@ -1,0 +1,18 @@
++++
+title = "Platform Environments"
+weight = 2
+chapter = false
+pre = ""
++++
+
+A Platform environment is the underlying infrastructure for Application environments. It scales up and down automatically based on the applications deployed to it. Dev and prod are isolated to reduce the blast radius of platform deployments.
+
+Each  platform environment has a set of predefined workflows that will be executed to test, validate, and publish the application. These workflows ensure the stability and reliability of deployments across different stages.
+
+## Choosing a Platform Environment
+
+When setting up a new tenant, you will be prompted to choose a platform environment eg:
+
+- **Pre-Development (`pre-dev`)** should only be used by platform operators for validating new versions of the environment. Most developers can ignore this option.
+- **Development (`dev`)** should be used for frequent testing and experimentation.
+- **Production (`prod`)** should only be used for live applications with end-user interactions.

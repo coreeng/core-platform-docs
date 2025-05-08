@@ -1,7 +1,7 @@
 import nextra from "nextra";
 
 const withNextra = nextra({
-  // ... Add Nextra-specific options here
+  staticImage: true,
 });
 
 export default withNextra({});
