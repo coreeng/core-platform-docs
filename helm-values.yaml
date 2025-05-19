@@ -1,0 +1,36 @@
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 1000m
+    memory: 1024Mi
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+
+livenessProbe:
+  failureThreshold: 3
+  httpGet:
+    port: 3000
+    path: /livez
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 1
+readinessProbe:
+  failureThreshold: 3
+  httpGet:
+    port: 3000
+    path: /readyz
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 1
+
+ingress:
+  enabled: true
+  hosts:
+    - paths:
+        - path: "/"
+          pathType: "ImplementationSpecific"
+
+service:
+  port: 3000
