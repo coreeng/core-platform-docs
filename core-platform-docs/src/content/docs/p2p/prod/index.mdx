@@ -1,12 +1,15 @@
+---
+asIndexPage: true
+---
+
 # Production Deployment
 
-
-Production deployment, by default once a day, takes the latest version that has passed [extended test](/p2p/extended-test/)
+Production deployment, by default once a day, takes the latest version that has passed [extended test](./extended-test/)
 and deploys it to production.
 
 Implement the following Make targets:
 
-* [p2p-prod](/p2p/prod/p2p-prod/)
+- [p2p-prod](./prod/p2p-prod/)
 
 ## Usage
 
@@ -19,7 +22,7 @@ name: Prod
 on:
   workflow_dispatch:
   schedule:
-    - cron: '35 5 * * 1,5'
+    - cron: "35 5 * * 1,5"
 
 permissions:
   contents: read
