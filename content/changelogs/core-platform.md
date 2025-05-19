@@ -16,6 +16,26 @@ environment: "gcp-dev"
 ...
 ```
 
+## v0.33.2
+
+### What's Changed
+
+* Update dependencies by @kkonstan
+* Increase ingress idle timeout by @kkonstan
+
+## v0.33.1
+
+* Fix lb iap backend update script by @kkonstan
+
+### What's Changed
+
+## v0.33.0
+
+* Update CODEOWNERS by @kkonstan
+* Switch route to traefik from http to http2 by @kkonstan
+
+### What's Changed
+
 ## v0.32.0
 
 ### What's Changed
