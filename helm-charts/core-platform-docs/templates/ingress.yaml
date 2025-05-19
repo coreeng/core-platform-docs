@@ -1,0 +1,22 @@
+{{- $domain := .Values.domain | required ".Values.domain is required." -}}
+{{- $subDomain := .Values.subDomain | required ".Values.subDomain is required." -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ $subDomain }}.{{ $domain }}
+    external-dns.alpha.kubernetes.io/target: {{ $domain }}
+  name: core-platform-docs
+spec:
+  ingressClassName: platform-ingress
+  rules:
+  - host: {{ $subDomain }}.{{ $domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: core-platform-docs
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
