@@ -1,6 +1,6 @@
 # Set tenant and app name
-P2P_TENANT_NAME ?= core-platform-landing
-P2P_APP_NAME ?= core-platform-landing
+P2P_TENANT_NAME ?= core-platform-docs
+P2P_APP_NAME ?= core-platform-docs
 
 # Download and include p2p makefile
 $(shell curl -fsSL "https://raw.githubusercontent.com/coreeng/p2p/v1/p2p.mk" -o ".p2p.mk")
