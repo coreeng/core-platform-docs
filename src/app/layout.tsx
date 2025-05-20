@@ -14,22 +14,7 @@ const navbar = (
   <Navbar
     logo={
       <b>
-        <Image
-          src="/logo.png"
-          alt="Development team collaborating"
-          className="dark:hidden block"
-          width={213}
-          height={23}
-          priority
-        />
-        <Image
-          src="/logo-dark.png"
-          alt="Development team collaborating"
-          className="dark:block hidden"
-          width={213}
-          height={23}
-          priority
-        />
+        <Image src="/logo.png" alt="Development team collaborating" width={213} height={23} priority />
       </b>
     }
   />
@@ -48,16 +33,16 @@ export default async function RootLayout({
       <Head
         color={{
           hue: {
-            dark: 326,
-            light: 326,
+            dark: 211,
+            light: 211,
           },
           saturation: {
             dark: 100,
             light: 100,
           },
           lightness: {
-            dark: 49,
-            light: 49,
+            dark: 51,
+            light: 51,
           },
         }}
       ></Head>
