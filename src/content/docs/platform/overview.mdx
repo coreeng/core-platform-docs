@@ -1,9 +1,4 @@
----
-asIndexPage: true
----
-
-# Platform Operations
-
+# Overview
 
 ## Accessing the Platform
 
@@ -39,7 +34,7 @@ corectl env connect <environment-name>
 
 ### Manually
 
-* Start IAP Tunnel:
+- Start IAP Tunnel:
 
 ```bash
 gcloud compute start-iap-tunnel ${BASTION_HOSTNAME} 3128 \
@@ -48,7 +43,7 @@ gcloud compute start-iap-tunnel ${BASTION_HOSTNAME} 3128 \
     --zone ${BASTION_ZONE}
 ```
 
-* Access the Cluster with kubectl:
+- Access the Cluster with kubectl:
 
 ```bash
 # Install the gke-gcloud-auth-plugin binary (required)
@@ -73,10 +68,10 @@ kubectl auth can-i get pods \
 
 ## GCP Registry Access
 
-* To access artifact registries, use the following command to configure Docker:
+- To access artifact registries, use the following command to configure Docker:
 
 ```bash
 gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev
 ```
 
-* Now, you have read and write access to `${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/tenant`.
+- Now, you have read and write access to `${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/tenant`.

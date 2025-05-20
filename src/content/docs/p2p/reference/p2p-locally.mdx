@@ -1,9 +1,4 @@
----
-asIndexPage: true
----
-
 # Local development
-
 
 Some `Makefile` targets within your app require specific variables to successfully execute. Those include registry
 details, tenancy or versioning. `Corectl` allows you to export those based on your existing local tenant and repository
@@ -18,12 +13,12 @@ corectl p2p export --tenant <your_tenant_name> --environment <your_target_env> -
 The command will print out all variables as export statements, ex.:
 
 ```bash
-export BASE_DOMAIN="gcp-dev.cecg.platform.cecg.io" # domain pulled in from environments project                                 
-export REPO_PATH="/path/to/my/app/repo" # path to your git local app repository                                                 
-export REGION="europe-west2" # region pulled in from environments project                                                         
+export BASE_DOMAIN="gcp-dev.cecg.platform.cecg.io" # domain pulled in from environments project
+export REPO_PATH="/path/to/my/app/repo" # path to your git local app repository
+export REGION="europe-west2" # region pulled in from environments project
 export REGISTRY="europe-west2-docker.pkg.dev/myproject/tenant/mytenant" # registry url constructed based on environments project
-export VERSION="53b9c85" # short git hash commit pointing to current HEAD (latest commit in currently checked out branch in that repo)                                                 
-export TENANT_NAME="mytenant" 
+export VERSION="53b9c85" # short git hash commit pointing to current HEAD (latest commit in currently checked out branch in that repo)
+export TENANT_NAME="mytenant"
 ```
 
 You can copy all the output and paste again in currently running shell to export all envs. Once done you can run most of

@@ -1,9 +1,4 @@
----
-asIndexPage: true
----
-
 # Versioning
-
 
 The P2P starts with a versioned immutable artifact that is passed through the pipeline.
 
@@ -14,10 +9,10 @@ Versioning is a critical part of the software development lifecycle. It allows y
 The P2P comes with a workflow that creates semantic versions for your application.
 
 ```yaml
-  version:
-    uses: coreeng/p2p/.github/workflows/p2p-version.yaml@v1
-    secrets:
-      git-token: ${{ secrets.GITHUB_TOKEN }} 
+version:
+  uses: coreeng/p2p/.github/workflows/p2p-version.yaml@v1
+  secrets:
+    git-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 When not on the main branch this will take the latest tag and append a commit hash.

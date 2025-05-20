@@ -1,15 +1,10 @@
----
-asIndexPage: true
----
-
 # Deployment Frequency
-
 
 The Core Platform P2P can be configured to deploy your application in one of three modes:
 
-* *Right away:* Fast feedback runs right away, followed by extended test, followed by production deployment.
-* *On a schedule:* Fast feedback runs right away, extended test and production run on a schedule.
-* *Manually:* Fast feedback runs right away, extended test and production are manually triggered.
+- _Right away:_ Fast feedback runs right away, followed by extended test, followed by production deployment.
+- _On a schedule:_ Fast feedback runs right away, extended test and production run on a schedule.
+- _Manually:_ Fast feedback runs right away, extended test and production are manually triggered.
 
 Or a hybrid of one of the above e.g. Fast feedback and extended test run right away, production is manually triggered.
 
@@ -37,7 +32,7 @@ jobs:
   version:
     uses: coreeng/p2p/.github/workflows/p2p-version.yaml@v1
     secrets:
-      git-token: ${{ secrets.GITHUB_TOKEN }} 
+      git-token: ${{ secrets.GITHUB_TOKEN }}
 
   fastfeedback:
     needs: [version]
@@ -62,9 +57,9 @@ jobs:
 
 This is the configuration all templates come with where:
 
-* Fast feedback runs for every commit to main
-* Extended test runs once a day, on the latest version that passed fastfeedback
-* Production runs once a day, on the latest version that passed extended test
+- Fast feedback runs for every commit to main
+- Extended test runs once a day, on the latest version that passed fastfeedback
+- Production runs once a day, on the latest version that passed extended test
 
 Create three workflows in your repo in `./github/workflows` with the following content:
 
@@ -91,12 +86,12 @@ jobs:
     uses: coreeng/p2p/.github/workflows/p2p-version.yaml@v1
     secrets:
       git-token: ${{ secrets.GITHUB_TOKEN }}
-    
+
   fastfeedback:
     needs: [version]
     uses: coreeng/p2p/.github/workflows/p2p-workflow-fastfeedback.yaml@v1
     with:
-     version: ${{ needs.version.outputs.version }}
+      version: ${{ needs.version.outputs.version }}
 ```
 
 ### Extended Test
@@ -107,7 +102,7 @@ name: Extended Test
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 22 * * *'
+    - cron: "0 22 * * *"
 
 permissions:
   contents: read
@@ -134,7 +129,7 @@ name: Prod
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 5 * * 1,5'
+    - cron: "30 5 * * 1,5"
 
 permissions:
   contents: read
