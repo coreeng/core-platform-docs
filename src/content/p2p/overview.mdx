@@ -1,0 +1,86 @@
+# Overview
+
+## Core Platform Path to Production
+
+The P2P enables you to focus on building your business logic and tests without
+wasting time on CI/CD tooling setup.
+All your custom logic should be added to your Makefile rather than directly in GitHub actions.
+
+All you need to do is implement the steps in the Makefile in your repository and let the Core Platform do everything else.
+
+Not ready to implement a step yet? Just leave it blank!
+
+## Represent change as an Immutable Deployable Versioned Artifact
+
+Regardless of what your change is for production, an application, terraform infrastructure, we build it into an
+Immutable Deployable Versioned Artifact, specfically an OCI image and promote it through the stages of the P2P.
+
+### Pipeline as a contract
+
+- The P2P is the contract that every application agrees to adhere to for continuous delivery
+- It is _light touch_ in that it doesn't mandate many steps, just the most important types of testing
+  - You can use whatever tools you want from each step
+
+![p2p.png](/p2p/p2p.png)
+
+## Quality Gates
+
+The P2P consists of the following quality gates:
+
+- Fast Feedback: What you can do in a few minutes
+  - Build
+    - Unit tests
+    - Static Verification
+  - Deployed stubbed functional tests
+  - Deployed stubbed non-functional tests
+  - Deployed integration tests
+- Extended Tests
+  - Slower tests such as peak load tests
+- Once a version has been promoted from Extended tests it is ready for production
+
+Two key concepts for the P2P are:
+
+- [Versioning](./versioning): The P2P promoted an immutable, versioned artifact through the pipeline
+- [Promotion](./reference/promotion): Each time a quality gate is passed the immutable, versioned artifact is promoted
+
+### P2P Interface: giving you control
+
+Assuming you've started with a software template via corectl you already have a Makefile with the following tasks.
+All you need to do is implement them for your application and the P2P will execute them at the right time.
+
+```makefile
+p2p-build: ## Build phase
+    echo "##### EXECUTING P2P-BUILD #####"
+
+p2p-functional: ## Execute functional tests
+    echo "##### EXECUTING P2P-FUNCTIONAL #####"
+
+p2p-nft:  ## Execute non-functional tests
+    echo "##### EXECUTING P2P-NFT #####"
+
+p2p-integration:  ## Execute integration tests
+    echo "##### EXECUTING P2P-INTEGRATION #####"
+
+p2p-extended-test: ## Runs extended tests
+    echo "##### EXECUTING P2P-EXTENDED-TEST #####"
+
+p2p-promote-to-extended-test: ## Promote service to extended test
+    echo "##### EXECUTING P2P-PROMOTE-TO-EXTENDED-TEST #####"
+
+p2p-promote-to-prod:  ## Promote service to prod
+    echo "##### EXECUTING P2P-PROMOTE-TO-PROD #####"
+
+p2p-prod: ## Runs the service
+    echo "##### EXECUTING P2P-PROD #####"
+
+```
+
+These will be the entrypoints of the pipeline. You can then extend these to do your custom actions.
+
+What tool you use in each of the Makefile targets is up to you.
+
+### FAQs
+
+#### What if I don't have tests for one of the stages?
+
+- Leave it as a no-op and as you want to increase your maturity and aim for Continuous Delivery you already have the place to run them

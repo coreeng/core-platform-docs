@@ -1,0 +1,19 @@
+# Promote to Extended Test
+
+Make target: `p2p-promote-to-extended-test`
+
+After successful run of `p2p-functional`, `p2p-integration`, and `p2p-nft` the version is considered ready for
+Extended Test.
+
+The default implementation as provided by software templates rarely needs changing:
+
+```Make
+p2p-promote-to-extended-test:
+    corectl p2p promote <app-name>:${VERSION} \
+        --source-stage $(FAST_FEEDBACK_PATH) \
+        --dest-registry $(REGISTRY) \
+        --dest-stage $(EXTENDED_TEST_PATH)
+```
+
+This moves the immutable versioned artifact into the registry for extended test and will be
+picked up next time [Extended Test](/p2p/extended-test/overview) runs

@@ -4,24 +4,26 @@ import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "./globals.css";
 import Image from "next/image";
+import { Geist, Geist_Mono } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Core Platform Docs",
-  description: "Core Platform Docs",
+  description: "Comprehensive documentation for the Core Platform.",
 };
 
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 const navbar = (
-  <Navbar
-    logo={
-      <b>
-        <Image src="/logo.png" alt="Development team collaborating" width={213} height={23} priority />
-      </b>
-    }
-  />
+  <Navbar logo={<Image src="/logo.png" alt="Development team collaborating" width={213} height={23} priority />} />
 );
-// const footer = (
-//   <div className="text-center h-10 bg-neutral-100 dark:bg-neutral-900 w-full text-gray-700">MY FOOTER</div>
-// );
 
 export default async function RootLayout({
   children,
@@ -46,7 +48,7 @@ export default async function RootLayout({
           },
         }}
       ></Head>
-      <body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
