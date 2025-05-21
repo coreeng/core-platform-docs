@@ -22,7 +22,28 @@ const geistMono = Geist_Mono({
 });
 
 const navbar = (
-  <Navbar logo={<Image src="/logo.png" alt="Development team collaborating" width={213} height={23} priority />} />
+  <Navbar
+    logo={
+      <>
+        <Image
+          src="/logo.png"
+          className="block dark:hidden"
+          alt="Development team collaborating"
+          width={213}
+          height={23}
+          priority
+        />
+        <Image
+          src="/logo-dark.png"
+          className="hidden dark:block"
+          alt="Development team collaborating"
+          width={213}
+          height={23}
+          priority
+        />
+      </>
+    }
+  />
 );
 
 export default async function RootLayout({
@@ -44,7 +65,7 @@ export default async function RootLayout({
           },
           lightness: {
             dark: 51,
-            light: 51,
+            light: 44,
           },
         }}
       ></Head>
