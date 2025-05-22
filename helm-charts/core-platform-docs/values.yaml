@@ -1,7 +1,0 @@
-registry:
-domain:
-subDomain:
-service:
-  image: core-platform-docs
-  tag: latest
-
