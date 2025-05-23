@@ -1,7 +1,0 @@
-<ul>
-  {{ range index .Site.Data.environments.environments  }}
-  <li>
-    <a href="https://grafana.{{ .internal_services }}/d/zDpLnqaMz/continuous-load?orgId=1&refresh=5s" >{{ .name }}</a>
-  </li>
-  {{ end }}
-</ul>

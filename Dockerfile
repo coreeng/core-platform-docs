@@ -1,33 +1,43 @@
-FROM alpine:3.20
+FROM node:22-alpine AS base
 
-# The Hugo version
-ARG HUGO_VERSION=0.132.1
+# Install dependencies only when needed
+FROM base AS deps
+RUN apk add --no-cache gcompat=1.1.0-r4
+WORKDIR /app
 
-# Add a non-root user
-RUN addgroup -S hugo && adduser -S -G hugo hugo
+# Install dependencies
+COPY package.json yarn.lock* ./
+RUN yarn --frozen-lockfile;
 
-# Download and extract Hugo
-ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /hugo.tar.gz
-RUN tar -zxvf hugo.tar.gz && \
-    rm -f hugo.tar.gz && \
-    mv hugo /usr/local/bin/hugo && \
-    chmod +x /usr/local/bin/hugo
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json yarn.lock* eslint.config.mjs next.config.ts postcss.config.mjs tsconfig.json ./
+COPY public ./public
+COPY src ./src
 
-# We add git to the build stage, because Hugo needs it with --enableGitInfo
-# hadolint ignore=DL3018
-RUN apk add --no-cache git
+RUN yarn run build;
 
-# Set the working directory
-WORKDIR /site
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
 
-# Copy the source files
-COPY . .
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Set ownership and permissions
-RUN chown -R hugo:hugo /site
+RUN addgroup --system --gid 1001 nodejs \
+ && adduser --system --uid 1001 nextjs
 
-# Set the non-root user
-USER hugo
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Run Hugo
-ENTRYPOINT ["/site/run.sh"]
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]

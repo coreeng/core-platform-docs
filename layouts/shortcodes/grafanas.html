@@ -1,7 +1,0 @@
-<ul>
-  {{ range index .Site.Data.environments.environments  }}
-  <li>
-    <a href="https://grafana.{{ .internal_services }}" >{{ .name }}</a>
-  </li>
-  {{ end }}
-</ul>
