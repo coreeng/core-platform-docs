@@ -1,5 +1,4 @@
 const app = {
-  overview: {},
   tenancy: {},
   "new-app": {},
   configuration: {},
@@ -26,12 +25,10 @@ const app = {
   },
 };
 const p2p = {
-  overview: {},
   versioning: {},
   "fast-feedback": {
     title: "Quality Gate: Fast Feedback",
     items: {
-      overview: {},
       "p2p-build": {},
       "p2p-functional": {},
       "p2p-integration": {},
@@ -43,7 +40,6 @@ const p2p = {
     title: "Production Deployment",
 
     items: {
-      overview: {},
       "p2p-prod": {},
     },
   },
@@ -51,14 +47,12 @@ const p2p = {
     title: "Quality Gate: Extended Test",
 
     items: {
-      overview: {},
       "p2p-extended-test": {},
       "p2p-promote-to-prod": {},
     },
   },
   reference: {
     items: {
-      overview: {},
       "deployment-frequency": {},
       "extended-tests": {},
       "p2p-locally": {},
@@ -67,7 +61,6 @@ const p2p = {
   },
 };
 const platform = {
-  overview: {},
   "cluster-autoscaling": {},
   dns: {},
   "managed-services": {},
@@ -87,7 +80,6 @@ const platform = {
       grafana: {},
       "infra-connector": {},
       "metrics-collection": {},
-      overview: {},
       tenancy: {},
     },
   },
@@ -117,7 +109,6 @@ const reference = {
   "deploying-reference-apps": {},
 };
 const capabilities = {
-  overview: {},
   roadmap: {},
   history: {},
 };
