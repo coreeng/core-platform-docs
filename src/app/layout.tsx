@@ -54,6 +54,7 @@ export default async function RootLayout({
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head
+        backgroundColor={{ dark: "#09090b", light: "#fafafa" }}
         color={{
           hue: {
             dark: 216,
