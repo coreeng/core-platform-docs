@@ -5,6 +5,7 @@ import { getPageMap } from "nextra/page-map";
 import "./globals.css";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import PostPathToParent from "@/post-path-to-parent";
 
 export const metadata: Metadata = {
   title: "Core Platform Docs",
@@ -71,6 +72,7 @@ export default async function RootLayout({
         }}
       ></Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <PostPathToParent />
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
