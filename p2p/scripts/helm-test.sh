@@ -24,7 +24,7 @@ scaleDownApp() {
 	fi
 }
 
-trap 'printLogs && scaleDownApp' SIGINT SIGTERM ERR EXIT
+trap 'printLogs && scaleDownApp' SIGINT SIGTERM EXIT
 logs_start=$(date +%s)
 
 helm test "${app_name}" -n "${namespace}" --filter name="${test_name}" --timeout "${timeout}"

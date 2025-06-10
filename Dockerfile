@@ -1,4 +1,4 @@
-FROM node:22-alpine AS base
+FROM docker.io/node:22.16.0-alpine3.22 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -10,14 +10,15 @@ COPY package.json yarn.lock* ./
 RUN yarn --frozen-lockfile;
 
 # Rebuild the source code only when needed
-FROM base AS builder
+FROM base AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY package.json yarn.lock* eslint.config.mjs next.config.ts postcss.config.mjs tsconfig.json ./
+COPY package.json yarn.lock* eslint.config.mjs next.config.ts postcss.config.mjs tsconfig.json jest.config.ts jest.setup.ts ./
 COPY public ./public
 COPY src ./src
 
-RUN yarn run build;
+# Build and test the app
+RUN yarn run test && yarn run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -29,9 +30,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs \
  && adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
+COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 

@@ -1,0 +1,12 @@
+{
+  "default": {
+    "requireModule": ["ts-node/register"],
+    "paths": ["tests/features/"],
+    "require": ["tests/steps/*.ts"],
+    "formatOptions": {
+      "snippetInterface": "async-await"
+    },
+
+    "format": [["html", "cucumber-report.html"], "summary", "progress", "json:./cucumber-report.json"]
+  }
+}
