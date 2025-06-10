@@ -5,7 +5,7 @@
 *.swp
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -46,3 +46,13 @@ next-env.d.ts
 
 # pagefind
 _pagefind/
+
+# playwright
+test-results/
+playwright-report/
+blob-report/
+**/playwright/.cache/
+
+# cucumber
+cucumber-report.html
+cucumber-report.json
