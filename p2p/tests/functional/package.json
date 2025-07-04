@@ -6,8 +6,8 @@
     "test:cucumber": "cucumber-js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.27",
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^22.16.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
