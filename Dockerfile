@@ -1,4 +1,4 @@
-FROM docker.io/node:22.16.0-alpine3.22 AS base
+FROM docker.io/node:22.17.1-alpine3.22 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
