@@ -16,6 +16,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY package.json yarn.lock* eslint.config.mjs next.config.ts postcss.config.mjs tsconfig.json jest.config.ts jest.setup.ts ./
 COPY public ./public
 COPY src ./src
+COPY scripts ./scripts
 
 # Build and test the app
 RUN yarn run test && yarn run build
@@ -33,6 +34,7 @@ RUN addgroup --system --gid 1001 nodejs \
 COPY --from=build /app/public ./public
 COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=build /app/scripts ./scripts
 
 USER nextjs
 
@@ -41,4 +43,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["node", "scripts/start-with-runtime-url.mjs"]

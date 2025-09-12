@@ -1,1 +1,3 @@
 ---
+envVarsMap:
+  BASE_URL: "https://core-platform-docs-integration.gcp-dev.cecg.platform.cecg.io/"
