@@ -1,1 +1,3 @@
 ---
+envVarsMap:
+  BASE_URL: "https://core-platform-docs-nft.gcp-dev.cecg.platform.cecg.io/"

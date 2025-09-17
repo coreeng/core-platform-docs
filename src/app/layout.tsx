@@ -7,9 +7,18 @@ import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import PostPathToParent from "@/post-path-to-parent";
 
+const baseUrl =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://base-url-placeholder.example.com"; // This will be replaced by the runtime script
+
 export const metadata: Metadata = {
-  title: "Core Platform Docs",
+  title: "Core Platform - Documentation",
   description: "Comprehensive documentation for the Core Platform.",
+  metadataBase: new URL(baseUrl),
+  openGraph: {
+    title: "Core Platform - Documentation",
+    description:
+      "Power Your Teams' Engineering Velocity From Day 1 With Core Platform - Your All-in-one Internal Developer Platform Built for Speed, Scale & Developer Happiness.",
+  },
 };
 
 const geistSans = Geist({
