@@ -6,13 +6,13 @@
     "test:cucumber": "cucumber-js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.53.2",
-    "@types/node": "^22.16.0",
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.6.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^11.3.0",
+    "@cucumber/cucumber": "^12.2.0",
     "node-fetch": "^3.3.2"
   }
 }
