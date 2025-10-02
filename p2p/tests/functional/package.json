@@ -7,9 +7,9 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
-    "@types/node": "^24.6.0",
+    "@types/node": "^24.6.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@cucumber/cucumber": "^12.2.0",
