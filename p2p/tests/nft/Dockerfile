@@ -1,4 +1,4 @@
-FROM docker.io/golang:1.24.4-alpine3.22 AS build
+FROM docker.io/golang:1.25.1-alpine3.22 AS build
 WORKDIR $GOPATH/src/go.k6.io/k6
 
 # hadolint ignore=DL3018
