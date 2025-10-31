@@ -145,5 +145,11 @@ const meta = {
     title: "Changelogs",
     items: changelogs,
   },
+  legal: {
+    title: "Legal",
+    items: {
+      licenses: {},
+    },
+  },
 };
 export default meta;
