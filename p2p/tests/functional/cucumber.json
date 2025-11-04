@@ -4,9 +4,13 @@
     "paths": ["tests/features/"],
     "require": ["tests/steps/*.ts"],
     "formatOptions": {
-      "snippetInterface": "async-await"
+      "snippetInterface": "async-await",
+      "colorsEnabled": true
     },
-
-    "format": [["html", "cucumber-report.html"], "summary", "progress", "json:./cucumber-report.json"]
+    "format": [
+      "pretty",
+      ["html", "cucumber-report.html"],
+      ["json", "cucumber-report.json"]
+    ]
   }
 }
