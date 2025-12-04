@@ -37,7 +37,7 @@ Define the basic information for your application.
 
 - **Name** (required): The name of your application. Must be lowercase as Docker only allows lowercase letters for image names.
 - **Description** (optional): A brief description of what your application does.
-- **Team** (required): Select the team that will own this application. This determines access control and organization.
+- **[Team](/reference/tenancy#team-tenants)** (required): Select the team that will own this application. This determines access control and organization.
 
 Click **Next** to proceed to the repository configuration.
 
@@ -60,21 +60,21 @@ Configure where your application code will be stored.
 
 <Callout type="info">
 
-A new repository will be created during the application setup process with the template code and all necessary P2P workflow configurations.
+A new repository will be created during the application setup process with the [application template](/reference/software-templates#application-templates) code and all necessary P2P workflow configurations.
 
 </Callout>
 
-Click **Next** to select an application template.
+Click **Next** to select a [application template](/reference/software-templates#application-templates).
 
 ### Application Template Selection
 
-Choose a predefined application template that best fits your technology stack.
+Choose an application template that best fits your technology stack.
 
 <Image src="/images/app/wizard/step-3-application-template-light.jpg" alt="Application Template Selection Step" width={1200} height={800} className="block dark:hidden" />
 <Image src="/images/app/wizard/step-3-application-template-dark.jpg" alt="Application Template Selection Step" width={1200} height={800} className="hidden dark:block" />
 
 
-Each template comes pre-configured with:
+Each [application template](/reference/software-templates#application-templates) comes pre-configured with:
 - Dockerfile and build configuration
 - P2P workflow definitions
 - Testing setup
@@ -98,14 +98,14 @@ Configure the deployment environment and resource allocation for your applicatio
 
 **Fields:**
 
-- **Cluster Set** (required): Select the cluster set where your application will be deployed (currently only GCP is available)
+- **Cluster Set** (required): Select the cluster set where your application will be deployed
 - **Replicas** (required): Number of pod replicas to run
 - **CPU (millicores)** (required): CPU allocation in millicores (e.g., 250 = 0.25 CPU cores)
 - **Memory (MiB)** (required): Memory allocation in MiB (e.g., 512 = 512 MiB)
 
 <Callout type="info">
 
-These values are pre-filled based on your selected template but can be adjusted to meet your application's specific requirements.
+These values are pre-filled based on your selected [application template](/reference/software-templates#application-templates) but can be adjusted to meet your application's specific requirements.
 
 </Callout>
 
@@ -118,12 +118,7 @@ Review all your configuration before submitting the application creation request
 <Image src="/images/app/wizard/step-5-review-and-deploy-light.jpg" alt="Review and Deploy Step" width={1200} height={800} className="block dark:hidden" />
 <Image src="/images/app/wizard/step-5-review-and-deploy-dark.jpg" alt="Review and Deploy Step" width={1200} height={800} className="hidden dark:block" />
 
-This step displays a summary of all your selections:
-
-- **Application Details**: Name, description, and team
-- **Repository Configuration**: Repository type, name, and organization
-- **Application Template**: Selected template
-- **Environment Configuration**: Cluster set, replicas, CPU, and memory
+This step displays a summary of all your selections
 
 **Options:**
 
@@ -146,8 +141,8 @@ After submitting, you'll see the application creation status page.
 The status page shows:
 
 - **Repository**: Link to the newly created GitHub repository
-- **Tenant PR**: Link to the tenant configuration pull request
-- **PR Status**: Current status of the tenant PR (Merged/Not Merged)
+- **Tenant PR**: Link to the [app tenant](/reference/tenancy#app-tenants) configuration pull request
+- **PR Status**: Current status of the [app tenant](/reference/tenancy#app-tenants) PR (Merged/Not Merged)
 - **Creation timestamps**: When the application was created and last updated
 
 **Next Steps:**
@@ -161,17 +156,17 @@ The status page shows:
 
 The Core Platform will automatically:
 
-1. **Create a new GitHub repository** with your selected template
+1. **Create a new GitHub repository** with your selected [application template](/reference/software-templates#application-templates)
 2. **Configure the repository** with:
    - P2P workflow files for continuous delivery
    - Dockerfile and build configuration
    - Testing setup
    - Deployment manifests
 3. **Set up GitHub environments** for each deployment stage
-4. **Create a tenant PR** to register your application with the platform
-5. **Configure access controls** based on your team selection
+4. **Create an [app tenant](/reference/tenancy#app-tenants) PR** to register your application with the platform
+5. **Configure access controls** based on your [team](/reference/tenancy#team-tenants) selection
 
-Once the tenant PR is merged, your application will be ready to deploy!
+Once the [app tenant](/reference/tenancy#app-tenants) PR is merged, your application will be ready to deploy!
 
 ## Create a new application using the CLI
 
@@ -189,8 +184,8 @@ corectl apps create <new-app-name> [<new-app-dir>]
 
 The CLI will:
 
-- Prompt you for additional questions, including the template for the application
-- Create a new repository using the selected template
+- Prompt you for additional questions, including the [application template](/reference/software-templates#application-templates) for the application
+- Create a new repository using the selected [application template](/reference/software-templates#application-templates)
 - Configure the created GitHub repository so P2P workflows will run without an issue
 
 ## Developer workflow
