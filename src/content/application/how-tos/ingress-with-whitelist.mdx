@@ -1,6 +1,6 @@
 import { Callout } from "nextra/components";
 
-# Create Ingress with IP Whitelisting
+# Create Ingress with IP Allowlisting
 
 <Callout type="warning">This uses beta features in the platform and breaking changes may occur in the future</Callout>
 
@@ -11,7 +11,7 @@ import { Callout } from "nextra/components";
   will be deprecated in the future.
 </Callout>
 
-Create a `middleware.traefik.io` object to [whitelist IP addresses](https://doc.traefik.io/traefik/middlewares/http/ipwhitelist/):
+Create a `middleware.traefik.io` object to [allowlist IP addresses](https://doc.traefik.io/traefik/reference/routing-configuration/http/middlewares/ipallowlist/):
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
@@ -20,9 +20,9 @@ metadata:
   name: <middlewareName>
   namespace: <middlewareNamespace>
 spec:
-  ipWhiteList:
+  ipAllowList:
     ipStrategy:
-      depth: 2 # depth is required as request is forwarded from load balancer. See https://doc.traefik.io/traefik/middlewares/http/ipwhitelist/#ipstrategydepth for more details
+      depth: 2 # request is forwarded from load balancer (X-Forwarded-For). Depth is counted from the right.
     sourceRange:
       - <ip-address>
       - <ip-address>
@@ -58,7 +58,7 @@ spec:
             pathType: ImplementationSpecific
 ```
 
-After you apply this, only users with whitelisted IPs will be able to use that ingress URL.
+After you apply this, only users with allowlisted IPs will be able to use that ingress URL.
 
 ## Debugging
 
@@ -70,6 +70,6 @@ To validate that your Middleware has been applied successfully, check the Traefi
 
 ### Logs
 
-Check traefik logs to see whether request is being whitelisted:
+Check traefik logs to see whether request is being allowlisted:
 
 ![Traefik Logs](/images/app/how-to/traefik-logs.png)
