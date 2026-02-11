@@ -106,21 +106,6 @@ This will attempt to initialize an environment called `dev`, as before, the scri
 
 ### Manual Steps
 
-#### Brand
-
-The IAP Brand needs to be manually created before deploying the Core Platform.
-After running the environment creation. Get the project id under the new environments folder
-then run:
-
-```shell
-PLATFORM_ADMIN_GROUP=???
-PROJECT=???
-gcloud iap oauth-brands create --application_title="Core Platform" --support_email="$PLATFORM_ADMIN_GROUP" --project $PROJECT
-```
-
-> ![WARNING]
-> The person executing this much be an owner of the $PLATFORM_ADMIN_GROUP
-
 #### DNS Delegation
 
 See [DNS Delegation](./dns) and [Identity Provider Login](./internal-services)
