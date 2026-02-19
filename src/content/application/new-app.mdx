@@ -1,21 +1,176 @@
-import { Callout } from "nextra/components";
+import { Callout, Steps } from "nextra/components";
+import Image from "next/image";
 
 # Create application
 
-## Create a new application
+There are two ways to create a new application on the Core Platform:
 
-The Core Platform with a single command will configure:
+1. **Using the Dashboard Wizard** (Recommended) - A guided web interface
+2. **Using the CLI** - Command-line tool for automation
 
-- A new repository
-- A template application demonstrating full continuous delivery:
-  - Versioning
-  - Functional testing
-  - Non-functional testing
-  - Promotion between a set of standard environments
-  - Deployment to production
+## Create a new application using the Dashboard
 
-After running this command, and triggering the resulting GitHub workflow you'll have an
-application ready to deploy to production on every commit!
+The Core Platform Dashboard provides an intuitive wizard to create applications with a step-by-step guided process.
+
+### Access the Create Application Wizard
+
+1. Navigate to the Core Platform Dashboard
+2. Go to the **Applications** page
+3. Click the **Create Application** button in the top right corner
+
+<Callout type="info">
+
+You need to have your GitHub account connected to use the wizard. If you haven't connected it yet, you'll see a prompt to go to your profile and connect your GitHub account.
+
+</Callout>
+
+<Steps>
+
+### Application Details
+
+Define the basic information for your application.
+
+<Image src="/images/app/wizard/step-1-application-details-light.jpg" alt="Application Details Step" width={1200} height={800} className="block dark:hidden" />
+<Image src="/images/app/wizard/step-1-application-details-dark.jpg" alt="Application Details Step" width={1200} height={800} className="hidden dark:block" />
+
+**Fields:**
+
+- **Name** (required): The name of your application. Must be lowercase as Docker only allows lowercase letters for image names.
+- **Description** (optional): A brief description of what your application does.
+- **[Team](/reference/tenancy#team-tenants)** (required): Select the team that will own this application. This determines access control and organization.
+
+Click **Next** to proceed to the repository configuration.
+
+### Repository Configuration
+
+Configure where your application code will be stored.
+
+<Image src="/images/app/wizard/step-2-repository-configuration-light.jpg" alt="Repository Configuration Step" width={1200} height={800} className="block dark:hidden" />
+<Image src="/images/app/wizard/step-2-repository-configuration-dark.jpg" alt="Repository Configuration Step" width={1200} height={800} className="hidden dark:block" />
+
+**Options:**
+
+- **Create New**: Creates a brand new GitHub repository for your application
+- **Add to Existing**: Adds the application to an existing repository (currently disabled)
+
+**Fields:**
+
+- **GitHub Organization** (required): Select the GitHub organization where the repository will be created
+- **Repository Name** (required): The name for your new repository. The wizard will automatically check if the name is available in the selected organization.
+
+<Callout type="info">
+
+A new repository will be created during the application setup process with the [application template](/reference/software-templates#application-templates) code and all necessary P2P workflow configurations.
+
+</Callout>
+
+Click **Next** to select a [application template](/reference/software-templates#application-templates).
+
+### Application Template Selection
+
+Choose an application template that best fits your technology stack.
+
+<Image src="/images/app/wizard/step-3-application-template-light.jpg" alt="Application Template Selection Step" width={1200} height={800} className="block dark:hidden" />
+<Image src="/images/app/wizard/step-3-application-template-dark.jpg" alt="Application Template Selection Step" width={1200} height={800} className="hidden dark:block" />
+
+
+Each [application template](/reference/software-templates#application-templates) comes pre-configured with:
+- Dockerfile and build configuration
+- P2P workflow definitions
+- Testing setup
+- Deployment configurations
+- Default resource limits
+
+<Callout type="info">
+
+Selecting a template will automatically populate the Environment Configuration step with the template's recommended resource settings.
+
+</Callout>
+
+Click **Next** to configure deployment environments.
+
+### Environment Configuration
+
+Configure the deployment environment and resource allocation for your application.
+
+<Image src="/images/app/wizard/step-4-environment-configuration-light.jpg" alt="Environment Configuration Step" width={1200} height={800} className="block dark:hidden" />
+<Image src="/images/app/wizard/step-4-environment-configuration-dark.jpg" alt="Environment Configuration Step" width={1200} height={800} className="hidden dark:block" />
+
+**Fields:**
+
+- **Cluster Set** (required): Select the cluster set where your application will be deployed
+- **Replicas** (required): Number of pod replicas to run
+- **CPU (millicores)** (required): CPU allocation in millicores (e.g., 250 = 0.25 CPU cores)
+- **Memory (MiB)** (required): Memory allocation in MiB (e.g., 512 = 512 MiB)
+
+<Callout type="info">
+
+These values are pre-filled based on your selected [application template](/reference/software-templates#application-templates) but can be adjusted to meet your application's specific requirements.
+
+</Callout>
+
+Click **Next** to review your configuration.
+
+### Review and Deploy
+
+Review all your configuration before submitting the application creation request.
+
+<Image src="/images/app/wizard/step-5-review-and-deploy-light.jpg" alt="Review and Deploy Step" width={1200} height={800} className="block dark:hidden" />
+<Image src="/images/app/wizard/step-5-review-and-deploy-dark.jpg" alt="Review and Deploy Step" width={1200} height={800} className="hidden dark:block" />
+
+This step displays a summary of all your selections
+
+**Options:**
+
+- **Dry Run**: Check this option to validate your configuration without actually creating the application
+- **Submit**: Create the application with the specified configuration
+
+<Callout type="warning">
+
+Creating this application will provision resources according to the configuration above. Make sure everything is correct before proceeding.
+
+</Callout>
+
+### Application Creation Status
+
+After submitting, you'll see the application creation status page.
+
+<Image src="/images/app/wizard/step-6-success-light.jpg" alt="Application Creation Status" width={1200} height={800} className="block dark:hidden" />
+<Image src="/images/app/wizard/step-6-success-dark.jpg" alt="Application Creation Status" width={1200} height={800} className="hidden dark:block" />
+
+The status page shows:
+
+- **Repository**: Link to the newly created GitHub repository
+- **Tenant PR**: Link to the [app tenant](/reference/tenancy#app-tenants) configuration pull request
+- **PR Status**: Current status of the [app tenant](/reference/tenancy#app-tenants) PR (Merged/Not Merged)
+- **Creation timestamps**: When the application was created and last updated
+
+**Next Steps:**
+
+- **View Application**: Navigate to the application details page
+- **Submit Another Application**: Create another application
+
+</Steps>
+
+### What Happens After Creation?
+
+The Core Platform will automatically:
+
+1. **Create a new GitHub repository** with your selected [application template](/reference/software-templates#application-templates)
+2. **Configure the repository** with:
+   - P2P workflow files for continuous delivery
+   - Dockerfile and build configuration
+   - Testing setup
+   - Deployment manifests
+3. **Set up GitHub environments** for each deployment stage
+4. **Create an [app tenant](/reference/tenancy#app-tenants) PR** to register your application with the platform
+5. **Configure access controls** based on your [team](/reference/tenancy#team-tenants) selection
+
+Once the [app tenant](/reference/tenancy#app-tenants) PR is merged, your application will be ready to deploy!
+
+## Create a new application using the CLI
+
+The Core Platform CLI (`corectl`) provides a command-line interface for creating applications, which is useful for automation and scripting.
 
 ```shell
 corectl apps create <new-app-name> [<new-app-dir>]
@@ -27,11 +182,11 @@ corectl apps create <new-app-name> [<new-app-dir>]
 
 </Callout>
 
-It will:
+The CLI will:
 
-- prompt you a few additional questions, including template for the application.
-- create a new repository using the selected template
-- configure the created GitHub repository, so P2P workflows will run without an issue
+- Prompt you for additional questions, including the [application template](/reference/software-templates#application-templates) for the application
+- Create a new repository using the selected [application template](/reference/software-templates#application-templates)
+- Configure the created GitHub repository so P2P workflows will run without an issue
 
 ## Developer workflow
 
