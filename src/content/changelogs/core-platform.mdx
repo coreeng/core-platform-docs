@@ -5,9 +5,72 @@ import { Callout } from "nextra/components";
 This is the released artifact that is created to be deployed on each platform environment. You can change it by editing you `platform-environments/environments/<env_name>/config.yaml` and change your `release` value.
 
 ```yaml
-release: "0.51.1"
+release: "0.53.3"
 environment: "gcp-dev"
 ```
+
+## v0.53.3
+
+- Improve continuous load test by @kkonstan
+- Update platform-portal by @kkonstan
+- Improve continuous load exporter by @kkonstan
+
+## v0.53.2
+
+- Update platform-portal by @kkonstan
+- Fix platform-ingress bootstrap race condition by @kkonstan
+
+## v0.53.1
+
+- Deprecate gcp-init by @kkonstan
+- Update platform-portal by @kkonstan
+
+## v0.53.0
+
+- Make readonly IAM group configurable by @kkonstan
+- Update environment schema validation by @kkonstan
+
+## v0.52.9
+
+- Fix cert-manager SA by @kkonstan
+
+## v0.52.8
+
+- Fix bastion zone selection by @kkonstan
+
+## v0.52.7
+
+- Fix gcp zone detection by @kkonstan
+
+## v0.52.6
+
+- Improve bastion zone selection by @kkonstan
+
+## v0.52.5
+
+- Support pre-created cert-manager SAs by @kkonstan
+
+## v0.52.4
+
+- Update platform-portal by @kkonstan
+
+## v0.52.3
+
+- Fix cert-manager by @kkonstan
+
+## v0.52.2
+
+- Support ingress base domain fix by @kkonstan
+
+## v0.52.1
+
+- Update environments schema by @kkonstan
+- Update environments validator by @kkonstan
+- Support ingress base domain by @kkonstan
+
+## v0.52.0
+
+- Support (optional) shared DNS zone by @kkonstan
 
 ## v0.51.1
 
