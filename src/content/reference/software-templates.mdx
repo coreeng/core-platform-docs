@@ -3,7 +3,7 @@
 
 ## What is a software template?
 
-Software template provide pre-built, standardized structures for common types of applications. This allows
+Software templates provide pre-built, standardized structures for common types of applications. This allows
 developers to:
 
 - Quickly start new projects without building the basic architecture from scratch
@@ -26,6 +26,35 @@ These templates:
 - Enable developers to start from zero and rapidly create a functional application
 
 You can find the templates in the [CECG Software Templates repository](https://github.com/coreeng/core-platform-software-templates)
+
+## Template Types
+
+The Core Platform provides two categories of templates:
+
+### Application Templates
+
+Templates for building deployable applications such as web services and frontends. Application templates include default resource configurations (CPU, memory, replicas) that are automatically applied when creating a new application.
+
+### Infrastructure Templates
+
+Templates for provisioning cloud infrastructure resources such as databases, networking, and other managed services.
+
+## Viewing Templates in the Dashboard
+
+You can browse all available templates in the **Core Platform Dashboard** under the **Templates** section. The templates page displays:
+
+- Template name and description
+- Template type (Application or Infrastructure)
+- Direct links to the template source on GitHub
+
+This allows teams to explore available options before creating a new application.
+
+## Creating Applications from Templates
+
+There are two ways to create an application from a software template:
+
+1. **Dashboard Wizard** – Use the [App Creation Wizard](/application/new-app) in the Core Platform Dashboard for a guided experience
+2. **CLI** – Use the `corectl app create` command for automation and scripting
 
 ## Integration via corectl
 

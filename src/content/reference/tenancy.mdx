@@ -21,6 +21,45 @@ A tenancy can be used to configure:
 - access control via network policies on a per-tenant basis. (e.g. granting another tenancy network access to your tenant)
 - a shared prometheus instance for a tenant and its children
 
+## Tenant Kinds
+
+Tenants are classified into two kinds: **Team** and **App**. This distinction helps organize applications under logical groups and enables proper access control.
+
+### Team Tenants
+
+A Team tenant represents an organizational unit or group that owns applications. Teams serve as parent containers for app tenants.
+
+**Characteristics:**
+- Cannot have repositories directly attached
+- Act as a logical grouping for applications
+- Provide shared configuration (environments, access groups) to child apps
+- Displayed in the Core Platform Dashboard when [creating a new application](/application/new-app)
+
+When you create an application using the Dashboard wizard, you select a Team as the owning group. The application is then created as a child tenant under that team.
+
+### App Tenants
+
+An App tenant represents an actual application deployed on the platform. Each app tenant is associated with a repository and belongs to a parent team.
+
+**Characteristics:**
+- Must have a Team tenant as its parent
+- Has repositories attached for CI/CD pipelines
+- Created automatically when using the [App Creation Wizard](/application/new-app) in the Dashboard
+- Stored as a file within the parent team's directory in the environments repository
+
+<Callout>
+
+When you create an application via the Dashboard, both the GitHub repository and the app tenant configuration are created automatically.
+
+</Callout>
+
+## Viewing Tenants in the Dashboard
+
+The Core Platform Dashboard provides visibility into your tenant structure:
+
+- **Teams** are available for selection when creating new applications
+- **Apps** are listed under the Applications section, showing their associated team and deployment status
+
 ### Manually raising a PR for a new tenancy
 
 <Callout>
@@ -29,7 +68,7 @@ A tenancy can be used to configure:
 
 </Callout>
 
-To add a tenancy raise a PR to the Environments Repo under `tenants/tenants/` in your platform environments repo.
+To add a tenancy raise a PR to the Environments Repo under `tenants/` in your platform environments repo.
 
 <Callout>
 
@@ -37,35 +76,64 @@ Your tenancy name must be the same as the file name!
 
 </Callout>
 
-For example, if I want to create a tenancy with the name `myfirsttenancy`, then I will create a file named `myfirsttenancy.yaml` with the following structure:
+#### Team Tenant Example
+
+To create a team tenant named `my-team`, create a file `tenants/my-team.yaml`:
 
 ```yaml
-name: myfirsttenancy
-parent: sandboxes
-description: "Go Application"
-contactEmail: go-application@awesomestartup.com
+name: my-team
+parent: root
+kind: team
+description: "My Team"
+contactEmail: my-team@example.com
 environments:
   - gcp-dev
+  - gcp-prod
+repos: []
+adminGroup: my-team-admin@example.com
+readonlyGroup: my-team-readonly@example.com
+cloudAccess: []
+```
+
+#### App Tenant Example
+
+To create an app tenant named `my-app` under `my-team`, create a file `tenants/my-team/my-app.yaml`:
+
+```yaml
+name: my-app
+parent: my-team
+kind: app
+description: "My Application"
+contactEmail: my-app@example.com
+environments:
+  - gcp-dev
+  - gcp-prod
 repos:
-  - https://github.com/<your-github-id>/go-application
-adminGroup: platform-accelerator-admin@awesomestartup.com
-readonlyGroup: platform-readonly@awesomestartup.com
+  - https://github.com/<your-org>/my-app
+adminGroup: my-team-admin@example.com
+readonlyGroup: my-team-readonly@example.com
 cloudAccess:
-  - name: ca # Cloud Access. Keeping it short so the username is also short, biggest one will be ca-connected-app-functional which is 27 chars, for mysql 8.0 needs to be 32max. For 5.7 16 max
+  - name: ca
     provider: gcp
+    environment: gcp-dev
     kubernetesServiceAccounts:
-      - <namespace>/<k8s_service_account_name>
+      - my-app-functional/my-sa
+      - my-app-dev/my-sa
 infrastructure:
   network:
     projects:
-      - name: name
+      - name: infra
         id: <project_id>
-        environment: <platform_environment>
+        environment: gcp-dev
 betaFeatures:
   - k6-operator
 ```
 
-- `repos` - All `repos` GitHub actions will get permission to deploy to the created namespaces for implementing your application's [Path to Production](../p2p) aka CI/CD
+### Configuration Fields
+
+- `kind` - The type of tenant: `team` for organizational groups or `app` for applications
+- `parent` - The parent tenant name (`root` for top-level teams, or a team name for apps)
+- `repos` - GitHub repositories for CI/CD access. Empty for teams, required for apps
 - `cloudAccess` - generates cloud-provider-specific machine identities for kubernetes service accounts to impersonate/assume. Note that the `kubernetesServiceAccounts` are constructed like `<namespace>/<kubernetesServiceAccount>` so make sure these match with what your application is doing. This Kubernetes Service Account is controlled and created by the App and configured to use the GCP service account created by this configuration.
 - `infrastructure` - allows you to configure projects to be attached to the current one's shared VPC, allowing you to use Private Service Access connections to databases in your own projects. This will attach your project to the one on the environment.
 - `betaFeatures` - enables certain beta features for tenants:
