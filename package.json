@@ -37,6 +37,9 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
+  "engines": {
+    "node": "^25.0.0"
+  },
   "resolutions": {
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3"
