@@ -29,6 +29,7 @@ jobs:
       env_vars: ${{ secrets.env_vars }}
     with:
       app-name: core-platform-docs
+      tenant-name: core-platform-docs
       version: ${{ needs.version.outputs.version }}
       working-directory: ./
 
