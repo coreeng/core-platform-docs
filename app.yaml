@@ -1,0 +1,19 @@
+---
+name: core-platform-docs
+description: ""
+config:
+  autoscaling:
+    behavior:
+      scaleDown:
+        stabilizationWindowSeconds: 300
+      scaleUp:
+        stabilizationWindowSeconds: 30
+    enabled: true
+    maxReplicas: 8
+    minReplicas: 2
+    targetCPUUtilizationPercentage: 80
+  replicas: 2
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi

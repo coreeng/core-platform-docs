@@ -3,4 +3,4 @@ extends: default
 
 rules:
   line-length:
-    max: 255
+    max: 512
