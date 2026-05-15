@@ -27,6 +27,16 @@ Kubernetes provides [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks
 Horizontal scaling response to increased load is to deploy more pods.
 If the load decreases, HPA instructs the deployment to scale back down.
 
+Core Platform app templates enable HPA by default for new applications. The generated app config starts with:
+
+- `minReplicas: 2`
+- `maxReplicas: 8`
+- `targetCPUUtilizationPercentage: 80`
+- scale-up stabilization window of 30 seconds
+- scale-down stabilization window of 300 seconds
+
+The P2P cleanup stages that scale workloads to zero disable HPA in their stage override files, because an enabled HPA would keep reconciling the workload back to its minimum replica count.
+
 Below is an example of HPA configuration for the Reference app to scale based on CPU Utilization. (We can use other resources e.g. memory utilization or a combination of them)
 We specify the range for the number of replicas, [resources and thresholds](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics) when HPA should be triggered.
 

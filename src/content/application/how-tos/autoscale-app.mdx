@@ -10,6 +10,55 @@ Horizontal Pod Autoscaler and Vertical Pod Autoscaler should not be used togethe
 
 For more details on how autoscaling works see [Autoscaling in depth](/reference/app-autoscaling).
 
+Core Platform app templates enable Horizontal Pod Autoscaling by default for new applications. The generated defaults are two to eight replicas, scaling on 80% CPU utilization, with a 30 second scale-up stabilization window and a 300 second scale-down stabilization window.
+
+## Configure Autoscaling In P2P
+
+For generated applications, configure autoscaling through the app config and P2P Helm values rather than creating a standalone HPA manifest.
+
+The root `app.yaml` contains the defaults used by P2P:
+
+```yaml
+config:
+  replicas: 2
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 80
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 30
+      scaleDown:
+        stabilizationWindowSeconds: 300
+```
+
+The generated `p2p/config/common.yaml` passes those values to the Core Platform app chart:
+
+```yaml
+replicaCount: ${p2p_app_config_replicas}
+
+autoscaling:
+  enabled: ${p2p_app_config_autoscaling_enabled}
+  minReplicas: ${p2p_app_config_autoscaling_minReplicas}
+  maxReplicas: ${p2p_app_config_autoscaling_maxReplicas}
+  targetCPUUtilizationPercentage: ${p2p_app_config_autoscaling_targetCPUUtilizationPercentage}
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: ${p2p_app_config_autoscaling_behavior_scaleUp_stabilizationWindowSeconds}
+    scaleDown:
+      stabilizationWindowSeconds: ${p2p_app_config_autoscaling_behavior_scaleDown_stabilizationWindowSeconds}
+```
+
+P2P stages that clean up by scaling workloads to zero should disable HPA in their stage override file:
+
+```yaml
+autoscaling:
+  enabled: false
+```
+
+This prevents HPA from reconciling the deployment back to `minReplicas` during cleanup.
+
 ## Horizontal Scaling using CPU
 
 Increase pod replicas if cpu of pod exceeds 60%
