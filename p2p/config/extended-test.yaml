@@ -1,3 +1,7 @@
 ---
+# Disable HPA because this stage scales workloads to zero after tests.
+autoscaling:
+  enabled: false
+
 envVarsMap:
   BASE_URL: "https://core-platform-docs-extended.gcp-dev.cecg.platform.cecg.io/"
