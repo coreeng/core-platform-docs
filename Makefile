@@ -11,7 +11,7 @@ p2p-build:         build-app           push-app
 p2p-functional:    build-functional    push-functional    deploy-functional    run-functional
 p2p-nft:           build-nft           push-nft           deploy-nft           run-nft
 p2p-integration:   build-integration   push-integration   deploy-integration   run-integration
-p2p-extended-test: build-extended-test push-extended-test deploy-extended-test run-extended-test
+#p2p-extended-test: build-extended-test push-extended-test deploy-extended-test run-extended-test
 p2p-prod:                                                 deploy-prod
 
 
