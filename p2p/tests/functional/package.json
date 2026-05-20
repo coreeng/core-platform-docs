@@ -7,14 +7,14 @@
   },
   "devDependencies": {
     "@cucumber/messages": "^32.3.1",
-    "@cucumber/pretty-formatter": "^3.3.0",
+    "@cucumber/pretty-formatter": "^3.3.1",
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.7.0",
+    "@types/node": "^25.9.1",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^12.8.3",
+    "@cucumber/cucumber": "^12.9.0",
     "node-fetch": "^3.3.2"
   },
   "resolutions": {

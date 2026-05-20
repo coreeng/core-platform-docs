@@ -20,6 +20,14 @@ resources:
     cpu: ${p2p_app_config_resources_limits_cpu}
     memory: ${p2p_app_config_resources_limits_memory}
 
+startupProbe:
+  failureThreshold: 30
+  httpGet:
+    port: 3000
+    path: /livez
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
 livenessProbe:
   failureThreshold: 3
   httpGet:
@@ -27,7 +35,7 @@ livenessProbe:
     path: /livez
   periodSeconds: 20
   successThreshold: 1
-  timeoutSeconds: 1
+  timeoutSeconds: 5
 readinessProbe:
   failureThreshold: 3
   httpGet:
@@ -35,7 +43,7 @@ readinessProbe:
     path: /readyz
   periodSeconds: 20
   successThreshold: 1
-  timeoutSeconds: 1
+  timeoutSeconds: 5
 
 ingress:
   enabled: true
