@@ -2,7 +2,7 @@ import { check } from "k6";
 import http from "k6/http";
 
 const SERVICE_ENDPOINT = __ENV.SERVICE_ENDPOINT || "http://reference-service";
-const REQ_PER_SECOND = __ENV.REQ_PER_SECOND || 1000;
+const REQ_PER_MINUTE = Number(__ENV.REQ_PER_MINUTE || 2000);
 const VUS = __ENV.VUS || 200;
 
 export const options = {
@@ -10,15 +10,15 @@ export const options = {
   scenarios: {
     loadTest: {
       executor: "constant-arrival-rate",
-      rate: REQ_PER_SECOND,
-      timeUnit: "1s", // iterations per second
+      rate: REQ_PER_MINUTE,
+      timeUnit: "1m", // iterations per minute
       duration: "1m",
       preAllocatedVUs: VUS, // how large the initial pool of VUs would be
     },
   },
   thresholds: {
     checks: ["rate>0.99"],
-    http_reqs: ["rate>" + REQ_PER_SECOND * 0.8],
+    http_reqs: ["rate>" + (REQ_PER_MINUTE / 60) * 0.8],
     http_req_failed: ["rate<0.01"],
     http_req_duration: ["p(99)<2000"],
   },
@@ -31,6 +31,6 @@ export default function () {
   const res = http.get(`${SERVICE_ENDPOINT}/readyz`);
   check(res, {
     "status is 200": (r) => r.status === 200,
-    "response body is correct": (r) => r.body.includes("OK"),
+    "response body is correct": (r) => typeof r.body === "string" && r.body.includes("OK"),
   });
 }
