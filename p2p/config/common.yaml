@@ -14,8 +14,8 @@ autoscaling:
 
 resources:
   requests:
-    cpu: ${p2p_app_config_resources_limits_cpu}
-    memory: ${p2p_app_config_resources_limits_memory}
+    cpu: ${p2p_app_config_resources_requests_cpu}
+    memory: ${p2p_app_config_resources_requests_memory}
   limits:
     cpu: ${p2p_app_config_resources_limits_cpu}
     memory: ${p2p_app_config_resources_limits_memory}
