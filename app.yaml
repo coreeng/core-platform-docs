@@ -14,6 +14,9 @@ config:
     targetCPUUtilizationPercentage: 80
   replicas: 3
   resources:
-    limits:
-      cpu: 125m
+    requests:
+      cpu: 50m
       memory: 384Mi
+    limits:
+      cpu: 200m
+      memory: 512Mi
