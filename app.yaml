@@ -9,7 +9,7 @@ config:
       scaleUp:
         stabilizationWindowSeconds: 30
     enabled: true
-    maxReplicas: 8
+    maxReplicas: 9
     minReplicas: 3
     targetCPUUtilizationPercentage: 80
   replicas: 3
